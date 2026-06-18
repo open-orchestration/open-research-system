@@ -3,16 +3,16 @@
 set -uo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 fail=0
-check() { if eval "$2"; then echo "ok: $1"; else echo "MISS: $1"; fail=1; fi; }
+check() { local label="$1"; shift; if "$@"; then echo "ok: $label"; else echo "MISS: $label"; fail=1; fi; }
 
 # Top-level files
 for f in README.md .gitignore RESEARCH-CATALOG.md SYNTHESIS.md; do
-  check "$f exists" "[ -f '$ROOT/$f' ]"
+  check "$f exists" test -f "$ROOT/$f"
 done
 
 # Required dirs
 for d in ingest docs docs/findings docs/diagrams scripts graphify-out tests; do
-  check "$d/ exists" "[ -d '$ROOT/$d' ]"
+  check "$d/ exists" test -d "$ROOT/$d"
 done
 
 # 17 topic dirs
@@ -23,14 +23,14 @@ topics=(01-methodology-epistemics 02-statistical-causal-inference 03-decision-fr
 13-reference-systems-case-studies 14-papers 15-textbooks-longform \
 16-evaluation-benchmarks 17-specs-standards)
 for t in "${topics[@]}"; do
-  check "docs/$t/README.md" "[ -f '$ROOT/docs/$t/README.md' ]"
-  check "docs/$t/sources/" "[ -d '$ROOT/docs/$t/sources' ]"
+  check "docs/$t/README.md" test -f "$ROOT/docs/$t/README.md"
+  check "docs/$t/sources/" test -d "$ROOT/docs/$t/sources"
 done
 
 # RESEARCH-CATALOG must reference all 17 topic slugs
 if [ -f "$ROOT/RESEARCH-CATALOG.md" ]; then
   for t in "${topics[@]}"; do
-    check "catalog mentions $t" "grep -q '$t' '$ROOT/RESEARCH-CATALOG.md'"
+    check "catalog mentions $t" grep -qF -- "$t" "$ROOT/RESEARCH-CATALOG.md"
   done
 fi
 
