@@ -15,5 +15,5 @@ for r in data:
         md = subprocess.run([py, fetch, url], capture_output=True, text=True, timeout=120).stdout
         dest.write_text(f"# {r.get('title','')}\n\nSource: {url}\n\n{md}")
         print(f"fetched: {url} -> {dest}")
-    except Exception as e:  # noqa: BLE001 - log and continue per-URL
+    except (subprocess.SubprocessError, OSError) as e:
         print(f"FAIL {url} {e}", file=sys.stderr)
