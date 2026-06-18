@@ -5,7 +5,14 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- competitive teardown
+- market/TAM sizing
+- trend & weak-signal detection
+- cohort/retention
+- A/B experimentation
+- idea validation
+- SEO/intent
+- systematic literature review
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

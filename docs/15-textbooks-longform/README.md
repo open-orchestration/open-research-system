@@ -5,7 +5,8 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- research methods texts
+- ML/IR textbooks
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

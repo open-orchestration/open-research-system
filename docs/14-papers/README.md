@@ -5,7 +5,7 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- RAG, agents, retrieval, eval, KG papers
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

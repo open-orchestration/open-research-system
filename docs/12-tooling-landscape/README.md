@@ -5,7 +5,11 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- orchestration frameworks (LangGraph, LlamaIndex, DSPy, AutoGen)
+- search APIs
+- scrapers (crawl4ai)
+- converters (markitdown)
+- MCP / agent-tool integration
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

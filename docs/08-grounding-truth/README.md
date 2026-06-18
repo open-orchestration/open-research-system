@@ -5,7 +5,12 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- citation/attribution
+- hallucination mitigation
+- LLM-as-judge
+- evaluation of research outputs
+- faithfulness metrics
+- research-output quality/style auditing (anti-AI-isms)
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

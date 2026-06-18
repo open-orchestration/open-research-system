@@ -5,7 +5,14 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- MADR/ADR
+- decision matrices (weighted criteria)
+- Analysis of Competing Hypotheses (ACH)
+- cost-benefit
+- SWOT
+- risk modeling
+- stress/scenario/sensitivity analysis
+- go/no-go & ship/no-ship gates
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

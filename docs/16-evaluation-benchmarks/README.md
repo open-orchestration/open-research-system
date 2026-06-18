@@ -5,7 +5,9 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- research-QA benchmarks
+- faithfulness/groundedness metrics
+- agent benchmarks
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

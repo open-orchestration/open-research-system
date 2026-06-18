@@ -5,7 +5,11 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- deep-research agents (OpenAI/Google/Anthropic Deep Research)
+- STORM (Stanford)
+- GPT-Researcher
+- Perplexity / Elicit-class
+- open-source clones & their architectures
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

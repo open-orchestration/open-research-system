@@ -5,7 +5,15 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- naive→advanced RAG
+- GraphRAG
+- agentic RAG
+- embeddings
+- vector stores
+- hybrid (BM25 + dense) search
+- rerankers
+- chunking
+- context management
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

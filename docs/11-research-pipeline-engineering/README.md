@@ -5,7 +5,11 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- data pipelines/ETL
+- experiment tracking
+- model registry/lineage
+- drift & retraining
+- reproducibility infra
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

@@ -5,7 +5,12 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- context engineering
+- CoT/ToT/ReAct
+- constitutional/role-based
+- long-context vs RAG trade-offs
+- token/context compression
+- output parsing
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)

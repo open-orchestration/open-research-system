@@ -5,7 +5,12 @@
 **Status:** not started · breadth-scan · deep-dive · synthesized
 
 ## Sub-topics
-- (filled from RESEARCH-CATALOG.md)
+- source-of-truth maintenance
+- normative docs
+- knowledge-graph construction (god nodes / nodes / edges)
+- community detection & centrality
+- synthesis→decision pipelines
+- retrieval-optimized knowledge stores
 
 ## Sources gathered
 - (links + `sources/` files appear here as gathered)
