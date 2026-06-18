@@ -1,0 +1,26 @@
+# Findings — Reference Systems & Case Studies
+
+**Question:** What does this category teach for building an AI research system?
+
+## Key claims (cited)
+- The canonical deep-research pipeline is a fixed sequence: take a question → generate 3–5 sub-queries covering different facets → scrape top 5–10 sources per sub-query → extract claims/evidence per page → detect cross-source conflicts → synthesize a structured report with inline citations. This is the reference architecture to copy. — [Build Your Own Deep Research Agent: An Open-Source Perplexity Clone](https://knowledgesdk.com/blog/deep-research-agent)
+- Perplexity's edge is not a smarter model but a disciplined RAG pipeline that treats retrieval, source ranking, and inline citation as first-class engineering concerns; the underlying LLMs (GPT-4/Claude/Gemini/Sonar) are the same families everyone uses — the differentiator is the orchestration layer. — [A complete architectural teardown of how Perplexity's deep research works](https://gist.github.com/Co-Messi/bfcfb39eede5c6bc2fadd2c04139a136)
+- The reproducible MVP stack named explicitly: hybrid retrieval (BM25 + dense) → passage-level reranker → structured prompt assembly with source snippets + citation IDs embedded before generation → constrained generation → end-to-end tracing (query → sources → citations → answer). — [A complete architectural teardown of how Perplexity's deep research works](https://gist.github.com/Co-Messi/bfcfb39eede5c6bc2fadd2c04139a136)
+- A "Standard vs Research" mode toggle should genuinely change retrieval depth and number of planning steps, not just prompt wording — depth is a configurable dial, not a label. — [A complete architectural teardown of how Perplexity's deep research works](https://gist.github.com/Co-Messi/bfcfb39eede5c6bc2fadd2c04139a136)
+- LangChain's Open Deep Research ships a supervisor–researcher multi-agent architecture: a supervisor coordinates multiple researcher agents that work in parallel for faster report generation, with extensive Model Context Protocol (MCP) integration. — [open_deep_research README (langchain-ai)](https://github.com/langchain-ai/open_deep_research/blob/main/README.md)
+- A reference open-source agent costs roughly $0.08–$0.25 per research query (20–60x cheaper than Perplexity's $5/1,000-query API), so self-hosting is economically viable and gives control over sources, reasoning, and output format that black-box products withhold. — [Build Your Own Deep Research Agent: An Open-Source Perplexity Clone](https://knowledgesdk.com/blog/deep-research-agent)
+- A 2025 survey formalizes the field's structure (search engine, tool use, workflow, tuning, non-parametric continual learning; single- vs multi-agent designs) and grounds it on RAG/agentic-retrieval, MCP, and agent-to-agent policy as the enabling substrate. — [Deep Research Agents: A Systematic Examination And Roadmap](https://arxiv.org/html/2506.18096v2)
+- Langfuse's teardown of David Zhang's Open Deep Research treats the agent as an observability-first system (tracing, prompt management, evaluation) and points to a peer ecosystem worth studying: HuggingFace open-deep-research, assafelovic/gpt-researcher, jina-ai/node-DeepResearch. — [The Agent Deep Dive: David Zhang's Open Deep Research](https://langfuse.com/blog/2025-02-20-the-agent-deep-dive-open-deep-research)
+
+## Convergent vs contested
+- **Convergent:** Every reference system separates planning (query decomposition) from retrieval from synthesis; inline citation is the default output mode, not optional; hybrid retrieval + reranking beats single-strategy retrieval; observability/tracing over the full query→citation→answer path is treated as core, not nice-to-have.
+- **Contested / open:** Single-agent linear pipeline (knowledgesdk, Perplexity teardown) vs supervisor–researcher multi-agent parallelism (LangChain). Parallelism buys speed but adds coordination cost; the survey treats this as an open design axis rather than a settled choice. Whether MCP should be the integration backbone is asserted by LangChain/the survey but not by the leaner clones.
+
+## Implications for the system (Phase 2)
+- Adopt the convergent pipeline as the Phase-2 skeleton: planner (decompose into 3–5 sub-queries) → hybrid retrieval + reranker → per-source claim extractor → conflict detector → citation-embedded synthesizer. Wire end-to-end tracing from the start.
+- Make retrieval depth and planning-step count a config dial (the "Standard vs Research" pattern), so cost/latency can be traded against thoroughness per request.
+- Start single-agent linear; treat supervisor–researcher parallelism as a later optimization once tracing exists to measure whether coordination overhead pays off.
+
+## Gaps found → re-scan
+- No source gives concrete reranker model choices, chunking parameters, or conflict-detection prompt internals. Targeted re-scan: "open deep research reranker model + chunk size + conflict detection prompt implementation" and pull the actual `configuration.py` from langchain-ai/open_deep_research.
+- gpt-researcher and Hugging Face open-deep-research (GAIA submission) are named but not gathered — a targeted fetch of their architectures would round out the multi-agent comparison.

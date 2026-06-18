@@ -1,0 +1,25 @@
+# Findings — Evaluation & Benchmarks
+
+**Question:** What does this category teach for building an AI research system?
+
+## Key claims (cited)
+- RAG evaluation splits cleanly into retrieval metrics and generation metrics, and you should measure each separately because they have independent failure modes — the standard retrieval set is Recall@K, Precision@K, Hit@K, MRR, and nDCG. — [RAG Evaluation Metrics: Recall@K, MRR, Faithfulness & RAGAS (2026)](https://langcopilot.com/posts/2025-09-17-rag-evaluation-101-from-recall-k-to-answer-faithfulness)
+- Concrete metric definitions to implement: Recall@K = fraction of all relevant docs found in top K (catches missed sources); Precision@K = fraction of top-K that are relevant (catches context padding); MRR = average reciprocal rank of the first relevant result (matters when the answer should be at position #1). — [RAG Evaluation Metrics: Recall@K, MRR, Faithfulness & RAGAS (2026)](https://langcopilot.com/posts/2025-09-17-rag-evaluation-101-from-recall-k-to-answer-faithfulness)
+- The generation-side core metrics are faithfulness (answer grounded in retrieved context, i.e. anti-hallucination), answer relevancy, contextual relevancy, contextual recall, and contextual precision — typically scored by an LLM-as-judge via frameworks like DeepEval. — [RAG Evaluation Metrics: Assessing Answer Relevancy, Faithfulness, Contextual Relevancy, And More](https://www.confident-ai.com/blog/rag-evaluation-metrics-answer-relevancy-faithfulness-and-more)
+- Standard benchmark datasets exist and each targets a specific capability: BEIR (18 datasets, retrieval generalization across domains), HotpotQA (multi-hop reasoning, useful for GraphRAG), TriviaQA (straightforward factual QA), and RGB (four RAG failure modes: noise robustness, negative rejection, information integration, counterfactual robustness). — [RAG Evaluation: Metrics, Tools, and the Context Gap (2026)](https://atlan.com/know/how-to-evaluate-rag-systems-explained/)
+- Public benchmarks have a structural blind spot ("the context gap"): they measure general-domain questions with clean, correctly-stated ground truth and do not measure whether answers are consistent with your organization's specific knowledge — so they under-predict enterprise/deployment quality. — [RAG Evaluation: Metrics, Tools, and the Context Gap (2026)](https://atlan.com/know/how-to-evaluate-rag-systems-explained/)
+- RAGAS (Es et al., 2023) is the named reference framework for automated, reference-free RAG metrics (faithfulness, answer relevance), with ARES as an alternative — frameworks differ by which metrics they emphasize. — [RAG Evaluation Metrics: Recall@K, MRR, Faithfulness & RAGAS (2026)](https://langcopilot.com/posts/2025-09-17-rag-evaluation-101-from-recall-k-to-answer-faithfulness)
+- Retrieval and generation quality are coupled: retrieval noise (irrelevant retrieved passages) directly causes generation hallucination, so high recall alone is harmful without precision — there is a measurable recall-vs-precision trade-off to tune. — [RAG Evaluation Metrics: Recall@K, MRR, Faithfulness & RAGAS (2026)](https://langcopilot.com/posts/2025-09-17-rag-evaluation-101-from-recall-k-to-answer-faithfulness)
+
+## Convergent vs contested
+- **Convergent:** All five sources agree on the retrieval/generation metric split, on faithfulness + answer relevancy + context precision/recall as the generation-side core, and that LLM-as-judge is the practical scoring mechanism. RAGAS is the consistently named framework.
+- **Contested / open:** How much to trust LLM-as-judge scores (bias, cost, drift) is implied but not resolved across sources. Whether public benchmarks are worth running at all given the "context gap" is contested — Atlan argues for domain-specific eval over standard benchmarks, while the metrics guides still lean on BEIR/HotpotQA/RGB.
+
+## Implications for the system (Phase 2)
+- Implement the eval harness with two metric tiers: retrieval (Recall@K, Precision@K, MRR, nDCG) and generation (faithfulness, answer relevancy, contextual precision/recall), wiring an LLM-as-judge (RAGAS/DeepEval-style) for the generation tier.
+- Treat faithfulness as the primary guardrail metric for the synthesizer (topic 13's citation step) since retrieval noise → hallucination is the documented failure path; gate releases on it.
+- Run a standard benchmark (e.g. HotpotQA for multi-hop, RGB for failure-mode coverage) for regression signal, but build a project-specific golden set to close the "context gap."
+
+## Gaps found → re-scan
+- Sources skew to how-to / metric-explainer articles (langcopilot, confident-ai, atlan, bestaiweb, benchmarkingagents) rather than the primary benchmark papers themselves. GAIA and BrowseComp — the agent/deep-research benchmarks most relevant to this system — were not gathered; HotpotQA/BEIR/RGB appear only secondhand.
+- Targeted re-scan: fetch primary papers — GAIA (general AI assistants benchmark), BrowseComp (browsing/agent benchmark), HotpotQA, and the RAGAS paper (Es et al. 2023) — for exact task definitions and scoring, instead of blog summaries.
