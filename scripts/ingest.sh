@@ -16,9 +16,9 @@ mkdir -p "$dest"
 
 for f in "${real[@]+"${real[@]}"}"; do
   base="$(basename "${f%.*}")"
-  # markitdown prints markdown to stdout; redirect to the destination. stderr carries
-  # a harmless pydub/ffmpeg warning we discard.
-  "$MARKITDOWN" "$f" > "$dest/${base}.md" 2>/dev/null
+  [ -n "$base" ] || { echo "skipping dotfile: $f" >&2; continue; }
+  # Discard the harmless pydub/ffmpeg stderr warning; a real failure aborts with a message.
+  "$MARKITDOWN" "$f" > "$dest/${base}.md" 2>/dev/null || { echo "markitdown failed on $f" >&2; exit 1; }
   echo "ingested: $f -> $dest/${base}.md"
 done
 echo "Done. Index with context-mode before reading; do not raw-read."
