@@ -2,7 +2,7 @@
 
 **Scope:** Quantitative spine for defensible decisions.
 
-**Status:** not started · breadth-scan · deep-dive · synthesized
+**Status:** breadth-scan
 
 ## Sub-topics
 - significance/p-values & misconceptions
@@ -17,7 +17,11 @@
 - Monte Carlo
 
 ## Sources gathered
-- (links + `sources/` files appear here as gathered)
+- [Bayesian inferences and frequentist evaluations | Statistical Modeling ...](https://statmodeling.stat.columbia.edu/2026/03/07/bayesian-inferences-and-frequentist-evaluations/)
+- [Comparing Frequentist and Bayesian Approaches - Statology](https://www.statology.org/comparing-frequentist-and-bayesian-approaches/)
+- [Decision Rules in Frequentist and Bayesian Hypothesis Testing ... - SSPH+](https://www.ssph-journal.org/journals/international-journal-of-public-health/articles/10.3389/ijph.2025.1608258/full)
+- [Bayesian or Frequentist: Choosing your statistical approach](https://statsig.com/perspectives/bayesian-or-frequentist-choosing-your-statistical-approach)
+- [Interpreting frequentist hypothesis tests: insights from Bayesian ...](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10600289/)
 
 ## Key findings
 - (promoted to `docs/findings/` when synthesized)
