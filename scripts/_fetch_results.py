@@ -10,7 +10,13 @@ for r in data:
     if not url:
         continue
     slug = re.sub(r"[^a-z0-9]+", "-", (r.get("title") or url).lower())[:60].strip("-") or "src"
+    # Distinct URLs can share a title (e.g. arxiv /abs/ + /html/); suffix on collision
+    # so neither source is silently overwritten.
     dest = pathlib.Path(out_dir) / f"{slug}.md"
+    n = 2
+    while dest.exists():
+        dest = pathlib.Path(out_dir) / f"{slug}-{n}.md"
+        n += 1
     try:
         md = subprocess.run([py, fetch, url], capture_output=True, text=True, timeout=120).stdout
         dest.write_text(f"# {r.get('title','')}\n\nSource: {url}\n\n{md}")
