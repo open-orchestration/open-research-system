@@ -1,0 +1,19 @@
+#!/usr/bin/env python
+"""Fetch each search result to markdown. Usage: _fetch_results.py <search.json> <out_dir> <fetch_md.py>"""
+import json, sys, subprocess, re, pathlib
+
+search_json, out_dir, fetch = sys.argv[1], sys.argv[2], sys.argv[3]
+py = sys.executable
+data = json.loads(pathlib.Path(search_json).read_text())
+for r in data:
+    url = r.get("url")
+    if not url:
+        continue
+    slug = re.sub(r"[^a-z0-9]+", "-", (r.get("title") or url).lower())[:60].strip("-") or "src"
+    dest = pathlib.Path(out_dir) / f"{slug}.md"
+    try:
+        md = subprocess.run([py, fetch, url], capture_output=True, text=True, timeout=120).stdout
+        dest.write_text(f"# {r.get('title','')}\n\nSource: {url}\n\n{md}")
+        print(f"fetched: {url} -> {dest}")
+    except Exception as e:  # noqa: BLE001 - log and continue per-URL
+        print(f"FAIL {url} {e}", file=sys.stderr)
