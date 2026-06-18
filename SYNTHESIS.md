@@ -160,4 +160,38 @@ These honestly-flagged thin spots define the deep-dive backlog for Phase 2:
 
 ## Graph reading
 
-_(placeholder — filled in Task 7 after graphify identifies god nodes)_
+A directed graphify pass over the whole corpus (147 files, 445 nodes, 521 edges, 61
+communities; `graphify-out/GRAPH_REPORT.md`) ranks these god nodes by degree centrality:
+
+1. `12 Advanced RAG Techniques Beyond Naive Retrieval` (12) — retrieval
+2. `17-Category Research Taxonomy` (11) — the catalog spine itself
+3. `AI Agent Frameworks 2026 Deep Dive` (11) — tooling landscape
+4. `Cochrane Handbook Ch.1: Starting a Review` (10) — methodology/epistemics
+5. `Building Effective AI Agents (Anthropic)` (9) — orchestration patterns
+6. `Context & Prompt Engineering for Research` (9) — prompting
+7. `Statistical & Causal Inference Topic` (8) — stats
+8. `Markdown Architectural Decision Records (MADR)` (8) — decision records
+9. `Build Your Own Deep Research Agent (Perplexity clone)` (8) — reference systems
+10. `Open-Research-System Research-Spike Spec (Phase 1)` (8) — the spec itself
+
+The two highest-degree nodes are the catalog and the spec — structural hubs that wire the
+corpus together rather than load-bearing concepts, so the centrality ranking should be read
+through the cross-community bridges, not the raw degree list. Doing that, the graph confirms
+the SYNTHESIS thesis rather than challenging it: the durably central *real* concepts are the
+orchestration-and-grounding layer (Anthropic's agent-workflow patterns, the deep-research
+pipeline, hybrid+rerank retrieval, protocol-first provenance, MADR decision output), while
+the heavily-cited retrieval/framework documents (RAG techniques, agent frameworks) sit as
+interchangeable component catalogs the orchestration nodes select from — exactly the
+"orchestration layer is the value, components are commodities" reading. The strongest
+agreements with the 10 load-bearing patterns surface as graphify hyperedges that cut across
+communities: "Recurring Research Pipeline Load-Bearing Patterns" (the five SYNTHESIS
+spine claims as one group), "Anthropic Agent Workflow Patterns," "Deep Research Agent
+Pipeline Stages," and the "Protocol-First Bias-Minimizing Evidence Synthesis" cluster — and
+the inference edges link Cochrane's protocol-first methodology and audit-trail discipline
+directly to the SYNTHESIS pipeline claims, evidence that the methodology spine and the
+engineering spine are the same backbone. The one mild surprise is how high the *statistical
+inference* and *systematic-review methodology* hubs rank despite being flagged as thin corpus
+gaps — high centrality on a shallow neighborhood, which marks them as the highest-leverage
+Phase-2 deep-dive targets: the system must be built around the orchestration/grounding
+backbone, but its epistemic credibility hinges on filling exactly those two thin-but-central
+methodology hubs.
