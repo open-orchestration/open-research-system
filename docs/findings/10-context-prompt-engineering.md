@@ -1,0 +1,26 @@
+# Findings — Context & Prompt Engineering for Research
+
+**Question:** What does this category teach for building an AI research system?
+
+## Key claims (cited)
+- Prompting techniques form a measurable accuracy/cost spectrum: Few-shot gives +15–25% with 1 API call, Zero-shot CoT +20–40%, Few-shot CoT +40–60%, Self-Consistency +10–18% (5–10 calls), Tree-of-Thought up to +70% on specific tasks (multiple calls), and Structured Output gives 100% format compliance — so technique choice is an explicit accuracy-vs-cost tradeoff — [Advanced LLM Prompt Engineering: Chain-of-Thought, ReAct, and Tree of Thoughts in Practice](https://www.youngju.dev/blog/llm/2026-03-10-llm-prompt-engineering-cot-react-advanced.en)
+- A decision tree maps task type to technique: simple classification → zero/few-shot; math reasoning → CoT + Self-Consistency; multi-step search (external info) → ReAct; creative/large-search-space problems → Tree-of-Thought; production APIs → Few-shot + Structured Output — [Advanced LLM Prompt Engineering: Chain-of-Thought, Tree-of-Thought, ReAct, and Few-Shot Pattern Practical Guide](https://www.youngju.dev/blog/llm/2026-03-12-llm-prompt-engineering-cot-tot-react-few-shot-advanced.en)
+- ReAct (Yao et al. 2022) alternates Thought → Action → Observation, letting the model reason, call an external tool, and observe results in a loop; this reduces hallucination and produces verifiable results, and is the recommended pattern when external information is needed — [Advanced LLM Prompt Engineering: Chain-of-Thought, Tree-of-Thought, ReAct, and Few-Shot Pattern Practical Guide](https://www.youngju.dev/blog/llm/2026-03-12-llm-prompt-engineering-cot-tot-react-few-shot-advanced.en)
+- Simply enlarging context windows (100k+ tokens) does not guarantee robust multi-hop reasoning when key details are scattered; an approach that treats the model as both retriever and reasoner — tag relevant segments in the long passage, then run a stepwise CoT to integrate evidence in a single pass — reduces reliance on an external retriever — [Emulating Retrieval Augmented Generation via Prompt Engineering for Enhanced Long Context Comprehension in LLMs](https://arxiv.org/abs/2502.12462)
+- Structured Output (schema enforcement, e.g. Pydantic models with typed fields and constraints) is the production default because outputs must be programmatically parsable; it yields 100% format compliance at the cost of one call — [Advanced LLM Prompt Engineering: Chain-of-Thought, Tree-of-Thought, ReAct, and Few-Shot Pattern Practical Guide](https://www.youngju.dev/blog/llm/2026-03-12-llm-prompt-engineering-cot-tot-react-few-shot-advanced.en)
+- Context-window waste is a named anti-pattern: repeating an identical long system prompt per item burns tokens; batching multiple items under one shared system prompt with a JSON-array response is the corrective — [Advanced LLM Prompt Engineering: Chain-of-Thought, Tree-of-Thought, ReAct, and Few-Shot Pattern Practical Guide](https://www.youngju.dev/blog/llm/2026-03-12-llm-prompt-engineering-cot-tot-react-few-shot-advanced.en)
+- The thought structures sit on a complexity ladder — chains (linear CoT), trees (branching search with backtracking), and graphs (arbitrary reasoning topologies) — with each step up trading more API calls/compute for better handling of harder search and planning problems — [Demystifying Chains, Trees, and Graphs of Thoughts](https://arxiv.org/abs/2401.14295)
+
+## Convergent vs contested
+- **Convergent:** No single technique wins; match technique to task. ReAct is the consensus pattern for tool-using research loops, Structured Output for production parsability, and CoT/Self-Consistency for reasoning accuracy.
+- **Contested / open:** Whether long-context prompting can *replace* RAG is unsettled — one source argues large windows alone fail at scattered multi-hop reasoning and proposes prompt-engineered emulated-RAG instead, implying retrieval architecture still matters even at 100k+ tokens. Tree-of-Thought's "+70%" is task-specific, not general.
+
+## Implications for the system (Phase 2)
+- Build a technique-selection layer: route research subtasks to the cheapest technique that meets the accuracy bar (few-shot/CoT for reasoning, ReAct for tool-driven search, ToT only for hard planning steps) rather than defaulting to the most expensive everywhere.
+- Make ReAct (Thought/Action/Observation) the core subagent reasoning loop, since research is inherently multi-step tool use, and enforce Structured Output for every machine-consumed step.
+- Do not assume a big context window removes the need for retrieval; pair long-context reads with explicit segment-tagging + stepwise integration for multi-hop questions.
+- Treat token economy as a design constraint — batch shared prompts, cap chain depth, and reserve high-call techniques (Self-Consistency, ToT) for steps where the accuracy gain is worth the multiplier.
+
+## Gaps found → re-scan
+- Sources are technique-catalog-heavy and lean on two posts from the same author (youngju.dev); little on context *management* over long agent runs (compaction, memory). Re-scan: "context management compaction memory long-running agent research".
+- Graph-of-Thoughts is named but its concrete research applications are thin. Re-scan: "graph of thoughts implementation research synthesis applications".
