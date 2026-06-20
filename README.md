@@ -47,3 +47,28 @@ It seeds from the current `.graphify/graph.json`, then animates each new
 AI-asserted edges (sub-project #4) render dashed and tinted, distinct from
 corpus-extracted edges. Binds localhost only (unauthenticated). Flags:
 `--host --port --events --graph --html` (or `GV_*` env vars).
+
+## Convergence loop (`/goal`)
+
+`scripts/orchestrator.py` turns the three manually-kicked flows into one autonomously
+convergent loop. Launch it with the `/goal` prompt in `.claude/goal.md`.
+
+Each cycle the orchestrator reads `.research/state.json`, **auto-selects the budget
+`phase`** from deterministic signals, and reports which flows are eligible:
+
+- `gather` — nothing processable yet; search + ingest dominate.
+- `deepen` — corpus is processable but gathering / graph work is still in flight.
+- `synthesize` — gaps drained and graph merged; process dominates.
+
+The phase function is stateless, so a gap reopened during synthesis flips the engine back
+to `deepen` automatically. The loop stops when `orchestrator.py decide` reports
+`goal_met` — the autonomous work is drained and drafts wait in the review queue. Promotion
+stays a human gate (`python3 scripts/promote.py queue`).
+
+Inspect a decision without changing anything:
+
+```
+python3 scripts/orchestrator.py decide
+```
+
+Add `--apply` to persist the phase flip (the `/goal` loop does this).
