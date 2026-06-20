@@ -10,9 +10,9 @@ import base64
 import hashlib
 import json
 import os
+import select
 import struct
 import sys
-import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -103,7 +103,18 @@ class _Handler(BaseHTTPRequestHandler):
                         except UnicodeDecodeError:
                             continue   # skip a corrupt log line rather than crash the client
                         conn.sendall(ws_frame(text))
-                time.sleep(_POLL)
+                # Wait up to _POLL, but wake early if the client sends or closes,
+                # so an idle view detects a closed tab instead of parking forever.
+                r, _, _ = select.select([conn], [], [], _POLL)
+                if r:
+                    try:
+                        data = conn.recv(4096)
+                    except (BlockingIOError, InterruptedError):
+                        continue
+                    if not data:                       # peer closed (EOF)
+                        return
+                    if (data[0] & 0x0F) == 0x8:         # client WebSocket close frame
+                        return
             except (BrokenPipeError, ConnectionResetError, OSError):
                 return
 
