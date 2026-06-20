@@ -26,3 +26,10 @@ Definitive source-of-truth for **AI-assisted research → decisions → actionab
 - `scripts/ingest_flow.sh <topic>` normalizes them into `docs/<topic>/sources/`, records each in `.research/state.json` with a durable id + lifecycle, and flags the graph dirty.
 - The graph is updated incrementally (graphify `--update`); deltas append to `.research/graph-events.jsonl` (the realtime-view feed + audit log).
 - Run the loop hands-off with `/loop` (uses `.claude/loop.md`).
+
+### Autonomous search loop
+- Queue a research gap: `python3 scripts/state.py add-gap --topic 06-rag-retrieval --desc "hybrid retrieval rerank 2025"`.
+- `scripts/search_flow.sh --topic <T>` drains that topic's queued gaps within the source budget (`budget.sources_per_cycle`): it searches + fetches via crawl4ai, drops non-junk results into `ingest/`, and marks each gap done (or re-queues it; failed after 3 attempts).
+- Search is run **per topic** so the ingest flow routes each batch correctly: for every topic with queued gaps, run `scripts/search_flow.sh --topic <T>` then `scripts/ingest_flow.sh <T>`.
+- Reset the per-cycle budget with `python3 scripts/state.py budget-reset`; inspect it with `python3 scripts/state.py budget-status`.
+- Run hands-off on a slow interval, e.g. `/loop 10m for each topic with queued gaps, run scripts/search_flow.sh --topic <T> then scripts/ingest_flow.sh <T>`.
