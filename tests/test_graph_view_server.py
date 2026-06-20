@@ -63,7 +63,9 @@ class TestServerE2E(unittest.TestCase):
             s.settimeout(5)
             frame = s.recv(4096)
             self.assertEqual(frame[0], 0x81)
-            payload = frame[2:] if frame[1] < 126 else frame[4:]
+            _b1 = frame[1]
+            _off = 2 if _b1 < 126 else (4 if _b1 == 126 else 10)
+            payload = frame[_off:]
             self.assertEqual(json.loads(payload.decode("utf-8"))["new_nodes"], ["a"])
 
 

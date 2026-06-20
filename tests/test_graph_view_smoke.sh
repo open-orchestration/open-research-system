@@ -39,20 +39,22 @@ graph = json.load(urllib.request.urlopen(f"http://127.0.0.1:{port}/graph"))
 assert graph["nodes"][0]["id"] == "seed", "GET /graph snapshot wrong"
 
 s = socket.create_connection(("127.0.0.1", port), timeout=5)
+s.settimeout(5)
 s.sendall(b"GET /ws HTTP/1.1\r\nHost: x\r\nUpgrade: websocket\r\n"
           b"Connection: Upgrade\r\nSec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==\r\n"
           b"Sec-WebSocket-Version: 13\r\n\r\n")
-time.sleep(0.1)
 resp = s.recv(1024).decode("latin-1")
 assert "101" in resp and "s3pPLMBiTxaQ9kYGzzhZRbK+xOo=" in resp, "bad handshake"
 
+time.sleep(0.3)
 with open(f"{tmp}/events.jsonl", "a", encoding="utf-8") as fh:
     fh.write('{"new_nodes":["live1"],"new_edges":[],"edge_origins":{}}\n')
 
-s.settimeout(5)
 frame = s.recv(4096)
 assert frame[0] == 0x81, "not a text frame"
-payload = frame[2:] if frame[1] < 126 else frame[4:]
+_b1 = frame[1]
+_off = 2 if _b1 < 126 else (4 if _b1 == 126 else 10)
+payload = frame[_off:]
 assert json.loads(payload.decode("utf-8"))["new_nodes"] == ["live1"], "delta not received"
 s.close()
 print("PASS graph view smoke")
