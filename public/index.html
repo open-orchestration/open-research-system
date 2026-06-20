@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Knowledge graph — live</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.30.2/cytoscape.min.js"
+        integrity="sha512-EY3U1MWdgKx0P1dqTE4inlKz2cpXtWpsR1YUyD855Hs6RL/A0cyvrKh60EpE8wDZ814cTe1KgRK+sG0Rn792vQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+  html, body { margin: 0; height: 100%; background: #0e1116; }
+  #cy { width: 100vw; height: 100vh; }
+  #status { position: fixed; top: 8px; left: 12px; color: #8b949e;
+            font: 12px ui-monospace, monospace; z-index: 1; }
+</style>
+</head>
+<body>
+<div id="status">connecting…</div>
+<div id="cy"></div>
+<script>
+const cy = cytoscape({
+  container: document.getElementById("cy"),
+  style: [
+    { selector: "node", style: {
+        "label": "data(id)", "font-size": 8, "color": "#c9d1d9",
+        "background-color": "#388bfd", "width": 14, "height": 14 } },
+    { selector: "edge", style: {
+        "width": 2, "line-color": "#30363d",
+        "target-arrow-color": "#30363d", "target-arrow-shape": "triangle",
+        "curve-style": "bezier" } },
+    { selector: 'edge[origin = "asserted"]', style: {
+        "line-color": "#f778ba", "target-arrow-color": "#f778ba",
+        "line-style": "dashed", "width": 2 } },
+  ],
+  layout: { name: "grid" },
+});
+
+const status = document.getElementById("status");
+let seeded = false;
+const buffer = [];
+
+function addNode(id) {
+  if (id != null && cy.getElementById(String(id)).empty())
+    cy.add({ group: "nodes", data: { id: String(id) } });
+}
+function addEdge(s, t, origin) {
+  if (s == null || t == null) return;
+  const id = s + "|" + t;
+  if (cy.getElementById(s).empty() || cy.getElementById(t).empty()) return;
+  if (cy.getElementById(id).empty())
+    cy.add({ group: "edges",
+      data: { id, source: s, target: t, origin: origin || "extracted" } });
+}
+
+function addDelta(d) {
+  (d.new_nodes || []).forEach(addNode);
+  const origins = d.edge_origins || {};
+  (d.new_edges || []).forEach(([s, t]) => addEdge(s, t, origins[s + "|" + t]));
+  relayout();
+}
+
+let relayoutPending = false;
+function relayout() {              // coalesce bursty deltas into one layout pass
+  if (relayoutPending) return;
+  relayoutPending = true;
+  setTimeout(() => {
+    relayoutPending = false;
+    cy.layout({ name: "cose", animate: false }).run();
+  }, 150);
+}
+
+// Open the WS first and buffer deltas so none are lost during the snapshot fetch.
+const ws = new WebSocket("ws://" + location.host + "/ws");
+ws.onmessage = (ev) => {
+  const d = JSON.parse(ev.data);
+  if (seeded) addDelta(d); else buffer.push(d);
+};
+ws.onopen = () => { status.textContent = "live"; };
+ws.onclose = () => { status.textContent = "disconnected"; };
+
+fetch("/graph").then(r => r.json()).then(g => {
+  (g.nodes || []).forEach(n => addNode(n.id));
+  (g.links || g.edges || []).forEach(e => addEdge(e.source, e.target, e._origin));
+  seeded = true;
+  buffer.splice(0).forEach(addDelta);
+  cy.layout({ name: "cose", animate: false }).run();
+}).catch(() => { seeded = true; });   // no snapshot yet — run on live deltas only
+</script>
+</body>
+</html>
