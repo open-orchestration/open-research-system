@@ -19,15 +19,17 @@ def promote(root, draft_id):
         return 1, f"draft file missing: {d['path']}"
     dest_rel = f"{FINDINGS_DIR}/{src.name}"
     dest = Path(root) / dest_rel
+    if dest.exists():
+        return 1, f"dest already exists: {dest_rel}"
     dest.parent.mkdir(parents=True, exist_ok=True)
     shutil.move(str(src), str(dest))
     state_mod.promote_draft(st, draft_id, dest_rel)
-    state_mod.save(st, root)
     syn = Path(root) / SYNTHESIS
     if not syn.exists():
         syn.write_text("# Synthesis — promoted findings\n\n", encoding="utf-8")
     with syn.open("a", encoding="utf-8") as f:
         f.write(f"- [{d['title']}]({src.name}) — {d['topic']}\n")
+    state_mod.save(st, root)
     return 0, f"promoted {draft_id} -> {dest_rel}"
 
 

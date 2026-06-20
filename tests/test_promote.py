@@ -37,6 +37,13 @@ class TestPromoteOps(unittest.TestCase):
         self.assertEqual(out["status"], "rejected")
         self.assertEqual(out["reject_reason"], "thin")
 
+    def test_reject_draft_without_reason(self):
+        st = state.load_default()
+        d = state.add_draft(st, topic="t", title="x", path="p.md", cites=[])
+        out = state.reject_draft(st, d["id"])
+        self.assertEqual(out["status"], "rejected")
+        self.assertNotIn("reject_reason", out)
+
 
 class TestPromoteCLI(unittest.TestCase):
     def _run(self, root, *args):
@@ -74,6 +81,39 @@ class TestPromoteCLI(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             did, _ = _seed_draft(d)
             self.assertIn(did, self._run(d, "queue").stdout)
+
+    def test_promote_missing_file_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            did, fname = _seed_draft(d)
+            (Path(d) / "docs/findings/_drafts" / fname).unlink()
+            r = self._run(d, "promote", did)
+            self.assertEqual(r.returncode, 1)
+            self.assertFalse((Path(d) / "docs/findings" / fname).exists())
+
+    def test_promote_dest_exists_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            did, fname = _seed_draft(d)
+            dest_path = Path(d) / "docs/findings" / fname
+            dest_path.parent.mkdir(parents=True, exist_ok=True)
+            sentinel = "original content\n"
+            dest_path.write_text(sentinel, encoding="utf-8")
+            r = self._run(d, "promote", did)
+            self.assertEqual(r.returncode, 1)
+            self.assertEqual(dest_path.read_text(encoding="utf-8"), sentinel)
+            self.assertTrue((Path(d) / "docs/findings/_drafts" / fname).exists())
+
+    def test_promote_appends_to_existing_synthesis(self):
+        with tempfile.TemporaryDirectory() as d:
+            syn_path = Path(d) / "docs/findings" / "SYNTHESIS.md"
+            syn_path.parent.mkdir(parents=True, exist_ok=True)
+            existing_line = "- existing entry\n"
+            syn_path.write_text(existing_line, encoding="utf-8")
+            did, fname = _seed_draft(d)
+            r = self._run(d, "promote", did)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            syn_content = syn_path.read_text(encoding="utf-8")
+            self.assertIn(existing_line, syn_content)
+            self.assertIn("Deep research", syn_content)
 
 
 if __name__ == "__main__":
