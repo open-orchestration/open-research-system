@@ -14,6 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import state as state_mod
 
 OVERLAY_REL = ".research/graph-assertions.jsonl"
+GRAPH_REL = ".graphify/graph.json"
 RELATIONS = ("bridges", "supports", "contradicts", "refines")
 
 
@@ -84,6 +85,32 @@ def prune_assertion(root=".", assertion_id=None, now=None):
     return existed
 
 
+def _asserted_link(rec):
+    return {
+        "source": rec["from"], "target": rec["to"],
+        "relation": rec["relation"], "weight": 1.0, "_origin": "asserted",
+        "assertion_id": rec["id"], "rationale": rec.get("rationale", ""),
+        "cites": rec.get("cites", []), "author": rec.get("author", "ai"),
+        "confidence": rec.get("confidence"),
+    }
+
+
+def replay(root=".", graph_path=None):
+    gp = Path(graph_path) if graph_path else Path(root) / GRAPH_REL
+    if not gp.exists():
+        return {"asserted": 0, "stripped": 0, "skipped": f"no graph at {gp}"}
+    graph = json.loads(gp.read_text(encoding="utf-8"))
+    links = graph.get("links", [])
+    kept = [l for l in links if l.get("_origin") != "asserted"]
+    stripped = len(links) - len(kept)
+    active = load_overlay(root)
+    graph["links"] = kept + [_asserted_link(r) for r in active]
+    tmp = gp.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(graph, ensure_ascii=False), encoding="utf-8")
+    os.replace(tmp, gp)
+    return {"asserted": len(active), "stripped": stripped, "skipped": None}
+
+
 def _main(argv):
     import argparse
     ap = argparse.ArgumentParser()
@@ -107,6 +134,10 @@ def _main(argv):
     li = sub.add_parser("list")
     li.add_argument("--root", default=".")
 
+    rp = sub.add_parser("replay")
+    rp.add_argument("--root", default=".")
+    rp.add_argument("--graph", default=None)
+
     args = ap.parse_args(argv)
     if args.cmd == "add":
         cites = [c for c in args.cites.split(",") if c]
@@ -123,6 +154,14 @@ def _main(argv):
     if args.cmd == "list":
         for r in load_overlay(args.root):
             print(f"{r['id']} {r['relation']} {r['from']} -> {r['to']}")
+        return 0
+    if args.cmd == "replay":
+        res = replay(root=args.root, graph_path=args.graph)
+        if res["skipped"]:
+            print(res["skipped"])
+        else:
+            print(f"replayed: +{res['asserted']} asserted links "
+                  f"(stripped {res['stripped']})")
         return 0
     return 1
 
