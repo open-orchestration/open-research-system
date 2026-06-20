@@ -77,9 +77,10 @@ def add_assertion(root=".", *, frm, to, relation, rationale, cites,
 def prune_assertion(root=".", assertion_id=None, now=None):
     active = {r["id"] for r in load_overlay(root)}
     existed = assertion_id in active
-    _append_line(root, {"id": assertion_id, "pruned": True,
-                        "pruned_at": now or state_mod._now()})
-    sync_count(root)
+    if existed:
+        _append_line(root, {"id": assertion_id, "pruned": True,
+                            "pruned_at": now or state_mod._now()})
+        sync_count(root)
     return existed
 
 

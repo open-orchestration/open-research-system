@@ -89,6 +89,14 @@ class Prune(unittest.TestCase):
         self.assertEqual(len(loaded), 1)
         self.assertEqual(loaded[0]["rationale"], "r2")
 
+    def test_prune_unknown_id_is_noop(self):
+        path = assertions.overlay_path(self.tmp)
+        before = path.read_text() if path.exists() else ""
+        ok = assertions.prune_assertion(root=self.tmp, assertion_id="a00000000")
+        self.assertFalse(ok)
+        after = path.read_text() if path.exists() else ""
+        self.assertEqual(before, after)  # nothing appended
+
 
 if __name__ == "__main__":
     unittest.main()
