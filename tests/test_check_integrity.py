@@ -118,6 +118,15 @@ class AssertionIntegrity(unittest.TestCase):
         probs = ci.check(self.tmp)
         self.assertTrue(any("dangling cite: c9999dead" in p for p in probs))
 
+    def test_corrupt_graph_reported_not_crashed(self):
+        (Path(self.tmp) / ".graphify" / "graph.json").write_text(
+            "{ this is not json", encoding="utf-8")
+        assertions.add_assertion(
+            root=self.tmp, frm="node_x", to="node_y", relation="bridges",
+            rationale="r", cites=["c0000aaaa"])
+        probs = ci.check(self.tmp)  # must not raise
+        self.assertTrue(any("graph.json unreadable" in p for p in probs))
+
 
 if __name__ == "__main__":
     unittest.main()

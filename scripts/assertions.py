@@ -31,7 +31,10 @@ def load_overlay(root="."):
         line = line.strip()
         if not line:
             continue
-        rec = json.loads(line)
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError:
+            continue
         rid = rec.get("id")
         if rid is None:
             continue
@@ -87,8 +90,8 @@ def prune_assertion(root=".", assertion_id=None, now=None):
 
 def _asserted_link(rec):
     return {
-        "source": rec["from"], "target": rec["to"],
-        "relation": rec["relation"], "weight": 1.0, "_origin": "asserted",
+        "source": rec.get("from"), "target": rec.get("to"),
+        "relation": rec.get("relation"), "weight": 1.0, "_origin": "asserted",
         "assertion_id": rec["id"], "rationale": rec.get("rationale", ""),
         "cites": rec.get("cites", []), "author": rec.get("author", "ai"),
         "confidence": rec.get("confidence"),
@@ -103,7 +106,8 @@ def replay(root=".", graph_path=None):
     links = graph.get("links", [])
     kept = [l for l in links if l.get("_origin") != "asserted"]
     stripped = len(links) - len(kept)
-    active = load_overlay(root)
+    active = [r for r in load_overlay(root)
+              if r.get("from") and r.get("to") and r.get("relation")]
     graph["links"] = kept + [_asserted_link(r) for r in active]
     tmp = gp.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(graph, ensure_ascii=False), encoding="utf-8")

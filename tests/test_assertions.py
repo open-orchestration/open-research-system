@@ -58,6 +58,15 @@ class AddAndLoad(unittest.TestCase):
         st = state_mod.load(self.tmp)
         self.assertEqual(st["assertions"]["count"], 1)
 
+    def test_load_overlay_skips_torn_line(self):
+        assertions.add_assertion(
+            root=self.tmp, frm="a", to="b", relation="bridges",
+            rationale="r", cites=["c0000aaaa"])
+        with assertions.overlay_path(self.tmp).open("a", encoding="utf-8") as fh:
+            fh.write('{"id": "torn", "from": "a"')  # torn, no newline/close
+        loaded = assertions.load_overlay(root=self.tmp)
+        self.assertEqual(len(loaded), 1)  # torn line skipped, valid one kept
+
 
 class Prune(unittest.TestCase):
     def setUp(self):
@@ -157,6 +166,16 @@ class Replay(unittest.TestCase):
         res = assertions.replay(root=empty)
         self.assertEqual(res["asserted"], 0)
         self.assertIn("no graph", res["skipped"])
+
+    def test_replay_skips_record_missing_endpoint(self):
+        op = assertions.overlay_path(self.tmp)
+        op.write_text(json.dumps({"id": "a0000beef", "from": "node_x",
+                                  "relation": "bridges", "cites": []}) + "\n",
+                      encoding="utf-8")
+        res = assertions.replay(root=self.tmp)  # must not raise
+        self.assertEqual(res["asserted"], 0)
+        self.assertEqual(
+            [l for l in self._links() if l.get("_origin") == "asserted"], [])
 
 
 if __name__ == "__main__":

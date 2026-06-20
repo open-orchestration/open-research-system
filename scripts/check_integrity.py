@@ -45,8 +45,12 @@ def check(root="."):
         gp = Path(root) / assertions_mod.GRAPH_REL
         node_ids = None
         if gp.exists():
-            graph = json.loads(gp.read_text(encoding="utf-8"))
-            node_ids = {n.get("id") for n in graph.get("nodes", [])}
+            try:
+                graph = json.loads(gp.read_text(encoding="utf-8"))
+                node_ids = {n.get("id") for n in graph.get("nodes", [])}
+            except json.JSONDecodeError as e:
+                problems.append(f"graph.json unreadable: {e}")
+                node_ids = None
         for a in active:
             aid = a.get("id")
             if node_ids is not None:
