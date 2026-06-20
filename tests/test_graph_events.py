@@ -24,7 +24,7 @@ class TestGraphEvents(unittest.TestCase):
             self.assertEqual(rec["ts"], "2026-06-19T00:00:00Z")
 
     def test_missing_keys_tolerated(self):
-        self.assertEqual(ge.diff({}, {}), {"new_nodes": [], "new_edges": []})
+        self.assertEqual(ge.diff({}, {}), {"new_nodes": [], "new_edges": [], "edge_origins": {}})
 
     def test_load_empty_or_missing_path_is_empty_graph(self):
         # Empty string (the CLI default for --old) must be treated as an empty
@@ -32,6 +32,24 @@ class TestGraphEvents(unittest.TestCase):
         self.assertEqual(ge._load(""), {})
         with tempfile.TemporaryDirectory() as t:
             self.assertEqual(ge._load(str(Path(t) / "nope.json")), {})
+
+    def test_diff_tags_asserted_edge_origin(self):
+        old = {"nodes": [{"id": "a"}, {"id": "b"}], "links": []}
+        new = {"nodes": [{"id": "a"}, {"id": "b"}, {"id": "c"}],
+               "links": [{"source": "a", "target": "b", "_origin": "asserted"},
+                         {"source": "a", "target": "c"}]}
+        d = ge.diff(old, new)
+        self.assertEqual(d["new_edges"], [["a", "b"], ["a", "c"]])
+        self.assertEqual(d["edge_origins"], {"a|b": "asserted"})
+
+    def test_append_writes_edge_origins(self):
+        with tempfile.TemporaryDirectory() as t:
+            ev = Path(t) / "graph-events.jsonl"
+            ge.append_event(ev, {"new_nodes": [], "new_edges": [["a", "b"]],
+                                 "edge_origins": {"a|b": "asserted"}},
+                            now="2026-06-20T00:00:00Z")
+            rec = json.loads(ev.read_text(encoding="utf-8").strip())
+            self.assertEqual(rec["edge_origins"], {"a|b": "asserted"})
 
 
 class LinksFormat(unittest.TestCase):

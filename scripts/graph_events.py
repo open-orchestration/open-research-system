@@ -13,12 +13,26 @@ def node_edge_sets(graph):
     return nodes, edges
 
 
+def _edge_origins(graph):
+    out = {}
+    for e in graph.get("links", graph.get("edges", [])):
+        s, t, o = e.get("source"), e.get("target"), e.get("_origin")
+        if s is not None and t is not None and o:
+            out[(s, t)] = o
+    return out
+
+
 def diff(old, new):
     on, oe = node_edge_sets(old)
     nn, ne = node_edge_sets(new)
+    new_edges = sorted(ne - oe)
+    origins = _edge_origins(new)
+    edge_origins = {f"{s}|{t}": origins[(s, t)]
+                    for (s, t) in new_edges if (s, t) in origins}
     return {
         "new_nodes": sorted(nn - on),
-        "new_edges": [list(p) for p in sorted(ne - oe)],
+        "new_edges": [list(p) for p in new_edges],
+        "edge_origins": edge_origins,
     }
 
 
@@ -27,7 +41,8 @@ def append_event(events_path, delta, now=None):
     p.parent.mkdir(parents=True, exist_ok=True)
     rec = {"ts": now or datetime.now(timezone.utc).isoformat(),
            "new_nodes": delta.get("new_nodes", []),
-           "new_edges": delta.get("new_edges", [])}
+           "new_edges": delta.get("new_edges", []),
+           "edge_origins": delta.get("edge_origins", {})}
     with p.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
