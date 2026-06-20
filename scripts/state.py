@@ -147,6 +147,42 @@ def set_gap_status(state, gap_id, status, *, requeue=False):
             return
 
 
+def add_draft(state, *, topic, title, path, cites, status="draft", now=None, id=None):
+    did = id or gen_id("d", topic + "|" + title)
+    for d in state["drafts"]:
+        if d["id"] == did:
+            return d
+    draft = {
+        "id": did, "topic": topic, "title": title, "path": path,
+        "status": status, "cites": list(cites),
+        "created_at": now or _now(), "promoted_path": None,
+    }
+    state["drafts"].append(draft)
+    return draft
+
+
+def list_drafts(state, status=None, topic=None):
+    return [
+        d for d in state["drafts"]
+        if (status is None or d["status"] == status)
+        and (topic is None or d["topic"] == topic)
+    ]
+
+
+def get_draft(state, draft_id):
+    for d in state["drafts"]:
+        if d["id"] == draft_id:
+            return d
+    return None
+
+
+def set_draft_status(state, draft_id, status):
+    d = get_draft(state, draft_id)
+    if d is not None:
+        d["status"] = status
+    return d
+
+
 def _main(argv):
     import argparse
     ap = argparse.ArgumentParser()
