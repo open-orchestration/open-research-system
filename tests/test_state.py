@@ -69,6 +69,27 @@ class TestStateCore(unittest.TestCase):
         self.assertEqual(st["graph"]["node_count"], 42)
         self.assertEqual(st["graph"]["edge_count"], 0)
 
+    def test_budget_reset_zeroes_spent(self):
+        st = state.load_default()
+        st["budget"]["spent"]["sources"] = 5
+        state.budget_reset(st, now="t")
+        self.assertEqual(st["budget"]["spent"], {"tokens": 0, "sources": 0, "cycle_started_at": "t"})
+
+    def test_budget_remaining_sources(self):
+        st = state.load_default()
+        self.assertEqual(state.budget_remaining_sources(st), 8)  # default sources_per_cycle
+        state.budget_spend_source(st, 3)
+        self.assertEqual(state.budget_remaining_sources(st), 5)
+        state.budget_spend_source(st, 99)
+        self.assertEqual(state.budget_remaining_sources(st), 0)  # floored at 0
+
+    def test_subagent_count_follows_phase_weights(self):
+        st = state.load_default()  # phase "gather": search 0.7, process 0.0; max_subagents 8
+        self.assertEqual(state.subagent_count(st, "search"), 6)   # round(8*0.7)=6 (banker's: round(5.6)=6)
+        self.assertEqual(state.subagent_count(st, "process"), 0)
+        st["budget"]["phase"] = "synthesize"
+        self.assertEqual(state.subagent_count(st, "process"), 6)  # round(8*0.8)=6
+
 
 if __name__ == "__main__":
     unittest.main()

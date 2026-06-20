@@ -10,6 +10,7 @@ from pathlib import Path
 DEFAULT_STATE = {
     "budget": {
         "tokens_per_cycle": 200000,
+        "sources_per_cycle": 8,
         "max_subagents": 8,
         "phase": "gather",
         "weights": {
@@ -91,6 +92,24 @@ def set_graph(state, *, dirty=None, node_count=None, edge_count=None, last_updat
         g["last_update"] = last_update
 
 
+def budget_reset(state, now=None):
+    state["budget"]["spent"] = {"tokens": 0, "sources": 0, "cycle_started_at": now or _now()}
+
+
+def budget_remaining_sources(state):
+    b = state["budget"]
+    return max(0, b.get("sources_per_cycle", 8) - b["spent"]["sources"])
+
+
+def budget_spend_source(state, n=1):
+    state["budget"]["spent"]["sources"] += n
+
+
+def subagent_count(state, flow):
+    b = state["budget"]
+    return round(b["max_subagents"] * b["weights"][b["phase"]][flow])
+
+
 def _main(argv):
     import argparse
     ap = argparse.ArgumentParser()
@@ -109,6 +128,10 @@ def _main(argv):
     sg.add_argument("--node-count", type=int, default=None)
     sg.add_argument("--edge-count", type=int, default=None)
     sg.add_argument("--last-update", default=None)
+    br = sub.add_parser("budget-remaining"); br.add_argument("--root", default=".")
+    brs = sub.add_parser("budget-reset"); brs.add_argument("--root", default=".")
+    bsp = sub.add_parser("budget-spend"); bsp.add_argument("--root", default="."); bsp.add_argument("--sources", type=int, required=True)
+    bst = sub.add_parser("budget-status"); bst.add_argument("--root", default=".")
     args = ap.parse_args(argv)
     if args.cmd == "gen-id":
         print(gen_id(args.prefix, args.seed)); return 0
@@ -127,6 +150,19 @@ def _main(argv):
                   last_update=args.last_update)
         save(st, args.root)
         print("graph updated"); return 0
+    if args.cmd == "budget-remaining":
+        print(budget_remaining_sources(load(args.root))); return 0
+    if args.cmd == "budget-reset":
+        st = load(args.root); budget_reset(st); save(st, args.root); print("budget reset"); return 0
+    if args.cmd == "budget-spend":
+        st = load(args.root); budget_spend_source(st, args.sources); save(st, args.root)
+        print(budget_remaining_sources(st)); return 0
+    if args.cmd == "budget-status":
+        st = load(args.root)
+        out = {"phase": st["budget"]["phase"],
+               "remaining_sources": budget_remaining_sources(st),
+               "subagents": {f: subagent_count(st, f) for f in ("search", "ingest", "process")}}
+        print(json.dumps(out)); return 0
     return 1
 
 
