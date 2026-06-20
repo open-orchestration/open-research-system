@@ -183,6 +183,26 @@ def set_draft_status(state, draft_id, status):
     return d
 
 
+def promote_draft(state, draft_id, dest_path, now=None):
+    d = get_draft(state, draft_id)
+    if d is None:
+        return None
+    d["status"] = "promoted"
+    d["promoted_path"] = dest_path
+    d["promoted_at"] = now or _now()
+    return d
+
+
+def reject_draft(state, draft_id, reason=None, now=None):
+    d = get_draft(state, draft_id)
+    if d is None:
+        return None
+    d["status"] = "rejected"
+    if reason:
+        d["reject_reason"] = reason
+    return d
+
+
 def _cited_ids(state, exclude_rejected=True):
     out = set()
     for d in state["drafts"]:
