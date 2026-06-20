@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 DEFAULT_STATE = {
@@ -51,3 +52,83 @@ def save(state, root="."):
 
 def gen_id(prefix, seed):
     return prefix + hashlib.sha256(seed.encode("utf-8")).hexdigest()[:8]
+
+
+def load_default():
+    return copy.deepcopy(DEFAULT_STATE)
+
+
+def _now():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def add_corpus_entry(state, *, title, source, topic, native_path, extracted_path,
+                     lossy=False, lifecycle="active", now=None, id=None):
+    cid = id or gen_id("c", source)
+    for e in state["corpus"]:
+        if e["id"] == cid:
+            return e
+    entry = {
+        "id": cid, "title": title, "source": source, "topic": topic,
+        "lifecycle": lifecycle, "native_path": native_path,
+        "extracted_path": extracted_path, "lossy": lossy,
+        "ingested_at": now or _now(),
+    }
+    state["corpus"].append(entry)
+    state["graph"]["dirty"] = True
+    return entry
+
+
+def set_graph(state, *, dirty=None, node_count=None, edge_count=None, last_update=None):
+    g = state["graph"]
+    if dirty is not None:
+        g["dirty"] = dirty
+    if node_count is not None:
+        g["node_count"] = node_count
+    if edge_count is not None:
+        g["edge_count"] = edge_count
+    if last_update is not None:
+        g["last_update"] = last_update
+
+
+def _main(argv):
+    import argparse
+    ap = argparse.ArgumentParser()
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    g = sub.add_parser("gen-id")
+    g.add_argument("prefix"); g.add_argument("seed")
+    a = sub.add_parser("add-corpus")
+    a.add_argument("--root", default=".")
+    for f in ("title", "source", "topic", "native", "extracted"):
+        a.add_argument(f"--{f}", required=True)
+    a.add_argument("--lossy", action="store_true")
+    a.add_argument("--id", default=None)
+    sg = sub.add_parser("set-graph")
+    sg.add_argument("--root", default=".")
+    sg.add_argument("--dirty", choices=("true", "false"), default=None)
+    sg.add_argument("--node-count", type=int, default=None)
+    sg.add_argument("--edge-count", type=int, default=None)
+    sg.add_argument("--last-update", default=None)
+    args = ap.parse_args(argv)
+    if args.cmd == "gen-id":
+        print(gen_id(args.prefix, args.seed)); return 0
+    if args.cmd == "add-corpus":
+        st = load(args.root)
+        e = add_corpus_entry(st, title=args.title, source=args.source, topic=args.topic,
+                             native_path=args.native, extracted_path=args.extracted,
+                             lossy=args.lossy, id=args.id)
+        save(st, args.root)
+        print(e["id"]); return 0
+    if args.cmd == "set-graph":
+        st = load(args.root)
+        set_graph(st,
+                  dirty={"true": True, "false": False}.get(args.dirty),
+                  node_count=args.node_count, edge_count=args.edge_count,
+                  last_update=args.last_update)
+        save(st, args.root)
+        print("graph updated"); return 0
+    return 1
+
+
+if __name__ == "__main__":
+    sys.exit(_main(sys.argv[1:]))

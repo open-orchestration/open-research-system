@@ -31,6 +31,33 @@ class TestStateCore(unittest.TestCase):
             again = state.load(d)
             self.assertEqual(again["corpus"], [{"id": "c001"}])
 
+    def test_add_corpus_assigns_deterministic_id_and_sets_dirty(self):
+        st = state.load_default()
+        e = state.add_corpus_entry(
+            st, title="T", source="src://a", topic="11-x",
+            native_path="ingest/a.md", extracted_path="docs/11-x/sources/cXXXX-t.md",
+            now="2026-06-19T00:00:00+00:00",
+        )
+        self.assertEqual(e["id"], state.gen_id("c", "src://a"))
+        self.assertEqual(e["lifecycle"], "active")
+        self.assertTrue(st["graph"]["dirty"])
+        self.assertEqual(len(st["corpus"]), 1)
+
+    def test_add_corpus_is_idempotent(self):
+        st = state.load_default()
+        state.add_corpus_entry(st, title="T", source="src://a", topic="11-x",
+                               native_path="n", extracted_path="e", now="t")
+        state.add_corpus_entry(st, title="T2", source="src://a", topic="11-x",
+                               native_path="n", extracted_path="e", now="t")
+        self.assertEqual(len(st["corpus"]), 1)  # same source -> same id -> no dup
+
+    def test_set_graph_updates_named_fields_only(self):
+        st = state.load_default()
+        state.set_graph(st, dirty=False, node_count=42)
+        self.assertFalse(st["graph"]["dirty"])
+        self.assertEqual(st["graph"]["node_count"], 42)
+        self.assertEqual(st["graph"]["edge_count"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()
