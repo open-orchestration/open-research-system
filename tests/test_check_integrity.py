@@ -7,11 +7,15 @@ import check_integrity as ci
 def _write_state(root, corpus):
     p = Path(root) / ".research"; p.mkdir(parents=True, exist_ok=True)
     base = {"budget": {}, "gaps": [], "inbox": [], "corpus": corpus,
-            "graph": {}, "drafts": []}
+            "graph": {}, "assertions": {}, "drafts": []}
     (p / "state.json").write_text(json.dumps(base), encoding="utf-8")
 
 
 class TestIntegrity(unittest.TestCase):
+    def test_absent_state_is_healthy(self):
+        with tempfile.TemporaryDirectory() as t:
+            self.assertEqual(ci.check(t), [])
+
     def test_healthy_when_files_exist(self):
         with tempfile.TemporaryDirectory() as t:
             (Path(t) / "docs").mkdir()

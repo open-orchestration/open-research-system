@@ -10,9 +10,10 @@ cp "$ROOT/scripts/lib.sh" "$ROOT/scripts/state.py" "$ROOT/scripts/ingest_lib.py"
    "$ROOT/scripts/ingest_flow.sh" "$TMP/scripts/"
 printf '# Hello\n\nsome content\n' > "$TMP/ingest/notes.md"
 
-REPO_ROOT="$TMP" bash "$TMP/scripts/ingest_flow.sh" 11-x
-
 fail=0
+REPO_ROOT="$TMP" bash "$TMP/scripts/ingest_flow.sh" 11-x \
+  || { echo "MISS: ingest_flow.sh exited nonzero"; fail=1; }
+
 # corpus file written under sources/
 n=$(find "$TMP/docs/11-x/sources" -name '*.md' | wc -l | tr -d ' ')
 [ "$n" = "1" ] && echo "ok: one source file" || { echo "MISS: source file count=$n"; fail=1; }

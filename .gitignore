@@ -9,3 +9,9 @@ ingest/*
 
 # research engine state spine is committed; only atomic-write temp files are ignored
 .research/*.tmp
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+.superpowers/

@@ -22,6 +22,16 @@ class TestStateCore(unittest.TestCase):
             self.assertIn("budget", st)
             self.assertEqual(st["corpus"], [])
             self.assertTrue((Path(d) / ".research/state.json").exists())
+            self.assertTrue(
+                {"budget", "gaps", "inbox", "corpus", "graph", "assertions", "drafts"}
+                .issubset(st.keys())
+            )
+
+    def test_state_path(self):
+        self.assertEqual(
+            state.state_path("/tmp/x"),
+            Path("/tmp/x/.research/state.json"),
+        )
 
     def test_save_then_load_roundtrips(self):
         with tempfile.TemporaryDirectory() as d:
@@ -50,6 +60,7 @@ class TestStateCore(unittest.TestCase):
         state.add_corpus_entry(st, title="T2", source="src://a", topic="11-x",
                                native_path="n", extracted_path="e", now="t")
         self.assertEqual(len(st["corpus"]), 1)  # same source -> same id -> no dup
+        self.assertEqual(st["corpus"][0]["title"], "T")
 
     def test_set_graph_updates_named_fields_only(self):
         st = state.load_default()

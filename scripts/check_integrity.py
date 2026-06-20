@@ -5,14 +5,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import state as state_mod
 
-REQUIRED_KEYS = ("budget", "gaps", "inbox", "corpus", "graph", "drafts")
+REQUIRED_KEYS = ("budget", "gaps", "inbox", "corpus", "graph", "assertions", "drafts")
 
 
 def check(root="."):
     problems = []
     p = state_mod.state_path(root)
     if not p.exists():
-        return ["no state.json found"]
+        return []
     try:
         st = json.loads(p.read_text(encoding="utf-8"))
     except json.JSONDecodeError as e:
