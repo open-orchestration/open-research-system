@@ -107,6 +107,17 @@ class AssertionIntegrity(unittest.TestCase):
         probs = ci.check(self.tmp)
         self.assertFalse(any("missing node" in p for p in probs))
 
+    def test_dangling_cite_flagged(self):
+        line = json.dumps({"id": "a0000dead", "from": "node_x", "to": "node_y",
+                           "relation": "bridges", "rationale": "r",
+                           "cites": ["c9999dead"], "author": "ai",
+                           "confidence": 0.8, "created_at": "now"})
+        op = assertions.overlay_path(self.tmp)
+        op.parent.mkdir(parents=True, exist_ok=True)
+        op.write_text(line + "\n", encoding="utf-8")
+        probs = ci.check(self.tmp)
+        self.assertTrue(any("dangling cite: c9999dead" in p for p in probs))
+
 
 if __name__ == "__main__":
     unittest.main()
