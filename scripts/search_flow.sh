@@ -20,9 +20,12 @@ mkdir -p "$ROOT/ingest"
 remaining="$($SP budget-remaining --root "$ROOT")"
 [ "$remaining" -gt 0 ] || { echo "search: budget spent ($remaining remaining)"; exit 0; }
 
-while [ "$remaining" -gt 0 ]; do
-  line="$($SP next-gap --root "$ROOT" --topic "$topic")"
-  [ -n "$line" ] || { echo "search: no queued gaps for $topic"; break; }
+gaps="$($SP list-gaps --root "$ROOT" --topic "$topic" --status queued)"
+[ -n "$gaps" ] || { echo "search: no queued gaps for $topic"; exit 0; }
+
+while IFS= read -r line; do
+  [ "$remaining" -gt 0 ] || break
+  [ -n "$line" ] || continue
   gid="$(printf '%s' "$line" | cut -f1)"
   desc="$(printf '%s' "$line" | cut -f3)"
   n="$PER_GAP"; [ "$remaining" -lt "$n" ] && n="$remaining"
@@ -50,12 +53,10 @@ while [ "$remaining" -gt 0 ]; do
     $SP budget-spend --root "$ROOT" --sources "$kept" >/dev/null
     echo "search: gap $gid -> $kept source(s) into ingest/"
   else
-    $SP set-gap --root "$ROOT" --id "$gid" --status requeue --requeue >/dev/null
-    # Fail permanently after 3 attempts. Default -1 if the gap vanished, so the
-    # comparison never errors and a missing gap is simply not failed.
+    $SP set-gap --root "$ROOT" --id "$gid" --status queued --requeue >/dev/null
     att="$(python3 -c "import json,sys;print(next((g['attempts'] for g in json.load(open(sys.argv[1]+'/.research/state.json'))['gaps'] if g['id']==sys.argv[2]), -1))" "$ROOT" "$gid")"
     [ "$att" -ge 3 ] && $SP set-gap --root "$ROOT" --id "$gid" --status failed >/dev/null
     echo "search: gap $gid produced no non-junk sources (attempt $att)"
   fi
-done
+done <<< "$gaps"
 echo "Done. New sources (if any) await the ingest cycle."

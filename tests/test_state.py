@@ -117,6 +117,35 @@ class TestStateCore(unittest.TestCase):
         state.set_gap_status(st, g["id"], "failed")
         self.assertEqual(st["gaps"][0]["status"], "failed")
 
+    def test_list_gaps_filters_by_topic_and_status(self):
+        st = state.load_default()
+        g1 = state.add_gap(st, topic="a", desc="one")
+        g2 = state.add_gap(st, topic="a", desc="two")
+        g3 = state.add_gap(st, topic="b", desc="three")
+        st["gaps"][1]["status"] = "done"
+        all_gaps = state.list_gaps(st)
+        self.assertEqual(len(all_gaps), 3)
+        by_topic = state.list_gaps(st, topic="a")
+        self.assertEqual({g["id"] for g in by_topic}, {g1["id"], g2["id"]})
+        by_status = state.list_gaps(st, status="queued")
+        self.assertEqual({g["id"] for g in by_status}, {g1["id"], g3["id"]})
+        both = state.list_gaps(st, topic="a", status="queued")
+        self.assertEqual(len(both), 1)
+        self.assertEqual(both[0]["id"], g1["id"])
+
+    def test_budget_spend_leaves_tokens_untouched(self):
+        st = state.load_default()
+        st["budget"]["spent"]["tokens"] = 42
+        state.budget_spend_source(st, 3)
+        self.assertEqual(st["budget"]["spent"]["tokens"], 42)
+        self.assertEqual(st["budget"]["spent"]["sources"], 3)
+
+    def test_add_gap_id_override(self):
+        st = state.load_default()
+        g = state.add_gap(st, topic="a", desc="x", id="gFIXED")
+        self.assertEqual(g["id"], "gFIXED")
+        self.assertEqual(st["gaps"][0]["id"], "gFIXED")
+
 
 if __name__ == "__main__":
     unittest.main()

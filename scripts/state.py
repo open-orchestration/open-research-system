@@ -121,6 +121,14 @@ def add_gap(state, *, topic, desc, origin="human", id=None):
     return gap
 
 
+def list_gaps(state, topic=None, status=None):
+    return [
+        g for g in state["gaps"]
+        if (topic is None or g["topic"] == topic)
+        and (status is None or g["status"] == status)
+    ]
+
+
 def next_queued_gap(state, topic=None):
     for g in state["gaps"]:
         if g["status"] == "queued" and (topic is None or g["topic"] == topic):
@@ -164,6 +172,8 @@ def _main(argv):
     ag = sub.add_parser("add-gap"); ag.add_argument("--root", default=".")
     ag.add_argument("--topic", required=True); ag.add_argument("--desc", required=True)
     ag.add_argument("--origin", default="human")
+    lg = sub.add_parser("list-gaps"); lg.add_argument("--root", default=".")
+    lg.add_argument("--topic", default=None); lg.add_argument("--status", default=None)
     ng = sub.add_parser("next-gap"); ng.add_argument("--root", default="."); ng.add_argument("--topic", default=None)
     stg = sub.add_parser("set-gap"); stg.add_argument("--root", default=".")
     stg.add_argument("--id", required=True); stg.add_argument("--status", required=True)
@@ -202,6 +212,10 @@ def _main(argv):
     if args.cmd == "add-gap":
         st = load(args.root); g = add_gap(st, topic=args.topic, desc=args.desc, origin=args.origin)
         save(st, args.root); print(g["id"]); return 0
+    if args.cmd == "list-gaps":
+        for g in list_gaps(load(args.root), topic=args.topic, status=args.status):
+            print(f"{g['id']}\t{g['topic']}\t{g['desc']}")
+        return 0
     if args.cmd == "next-gap":
         g = next_queued_gap(load(args.root), topic=args.topic)
         if g:
