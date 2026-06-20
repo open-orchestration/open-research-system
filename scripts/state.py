@@ -183,6 +183,41 @@ def set_draft_status(state, draft_id, status):
     return d
 
 
+def _cited_ids(state, exclude_rejected=True):
+    out = set()
+    for d in state["drafts"]:
+        if exclude_rejected and d["status"] == "rejected":
+            continue
+        out.update(d.get("cites", []))
+    return out
+
+
+def unprocessed_sources(state, topic):
+    cited = _cited_ids(state)
+    return [e for e in state["corpus"]
+            if e["topic"] == topic and e["id"] not in cited]
+
+
+def process_candidates(state, min_sources=3):
+    if subagent_count(state, "process") <= 0:
+        return []
+    cited = _cited_ids(state)
+    counts = {}
+    for e in state["corpus"]:
+        if e["id"] not in cited:
+            counts[e["topic"]] = counts.get(e["topic"], 0) + 1
+    cands = [(t, n) for t, n in counts.items() if n >= min_sources]
+    cands.sort(key=lambda tn: (-tn[1], tn[0]))
+    return cands
+
+
+def set_phase(state, phase):
+    if phase not in state["budget"]["weights"]:
+        raise ValueError(f"unknown phase: {phase}")
+    state["budget"]["phase"] = phase
+    return phase
+
+
 def _main(argv):
     import argparse
     ap = argparse.ArgumentParser()
