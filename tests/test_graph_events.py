@@ -34,5 +34,22 @@ class TestGraphEvents(unittest.TestCase):
             self.assertEqual(ge._load(str(Path(t) / "nope.json")), {})
 
 
+class LinksFormat(unittest.TestCase):
+    def test_diff_reads_links_array(self):
+        old = {"nodes": [{"id": "a"}], "links": []}
+        new = {"nodes": [{"id": "a"}, {"id": "b"}],
+               "links": [{"source": "a", "target": "b"}]}
+        d = ge.diff(old, new)
+        self.assertEqual(d["new_nodes"], ["b"])
+        self.assertEqual(d["new_edges"], [["a", "b"]])
+
+    def test_diff_still_reads_legacy_edges_key(self):
+        old = {"nodes": [], "edges": []}
+        new = {"nodes": [{"id": "a"}, {"id": "b"}],
+               "edges": [{"source": "a", "target": "b"}]}
+        d = ge.diff(old, new)
+        self.assertEqual(d["new_edges"], [["a", "b"]])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -7,7 +7,8 @@ from pathlib import Path
 
 def node_edge_sets(graph):
     nodes = {n.get("id") for n in graph.get("nodes", []) if n.get("id") is not None}
-    edges = {(e.get("source"), e.get("target")) for e in graph.get("edges", [])
+    raw_edges = graph.get("links", graph.get("edges", []))
+    edges = {(e.get("source"), e.get("target")) for e in raw_edges
              if e.get("source") is not None and e.get("target") is not None}
     return nodes, edges
 
