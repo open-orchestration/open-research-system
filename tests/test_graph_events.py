@@ -26,6 +26,13 @@ class TestGraphEvents(unittest.TestCase):
     def test_missing_keys_tolerated(self):
         self.assertEqual(ge.diff({}, {}), {"new_nodes": [], "new_edges": []})
 
+    def test_load_empty_or_missing_path_is_empty_graph(self):
+        # Empty string (the CLI default for --old) must be treated as an empty
+        # graph, not Path(".") — which is a directory and would raise IsADirectoryError.
+        self.assertEqual(ge._load(""), {})
+        with tempfile.TemporaryDirectory() as t:
+            self.assertEqual(ge._load(str(Path(t) / "nope.json")), {})
+
 
 if __name__ == "__main__":
     unittest.main()

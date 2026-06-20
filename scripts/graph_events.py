@@ -32,8 +32,10 @@ def append_event(events_path, delta, now=None):
 
 
 def _load(path):
+    if not path:
+        return {}
     p = Path(path)
-    return json.loads(p.read_text(encoding="utf-8")) if p and p.exists() else {}
+    return json.loads(p.read_text(encoding="utf-8")) if p.is_file() else {}
 
 
 def _main(argv):
