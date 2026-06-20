@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import state as state_mod
+import assertions as assertions_mod
 
 REQUIRED_KEYS = ("budget", "gaps", "inbox", "corpus", "graph", "assertions", "drafts")
 
@@ -39,6 +40,23 @@ def check(root="."):
         for cid in dft.get("cites", []):
             if cid not in corpus_ids:
                 problems.append(f"draft {did} dangling cite: {cid}")
+    active = assertions_mod.load_overlay(root)
+    if active:
+        gp = Path(root) / assertions_mod.GRAPH_REL
+        node_ids = None
+        if gp.exists():
+            graph = json.loads(gp.read_text(encoding="utf-8"))
+            node_ids = {n.get("id") for n in graph.get("nodes", [])}
+        for a in active:
+            aid = a.get("id")
+            if node_ids is not None:
+                for endpoint in (a.get("from"), a.get("to")):
+                    if endpoint not in node_ids:
+                        problems.append(
+                            f"assertion {aid} references missing node: {endpoint}")
+            for cid in a.get("cites", []):
+                if cid not in corpus_ids:
+                    problems.append(f"assertion {aid} dangling cite: {cid}")
     return problems
 
 

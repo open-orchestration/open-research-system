@@ -2,6 +2,8 @@ import json, tempfile, unittest, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import check_integrity as ci
+import assertions
+import state as state_mod
 
 
 def _write_state(root, corpus):
@@ -65,6 +67,45 @@ class TestIntegrity(unittest.TestCase):
             _write_state_drafts(t, [], [{"id": "dP", "status": "promoted",
                 "path": "docs/findings/_drafts/moved.md", "cites": []}])
             self.assertEqual(ci.check(t), [])
+
+
+class AssertionIntegrity(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp()
+        st = state_mod.load(self.tmp)
+        st["corpus"].append({
+            "id": "c0000aaaa", "title": "t", "source": "s", "topic": "t",
+            "lifecycle": "active", "native_path": "n",
+            "extracted_path": "e.md", "lossy": False, "ingested_at": "now",
+        })
+        (Path(self.tmp) / "e.md").write_text("x", encoding="utf-8")
+        state_mod.save(st, self.tmp)
+        gp = Path(self.tmp) / ".graphify" / "graph.json"
+        gp.parent.mkdir(parents=True, exist_ok=True)
+        gp.write_text(json.dumps({
+            "nodes": [{"id": "node_x"}, {"id": "node_y"}], "links": [],
+        }), encoding="utf-8")
+
+    def test_clean_assertion_passes(self):
+        assertions.add_assertion(
+            root=self.tmp, frm="node_x", to="node_y", relation="bridges",
+            rationale="r", cites=["c0000aaaa"])
+        self.assertEqual(ci.check(self.tmp), [])
+
+    def test_missing_node_flagged(self):
+        assertions.add_assertion(
+            root=self.tmp, frm="node_x", to="ghost", relation="bridges",
+            rationale="r", cites=["c0000aaaa"])
+        probs = ci.check(self.tmp)
+        self.assertTrue(any("missing node: ghost" in p for p in probs))
+
+    def test_node_check_skipped_without_graph(self):
+        (Path(self.tmp) / ".graphify" / "graph.json").unlink()
+        assertions.add_assertion(
+            root=self.tmp, frm="node_x", to="ghost", relation="bridges",
+            rationale="r", cites=["c0000aaaa"])
+        probs = ci.check(self.tmp)
+        self.assertFalse(any("missing node" in p for p in probs))
 
 
 if __name__ == "__main__":
