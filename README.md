@@ -20,3 +20,9 @@ Definitive source-of-truth for **AI-assisted research → decisions → actionab
 2. Gather a topic: `scripts/gather.sh 06-rag-retrieval "advanced RAG architectures 2025"`.
 3. Synthesize into `docs/findings/` and `SYNTHESIS.md`.
 4. Run graphify; review `.graphify/GRAPH_REPORT.md`.
+
+### Continuous ingest loop
+- Drop sources (files/links/videos/raw text) into `ingest/`.
+- `scripts/ingest_flow.sh <topic>` normalizes them into `docs/<topic>/sources/`, records each in `.research/state.json` with a durable id + lifecycle, and flags the graph dirty.
+- The graph is updated incrementally (graphify `--update`); deltas append to `.research/graph-events.jsonl` (the realtime-view feed + audit log).
+- Run the loop hands-off with `/loop` (uses `.claude/loop.md`).

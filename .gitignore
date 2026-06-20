@@ -6,3 +6,6 @@ ingest/*
 *.docx
 *.xlsx
 *.pptx
+
+# research engine state spine is committed; only atomic-write temp files are ignored
+.research/*.tmp
