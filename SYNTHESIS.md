@@ -161,7 +161,7 @@ These honestly-flagged thin spots define the deep-dive backlog for Phase 2:
 ## Graph reading
 
 A directed graphify pass over the whole corpus (147 files, 445 nodes, 521 edges, 61
-communities; `graphify-out/GRAPH_REPORT.md`) ranks these god nodes by degree centrality:
+communities; `.graphify/GRAPH_REPORT.md`) ranks these god nodes by degree centrality:
 
 1. `12 Advanced RAG Techniques Beyond Naive Retrieval` (12) — retrieval
 2. `17-Category Research Taxonomy` (11) — the catalog spine itself

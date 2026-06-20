@@ -1,7 +1,5 @@
 .DS_Store
 .graphify/
-graphify-out/cache/
-graphify-out/manifest.json
 ingest/*
 !ingest/.gitkeep
 *.pdf

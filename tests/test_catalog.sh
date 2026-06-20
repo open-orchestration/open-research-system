@@ -11,7 +11,7 @@ for f in README.md .gitignore RESEARCH-CATALOG.md SYNTHESIS.md; do
 done
 
 # Required dirs
-for d in ingest docs docs/findings docs/diagrams scripts graphify-out tests; do
+for d in ingest docs docs/findings docs/diagrams scripts tests; do
   check "$d/ exists" test -d "$ROOT/$d"
 done
 

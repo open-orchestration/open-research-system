@@ -13,10 +13,10 @@ Definitive source-of-truth for **AI-assisted research → decisions → actionab
 - `SYNTHESIS.md` — cross-topic distillation.
 - `ingest/` — drop local files (PDF/docx/…); `scripts/ingest.sh` converts them.
 - `scripts/gather.sh` — drives the crawl4ai deep-research workflow per topic.
-- `graphify-out/` — relational model of the corpus (god nodes/nodes/edges).
+- `.graphify/` — relational model of the corpus (god nodes/nodes/edges); generated, gitignored.
 
 ## Quickstart
 1. Drop files into `ingest/`, run `scripts/ingest.sh`.
 2. Gather a topic: `scripts/gather.sh 06-rag-retrieval "advanced RAG architectures 2025"`.
 3. Synthesize into `docs/findings/` and `SYNTHESIS.md`.
-4. Run graphify; review `graphify-out/GRAPH_REPORT.md`.
+4. Run graphify; review `.graphify/GRAPH_REPORT.md`.

@@ -81,7 +81,7 @@ brainstorm.
   choices, with rejected alternatives as required output and a one-sentence canonical form for
   minor decisions. — basis: `docs/findings/03-decision-frameworks.md`.
 - **graphify node/edge schema + god nodes:** **Confirmed.** The directed graphify pass built a
-  real graph (147 files → 445 nodes, 521 edges, 61 communities; `graphify-out/GRAPH_REPORT.md`)
+  real graph (147 files → 445 nodes, 521 edges, 61 communities; `.graphify/GRAPH_REPORT.md`)
   and god nodes surfaced by degree centrality. Caveat the schema must encode: the two highest-degree
   nodes were the catalog and the spec — structural hubs, not concepts — so god-node reading must
   go through cross-community bridges, not raw degree. — basis: SYNTHESIS "Graph reading";
