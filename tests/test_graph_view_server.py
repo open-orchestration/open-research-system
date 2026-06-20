@@ -21,6 +21,14 @@ class TestWsHelpers(unittest.TestCase):
         self.assertEqual(struct.unpack(">H", f[2:4])[0], 200)
         self.assertEqual(f[4:], payload.encode("utf-8"))
 
+    def test_frame_large_payload(self):
+        payload = "x" * 65536
+        f = gv.ws_frame(payload)
+        self.assertEqual(f[0], 0x81)
+        self.assertEqual(f[1], 127)
+        self.assertEqual(struct.unpack(">Q", f[2:10])[0], 65536)
+        self.assertEqual(f[10:], payload.encode("utf-8"))
+
 
 if __name__ == "__main__":
     unittest.main()
