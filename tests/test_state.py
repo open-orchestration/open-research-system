@@ -90,6 +90,33 @@ class TestStateCore(unittest.TestCase):
         st["budget"]["phase"] = "synthesize"
         self.assertEqual(state.subagent_count(st, "process"), 6)  # round(8*0.8)=6
 
+    def test_add_gap_dedups_on_topic_desc(self):
+        st = state.load_default()
+        g1 = state.add_gap(st, topic="06-rag", desc="hybrid retrieval rerank")
+        g2 = state.add_gap(st, topic="06-rag", desc="hybrid retrieval rerank")
+        self.assertEqual(len(st["gaps"]), 1)
+        self.assertEqual(g1["id"], g2["id"])
+        self.assertEqual(g1["status"], "queued")
+        self.assertEqual(g1["attempts"], 0)
+
+    def test_next_queued_gap_skips_non_queued(self):
+        st = state.load_default()
+        state.add_gap(st, topic="a", desc="one")
+        g2 = state.add_gap(st, topic="b", desc="two")
+        st["gaps"][0]["status"] = "done"
+        self.assertEqual(state.next_queued_gap(st)["id"], g2["id"])
+        self.assertEqual(state.next_queued_gap(st, topic="b")["id"], g2["id"])
+        self.assertIsNone(state.next_queued_gap(st, topic="a"))  # a's only gap is done
+
+    def test_set_gap_status_requeue_increments_attempts(self):
+        st = state.load_default()
+        g = state.add_gap(st, topic="a", desc="one")
+        state.set_gap_status(st, g["id"], "x", requeue=True)
+        self.assertEqual(st["gaps"][0]["status"], "queued")
+        self.assertEqual(st["gaps"][0]["attempts"], 1)
+        state.set_gap_status(st, g["id"], "failed")
+        self.assertEqual(st["gaps"][0]["status"], "failed")
+
 
 if __name__ == "__main__":
     unittest.main()

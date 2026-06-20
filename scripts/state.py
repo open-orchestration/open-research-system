@@ -110,6 +110,35 @@ def subagent_count(state, flow):
     return round(b["max_subagents"] * b["weights"][b["phase"]][flow])
 
 
+def add_gap(state, *, topic, desc, origin="human", id=None):
+    gid = id or gen_id("g", topic + "|" + desc)
+    for g in state["gaps"]:
+        if g["id"] == gid:
+            return g
+    gap = {"id": gid, "topic": topic, "desc": desc, "origin": origin,
+           "status": "queued", "attempts": 0}
+    state["gaps"].append(gap)
+    return gap
+
+
+def next_queued_gap(state, topic=None):
+    for g in state["gaps"]:
+        if g["status"] == "queued" and (topic is None or g["topic"] == topic):
+            return g
+    return None
+
+
+def set_gap_status(state, gap_id, status, *, requeue=False):
+    for g in state["gaps"]:
+        if g["id"] == gap_id:
+            if requeue:
+                g["status"] = "queued"
+                g["attempts"] += 1
+            else:
+                g["status"] = status
+            return
+
+
 def _main(argv):
     import argparse
     ap = argparse.ArgumentParser()
@@ -132,6 +161,13 @@ def _main(argv):
     brs = sub.add_parser("budget-reset"); brs.add_argument("--root", default=".")
     bsp = sub.add_parser("budget-spend"); bsp.add_argument("--root", default="."); bsp.add_argument("--sources", type=int, required=True)
     bst = sub.add_parser("budget-status"); bst.add_argument("--root", default=".")
+    ag = sub.add_parser("add-gap"); ag.add_argument("--root", default=".")
+    ag.add_argument("--topic", required=True); ag.add_argument("--desc", required=True)
+    ag.add_argument("--origin", default="human")
+    ng = sub.add_parser("next-gap"); ng.add_argument("--root", default="."); ng.add_argument("--topic", default=None)
+    stg = sub.add_parser("set-gap"); stg.add_argument("--root", default=".")
+    stg.add_argument("--id", required=True); stg.add_argument("--status", required=True)
+    stg.add_argument("--requeue", action="store_true")
     args = ap.parse_args(argv)
     if args.cmd == "gen-id":
         print(gen_id(args.prefix, args.seed)); return 0
@@ -163,6 +199,17 @@ def _main(argv):
                "remaining_sources": budget_remaining_sources(st),
                "subagents": {f: subagent_count(st, f) for f in ("search", "ingest", "process")}}
         print(json.dumps(out)); return 0
+    if args.cmd == "add-gap":
+        st = load(args.root); g = add_gap(st, topic=args.topic, desc=args.desc, origin=args.origin)
+        save(st, args.root); print(g["id"]); return 0
+    if args.cmd == "next-gap":
+        g = next_queued_gap(load(args.root), topic=args.topic)
+        if g:
+            print(f"{g['id']}\t{g['topic']}\t{g['desc']}")
+        return 0
+    if args.cmd == "set-gap":
+        st = load(args.root); set_gap_status(st, args.id, args.status, requeue=args.requeue)
+        save(st, args.root); print("gap updated"); return 0
     return 1
 
 
