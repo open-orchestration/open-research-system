@@ -94,6 +94,18 @@ class TestCandidates(unittest.TestCase):
         with self.assertRaises(ValueError):
             state.set_phase(st, "bogus")
 
+    def test_unprocessed_sources_reincludes_rejected_draft_source(self):
+        st = state.load_default()
+        self._corpus(st, "05-ai", 1)
+        corpus_id = st["corpus"][0]["id"]
+        state.add_draft(
+            st, topic="05-ai", title="r", path="r.md",
+            cites=[corpus_id], status="rejected"
+        )
+        un = state.unprocessed_sources(st, "05-ai")
+        self.assertEqual(len(un), 1)
+        self.assertEqual(un[0]["id"], corpus_id)
+
 
 if __name__ == "__main__":
     unittest.main()
