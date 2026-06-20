@@ -1,6 +1,8 @@
 import unittest
 from pathlib import Path
 import sys
+import subprocess
+import tempfile
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import state
 
@@ -107,8 +109,6 @@ class TestCandidates(unittest.TestCase):
         self.assertEqual(un[0]["id"], corpus_id)
 
 
-import subprocess, tempfile
-
 SCRIPTS = Path(__file__).resolve().parent.parent / "scripts"
 
 
@@ -142,6 +142,18 @@ class TestDraftCLI(unittest.TestCase):
             self.assertEqual(self._run(d, "candidates").stdout.strip(), "")  # gather phase
             self._run(d, "set-phase", "--phase", "synthesize")
             self.assertIn("05-ai\t3", self._run(d, "candidates").stdout)
+
+    def test_set_draft_unknown_id_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            r = self._run(d, "set-draft", "--id", "dXXXXXXXX", "--status", "in_review")
+            self.assertEqual(r.returncode, 1)
+            self.assertIn("unknown draft", r.stderr)
+
+    def test_set_phase_invalid_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            r = self._run(d, "set-phase", "--phase", "badphase")
+            self.assertEqual(r.returncode, 1)
+            self.assertIn("badphase", r.stderr)
 
 
 if __name__ == "__main__":
