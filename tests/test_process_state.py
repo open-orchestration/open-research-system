@@ -107,5 +107,42 @@ class TestCandidates(unittest.TestCase):
         self.assertEqual(un[0]["id"], corpus_id)
 
 
+import subprocess, tempfile
+
+SCRIPTS = Path(__file__).resolve().parent.parent / "scripts"
+
+
+class TestDraftCLI(unittest.TestCase):
+    def _run(self, root, *args):
+        return subprocess.run(
+            ["python3", str(SCRIPTS / "state.py"), *args, "--root", root],
+            capture_output=True, text=True,
+        )
+
+    def test_add_list_set_draft_via_cli(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._run(d, "set-phase", "--phase", "synthesize")
+            r = self._run(d, "add-draft", "--topic", "05-ai", "--title", "X",
+                          "--path", "docs/findings/_drafts/dX.md", "--cites", "c1,c2")
+            self.assertEqual(r.returncode, 0)
+            did = r.stdout.strip()
+            self.assertTrue(did.startswith("d"))
+            lst = self._run(d, "list-drafts", "--status", "draft")
+            self.assertIn(did, lst.stdout)
+            self.assertIn("05-ai", lst.stdout)
+            self._run(d, "set-draft", "--id", did, "--status", "in_review")
+            self.assertEqual(self._run(d, "list-drafts", "--status", "draft").stdout.strip(), "")
+            self.assertIn(did, self._run(d, "list-drafts", "--status", "in_review").stdout)
+
+    def test_set_phase_then_candidates_via_cli(self):
+        with tempfile.TemporaryDirectory() as d:
+            for i in range(3):
+                self._run(d, "add-corpus", "--title", f"t{i}", "--source", f"s{i}",
+                          "--topic", "05-ai", "--native", f"n{i}.md", "--extracted", f"e{i}.md")
+            self.assertEqual(self._run(d, "candidates").stdout.strip(), "")  # gather phase
+            self._run(d, "set-phase", "--phase", "synthesize")
+            self.assertIn("05-ai\t3", self._run(d, "candidates").stdout)
+
+
 if __name__ == "__main__":
     unittest.main()

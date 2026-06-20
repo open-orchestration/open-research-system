@@ -249,6 +249,18 @@ def _main(argv):
     stg = sub.add_parser("set-gap"); stg.add_argument("--root", default=".")
     stg.add_argument("--id", required=True); stg.add_argument("--status", required=True)
     stg.add_argument("--requeue", action="store_true")
+    ad = sub.add_parser("add-draft"); ad.add_argument("--root", default=".")
+    ad.add_argument("--topic", required=True); ad.add_argument("--title", required=True)
+    ad.add_argument("--path", required=True); ad.add_argument("--cites", default="")
+    ad.add_argument("--status", default="draft"); ad.add_argument("--id", default=None)
+    ld = sub.add_parser("list-drafts"); ld.add_argument("--root", default=".")
+    ld.add_argument("--status", default=None); ld.add_argument("--topic", default=None)
+    sd = sub.add_parser("set-draft"); sd.add_argument("--root", default=".")
+    sd.add_argument("--id", required=True); sd.add_argument("--status", required=True)
+    cd = sub.add_parser("candidates"); cd.add_argument("--root", default=".")
+    cd.add_argument("--min-sources", type=int, default=3)
+    sph = sub.add_parser("set-phase"); sph.add_argument("--root", default=".")
+    sph.add_argument("--phase", required=True)
     args = ap.parse_args(argv)
     if args.cmd == "gen-id":
         print(gen_id(args.prefix, args.seed)); return 0
@@ -295,6 +307,32 @@ def _main(argv):
     if args.cmd == "set-gap":
         st = load(args.root); set_gap_status(st, args.id, args.status, requeue=args.requeue)
         save(st, args.root); print("gap updated"); return 0
+    if args.cmd == "add-draft":
+        st = load(args.root)
+        cites = [c for c in args.cites.split(",") if c]
+        d = add_draft(st, topic=args.topic, title=args.title, path=args.path,
+                      cites=cites, status=args.status, id=args.id)
+        save(st, args.root); print(d["id"]); return 0
+    if args.cmd == "list-drafts":
+        for d in list_drafts(load(args.root), status=args.status, topic=args.topic):
+            print(f"{d['id']}\t{d['status']}\t{d['topic']}\t{d['title']}")
+        return 0
+    if args.cmd == "set-draft":
+        st = load(args.root)
+        if set_draft_status(st, args.id, args.status) is None:
+            print(f"unknown draft: {args.id}", file=sys.stderr); return 1
+        save(st, args.root); print("draft updated"); return 0
+    if args.cmd == "candidates":
+        for topic, n in process_candidates(load(args.root), min_sources=args.min_sources):
+            print(f"{topic}\t{n}")
+        return 0
+    if args.cmd == "set-phase":
+        st = load(args.root)
+        try:
+            set_phase(st, args.phase)
+        except ValueError as e:
+            print(str(e), file=sys.stderr); return 1
+        save(st, args.root); print(args.phase); return 0
     return 1
 
 
