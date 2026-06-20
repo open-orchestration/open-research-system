@@ -33,3 +33,17 @@ Definitive source-of-truth for **AI-assisted research → decisions → actionab
 - Search is run **per topic** so the ingest flow routes each batch correctly: for every topic with queued gaps, run `scripts/search_flow.sh --topic <T>` then `scripts/ingest_flow.sh <T>`.
 - Reset the per-cycle budget with `python3 scripts/state.py budget-reset`; inspect it with `python3 scripts/state.py budget-status`.
 - Run hands-off on a slow interval, e.g. `/loop 10m for each topic with queued gaps, run scripts/search_flow.sh --topic <T> then scripts/ingest_flow.sh <T>`.
+
+## Realtime graph view
+
+Watch the knowledge graph grow live in a browser. The view is read-only and
+runs beside the engine — start it whenever you want to watch:
+
+    python3 scripts/graph_view_server.py
+    # then open http://127.0.0.1:8000
+
+It seeds from the current `.graphify/graph.json`, then animates each new
+`.research/graph-events.jsonl` delta over a WebSocket as ingest cycles land.
+AI-asserted edges (sub-project #4) render dashed and tinted, distinct from
+corpus-extracted edges. Binds localhost only (unauthenticated). Flags:
+`--host --port --events --graph --html` (or `GV_*` env vars).
