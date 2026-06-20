@@ -29,6 +29,16 @@ def check(root="."):
         ep = e.get("extracted_path", "")
         if not (Path(root) / ep).exists():
             problems.append(f"corpus {cid} missing file: {ep}")
+    corpus_ids = {e.get("id") for e in st.get("corpus", [])}
+    for dft in st.get("drafts", []):
+        did = dft.get("id")
+        if dft.get("status") != "promoted":
+            dp = dft.get("path", "")
+            if not (Path(root) / dp).exists():
+                problems.append(f"draft {did} missing file: {dp}")
+        for cid in dft.get("cites", []):
+            if cid not in corpus_ids:
+                problems.append(f"draft {did} dangling cite: {cid}")
     return problems
 
 
