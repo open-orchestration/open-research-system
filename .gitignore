@@ -9,6 +9,8 @@ ingest/*
 
 # research engine state spine is committed; only atomic-write temp files are ignored
 .research/*.tmp
+.research/run.jsonl
+.research/run-context.json
 
 # Python bytecode
 __pycache__/
