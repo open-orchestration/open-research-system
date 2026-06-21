@@ -37,12 +37,20 @@ Each cycle, do exactly this:
      Before stopping, close the run log: `python3 scripts/runlog.py end --status ok`
      Do not run any more cycles.
 
-3. **Search.** If `D.search` is `true`: run one search cycle:
+3. **Search.** If `D.search` is `true`: run one paired search+ingest pass for every topic
+   that has queued gaps, so each batch is filed under its own topic (a single global topic
+   would mis-route sources, since `ingest_flow.sh` routes by the topic argument):
    ```
-   bash scripts/search_flow.sh --topic 13-reference-systems-case-studies
+   for T in $(python3 scripts/state.py list-gaps --status queued | cut -f2 | sort -u); do
+     bash scripts/search_flow.sh --topic "$T"
+     bash scripts/ingest_flow.sh "$T"
+   done
    ```
-   (Use the goal's topic if a different one is in play.) Output lands in `ingest/` and is
-   drained by the next cycle's step 1.
+   `search_flow.sh` drains that topic's queued gaps within the shared per-cycle budget and
+   drops results into `ingest/`; the paired `ingest_flow.sh "$T"` normalizes them straight
+   into `docs/<T>/sources/` and flags the graph dirty. The graph update + replay + event
+   append run in the next cycle's step 1, which still fires on an empty drain because the
+   dirty flag persists in `.research/state.json`.
 
 4. **Process.** If `D.process` is `true`: run the Process cycle exactly as defined in
    `.claude/process.md` (pick a candidate topic, draft with inline citations, pass both
