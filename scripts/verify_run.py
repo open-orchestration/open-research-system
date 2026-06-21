@@ -263,7 +263,6 @@ def all_findings(recs, root):
                check_integrity_per_cycle, check_replay_ordering,
                check_recompute, check_work_after_goal, check_completeness):
         out += fn(recs)
-    out += check_consistency(recs, root)
     return out
 
 
@@ -273,6 +272,11 @@ def _compute(root, run_id, path, use_gotchas):
     recs, findings = parse_recs(lines)
     run = select_run(recs, run_id)
     findings += all_findings(run, root)
+    starts = [r for r in recs if r.get("step") == "run_start"]
+    latest_id = starts[-1]["run_id"] if starts else None
+    is_latest = bool(run) and run[0].get("run_id") == latest_id
+    if is_latest:
+        findings += check_consistency(run, root)
     notes = {}
     if use_gotchas:
         reg = gotchas_mod.load_registry(root)

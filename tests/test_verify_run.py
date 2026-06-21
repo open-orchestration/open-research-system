@@ -132,6 +132,27 @@ class VerifyCatches(unittest.TestCase):
                                 for x in findings))
             self.assertEqual(code, 1)
 
+    def test_consistency_skipped_for_non_latest_run(self):
+        with TemporaryDirectory() as d:
+            base = st.load_default()
+            st.save(st.load_default(), d)                       # live state = empty default
+            recs = [
+                # older run logs a corpus id that is NOT in live state
+                {"run_id": "rOLD", "cycle": 0, "seq": 0, "ts": "t", "flow": "run",
+                 "step": "run_start", "status": "ok", "data": {"state": base}},
+                {"run_id": "rOLD", "cycle": 1, "seq": 1, "ts": "t", "flow": "ingest",
+                 "step": "normalize", "status": "ok", "data": {"corpus_id": "cOLDOLD11"}},
+                # a newer run exists, so rOLD is not the latest
+                {"run_id": "rNEW", "cycle": 0, "seq": 0, "ts": "t", "flow": "run",
+                 "step": "run_start", "status": "ok", "data": {"state": base}},
+            ]
+            p = Path(d) / ".research" / "run.jsonl"
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text("".join(json.dumps(r) + "\n" for r in recs))
+            findings, code = vr.verify(d, run_id="rOLD", use_gotchas=False)
+            self.assertFalse(any(x["check"] in ("corpus_id_mismatch", "draft_id_mismatch")
+                                 for x in findings))
+
     def test_work_after_goal_met_fails(self):
         with TemporaryDirectory() as d:
             base = st.load_default()

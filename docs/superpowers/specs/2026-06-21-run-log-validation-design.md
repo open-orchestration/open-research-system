@@ -190,10 +190,12 @@ stopped).
 true), a corresponding logged step is expected; a missing one is WARN (agent deviation or
 legitimately idle — surfaced, not failed).
 
-**Consistency (FAIL):** baseline counts from the `run_start` snapshot (`data.state`) plus the deltas
-logged during the run (corpus added, drafts created, assertions applied) reconcile with the live
-`state.json` (`len(corpus)`, draft count, `assertions.count`): `baseline + sum(logged deltas) ==
-final`. Divergence is a FAIL.
+**Consistency (FAIL):** the corpus id-set logged during the run (from `normalize` steps) and the
+draft id-set logged during the run (from `draft` steps) must each equal the delta between the
+`run_start` baseline and the final `state.json` — only for the **latest** run, because live state
+has moved on by the time an older run is verified. Divergence in either id-set is a FAIL.
+Assertion-count reconciliation is intentionally out of scope: replay is idempotent and prune uses
+tombstones, making strict equality fragile and unreliable as an invariant.
 
 **Out of scope:** the agent-side faithfulness self-check in `process.md` is not deterministically
 checkable and is already gated in-flow; the verifier does not attempt it. `ponytail: verifier covers
