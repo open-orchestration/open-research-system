@@ -12,11 +12,14 @@ Before a real smoke test, we need observability so that **each step of a run is 
 verifiable** and **an entire run writes to one consolidated log** we can inspect to confirm
 everything worked.
 
-Two deliverables:
+Three deliverables:
 1. A structured, append-only run log (`​.research/run.jsonl`) — every flow step emits one JSON line
    through a thin helper, carrying enough metadata to reconstruct and verify the whole run.
 2. An automated verifier (`scripts/verify_run.py`) that reads the log back, asserts per-step and
    cross-step invariants, and prints a pass/fail report — so the eye is backed by a regression net.
+3. A gotchas detection process — a committed registry (`.research/gotchas.jsonl`) the verifier
+   matches every failure against, annotating known failures with their fix and auto-capturing new
+   ones, so what goes wrong (and how it was fixed) accumulates as durable knowledge across runs.
 
 ## 2. Locked decisions
 
@@ -42,10 +45,20 @@ Two deliverables:
   taken right **after** `decide --apply` (post-flip). The verifier imports `orchestrator` and
   re-runs `recommend_phase`/`next_actions`/`goal_met` against that snapshot, comparing to the logged
   and acted decision — catching a desynced orchestrator, not just a self-consistent log.
+- **Gotchas detection process.** Every FAIL/WARN finding is matched against a **committed**
+  gotchas registry (`.research/gotchas.jsonl`). A known gotcha annotates the report with its
+  recorded fix and bumps its `occurrences`/`last_seen`; an **unknown** finding **auto-appends a
+  stub** (`root_cause`/`fix` = `"TODO"`, symptom auto-filled) and is flagged `NEW` so it is captured,
+  not lost. This turns each run's failures into durable, reusable knowledge across runs and sessions.
+- **Gotcha signature = check-name + optional data token.** A registry entry matches a finding when
+  its `check` equals the finding's check name AND its (optional) `token` is a substring of the
+  finding's serialized `data`. This separates distinct root causes that trip the same invariant
+  (e.g. a crawl4ai cold-start vs a genuinely empty result, both surfacing as `search_zero_sources`).
 - **Python 3 stdlib only**, no pip/pytest; tests are `unittest`. No lint/type suppression comments.
-- **Run artifacts are gitignored.** Add `.research/run.jsonl` and `.research/run-context.json` to
-  `.gitignore` — they are large, ephemeral per-run traces regenerated each run; inspect the
-  working-tree file rather than committing run history.
+- **Run artifacts gitignored; gotchas registry committed.** Add `.research/run.jsonl` and
+  `.research/run-context.json` to `.gitignore` — large, ephemeral per-run traces regenerated each run
+  (inspect the working-tree file, don't commit history). `.research/gotchas.jsonl` is the opposite —
+  curated knowledge that **is** committed and grows over time.
 
 ## 3. Record schema
 
@@ -101,15 +114,51 @@ Small additions at each step boundary:
   `orchestrator decide` step with `--snapshot`; `runlog end` at stop.
 - `orchestrator.py` stays pure — `goal.md` performs its logging.
 
+### `scripts/gotchas.py` (new)
+
+The gotchas registry — `.research/gotchas.jsonl` (committed). One JSON object per line:
+
+```
+{
+  "id":          "gh" + 8 hex of signature,   # dedup key: same signature -> same id
+  "check":       <str>,                        # the invariant/check name it matches
+  "token":       <str>,                        # optional data substring; "" = match any data
+  "title":       <str>,                        # short human label
+  "symptom":     <str>,                        # auto-filled from the finding on first capture
+  "root_cause":  <str>,                        # "TODO" until a human fills it
+  "fix":         <str>,                        # "TODO" until a human fills it
+  "severity":    "fail" | "warn",
+  "occurrences": <int>,
+  "first_seen":  <iso8601>,
+  "last_seen":   <iso8601>
+}
+```
+
+- `signature(check, data) -> (check, token)` and `sig_id(check, token) -> "gh"+8hex`.
+- `load_registry(root) -> {id: entry}` — full read (last-write-wins by id; tolerates a torn final
+  line, like `assertions.load_overlay`).
+- `match(registry, finding) -> entry | None` — first entry whose `check` equals and whose `token`
+  is `""` or a substring of the finding's serialized `data`.
+- `record(registry, finding, now) -> (entry, is_new)` — on match: bump `occurrences`, update
+  `last_seen`; on miss: create a stub (`root_cause`/`fix`=`"TODO"`, `symptom` auto-filled,
+  `occurrences=1`). Caller persists via `save_registry` (atomic full rewrite, tmp + `os.replace`,
+  sorted by id — small curated file, no append-only compaction needed).
+- CLI: `list` (print the registry, sorted, with TODO entries first) · `show <id>`.
+- Editing `root_cause`/`fix` is done by hand in the file (it is committed source); no edit CLI.
+
 ### `scripts/verify_run.py` (new)
 
 - Reads `.research/run.jsonl`, selects the latest `run_id` (or `--run-id`).
 - Runs the §5 invariant checks; each yields findings tagged FAIL or WARN.
+- **Gotchas pass:** for every finding, `gotchas.record(...)` — a known gotcha annotates the report
+  line with `KNOWN gh…: <fix>` (or `<fix=TODO>` if unfilled) and bumps its counters; an unknown
+  finding auto-appends a stub and is marked `NEW — capture in gotchas.jsonl`. The (possibly grown)
+  registry is saved once at the end.
 - Prints: a per-cycle timeline (steps in order with status) + an invariant summary table
-  (check name → PASS / WARN / FAIL with offending `seq`/line). `--json` for a machine-readable
-  verdict.
-- Exit 1 if any FAIL, else 0 (WARNs do not fail).
-- Imports `orchestrator` and `state` for the recompute and consistency checks.
+  (check name → PASS / WARN / FAIL, offending `seq`/line, and the gotcha annotation). `--json` for a
+  machine-readable verdict. `--no-gotchas` disables the registry pass (pure read-only verify).
+- Exit 1 if any FAIL, else 0 (WARNs and NEW-gotcha captures do not fail).
+- Imports `orchestrator`, `state`, and `gotchas` for the recompute, consistency, and gotchas checks.
 
 ## 5. Invariants
 
@@ -161,8 +210,13 @@ runlog end ──> run_end line
    │
 verify_run.py ──read run.jsonl (latest run_id)──> invariant checks + recompute
    │                                                (imports orchestrator, state)
-   └──> report (timeline + FAIL/WARN table) + exit 0/1
+   ├──findings──> gotchas.record ──> .research/gotchas.jsonl (annotate known / append stub for new)
+   └──> report (timeline + FAIL/WARN table + gotcha annotations) + exit 0/1
 ```
+
+The gotchas registry is the durable memory: `run.jsonl` is thrown away each run, but every failure
+mode it ever surfaced accumulates in `gotchas.jsonl` with its fix, so a recurring problem is
+recognized and remedied on sight in later runs.
 
 ## 7. Testing
 
@@ -175,6 +229,13 @@ verify_run.py ──read run.jsonl (latest run_id)──> invariant checks + rec
   a graph step with decreasing node count; a `decide` whose logged phase diverges from the recompute;
   a `search` step after `goal_met==true`; a log/`state.json` count mismatch) trips **exactly** its
   check at the right severity. This makes the verifier's own correctness the thing under test.
+- `tests/test_gotchas.py` (unittest, temp root): `sig_id` is stable for the same `(check, token)`;
+  `match` honors check-equality + token-substring (and `token=""` matches any); `record` bumps
+  `occurrences`/`last_seen` on a known entry and creates a `TODO` stub on an unknown one;
+  `save_registry`/`load_registry` round-trip and dedup by id (a second unknown with the same
+  signature does not create a second stub). One `verify_run` case asserts the end-to-end gotchas
+  pass: an unknown finding appears `NEW` and is appended; a pre-seeded matching entry is annotated
+  with its fix and its `occurrences` increments.
 
 The live full-loop smoke run itself is the consumer of this suite, performed after it merges — not a
 unit test.
@@ -184,3 +245,7 @@ unit test.
 - No logging framework, no DB, no live dashboard, no per-function tracing — one JSONL + one verifier.
 - No new flow behavior; instrumentation only observes existing steps.
 - No committing of run traces (gitignored); evidence-keeping is a manual copy if ever needed.
+- No auto-authored `root_cause`/`fix` text — stubs are captured automatically but the diagnosis and
+  remedy are filled by a human. `ponytail: gotcha capture is automatic; diagnosis stays human — a
+  guessed root cause is worse than a flagged TODO.`
+- No gotcha edit/resolve CLI — entries are edited by hand in the committed file.
