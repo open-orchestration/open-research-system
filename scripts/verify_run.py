@@ -178,7 +178,7 @@ def check_recompute(recs):
         if r.get("flow") == "orchestrator" and r.get("step") == "decide":
             d = r.get("data", {})
             stt, dec = d.get("state"), d.get("decide")
-            if not stt or not dec:
+            if stt is None or dec is None:
                 out.append(_f("decide_missing_snapshot", WARN,
                               "decide record missing state/decide", "", r.get("seq")))
                 continue

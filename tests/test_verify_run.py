@@ -112,6 +112,49 @@ class VerifyCatches(unittest.TestCase):
         f, code = self._run(m)
         self.assertTrue(any(x["check"] == "corpus_id_mismatch" and x["severity"] == vr.FAIL for x in f))
 
+    def test_recompute_divergence_fails(self):
+        with TemporaryDirectory() as d:
+            base = st.load_default()
+            st.save(st.load_default(), d)                      # final state = empty default
+            recs = [
+                {"run_id": "r1", "cycle": 0, "seq": 0, "ts": "t", "flow": "run",
+                 "step": "run_start", "status": "ok", "data": {"state": base}},
+                {"run_id": "r1", "cycle": 1, "seq": 1, "ts": "t", "flow": "orchestrator",
+                 "step": "decide", "status": "ok",
+                 "data": {"decide": {"phase": "synthesize", "search": False,
+                                     "process": False, "goal_met": False}, "state": base}},
+            ]
+            p = Path(d) / ".research" / "run.jsonl"
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text("".join(json.dumps(r) + "\n" for r in recs))
+            findings, code = vr.verify(d, use_gotchas=False)
+            self.assertTrue(any(x["check"] == "orchestrator_recompute" and x["severity"] == vr.FAIL
+                                for x in findings))
+            self.assertEqual(code, 1)
+
+    def test_work_after_goal_met_fails(self):
+        with TemporaryDirectory() as d:
+            base = st.load_default()
+            st.save(st.load_default(), d)
+            recs = [
+                {"run_id": "r1", "cycle": 0, "seq": 0, "ts": "t", "flow": "run",
+                 "step": "run_start", "status": "ok", "data": {"state": base}},
+                {"run_id": "r1", "cycle": 1, "seq": 1, "ts": "t", "flow": "orchestrator",
+                 "step": "decide", "status": "ok",
+                 "data": {"decide": {"phase": "synthesize", "search": False,
+                                     "process": False, "goal_met": True}, "state": base}},
+                {"run_id": "r1", "cycle": 1, "seq": 2, "ts": "t", "flow": "search",
+                 "step": "gather", "status": "ok",
+                 "data": {"gap_id": "g1", "gap_status": "done", "sources_added": 1}},
+            ]
+            p = Path(d) / ".research" / "run.jsonl"
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text("".join(json.dumps(r) + "\n" for r in recs))
+            findings, code = vr.verify(d, use_gotchas=False)
+            self.assertTrue(any(x["check"] == "work_after_goal_met" and x["severity"] == vr.FAIL
+                                for x in findings))
+            self.assertEqual(code, 1)
+
 
 class VerifyGotchas(unittest.TestCase):
     def test_unknown_appends_stub_known_annotates(self):
