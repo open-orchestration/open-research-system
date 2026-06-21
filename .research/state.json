@@ -1,0 +1,117 @@
+{
+  "budget": {
+    "tokens_per_cycle": 200000,
+    "sources_per_cycle": 8,
+    "max_subagents": 8,
+    "phase": "gather",
+    "weights": {
+      "gather": {
+        "search": 0.7,
+        "ingest": 0.3,
+        "process": 0.0
+      },
+      "deepen": {
+        "search": 0.4,
+        "ingest": 0.3,
+        "process": 0.3
+      },
+      "synthesize": {
+        "search": 0.1,
+        "ingest": 0.1,
+        "process": 0.8
+      }
+    },
+    "spent": {
+      "tokens": 0,
+      "sources": 0,
+      "cycle_started_at": null
+    }
+  },
+  "gaps": [
+    {
+      "id": "gf89d9714",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "STORM + GPT-Researcher end-to-end architecture teardown 2025",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g3fb97fba",
+      "topic": "06-rag-retrieval",
+      "desc": "GraphRAG vs hybrid BM25+dense retrieval tradeoffs 2025",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gd8b4983e",
+      "topic": "06-rag-retrieval",
+      "desc": "Anthropic contextual retrieval + reranker selection ColBERT Cohere 2025",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g5484e92a",
+      "topic": "07-agentic-orchestration",
+      "desc": "planner-worker vs debate critique multi-agent research patterns 2025",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g53a71a9b",
+      "topic": "07-agentic-orchestration",
+      "desc": "iterate-until-dry loop engineering ReAct Reflexion CRAG Self-RAG",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gc41801d5",
+      "topic": "09-knowledge-compilation-graphs",
+      "desc": "KG construction + community detection for source-of-truth corpora",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g81eacc46",
+      "topic": "01-methodology-epistemics",
+      "desc": "claim extraction cross-referencing contradiction resolution methods",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g6e4292af",
+      "topic": "03-decision-frameworks",
+      "desc": "Analysis of Competing Hypotheses + MADR for AI-assisted decisions",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g0254bd50",
+      "topic": "08-grounding-truth",
+      "desc": "LLM-as-judge faithfulness metrics RAGAS FActScore RARR 2025",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    }
+  ],
+  "inbox": [],
+  "corpus": [],
+  "graph": {
+    "dirty": false,
+    "last_update": null,
+    "node_count": 0,
+    "edge_count": 0
+  },
+  "assertions": {
+    "count": 0,
+    "file": ".research/graph-assertions.jsonl"
+  },
+  "drafts": []
+}
