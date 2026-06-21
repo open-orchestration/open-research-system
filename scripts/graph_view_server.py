@@ -52,6 +52,49 @@ class _Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _send_json(self, obj):
+        self._send_bytes(json.dumps(obj).encode("utf-8"),
+                         "application/json; charset=utf-8")
+
+    @staticmethod
+    def _read_json(path, default):
+        if not path:
+            return default
+        p = Path(path)
+        if not p.is_file():
+            return default
+        try:
+            return json.loads(p.read_text(encoding="utf-8", errors="ignore"))
+        except ValueError:
+            return default   # mid-write torn read — caller keeps last good poll
+
+    def _queue_snapshot(self):
+        st = self._read_json(self.server.state_path, {})
+        return {
+            "phase": st.get("budget", {}).get("phase"),
+            "budget": st.get("budget", {}),
+            "gaps": st.get("gaps", []),
+            "drafts": st.get("drafts", []),
+            "corpus_count": len(st.get("corpus", [])),
+        }
+
+    def _runlog_tail(self, n=80):
+        if not self.server.runlog_path:
+            return []
+        p = Path(self.server.runlog_path)
+        if not p.is_file():
+            return []
+        out = []
+        for line in p.read_text(encoding="utf-8", errors="ignore").splitlines()[-n:]:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                out.append(json.loads(line))
+            except ValueError:
+                continue
+        return out
+
     def do_GET(self):
         if self.path == "/ws":
             return self._serve_ws()
@@ -59,6 +102,15 @@ class _Handler(BaseHTTPRequestHandler):
             p = Path(self.server.graph_path)
             body = p.read_bytes() if p.is_file() else b"{}"
             return self._send_bytes(body, "application/json; charset=utf-8")
+        if self.path == "/queue":
+            return self._send_json(self._queue_snapshot())
+        if self.path == "/runlog":
+            return self._send_json(self._runlog_tail())
+        if self.path in ("/dashboard", "/dashboard.html"):
+            dp = self.server.dashboard_path
+            p = Path(dp) if dp else None
+            body = p.read_bytes() if p and p.is_file() else b"<h1>dashboard html missing</h1>"
+            return self._send_bytes(body, "text/html; charset=utf-8")
         if self.path in ("/", "/index.html"):
             p = Path(self.server.html_path)
             body = p.read_bytes() if p.is_file() else b"<h1>view html missing</h1>"
@@ -122,12 +174,16 @@ class _Handler(BaseHTTPRequestHandler):
         pass
 
 
-def make_server(host, port, events_path, graph_path, html_path):
+def make_server(host, port, events_path, graph_path, html_path,
+                state_path=None, runlog_path=None, dashboard_path=None):
     srv = ThreadingHTTPServer((host, port), _Handler)
     srv.daemon_threads = True
     srv.events_path = events_path
     srv.graph_path = graph_path
     srv.html_path = html_path
+    srv.state_path = state_path
+    srv.runlog_path = runlog_path
+    srv.dashboard_path = dashboard_path
     return srv
 
 
@@ -143,10 +199,17 @@ def _main(argv):
                     default=os.environ.get("GV_GRAPH", str(root / ".graphify/graph.json")))
     ap.add_argument("--html",
                     default=os.environ.get("GV_HTML", str(root / "public/index.html")))
+    ap.add_argument("--state",
+                    default=os.environ.get("GV_STATE", str(root / ".research/state.json")))
+    ap.add_argument("--runlog",
+                    default=os.environ.get("GV_RUNLOG", str(root / ".research/run.jsonl")))
+    ap.add_argument("--dashboard",
+                    default=os.environ.get("GV_DASHBOARD", str(root / "public/dashboard.html")))
     args = ap.parse_args(argv)
-    srv = make_server(args.host, args.port, args.events, args.graph, args.html)
+    srv = make_server(args.host, args.port, args.events, args.graph, args.html,
+                      args.state, args.runlog, args.dashboard)
     host, port = srv.server_address[:2]   # actual bound port (resolves --port 0)
-    print(f"graph view on http://{host}:{port}  (events: {args.events})", flush=True)
+    print(f"graph view on http://{host}:{port}/dashboard  (events: {args.events})", flush=True)
     try:
         srv.serve_forever()
     except KeyboardInterrupt:
