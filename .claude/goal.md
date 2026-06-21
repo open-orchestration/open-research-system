@@ -9,6 +9,10 @@ starting at 0; increment it in step 5 each cycle.
 
 Each cycle, do exactly this:
 
+0. **Run start (once).** On the first cycle only, run `python3 scripts/runlog.py start` to open
+   the run log. Each cycle, run `python3 scripts/runlog.py set-cycle K` (K = your cycle counter)
+   before doing anything else, so every step this cycle is tagged with the cycle number.
+
 1. **Ingest.** Run the Ingest cycle exactly as defined in `.claude/loop.md` (drain
    `ingest/`, graphify `--update` if the graph is dirty, replay assertions, append graph
    events, clear the dirty flag, integrity check). If `ingest/` was empty and the graph
@@ -20,12 +24,17 @@ Each cycle, do exactly this:
    ```
    This prints JSON `{phase, phase_changed, search, process, goal_met}` and auto-flips
    the budget `phase` in `.research/state.json`. Parse it as `D`.
+   Log the decision with a state snapshot so the verifier can independently recompute it.
+   The record's `data` must be `{"decide": <the decide JSON>, "state": <snapshot>}`, so pass the
+   decide JSON nested under `decide` and let `--snapshot` add `state`:
+   `python3 scripts/runlog.py log --flow orchestrator --step decide --status ok --snapshot --data "{\"decide\": $D}"`
    - If `D.goal_met` is `true`: **stop**. Report convergence, then surface the human
      review queue and any stuck gaps:
      ```
      python3 scripts/promote.py queue
      python3 scripts/state.py list-gaps --status failed
      ```
+     Before stopping, close the run log: `python3 scripts/runlog.py end --status ok`
      Do not run any more cycles.
 
 3. **Search.** If `D.search` is `true`: run one search cycle:
@@ -44,6 +53,7 @@ Each cycle, do exactly this:
    (`python3 scripts/state.py list-gaps --status failed`) and the review queue
    (`python3 scripts/promote.py queue`) so a human can intervene. This is a backstop —
    normal termination comes from step 2.
+   Before stopping, close the run log: `python3 scripts/runlog.py end --status capped`
 
 The budget `phase` is chosen for you each cycle by `orchestrator.py` (gather → deepen →
 synthesize, and back to deepen if a gap reopens). Never set `phase` by hand inside this

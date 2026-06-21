@@ -31,6 +31,8 @@ Run one process cycle for the research engine. Do exactly this, then stop:
      - Exit 0 → continue. Exit 1 → the draft has missing or dangling citations. Fix the
        draft (cite real corpus ids, or remove the unsupported claim) and re-run until it
        passes.
+     Log the citation gate: on exit 0 `python3 scripts/runlog.py log --flow process --step cite_check --status ok`;
+     on exit 1 (after you have exhausted fixes) `--status fail`.
    - **(b) Faithfulness self-check (agent judgment):** re-read each claim **against the
      source it cites** and confirm the source actually supports the claim — not merely
      that the cited id exists. Rewrite or drop any claim the source does not bear out.
@@ -45,6 +47,7 @@ Run one process cycle for the research engine. Do exactly this, then stop:
      --path "docs/findings/_drafts/$ID-<slug>.md" --cites "c…,c…"
    ```
    (`--cites` is the comma-separated list of every corpus id you cited.)
+   Log the draft: `python3 scripts/runlog.py log --flow process --step draft --status ok --data "{\"draft_id\":\"$ID\"}"`.
 
 6. Emit gaps (closes the loop to search): for each open question the corpus could not
    answer, run
@@ -70,6 +73,7 @@ Run one process cycle for the research engine. Do exactly this, then stop:
 
 8. Run `python3 scripts/check_integrity.py` — if it reports problems, stop and surface
    them; do not claim the cycle succeeded.
+   Log it: `python3 scripts/runlog.py log --flow process --step integrity --status ok` (or `--status fail` if it reported problems).
 
 The draft now waits in the review queue (`python3 scripts/promote.py queue`). A human
 promotes it (`promote.py promote <id>`) into `docs/findings/` + `SYNTHESIS.md`, or

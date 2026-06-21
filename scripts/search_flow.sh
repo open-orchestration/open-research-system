@@ -11,6 +11,7 @@ SEARCH="${SEARCH:-$HOME/.venvs/crawl4ai/search.py}"
 FETCH="${FETCH:-$HOME/.venvs/crawl4ai/fetch_md.py}"
 PER_GAP="${PER_GAP:-5}"
 SP="python3 $HERE/state.py"
+RL="python3 $HERE/runlog.py"
 
 topic=""
 [ "${1:-}" = "--topic" ] && topic="${2:-}"
@@ -51,11 +52,16 @@ while IFS= read -r line; do
   if [ "$kept" -gt 0 ]; then
     $SP set-gap --root "$ROOT" --id "$gid" --status done >/dev/null
     $SP budget-spend --root "$ROOT" --sources "$kept" >/dev/null
+    $RL log --root "$ROOT" --flow search --step gather --status ok \
+      --data "{\"gap_id\":\"$gid\",\"gap_status\":\"done\",\"sources_added\":$kept}"
     echo "search: gap $gid -> $kept source(s) into ingest/"
   else
     $SP set-gap --root "$ROOT" --id "$gid" --status queued --requeue >/dev/null
     att="$(python3 -c "import json,sys;print(next((g['attempts'] for g in json.load(open(sys.argv[1]+'/.research/state.json'))['gaps'] if g['id']==sys.argv[2]), -1))" "$ROOT" "$gid")"
     [ "$att" -ge 3 ] && $SP set-gap --root "$ROOT" --id "$gid" --status failed >/dev/null
+    gs=queued; [ "$att" -ge 3 ] && gs=failed
+    $RL log --root "$ROOT" --flow search --step gather --status skip \
+      --data "{\"gap_id\":\"$gid\",\"gap_status\":\"$gs\",\"sources_added\":0,\"attempts\":$att}"
     echo "search: gap $gid produced no non-junk sources (attempt $att)"
   fi
 done <<< "$gaps"

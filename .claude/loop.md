@@ -20,6 +20,15 @@ Run one ingest cycle for the research engine. Do exactly this, then stop:
    E=$(python3 -c 'import json;g=json.load(open(".graphify/graph.json"));print(len(g.get("links",g.get("edges",[]))))')
    python3 scripts/state.py set-graph --dirty false --node-count "$N" --edge-count "$E"
    ```
+   Now emit the three graph-step log records in pipeline order (this fixes their
+   relative `seq` for the verifier — graphify, then replay, then graph_events):
+   ```
+   python3 scripts/runlog.py log --flow graph --step graphify --status ok --data "{\"node_count\":$N,\"edge_count\":$E}"
+   python3 scripts/runlog.py log --flow graph --step replay --status ok
+   python3 scripts/runlog.py log --flow graph --step graph_events --status ok
+   ```
 6. Run `python3 scripts/check_integrity.py` — if it reports problems, stop and surface them; do not claim the cycle succeeded.
+   Log the integrity result: `python3 scripts/runlog.py log --flow ingest --step integrity --status ok`
+   (use `--status fail` and stop if it reported problems).
 
 If `ingest/` was empty (step 1 printed "no new sources"), stop early — nothing to do this cycle.

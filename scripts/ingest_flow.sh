@@ -6,12 +6,14 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 source "$HERE/lib.sh"
 ROOT="${REPO_ROOT:-$(cd "$HERE/.." && pwd)}"
 PY="python3"
+RL="python3 $HERE/runlog.py"
 
 topic="${1:-}"; [ -n "$topic" ] || { echo "usage: ingest_flow.sh <topic>" >&2; exit 2; }
 dest="$(resolve_topic_dir "$ROOT" "$topic")/sources" || exit 1; mkdir -p "$dest"
 
 # Fail one item: move its native to _failed and skip to the next.
-fail_item() { echo "$2" >&2; mv "$1" "$ROOT/ingest/_failed/" 2>/dev/null; }
+fail_item() { echo "$2" >&2; mv "$1" "$ROOT/ingest/_failed/" 2>/dev/null; \
+  $RL log --root "$ROOT" --flow ingest --step normalize --status fail --data "{\"reason\":\"$2\"}"; }
 
 shopt -s nullglob
 items=("$ROOT"/ingest/*)
@@ -21,6 +23,7 @@ done
 [ "${#real[@]}" -gt 0 ] || { echo "no new sources in ingest/"; exit 0; }
 
 mkdir -p "$ROOT/ingest/_done" "$ROOT/ingest/_failed"
+added=0
 for f in "${real[@]}"; do
   name="$(basename "$f")"
   type="$("$PY" "$HERE/ingest_lib.py" detect "$name")"
@@ -57,6 +60,11 @@ for f in "${real[@]}"; do
         --topic "$topic" --native "ingest/_done/$name" --extracted "$rel" >/dev/null \
         || { fail_item "$f" "record failed: $f"; rm -f "$out"; continue; }
   mv "$f" "$ROOT/ingest/_done/" || { echo "warning: could not archive $f" >&2; }
+  added=$((added+1))
+  $RL log --root "$ROOT" --flow ingest --step normalize --status ok \
+    --data "{\"corpus_id\":\"$id\",\"type\":\"$type\"}"
   echo "ingested [$type]: $source_disp -> $out"
 done
+$RL log --root "$ROOT" --flow ingest --step summary --status ok \
+  --data "{\"corpus_added\":$added,\"graph_dirty\":true}"
 echo "Done. Graph marked dirty; run the graph-update step next."
