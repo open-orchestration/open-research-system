@@ -5,3 +5,4 @@
 - [The halt decision: how self-correcting agent loops decide when to stop, and why bounding it is the hard part](d5c35de17-halt-decision-self-correcting-loops.md) — 07-agentic-orchestration
 - [Faithfulness measurement machinery: structured LLM-judging, NLI entailment, and the faithfulness-vs-correctness evidence split](dfa42bc8a-faithfulness-measurement-machinery.md) — 08-grounding-truth
 - [Extraction method and community structure are the cost-fidelity levers when compiling a source-of-truth knowledge-graph corpus](d37b490ee-extraction-method-and-community-structure-cost-fidelity-levers.md) — 09-knowledge-compilation-graphs
+- [GraphRAG and ColBERT vs hybrid retrieval: what shared-benchmark primary sources actually measure](d73a9474e-graphrag-colbert-shared-benchmark-primary-evidence.md) — 06-rag-retrieval

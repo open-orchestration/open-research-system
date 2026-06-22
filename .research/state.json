@@ -307,6 +307,38 @@
       "origin": "process",
       "status": "queued",
       "attempts": 0
+    },
+    {
+      "id": "gfe2d8188",
+      "topic": "06-rag-retrieval",
+      "desc": "single shared benchmark putting GraphRAG + hybrid BM25+dense + ColBERT side-by-side (current primaries use different corpora)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "ge12a4272",
+      "topic": "06-rag-retrieval",
+      "desc": "true GraphRAG baselined against tuned hybrid BM25+dense (not just dense ada-002)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "ga344680a",
+      "topic": "06-rag-retrieval",
+      "desc": "peer-reviewed controlled ColBERT-vs-cross-encoder NDCG/Recall head-to-head table (current ColBERT controlled sources are blogs/aggregators)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g35c89496",
+      "topic": "06-rag-retrieval",
+      "desc": "GraphRAG generalizability beyond single enterprise domain (LLM-as-judge win-rate measured on ABAP migration only)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
     }
   ],
   "inbox": [],
@@ -1067,7 +1099,7 @@
     "edge_count": 1183
   },
   "assertions": {
-    "count": 16,
+    "count": 18,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -1196,6 +1228,23 @@
       "created_at": "2026-06-22T21:21:00.045788+00:00",
       "promoted_path": "docs/findings/d37b490ee-extraction-method-and-community-structure-cost-fidelity-levers.md",
       "promoted_at": "2026-06-22T21:23:23.201703+00:00"
+    },
+    {
+      "id": "d73a9474e",
+      "topic": "06-rag-retrieval",
+      "title": "GraphRAG and ColBERT vs hybrid retrieval: what shared-benchmark primary sources actually measure",
+      "path": "docs/findings/_drafts/d73a9474e-graphrag-colbert-shared-benchmark-primary-evidence.md",
+      "status": "promoted",
+      "cites": [
+        "cd52d257c",
+        "ca7f1d531",
+        "c578103a5",
+        "cf44b434b",
+        "c2fb735f5"
+      ],
+      "created_at": "2026-06-22T21:31:05.534612+00:00",
+      "promoted_path": "docs/findings/d73a9474e-graphrag-colbert-shared-benchmark-primary-evidence.md",
+      "promoted_at": "2026-06-22T21:35:05.985106+00:00"
     }
   ]
 }
