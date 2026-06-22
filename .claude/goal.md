@@ -48,11 +48,18 @@ Each cycle, do exactly this:
        bash scripts/search_flow.sh --topic "$T" --inbox "$IN"
        bash scripts/ingest_flow.sh "$T" --inbox "$IN"
      '
+   # self-certify: a search-only cycle still ingested, so it must log its own
+   # integrity step (the verifier requires one per cycle with work; don't defer
+   # it to the next cycle's step 1).
+   python3 scripts/check_integrity.py \
+     && python3 scripts/runlog.py log --flow ingest --step integrity --status ok \
+     || python3 scripts/runlog.py log --flow ingest --step integrity --status fail
    ```
    Each worker fetches within the shared strict budget (atomic reserve/refund, so concurrent
    workers never overspend `sources_per_cycle`) and flags the graph dirty. The graph update +
    replay + event append stay serial — they run in the next cycle's step 1, which still fires
-   on an empty drain because the dirty flag persists in `.research/state.json`.
+   on an empty drain because the dirty flag persists in `.research/state.json`. The integrity
+   check above closes the cycle so a search-only (`gather`-phase) cycle self-certifies.
 
 4. **Process.** If `D.process` is `true`: run the Process cycle exactly as defined in
    `.claude/process.md` (pick a candidate topic, draft with inline citations, pass both
