@@ -3,7 +3,7 @@
     "tokens_per_cycle": 200000,
     "sources_per_cycle": 8,
     "max_subagents": 8,
-    "phase": "gather",
+    "phase": "deepen",
     "weights": {
       "gather": {
         "search": 0.7,
@@ -23,8 +23,8 @@
     },
     "spent": {
       "tokens": 0,
-      "sources": 0,
-      "cycle_started_at": null
+      "sources": 8,
+      "cycle_started_at": "2026-06-22T03:36:34.367285+00:00"
     }
   },
   "gaps": [
@@ -33,15 +33,15 @@
       "topic": "05-ai-deep-research-systems",
       "desc": "STORM + GPT-Researcher end-to-end architecture teardown 2025",
       "origin": "human",
-      "status": "queued",
-      "attempts": 0
+      "status": "done",
+      "attempts": 1
     },
     {
       "id": "g3fb97fba",
       "topic": "06-rag-retrieval",
       "desc": "GraphRAG vs hybrid BM25+dense retrieval tradeoffs 2025",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -49,7 +49,7 @@
       "topic": "06-rag-retrieval",
       "desc": "Anthropic contextual retrieval + reranker selection ColBERT Cohere 2025",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -81,7 +81,7 @@
       "topic": "01-methodology-epistemics",
       "desc": "claim extraction cross-referencing contradiction resolution methods",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -89,7 +89,7 @@
       "topic": "03-decision-frameworks",
       "desc": "Analysis of Competing Hypotheses + MADR for AI-assisted decisions",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -99,12 +99,300 @@
       "origin": "human",
       "status": "queued",
       "attempts": 0
+    },
+    {
+      "id": "ga85b291b",
+      "topic": "06-rag-retrieval",
+      "desc": "GraphRAG retrieval quantitative performance vs hybrid BM25+dense on same benchmark 2025",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g60e2f127",
+      "topic": "06-rag-retrieval",
+      "desc": "reranker latency and compute cost overhead quantified (ColBERT vs cross-encoder) 2025",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g37f7c8d3",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "OpenAI Google Anthropic Deep Research agents 2026 capabilities and architecture comparison",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "gbced2142",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "open-source deep research agents 2026 STORM GPT-Researcher latest architecture",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "gda51fc38",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "Perplexity Elicit deep research tools 2026 features and evaluation",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "gf04ba132",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "deep research agent quantitative benchmark comparison GAIA DeepResearch-Bench 2026",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g7ec40a17",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "OpenAI Anthropic Google native Deep Research product feature comparison (not general agents) 2026",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
     }
   ],
   "inbox": [],
-  "corpus": [],
+  "corpus": [
+    {
+      "id": "ca4fbe169",
+      "title": "g81eacc46-claim-extraction-cross-referencing-contradiction-resolution-methods-1",
+      "source": "file://g81eacc46-claim-extraction-cross-referencing-contradiction-resolution-methods-1.md",
+      "topic": "01-methodology-epistemics",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g81eacc46-claim-extraction-cross-referencing-contradiction-resolution-methods-1.md",
+      "extracted_path": "docs/01-methodology-epistemics/sources/ca4fbe169-g81eacc46-claim-extraction-cross-referencing-contradiction-resolution-methods-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-21T23:11:46.489503+00:00"
+    },
+    {
+      "id": "cde4586b2",
+      "title": "g81eacc46-claim-extraction-cross-referencing-contradiction-resolution-methods-2",
+      "source": "file://g81eacc46-claim-extraction-cross-referencing-contradiction-resolution-methods-2.md",
+      "topic": "01-methodology-epistemics",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g81eacc46-claim-extraction-cross-referencing-contradiction-resolution-methods-2.md",
+      "extracted_path": "docs/01-methodology-epistemics/sources/cde4586b2-g81eacc46-claim-extraction-cross-referencing-contradiction-resolution-methods-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-21T23:11:46.660353+00:00"
+    },
+    {
+      "id": "cf07b946c",
+      "title": "g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-1",
+      "source": "file://g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-1.md",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-1.md",
+      "extracted_path": "docs/03-decision-frameworks/sources/cf07b946c-g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-21T23:12:03.213439+00:00"
+    },
+    {
+      "id": "c03622383",
+      "title": "g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-2",
+      "source": "file://g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-2.md",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-2.md",
+      "extracted_path": "docs/03-decision-frameworks/sources/c03622383-g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-21T23:12:03.352463+00:00"
+    },
+    {
+      "id": "c7b513d7d",
+      "title": "g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-3",
+      "source": "file://g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-3.md",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-3.md",
+      "extracted_path": "docs/03-decision-frameworks/sources/c7b513d7d-g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-21T23:12:03.496757+00:00"
+    },
+    {
+      "id": "c9429c5e7",
+      "title": "g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-5",
+      "source": "file://g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-5.md",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-5.md",
+      "extracted_path": "docs/03-decision-frameworks/sources/c9429c5e7-g6e4292af-analysis-of-competing-hypotheses-madr-for-ai-assisted-decisions-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-21T23:12:03.633871+00:00"
+    },
+    {
+      "id": "c86fc957c",
+      "title": "g3fb97fba-graphrag-vs-hybrid-bm25-dense-retrieval-tradeoffs-2025-1",
+      "source": "file://g3fb97fba-graphrag-vs-hybrid-bm25-dense-retrieval-tradeoffs-2025-1.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g3fb97fba-graphrag-vs-hybrid-bm25-dense-retrieval-tradeoffs-2025-1.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c86fc957c-g3fb97fba-graphrag-vs-hybrid-bm25-dense-retrieval-tradeoffs-2025-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-21T23:12:19.355111+00:00"
+    },
+    {
+      "id": "c46fda511",
+      "title": "g3fb97fba-graphrag-vs-hybrid-bm25-dense-retrieval-tradeoffs-2025-2",
+      "source": "file://g3fb97fba-graphrag-vs-hybrid-bm25-dense-retrieval-tradeoffs-2025-2.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g3fb97fba-graphrag-vs-hybrid-bm25-dense-retrieval-tradeoffs-2025-2.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c46fda511-g3fb97fba-graphrag-vs-hybrid-bm25-dense-retrieval-tradeoffs-2025-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-21T23:12:19.495428+00:00"
+    },
+    {
+      "id": "c3d184ff8",
+      "title": "gf89d9714-storm-gpt-researcher-end-to-end-architecture-teardown-2025-3",
+      "source": "file://gf89d9714-storm-gpt-researcher-end-to-end-architecture-teardown-2025-3.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/05-ai-deep-research-systems/_done/gf89d9714-storm-gpt-researcher-end-to-end-architecture-teardown-2025-3.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/c3d184ff8-gf89d9714-storm-gpt-researcher-end-to-end-architecture-teardown-2025-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:12:48.584293+00:00"
+    },
+    {
+      "id": "c7316bbcb",
+      "title": "gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-1",
+      "source": "file://gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-1.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/06-rag-retrieval/_done/gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-1.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c7316bbcb-gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:13:01.946000+00:00"
+    },
+    {
+      "id": "cf60e5897",
+      "title": "gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-2",
+      "source": "file://gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-2.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/06-rag-retrieval/_done/gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-2.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/cf60e5897-gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:13:02.082341+00:00"
+    },
+    {
+      "id": "c9742d19a",
+      "title": "gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-3",
+      "source": "file://gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-3.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/06-rag-retrieval/_done/gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-3.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c9742d19a-gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:13:02.220184+00:00"
+    },
+    {
+      "id": "c1be385f0",
+      "title": "gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-4",
+      "source": "file://gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-4.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/06-rag-retrieval/_done/gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-4.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c1be385f0-gd8b4983e-anthropic-contextual-retrieval-reranker-selection-colbert-cohere-2025-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:13:02.362883+00:00"
+    },
+    {
+      "id": "cb6ceb956",
+      "title": "g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-1",
+      "source": "file://g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-1.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/05-ai-deep-research-systems/_done/g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-1.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/cb6ceb956-g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:37:24.102002+00:00"
+    },
+    {
+      "id": "c81d54eba",
+      "title": "g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-2",
+      "source": "file://g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-2.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/05-ai-deep-research-systems/_done/g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-2.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/c81d54eba-g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:37:24.239732+00:00"
+    },
+    {
+      "id": "cf862bd6d",
+      "title": "g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-3",
+      "source": "file://g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-3.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/05-ai-deep-research-systems/_done/g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-3.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/cf862bd6d-g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:37:24.375615+00:00"
+    },
+    {
+      "id": "c99407eeb",
+      "title": "g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-4",
+      "source": "file://g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-4.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/05-ai-deep-research-systems/_done/g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-4.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/c99407eeb-g37f7c8d3-openai-google-anthropic-deep-research-agents-2026-capabilities-and-architecture-comparison-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:37:24.513816+00:00"
+    },
+    {
+      "id": "cc7b02e60",
+      "title": "gbced2142-open-source-deep-research-agents-2026-storm-gpt-researcher-latest-architecture-2",
+      "source": "file://gbced2142-open-source-deep-research-agents-2026-storm-gpt-researcher-latest-architecture-2.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/05-ai-deep-research-systems/_done/gbced2142-open-source-deep-research-agents-2026-storm-gpt-researcher-latest-architecture-2.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/cc7b02e60-gbced2142-open-source-deep-research-agents-2026-storm-gpt-researcher-latest-architecture-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:37:24.651107+00:00"
+    },
+    {
+      "id": "c1b024617",
+      "title": "gbced2142-open-source-deep-research-agents-2026-storm-gpt-researcher-latest-architecture-3",
+      "source": "file://gbced2142-open-source-deep-research-agents-2026-storm-gpt-researcher-latest-architecture-3.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/05-ai-deep-research-systems/_done/gbced2142-open-source-deep-research-agents-2026-storm-gpt-researcher-latest-architecture-3.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/c1b024617-gbced2142-open-source-deep-research-agents-2026-storm-gpt-researcher-latest-architecture-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:37:24.789854+00:00"
+    },
+    {
+      "id": "cf841afde",
+      "title": "gda51fc38-perplexity-elicit-deep-research-tools-2026-features-and-evaluation-1",
+      "source": "file://gda51fc38-perplexity-elicit-deep-research-tools-2026-features-and-evaluation-1.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/05-ai-deep-research-systems/_done/gda51fc38-perplexity-elicit-deep-research-tools-2026-features-and-evaluation-1.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/cf841afde-gda51fc38-perplexity-elicit-deep-research-tools-2026-features-and-evaluation-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:37:24.926776+00:00"
+    },
+    {
+      "id": "c2026b5cf",
+      "title": "gda51fc38-perplexity-elicit-deep-research-tools-2026-features-and-evaluation-2",
+      "source": "file://gda51fc38-perplexity-elicit-deep-research-tools-2026-features-and-evaluation-2.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": "ingest/.work/05-ai-deep-research-systems/_done/gda51fc38-perplexity-elicit-deep-research-tools-2026-features-and-evaluation-2.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/c2026b5cf-gda51fc38-perplexity-elicit-deep-research-tools-2026-features-and-evaluation-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T03:37:25.063104+00:00"
+    }
+  ],
   "graph": {
-    "dirty": false,
+    "dirty": true,
     "last_update": null,
     "node_count": 0,
     "edge_count": 0
@@ -113,5 +401,44 @@
     "count": 0,
     "file": ".research/graph-assertions.jsonl"
   },
-  "drafts": []
+  "drafts": [
+    {
+      "id": "dc97efcf9",
+      "topic": "06-rag-retrieval",
+      "title": "Hybrid retrieval and contextual RAG: architecture tradeoffs and the evidence",
+      "path": "docs/findings/_drafts/dc97efcf9-hybrid-retrieval-contextual-rag-tradeoffs.md",
+      "status": "promoted",
+      "cites": [
+        "c86fc957c",
+        "c46fda511",
+        "c7316bbcb",
+        "cf60e5897",
+        "c9742d19a",
+        "c1be385f0"
+      ],
+      "created_at": "2026-06-22T03:33:39.538172+00:00",
+      "promoted_path": "docs/findings/dc97efcf9-hybrid-retrieval-contextual-rag-tradeoffs.md",
+      "promoted_at": "2026-06-22T04:02:28.056339+00:00"
+    },
+    {
+      "id": "dc45795b1",
+      "topic": "05-ai-deep-research-systems",
+      "title": "The 2026 AI deep-research tool landscape: architectures, vendor strategies, and tool selection",
+      "path": "docs/findings/_drafts/dc45795b1-2026-ai-deep-research-tool-landscape.md",
+      "status": "rejected",
+      "cites": [
+        "c3d184ff8",
+        "cb6ceb956",
+        "c81d54eba",
+        "cf862bd6d",
+        "cc7b02e60",
+        "c1b024617",
+        "cf841afde",
+        "c2026b5cf"
+      ],
+      "created_at": "2026-06-22T03:39:17.931569+00:00",
+      "promoted_path": null,
+      "reject_reason": "ai-independent: secondary/promotional sources (SEO listicles decidenavigator/opentoolhq, vendor blogs); load-bearing stats on marketing sources; possible 89% citation misattribution; not canon-worthy"
+    }
+  ]
 }
