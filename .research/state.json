@@ -392,10 +392,10 @@
     }
   ],
   "graph": {
-    "dirty": true,
+    "dirty": false,
     "last_update": null,
-    "node_count": 0,
-    "edge_count": 0
+    "node_count": 583,
+    "edge_count": 670
   },
   "assertions": {
     "count": 0,
