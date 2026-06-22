@@ -388,20 +388,23 @@ def _main(argv):
             print(f"{d['id']}\t{d['status']}\t{d['topic']}\t{d['title']}")
         return 0
     if args.cmd == "set-draft":
-        with locked_state(args.root) as st:
-            if set_draft_status(st, args.id, args.status) is None:
-                print(f"unknown draft: {args.id}", file=sys.stderr); return 1
+        try:
+            with locked_state(args.root) as st:
+                if set_draft_status(st, args.id, args.status) is None:
+                    raise LookupError(args.id)
+        except LookupError as e:
+            print(f"unknown draft: {e.args[0]}", file=sys.stderr); return 1
         print("draft updated"); return 0
     if args.cmd == "candidates":
         for topic, n in process_candidates(load(args.root), min_sources=args.min_sources):
             print(f"{topic}\t{n}")
         return 0
     if args.cmd == "set-phase":
-        with locked_state(args.root) as st:
-            try:
+        try:
+            with locked_state(args.root) as st:
                 set_phase(st, args.phase)
-            except ValueError as e:
-                print(str(e), file=sys.stderr); return 1
+        except ValueError as e:
+            print(str(e), file=sys.stderr); return 1
         print(args.phase); return 0
     return 1
 
