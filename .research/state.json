@@ -275,6 +275,38 @@
       "origin": "process",
       "status": "queued",
       "attempts": 0
+    },
+    {
+      "id": "g2af7d2ae",
+      "topic": "09-knowledge-compilation-graphs",
+      "desc": "KG2RAG full-PDF: HotpotQA result magnitudes + chunk-expansion algorithm detail (c520aee3f abstract-only)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "ge213e295",
+      "topic": "09-knowledge-compilation-graphs",
+      "desc": "third-party reproduction of KG-construction evals (CCM/MOCHEG/HotpotQA author-run only)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g364b95aa",
+      "topic": "09-knowledge-compilation-graphs",
+      "desc": "direct evaluation of a god-node/centrality-ranking step for source-of-truth corpora (measured, not structural)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g1cd07cf2",
+      "topic": "09-knowledge-compilation-graphs",
+      "desc": "generalization of KG-construction accuracy/coverage gains to heterogeneous multi-domain corpora",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
     }
   ],
   "inbox": [],
@@ -1035,7 +1067,7 @@
     "edge_count": 1183
   },
   "assertions": {
-    "count": 13,
+    "count": 16,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -1149,6 +1181,21 @@
       "created_at": "2026-06-22T20:50:03.402785+00:00",
       "promoted_path": "docs/findings/dfa42bc8a-faithfulness-measurement-machinery.md",
       "promoted_at": "2026-06-22T20:53:10.196992+00:00"
+    },
+    {
+      "id": "d37b490ee",
+      "topic": "09-knowledge-compilation-graphs",
+      "title": "Extraction method and community structure are the cost-fidelity levers when compiling a source-of-truth knowledge-graph corpus",
+      "path": "docs/findings/_drafts/d37b490ee-extraction-method-and-community-structure-cost-fidelity-levers.md",
+      "status": "promoted",
+      "cites": [
+        "c0ec9aa64",
+        "c0cf2d36b",
+        "c520aee3f"
+      ],
+      "created_at": "2026-06-22T21:21:00.045788+00:00",
+      "promoted_path": "docs/findings/d37b490ee-extraction-method-and-community-structure-cost-fidelity-levers.md",
+      "promoted_at": "2026-06-22T21:23:23.201703+00:00"
     }
   ]
 }
