@@ -75,6 +75,11 @@ Run one process cycle for the research engine. Do exactly this, then stop:
    them; do not claim the cycle succeeded.
    Log it: `python3 scripts/runlog.py log --flow process --step integrity --status ok` (or `--status fail` if it reported problems).
 
-The draft now waits in the review queue (`python3 scripts/promote.py queue`). A human
-promotes it (`promote.py promote <id>`) into `docs/findings/` + `SYNTHESIS.md`, or
-rejects it (`promote.py reject <id>`).
+9. Review gate: run the independent reviewer on this draft exactly as defined in
+   `.claude/review.md` (dispatch a **fresh** reviewer subagent — never your own drafting
+   context — over the draft `$ID` and its cited sources; it returns a binary verdict and the
+   engine promotes or rejects accordingly). The gate is conservative: a clear `promote`
+   moves the finding into `docs/findings/` + `SYNTHESIS.md`; anything else rejects and frees
+   the sources for a stronger redraft.
+
+A human can still override the gate after the fact (`promote.py promote/reject <id>` by hand).
