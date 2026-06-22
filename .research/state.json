@@ -23,8 +23,8 @@
     },
     "spent": {
       "tokens": 0,
-      "sources": 3,
-      "cycle_started_at": "2026-06-22T18:44:08.135715+00:00"
+      "sources": 1,
+      "cycle_started_at": "2026-06-22T20:46:23.337067+00:00"
     }
   },
   "gaps": [
@@ -161,7 +161,7 @@
       "topic": "05-ai-deep-research-systems",
       "desc": "GAIA / BrowseComp accuracy scores for named deep-research agents (OpenAI/Gemini/Perplexity) 2026",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -169,7 +169,7 @@
       "topic": "05-ai-deep-research-systems",
       "desc": "latency and per-task cost figures for frontier deep-research agents (wall-clock + USD/query)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -177,13 +177,101 @@
       "topic": "05-ai-deep-research-systems",
       "desc": "internal architecture of closed frontier DRAs: OpenAI Deep Research, Gemini Deep Research decomposition/retrieval loop",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
       "id": "g2a965da5",
       "topic": "08-grounding-truth",
       "desc": "mechanism behind citation-abundance vs citation-accuracy tradeoff; how per-claim citation accuracy is computed (FACT)",
+      "origin": "process",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "gb5db13e7",
+      "topic": "06-rag-retrieval",
+      "desc": "true GraphRAG (entity/community-graph retrieval) vs hybrid BM25+dense quantitative numbers on a shared benchmark",
+      "origin": "process",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g1fef4d1f",
+      "topic": "06-rag-retrieval",
+      "desc": "ColBERT/late-interaction head-to-head NDCG/recall vs cross-encoder on a common benchmark (controlled)",
+      "origin": "process",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "ga688b0ea",
+      "topic": "06-rag-retrieval",
+      "desc": "reranker quality degradation under quantization/distillation (int8 cross-encoder) quantified",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g2fcf2525",
+      "topic": "06-rag-retrieval",
+      "desc": "independent reproduction of reranker cost figures ($/1K, GPU-seconds) with disclosed hardware + confidence intervals",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g40a40ca1",
+      "topic": "06-rag-retrieval",
+      "desc": "multilingual / non-English reranker latency and cost numbers",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gbf95a9ee",
+      "topic": "07-agentic-orchestration",
+      "desc": "reproducible head-to-head accuracy benchmark ReAct vs Reflexion vs CRAG vs Self-RAG (PopQA/TriviaQA, originating-paper results)",
+      "origin": "process",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g471a4391",
+      "topic": "07-agentic-orchestration",
+      "desc": "cost/latency overhead per iteration of self-correcting RAG loops (evaluator/critique token cost)",
+      "origin": "process",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g4e49ba30",
+      "topic": "07-agentic-orchestration",
+      "desc": "multi-agent debate halting/convergence criteria: how many rounds, when consensus reached, judge role",
+      "origin": "process",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g4668dd58",
+      "topic": "08-grounding-truth",
+      "desc": "RARR (attribution editing) and FActScore (atomic-fact precision) primary-paper definitions + reproducible numbers",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g3a31cd3d",
+      "topic": "08-grounding-truth",
+      "desc": "RAGAS arXiv:2309.15217 / Judging-the-Judges 2401.10020 / ARES 2311.09476 original metric defs + reproducible bias magnitudes",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g787384d6",
+      "topic": "08-grounding-truth",
+      "desc": "claim-to-source span anchoring (binding a sentence to a precise retrieved span), not just claim-to-context entailment",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -685,16 +773,269 @@
       "extracted_path": "docs/09-knowledge-compilation-graphs/sources/c520aee3f-gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-4.md",
       "lossy": false,
       "ingested_at": "2026-06-22T18:57:00.809264+00:00"
+    },
+    {
+      "id": "cc9ebf39f",
+      "title": "g23784af9-gaia-browsecomp-accuracy-scores-for-named-deep-research-agents-openai-gemini-perplexity-2026-1",
+      "source": "file://g23784af9-gaia-browsecomp-accuracy-scores-for-named-deep-research-agents-openai-gemini-perplexity-2026-1.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/g23784af9-gaia-browsecomp-accuracy-scores-for-named-deep-research-agents-openai-gemini-perplexity-2026-1.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/cc9ebf39f-g23784af9-gaia-browsecomp-accuracy-scores-for-named-deep-research-agents-openai-gemini-perplexity-2026-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:06.328696+00:00"
+    },
+    {
+      "id": "c2713d958",
+      "title": "g23784af9-gaia-browsecomp-accuracy-scores-for-named-deep-research-agents-openai-gemini-perplexity-2026-2",
+      "source": "file://g23784af9-gaia-browsecomp-accuracy-scores-for-named-deep-research-agents-openai-gemini-perplexity-2026-2.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/g23784af9-gaia-browsecomp-accuracy-scores-for-named-deep-research-agents-openai-gemini-perplexity-2026-2.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/c2713d958-g23784af9-gaia-browsecomp-accuracy-scores-for-named-deep-research-agents-openai-gemini-perplexity-2026-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:06.471095+00:00"
+    },
+    {
+      "id": "ceb7cfb9f",
+      "title": "gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-2",
+      "source": "file://gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-2.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-2.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/ceb7cfb9f-gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:06.613704+00:00"
+    },
+    {
+      "id": "c18cb025a",
+      "title": "gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-3",
+      "source": "file://gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-3.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-3.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/c18cb025a-gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:06.752805+00:00"
+    },
+    {
+      "id": "c3d36ff44",
+      "title": "gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-4",
+      "source": "file://gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-4.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-4.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/c3d36ff44-gb7d931d4-latency-and-per-task-cost-figures-for-frontier-deep-research-agents-wall-clock-usd-query-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:06.895006+00:00"
+    },
+    {
+      "id": "cbda2cb4e",
+      "title": "gcccbc027-internal-architecture-of-closed-frontier-dras-openai-deep-research-gemini-deep-research-decomposition-retrieval-loop-2",
+      "source": "file://gcccbc027-internal-architecture-of-closed-frontier-dras-openai-deep-research-gemini-deep-research-decomposition-retrieval-loop-2.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/gcccbc027-internal-architecture-of-closed-frontier-dras-openai-deep-research-gemini-deep-research-decomposition-retrieval-loop-2.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/cbda2cb4e-gcccbc027-internal-architecture-of-closed-frontier-dras-openai-deep-research-gemini-deep-research-decomposition-retrieval-loop-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:07.035928+00:00"
+    },
+    {
+      "id": "cfa313c43",
+      "title": "gcccbc027-internal-architecture-of-closed-frontier-dras-openai-deep-research-gemini-deep-research-decomposition-retrieval-loop-3",
+      "source": "file://gcccbc027-internal-architecture-of-closed-frontier-dras-openai-deep-research-gemini-deep-research-decomposition-retrieval-loop-3.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/gcccbc027-internal-architecture-of-closed-frontier-dras-openai-deep-research-gemini-deep-research-decomposition-retrieval-loop-3.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/cfa313c43-gcccbc027-internal-architecture-of-closed-frontier-dras-openai-deep-research-gemini-deep-research-decomposition-retrieval-loop-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:07.177718+00:00"
+    },
+    {
+      "id": "cf44b434b",
+      "title": "g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-1",
+      "source": "file://g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-1.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-1.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/cf44b434b-g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:07.385597+00:00"
+    },
+    {
+      "id": "c2fb735f5",
+      "title": "g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-2",
+      "source": "file://g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-2.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-2.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c2fb735f5-g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:07.530246+00:00"
+    },
+    {
+      "id": "c9d345293",
+      "title": "g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-3",
+      "source": "file://g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-3.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-3.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c9d345293-g1fef4d1f-colbert-late-interaction-head-to-head-ndcg-recall-vs-cross-encoder-on-a-common-benchmark-controlled-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:07.672825+00:00"
+    },
+    {
+      "id": "c4b99f896",
+      "title": "gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-1",
+      "source": "file://gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-1.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-1.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c4b99f896-gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:07.812988+00:00"
+    },
+    {
+      "id": "cd52d257c",
+      "title": "gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-3",
+      "source": "file://gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-3.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-3.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/cd52d257c-gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:08.097672+00:00"
+    },
+    {
+      "id": "cc958dce4",
+      "title": "gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-4",
+      "source": "file://gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-4.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-4.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/cc958dce4-gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:08.238280+00:00"
+    },
+    {
+      "id": "c3b9d1ab1",
+      "title": "gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-5",
+      "source": "file://gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-5.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-5.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c3b9d1ab1-gb5db13e7-true-graphrag-entity-community-graph-retrieval-vs-hybrid-bm25-dense-quantitative-numbers-on-a-shared-benchmark-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:08.380797+00:00"
+    },
+    {
+      "id": "cc583c0d6",
+      "title": "g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-1",
+      "source": "file://g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-1.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-1.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/cc583c0d6-g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:08.587052+00:00"
+    },
+    {
+      "id": "c8c70c097",
+      "title": "g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-2",
+      "source": "file://g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-2.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-2.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/c8c70c097-g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:08.728001+00:00"
+    },
+    {
+      "id": "ce3791ef9",
+      "title": "g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-4",
+      "source": "file://g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-4.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-4.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/ce3791ef9-g471a4391-cost-latency-overhead-per-iteration-of-self-correcting-rag-loops-evaluator-critique-token-cost-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:08.869462+00:00"
+    },
+    {
+      "id": "c7de7f558",
+      "title": "g4e49ba30-multi-agent-debate-halting-convergence-criteria-how-many-rounds-when-consensus-reached-judge-role-1",
+      "source": "file://g4e49ba30-multi-agent-debate-halting-convergence-criteria-how-many-rounds-when-consensus-reached-judge-role-1.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/g4e49ba30-multi-agent-debate-halting-convergence-criteria-how-many-rounds-when-consensus-reached-judge-role-1.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/c7de7f558-g4e49ba30-multi-agent-debate-halting-convergence-criteria-how-many-rounds-when-consensus-reached-judge-role-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:09.010171+00:00"
+    },
+    {
+      "id": "c1acffb70",
+      "title": "gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-2",
+      "source": "file://gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-2.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-2.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/c1acffb70-gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:09.169524+00:00"
+    },
+    {
+      "id": "c764cbe7d",
+      "title": "gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-3",
+      "source": "file://gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-3.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-3.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/c764cbe7d-gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:09.316475+00:00"
+    },
+    {
+      "id": "c6e7ab381",
+      "title": "gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-4",
+      "source": "file://gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-4.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-4.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/c6e7ab381-gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:09.459575+00:00"
+    },
+    {
+      "id": "c8393450b",
+      "title": "gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-5",
+      "source": "file://gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-5.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-5.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/c8393450b-gbf95a9ee-reproducible-head-to-head-accuracy-benchmark-react-vs-reflexion-vs-crag-vs-self-rag-popqa-triviaqa-originating-paper-results-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:09.601277+00:00"
+    },
+    {
+      "id": "c8ce45d2b",
+      "title": "g2a965da5-mechanism-behind-citation-abundance-vs-citation-accuracy-tradeoff-how-per-claim-citation-accuracy-is-computed-fact-2",
+      "source": "file://g2a965da5-mechanism-behind-citation-abundance-vs-citation-accuracy-tradeoff-how-per-claim-citation-accuracy-is-computed-fact-2.md",
+      "topic": "08-grounding-truth",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-08-grounding-truth/_done/g2a965da5-mechanism-behind-citation-abundance-vs-citation-accuracy-tradeoff-how-per-claim-citation-accuracy-is-computed-fact-2.md",
+      "extracted_path": "docs/08-grounding-truth/sources/c8ce45d2b-g2a965da5-mechanism-behind-citation-abundance-vs-citation-accuracy-tradeoff-how-per-claim-citation-accuracy-is-computed-fact-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T20:59:09.797790+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1260,
-    "edge_count": 1097
+    "node_count": 1321,
+    "edge_count": 1183
   },
   "assertions": {
-    "count": 4,
+    "count": 13,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -756,6 +1097,58 @@
       "created_at": "2026-06-22T19:19:50.288586+00:00",
       "promoted_path": "docs/findings/dc6ee6f7f-deepresearch-bench-agents-beat-search-llms-citation-accuracy-tradeoff.md",
       "promoted_at": "2026-06-22T19:23:28.006681+00:00"
+    },
+    {
+      "id": "d9fad8bfb",
+      "topic": "06-rag-retrieval",
+      "title": "Reranker and GraphRAG economics: latency, compute cost, and benchmark deltas quantified",
+      "path": "docs/findings/_drafts/d9fad8bfb-reranker-graphrag-economics-latency-cost-benchmarks.md",
+      "status": "rejected",
+      "cites": [
+        "c3bd3a176",
+        "c67cbb7b0",
+        "c83cc0570",
+        "ca7f1d531",
+        "c578103a5"
+      ],
+      "created_at": "2026-06-22T20:34:26.184706+00:00",
+      "promoted_path": null,
+      "reject_reason": "ai-independent: load-bearing reranker latency/cost/NDCG numbers single-sourced to vendor marketing blogs (Thread Transfer/Ailog/EngineersOfAI) with unreproducible undisclosed-hardware internal evals; rigorous arXiv sources back only the GraphRAG sub-section, not the economics thesis"
+    },
+    {
+      "id": "d5c35de17",
+      "topic": "07-agentic-orchestration",
+      "title": "The halt decision: how self-correcting agent loops decide when to stop, and why bounding it is the hard part",
+      "path": "docs/findings/_drafts/d5c35de17-halt-decision-self-correcting-loops.md",
+      "status": "promoted",
+      "cites": [
+        "cf4ac4282",
+        "c33ed5b08",
+        "cca3f9321",
+        "c3944e6ab",
+        "c1dcd6346",
+        "cea4d6678"
+      ],
+      "created_at": "2026-06-22T20:40:33.882157+00:00",
+      "promoted_path": "docs/findings/d5c35de17-halt-decision-self-correcting-loops.md",
+      "promoted_at": "2026-06-22T20:43:00.751958+00:00"
+    },
+    {
+      "id": "dfa42bc8a",
+      "topic": "08-grounding-truth",
+      "title": "Faithfulness measurement machinery: structured LLM-judging, NLI entailment, and the faithfulness-vs-correctness evidence split",
+      "path": "docs/findings/_drafts/dfa42bc8a-faithfulness-measurement-machinery.md",
+      "status": "promoted",
+      "cites": [
+        "c7baa2195",
+        "c2a47e89f",
+        "c86a2d307",
+        "cb1e98570",
+        "c3251a95a"
+      ],
+      "created_at": "2026-06-22T20:50:03.402785+00:00",
+      "promoted_path": "docs/findings/dfa42bc8a-faithfulness-measurement-machinery.md",
+      "promoted_at": "2026-06-22T20:53:10.196992+00:00"
     }
   ]
 }

@@ -65,8 +65,13 @@ Run one process cycle for the research engine. Do exactly this, then stop:
      --rationale "<why these two connect>" \
      --cites "c…,c…"
    ```
-   `--from`/`--to` are `id`s from `.graphify/graph.json` (the `nodes[].id`
-   field, not the label); `--cites` are the `corpus` ids that justify the edge.
+   `--from`/`--to` are graph node `id`s from `.graphify/graph.json` (the
+   `nodes[].id` field, not the label) — **never the `c…` corpus ids**, which
+   belong only in `--cites`. A corpus id used as `--from`/`--to` is a phantom
+   node and fails the next integrity check. Resolve a real node id by grepping
+   `.graphify/graph.json` (e.g. a source file maps to a `sources_…` node, a
+   concept to a `…_concept`/snake-case node) and confirm it exists before
+   asserting. `--cites` are the `corpus` ids that justify the edge.
    Assertions are auto-applied on the next ingest cycle's replay and are always
    recorded — only assert links you can defend from cited sources. Skip this
    step if no missing link is evident; do not invent edges to fill a quota.
