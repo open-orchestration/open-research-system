@@ -356,8 +356,8 @@ Replace lines 16-22 (the `--topic`-only parse, the top `mkdir -p ingest`, and th
 topic=""; INBOX=""
 while [ $# -gt 0 ]; do
   case "$1" in
-    --topic) topic="${2:-}"; shift 2 ;;
-    --inbox) INBOX="${2:-}"; shift 2 ;;
+    --topic) topic="${2:?--topic requires a value}"; shift 2 ;;
+    --inbox) INBOX="${2:?--inbox requires a DIR}"; shift 2 ;;
     *) shift ;;
   esac
 done
@@ -438,7 +438,7 @@ git commit -m "feat(search): reserve-before-fetch budget + --inbox isolation"
 ### Task 4: `ingest_flow.sh` — `--inbox`
 
 **Files:**
-- Modify: `scripts/ingest_flow.sh` (arg parse line 11; `fail_item` ~line 14; drain block lines ~28-46; `--native` arg ~line 60)
+- Modify: `scripts/ingest_flow.sh` (arg parse line 11; `fail_item` ~line 15; drain block lines ~19-25; `--native` arg ~line 60)
 - Test: `tests/test_ingest_flow_inbox.sh` (create)
 
 **Interfaces:**
@@ -482,7 +482,7 @@ topic="${1:-}"; [ -n "$topic" ] || { echo "usage: ingest_flow.sh <topic> [--inbo
 shift
 INBOX="$ROOT/ingest"
 while [ $# -gt 0 ]; do
-  case "$1" in --inbox) INBOX="${2:-}"; shift 2 ;; *) shift ;; esac
+  case "$1" in --inbox) INBOX="${2:?--inbox requires a DIR}"; shift 2 ;; *) shift ;; esac
 done
 INBOX_REL="$("$PY" -c "import os,sys;print(os.path.relpath(sys.argv[1],sys.argv[2]))" "$INBOX" "$ROOT")"
 ```
