@@ -34,6 +34,7 @@
   .log { white-space:pre; line-height:1.5; }
   .ok{color:var(--green)} .fail{color:var(--red)} .capped{color:var(--yellow)}
   #status { position:absolute; top:8px; left:12px; color:var(--dim); font-size:11px; z-index:1; }
+  #status::before { content:"\25CF"; margin-right:5px; color:var(--dot,#8b949e); }
   .muted { color:var(--dim); }
 </style>
 </head>
@@ -75,8 +76,18 @@ function relayout(){ if (relayoutPending) return; relayoutPending=true;
   setTimeout(()=>{ relayoutPending=false; cy.layout({ name:"cose", animate:false }).run(); }, 150); }
 const ws = new WebSocket("ws://" + location.host + "/ws");
 ws.onmessage = (ev)=>{ const d=JSON.parse(ev.data); if (seeded) addDelta(d); else buffer.push(d); };
-ws.onopen = ()=>{ status.textContent="live"; };
-ws.onclose = ()=>{ status.textContent="graph stream disconnected"; };
+let wsOpen = false;
+ws.onopen = ()=>{ wsOpen = true; };
+ws.onclose = ()=>{ wsOpen = false; status.textContent="graph stream disconnected"; status.style.setProperty("--dot","#f85149"); };
+
+const LIVE_WINDOW_MS = 30000;
+function setLive(lastTs){
+  if (!wsOpen){ return; }
+  const age = lastTs ? Date.now()-Date.parse(lastTs) : Infinity;
+  const live = age < LIVE_WINDOW_MS;
+  status.textContent = live ? "live" : "idle";
+  status.style.setProperty("--dot", live ? "#3fb950" : "#f85149");
+}
 fetch("/graph").then(r=>r.json()).then(g=>{
   (g.nodes||[]).forEach(n=>addNode(n.id));
   (g.links||g.edges||[]).forEach(e=>addEdge(e.source, e.target, e._origin));
@@ -110,8 +121,9 @@ function renderQueue(q){
 function renderLoop(rows){
   const cycleEl = document.getElementById("cycle"), body = document.getElementById("loopBody");
   if (!rows.length){ cycleEl.textContent="idle"; body.className="log muted";
-    body.textContent="loop idle — start it with /goal"; return; }
+    body.textContent="loop idle — start it with /goal"; setLive(null); return; }
   const last = rows[rows.length-1];
+  setLive(last.ts);
   cycleEl.textContent = (last.cycle!=null) ? `cycle ${last.cycle}` : "running";
   body.className = "log";
   body.innerHTML = rows.slice(-40).reverse().map(r=>{
