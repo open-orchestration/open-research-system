@@ -14,6 +14,7 @@ DEFAULT_STATE = {
         "tokens_per_cycle": 200000,
         "sources_per_cycle": 8,
         "max_subagents": 8,
+        "max_workers": 4,
         "phase": "gather",
         "weights": {
             "gather":     {"search": 0.7, "ingest": 0.3, "process": 0.0},
@@ -126,6 +127,17 @@ def budget_remaining_sources(state):
 
 def budget_spend_source(state, n=1):
     state["budget"]["spent"]["sources"] += n
+
+
+def budget_reserve(state, n=1):
+    granted = max(0, min(n, budget_remaining_sources(state)))
+    state["budget"]["spent"]["sources"] += granted
+    return granted
+
+
+def budget_refund(state, n=1):
+    s = state["budget"]["spent"]
+    s["sources"] = max(0, s["sources"] - n)
 
 
 def subagent_count(state, flow):
@@ -282,6 +294,8 @@ def _main(argv):
     br = sub.add_parser("budget-remaining"); br.add_argument("--root", default=".")
     brs = sub.add_parser("budget-reset"); brs.add_argument("--root", default=".")
     bsp = sub.add_parser("budget-spend"); bsp.add_argument("--root", default="."); bsp.add_argument("--sources", type=int, required=True)
+    brv = sub.add_parser("budget-reserve"); brv.add_argument("--root", default="."); brv.add_argument("--sources", type=int, required=True)
+    brf = sub.add_parser("budget-refund"); brf.add_argument("--root", default="."); brf.add_argument("--sources", type=int, required=True)
     bst = sub.add_parser("budget-status"); bst.add_argument("--root", default=".")
     ag = sub.add_parser("add-gap"); ag.add_argument("--root", default=".")
     ag.add_argument("--topic", required=True); ag.add_argument("--desc", required=True)
@@ -331,10 +345,19 @@ def _main(argv):
             budget_spend_source(st, args.sources)
             remaining = budget_remaining_sources(st)
         print(remaining); return 0
+    if args.cmd == "budget-reserve":
+        with locked_state(args.root) as st:
+            granted = budget_reserve(st, args.sources)
+        print(granted); return 0
+    if args.cmd == "budget-refund":
+        with locked_state(args.root) as st:
+            budget_refund(st, args.sources)
+        print("refunded"); return 0
     if args.cmd == "budget-status":
         st = load(args.root)
         out = {"phase": st["budget"]["phase"],
                "remaining_sources": budget_remaining_sources(st),
+               "max_workers": st["budget"].get("max_workers", 4),
                "subagents": {f: subagent_count(st, f) for f in ("search", "ingest", "process")}}
         print(json.dumps(out)); return 0
     if args.cmd == "add-gap":
