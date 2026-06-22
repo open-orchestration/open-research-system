@@ -1,9 +1,11 @@
 """On-disk state ledger for the loop research engine. Stdlib only."""
 import copy
+import fcntl
 import hashlib
 import json
 import os
 import sys
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -49,6 +51,27 @@ def save(state, root="."):
     tmp = p.with_suffix(".json.tmp")
     tmp.write_text(json.dumps(state, indent=2, ensure_ascii=False), encoding="utf-8")
     os.replace(tmp, p)
+
+
+def lock_path(root="."):
+    return Path(root) / ".research" / "state.lock"
+
+
+@contextmanager
+def locked_state(root="."):
+    """Load -> yield -> save the state under an exclusive cross-process flock.
+
+    The lock is a stable sidecar file (never the state file, whose os.replace
+    swaps the inode). The state is saved only on clean exit; an exception
+    propagates without a partial write. flock releases when the fd closes.
+    """
+    lp = lock_path(root)
+    lp.parent.mkdir(parents=True, exist_ok=True)
+    with open(lp, "w") as lf:
+        fcntl.flock(lf, fcntl.LOCK_EX)
+        st = load(root)
+        yield st
+        save(st, root)
 
 
 def gen_id(prefix, seed):
@@ -285,27 +308,29 @@ def _main(argv):
     if args.cmd == "gen-id":
         print(gen_id(args.prefix, args.seed)); return 0
     if args.cmd == "add-corpus":
-        st = load(args.root)
-        e = add_corpus_entry(st, title=args.title, source=args.source, topic=args.topic,
-                             native_path=args.native, extracted_path=args.extracted,
-                             lossy=args.lossy, id=args.id)
-        save(st, args.root)
+        with locked_state(args.root) as st:
+            e = add_corpus_entry(st, title=args.title, source=args.source, topic=args.topic,
+                                 native_path=args.native, extracted_path=args.extracted,
+                                 lossy=args.lossy, id=args.id)
         print(e["id"]); return 0
     if args.cmd == "set-graph":
-        st = load(args.root)
-        set_graph(st,
-                  dirty={"true": True, "false": False}.get(args.dirty),
-                  node_count=args.node_count, edge_count=args.edge_count,
-                  last_update=args.last_update)
-        save(st, args.root)
+        with locked_state(args.root) as st:
+            set_graph(st,
+                      dirty={"true": True, "false": False}.get(args.dirty),
+                      node_count=args.node_count, edge_count=args.edge_count,
+                      last_update=args.last_update)
         print("graph updated"); return 0
     if args.cmd == "budget-remaining":
         print(budget_remaining_sources(load(args.root))); return 0
     if args.cmd == "budget-reset":
-        st = load(args.root); budget_reset(st); save(st, args.root); print("budget reset"); return 0
+        with locked_state(args.root) as st:
+            budget_reset(st)
+        print("budget reset"); return 0
     if args.cmd == "budget-spend":
-        st = load(args.root); budget_spend_source(st, args.sources); save(st, args.root)
-        print(budget_remaining_sources(st)); return 0
+        with locked_state(args.root) as st:
+            budget_spend_source(st, args.sources)
+            remaining = budget_remaining_sources(st)
+        print(remaining); return 0
     if args.cmd == "budget-status":
         st = load(args.root)
         out = {"phase": st["budget"]["phase"],
@@ -313,8 +338,9 @@ def _main(argv):
                "subagents": {f: subagent_count(st, f) for f in ("search", "ingest", "process")}}
         print(json.dumps(out)); return 0
     if args.cmd == "add-gap":
-        st = load(args.root); g = add_gap(st, topic=args.topic, desc=args.desc, origin=args.origin)
-        save(st, args.root); print(g["id"]); return 0
+        with locked_state(args.root) as st:
+            g = add_gap(st, topic=args.topic, desc=args.desc, origin=args.origin)
+        print(g["id"]); return 0
     if args.cmd == "list-gaps":
         for g in list_gaps(load(args.root), topic=args.topic, status=args.status):
             print(f"{g['id']}\t{g['topic']}\t{g['desc']}")
@@ -325,34 +351,35 @@ def _main(argv):
             print(f"{g['id']}\t{g['topic']}\t{g['desc']}")
         return 0
     if args.cmd == "set-gap":
-        st = load(args.root); set_gap_status(st, args.id, args.status, requeue=args.requeue)
-        save(st, args.root); print("gap updated"); return 0
+        with locked_state(args.root) as st:
+            set_gap_status(st, args.id, args.status, requeue=args.requeue)
+        print("gap updated"); return 0
     if args.cmd == "add-draft":
-        st = load(args.root)
-        cites = [c for c in args.cites.split(",") if c]
-        d = add_draft(st, topic=args.topic, title=args.title, path=args.path,
-                      cites=cites, status=args.status, id=args.id)
-        save(st, args.root); print(d["id"]); return 0
+        with locked_state(args.root) as st:
+            cites = [c for c in args.cites.split(",") if c]
+            d = add_draft(st, topic=args.topic, title=args.title, path=args.path,
+                          cites=cites, status=args.status, id=args.id)
+        print(d["id"]); return 0
     if args.cmd == "list-drafts":
         for d in list_drafts(load(args.root), status=args.status, topic=args.topic):
             print(f"{d['id']}\t{d['status']}\t{d['topic']}\t{d['title']}")
         return 0
     if args.cmd == "set-draft":
-        st = load(args.root)
-        if set_draft_status(st, args.id, args.status) is None:
-            print(f"unknown draft: {args.id}", file=sys.stderr); return 1
-        save(st, args.root); print("draft updated"); return 0
+        with locked_state(args.root) as st:
+            if set_draft_status(st, args.id, args.status) is None:
+                print(f"unknown draft: {args.id}", file=sys.stderr); return 1
+        print("draft updated"); return 0
     if args.cmd == "candidates":
         for topic, n in process_candidates(load(args.root), min_sources=args.min_sources):
             print(f"{topic}\t{n}")
         return 0
     if args.cmd == "set-phase":
-        st = load(args.root)
-        try:
-            set_phase(st, args.phase)
-        except ValueError as e:
-            print(str(e), file=sys.stderr); return 1
-        save(st, args.root); print(args.phase); return 0
+        with locked_state(args.root) as st:
+            try:
+                set_phase(st, args.phase)
+            except ValueError as e:
+                print(str(e), file=sys.stderr); return 1
+        print(args.phase); return 0
     return 1
 
 
