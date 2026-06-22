@@ -23,8 +23,8 @@
     },
     "spent": {
       "tokens": 0,
-      "sources": 8,
-      "cycle_started_at": "2026-06-22T03:36:34.367285+00:00"
+      "sources": 3,
+      "cycle_started_at": "2026-06-22T18:44:08.135715+00:00"
     }
   },
   "gaps": [
@@ -57,7 +57,7 @@
       "topic": "07-agentic-orchestration",
       "desc": "planner-worker vs debate critique multi-agent research patterns 2025",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -65,7 +65,7 @@
       "topic": "07-agentic-orchestration",
       "desc": "iterate-until-dry loop engineering ReAct Reflexion CRAG Self-RAG",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -73,7 +73,7 @@
       "topic": "09-knowledge-compilation-graphs",
       "desc": "KG construction + community detection for source-of-truth corpora",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -97,7 +97,7 @@
       "topic": "08-grounding-truth",
       "desc": "LLM-as-judge faithfulness metrics RAGAS FActScore RARR 2025",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -105,7 +105,7 @@
       "topic": "06-rag-retrieval",
       "desc": "GraphRAG retrieval quantitative performance vs hybrid BM25+dense on same benchmark 2025",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -113,7 +113,7 @@
       "topic": "06-rag-retrieval",
       "desc": "reranker latency and compute cost overhead quantified (ColBERT vs cross-encoder) 2025",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -145,13 +145,45 @@
       "topic": "05-ai-deep-research-systems",
       "desc": "deep research agent quantitative benchmark comparison GAIA DeepResearch-Bench 2026",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
       "id": "g7ec40a17",
       "topic": "05-ai-deep-research-systems",
       "desc": "OpenAI Anthropic Google native Deep Research product feature comparison (not general agents) 2026",
+      "origin": "process",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g23784af9",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "GAIA / BrowseComp accuracy scores for named deep-research agents (OpenAI/Gemini/Perplexity) 2026",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gb7d931d4",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "latency and per-task cost figures for frontier deep-research agents (wall-clock + USD/query)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gcccbc027",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "internal architecture of closed frontier DRAs: OpenAI Deep Research, Gemini Deep Research decomposition/retrieval loop",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g2a965da5",
+      "topic": "08-grounding-truth",
+      "desc": "mechanism behind citation-abundance vs citation-accuracy tradeoff; how per-claim citation accuracy is computed (FACT)",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -389,16 +421,280 @@
       "extracted_path": "docs/05-ai-deep-research-systems/sources/c2026b5cf-gda51fc38-perplexity-elicit-deep-research-tools-2026-features-and-evaluation-2.md",
       "lossy": false,
       "ingested_at": "2026-06-22T03:37:25.063104+00:00"
+    },
+    {
+      "id": "cf650704e",
+      "title": "g7ec40a17-openai-anthropic-google-native-deep-research-product-feature-comparison-not-general-agents-2026-2",
+      "source": "file://g7ec40a17-openai-anthropic-google-native-deep-research-product-feature-comparison-not-general-agents-2026-2.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/g7ec40a17-openai-anthropic-google-native-deep-research-product-feature-comparison-not-general-agents-2026-2.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/cf650704e-g7ec40a17-openai-anthropic-google-native-deep-research-product-feature-comparison-not-general-agents-2026-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:57.142622+00:00"
+    },
+    {
+      "id": "c840a2e0d",
+      "title": "gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-1",
+      "source": "file://gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-1.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-1.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/c840a2e0d-gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:57.283271+00:00"
+    },
+    {
+      "id": "cc3dca8e9",
+      "title": "gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-4",
+      "source": "file://gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-4.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-4.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/cc3dca8e9-gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:57.422669+00:00"
+    },
+    {
+      "id": "c2fa5c707",
+      "title": "gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-5",
+      "source": "file://gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-5.md",
+      "topic": "05-ai-deep-research-systems",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-05-ai-deep-research-systems/_done/gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-5.md",
+      "extracted_path": "docs/05-ai-deep-research-systems/sources/c2fa5c707-gf04ba132-deep-research-agent-quantitative-benchmark-comparison-gaia-deepresearch-bench-2026-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:57.563489+00:00"
+    },
+    {
+      "id": "cf35fa065",
+      "title": "g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-1",
+      "source": "file://g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-1.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-1.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/cf35fa065-g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:57.764730+00:00"
+    },
+    {
+      "id": "c67cbb7b0",
+      "title": "g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-3",
+      "source": "file://g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-3.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-3.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c67cbb7b0-g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:57.905854+00:00"
+    },
+    {
+      "id": "c83cc0570",
+      "title": "g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-4",
+      "source": "file://g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-4.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-4.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c83cc0570-g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:58.045499+00:00"
+    },
+    {
+      "id": "c3bd3a176",
+      "title": "g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-5",
+      "source": "file://g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-5.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-5.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c3bd3a176-g60e2f127-reranker-latency-and-compute-cost-overhead-quantified-colbert-vs-cross-encoder-2025-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:58.186673+00:00"
+    },
+    {
+      "id": "c578103a5",
+      "title": "ga85b291b-graphrag-retrieval-quantitative-performance-vs-hybrid-bm25-dense-on-same-benchmark-2025-2",
+      "source": "file://ga85b291b-graphrag-retrieval-quantitative-performance-vs-hybrid-bm25-dense-on-same-benchmark-2025-2.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/ga85b291b-graphrag-retrieval-quantitative-performance-vs-hybrid-bm25-dense-on-same-benchmark-2025-2.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/c578103a5-ga85b291b-graphrag-retrieval-quantitative-performance-vs-hybrid-bm25-dense-on-same-benchmark-2025-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:58.327911+00:00"
+    },
+    {
+      "id": "ca7f1d531",
+      "title": "ga85b291b-graphrag-retrieval-quantitative-performance-vs-hybrid-bm25-dense-on-same-benchmark-2025-3",
+      "source": "file://ga85b291b-graphrag-retrieval-quantitative-performance-vs-hybrid-bm25-dense-on-same-benchmark-2025-3.md",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-06-rag-retrieval/_done/ga85b291b-graphrag-retrieval-quantitative-performance-vs-hybrid-bm25-dense-on-same-benchmark-2025-3.md",
+      "extracted_path": "docs/06-rag-retrieval/sources/ca7f1d531-ga85b291b-graphrag-retrieval-quantitative-performance-vs-hybrid-bm25-dense-on-same-benchmark-2025-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:58.469130+00:00"
+    },
+    {
+      "id": "cca3f9321",
+      "title": "g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-1",
+      "source": "file://g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-1.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-1.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/cca3f9321-g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:58.809713+00:00"
+    },
+    {
+      "id": "c33ed5b08",
+      "title": "g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-3",
+      "source": "file://g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-3.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-3.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/c33ed5b08-g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:58.949373+00:00"
+    },
+    {
+      "id": "c3944e6ab",
+      "title": "g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-4",
+      "source": "file://g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-4.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-4.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/c3944e6ab-g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:59.090195+00:00"
+    },
+    {
+      "id": "cf4ac4282",
+      "title": "g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-5",
+      "source": "file://g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-5.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-5.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/cf4ac4282-g53a71a9b-iterate-until-dry-loop-engineering-react-reflexion-crag-self-rag-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:59.230866+00:00"
+    },
+    {
+      "id": "cea4d6678",
+      "title": "g5484e92a-planner-worker-vs-debate-critique-multi-agent-research-patterns-2025-2",
+      "source": "file://g5484e92a-planner-worker-vs-debate-critique-multi-agent-research-patterns-2025-2.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/g5484e92a-planner-worker-vs-debate-critique-multi-agent-research-patterns-2025-2.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/cea4d6678-g5484e92a-planner-worker-vs-debate-critique-multi-agent-research-patterns-2025-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:59.371899+00:00"
+    },
+    {
+      "id": "c1dcd6346",
+      "title": "g5484e92a-planner-worker-vs-debate-critique-multi-agent-research-patterns-2025-4",
+      "source": "file://g5484e92a-planner-worker-vs-debate-critique-multi-agent-research-patterns-2025-4.md",
+      "topic": "07-agentic-orchestration",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-07-agentic-orchestration/_done/g5484e92a-planner-worker-vs-debate-critique-multi-agent-research-patterns-2025-4.md",
+      "extracted_path": "docs/07-agentic-orchestration/sources/c1dcd6346-g5484e92a-planner-worker-vs-debate-critique-multi-agent-research-patterns-2025-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:59.541118+00:00"
+    },
+    {
+      "id": "c7baa2195",
+      "title": "g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-1",
+      "source": "file://g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-1.md",
+      "topic": "08-grounding-truth",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-08-grounding-truth/_done/g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-1.md",
+      "extracted_path": "docs/08-grounding-truth/sources/c7baa2195-g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:59.738599+00:00"
+    },
+    {
+      "id": "c3251a95a",
+      "title": "g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-2",
+      "source": "file://g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-2.md",
+      "topic": "08-grounding-truth",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-08-grounding-truth/_done/g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-2.md",
+      "extracted_path": "docs/08-grounding-truth/sources/c3251a95a-g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:56:59.903274+00:00"
+    },
+    {
+      "id": "c2a47e89f",
+      "title": "g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-3",
+      "source": "file://g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-3.md",
+      "topic": "08-grounding-truth",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-08-grounding-truth/_done/g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-3.md",
+      "extracted_path": "docs/08-grounding-truth/sources/c2a47e89f-g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:57:00.044548+00:00"
+    },
+    {
+      "id": "c86a2d307",
+      "title": "g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-4",
+      "source": "file://g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-4.md",
+      "topic": "08-grounding-truth",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-08-grounding-truth/_done/g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-4.md",
+      "extracted_path": "docs/08-grounding-truth/sources/c86a2d307-g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:57:00.188000+00:00"
+    },
+    {
+      "id": "cb1e98570",
+      "title": "g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-5",
+      "source": "file://g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-5.md",
+      "topic": "08-grounding-truth",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-08-grounding-truth/_done/g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-5.md",
+      "extracted_path": "docs/08-grounding-truth/sources/cb1e98570-g0254bd50-llm-as-judge-faithfulness-metrics-ragas-factscore-rarr-2025-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:57:00.327953+00:00"
+    },
+    {
+      "id": "c0ec9aa64",
+      "title": "gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-1",
+      "source": "file://gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-1.md",
+      "topic": "09-knowledge-compilation-graphs",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-09-knowledge-compilation-graphs/_done/gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-1.md",
+      "extracted_path": "docs/09-knowledge-compilation-graphs/sources/c0ec9aa64-gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:57:00.523831+00:00"
+    },
+    {
+      "id": "c0cf2d36b",
+      "title": "gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-2",
+      "source": "file://gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-2.md",
+      "topic": "09-knowledge-compilation-graphs",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-09-knowledge-compilation-graphs/_done/gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-2.md",
+      "extracted_path": "docs/09-knowledge-compilation-graphs/sources/c0cf2d36b-gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:57:00.664886+00:00"
+    },
+    {
+      "id": "c520aee3f",
+      "title": "gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-4",
+      "source": "file://gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-4.md",
+      "topic": "09-knowledge-compilation-graphs",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-09-knowledge-compilation-graphs/_done/gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-4.md",
+      "extracted_path": "docs/09-knowledge-compilation-graphs/sources/c520aee3f-gc41801d5-kg-construction-community-detection-for-source-of-truth-corpora-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T18:57:00.809264+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 583,
-    "edge_count": 670
+    "node_count": 1260,
+    "edge_count": 1097
   },
   "assertions": {
-    "count": 0,
+    "count": 4,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -439,6 +735,27 @@
       "created_at": "2026-06-22T03:39:17.931569+00:00",
       "promoted_path": null,
       "reject_reason": "ai-independent: secondary/promotional sources (SEO listicles decidenavigator/opentoolhq, vendor blogs); load-bearing stats on marketing sources; possible 89% citation misattribution; not canon-worthy"
+    },
+    {
+      "id": "dc6ee6f7f",
+      "topic": "05-ai-deep-research-systems",
+      "title": "What DeepResearch-Bench numbers reveal: deep-research agents beat search-augmented LLMs, and citation accuracy trades off against citation volume",
+      "path": "docs/findings/_drafts/dc6ee6f7f-deepresearch-bench-agents-beat-search-llms-citation-accuracy-tradeoff.md",
+      "status": "promoted",
+      "cites": [
+        "c840a2e0d",
+        "cc3dca8e9",
+        "c2fa5c707",
+        "c3d184ff8",
+        "cc7b02e60",
+        "c1b024617",
+        "cb6ceb956",
+        "cf841afde",
+        "c2026b5cf"
+      ],
+      "created_at": "2026-06-22T19:19:50.288586+00:00",
+      "promoted_path": "docs/findings/dc6ee6f7f-deepresearch-bench-agents-beat-search-llms-citation-accuracy-tradeoff.md",
+      "promoted_at": "2026-06-22T19:23:28.006681+00:00"
     }
   ]
 }
