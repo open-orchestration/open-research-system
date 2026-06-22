@@ -37,20 +37,22 @@ Each cycle, do exactly this:
      Before stopping, close the run log: `python3 scripts/runlog.py end --status ok`
      Do not run any more cycles.
 
-3. **Search.** If `D.search` is `true`: run one paired search+ingest pass for every topic
-   that has queued gaps, so each batch is filed under its own topic (a single global topic
-   would mis-route sources, since `ingest_flow.sh` routes by the topic argument):
+3. **Search.** If `D.search` is `true`: run search+ingest concurrently, one worker per topic
+   with queued gaps, each isolated in its own `ingest/.work/<topic>/` inbox so parallel
+   ingests never share files or mis-route. Worker count is `budget.max_workers`:
    ```
-   for T in $(python3 scripts/state.py list-gaps --status queued | cut -f2 | sort -u); do
-     bash scripts/search_flow.sh --topic "$T"
-     bash scripts/ingest_flow.sh "$T"
-   done
+   W=$(python3 scripts/state.py budget-status | python3 -c 'import json,sys;print(json.load(sys.stdin)["max_workers"])')
+   python3 scripts/state.py list-gaps --status queued | cut -f2 | sort -u | \
+     xargs -P "$W" -I{} bash -c '
+       T="{}"; IN="ingest/.work/$T"; mkdir -p "$IN"
+       bash scripts/search_flow.sh --topic "$T" --inbox "$IN"
+       bash scripts/ingest_flow.sh "$T" --inbox "$IN"
+     '
    ```
-   `search_flow.sh` drains that topic's queued gaps within the shared per-cycle budget and
-   drops results into `ingest/`; the paired `ingest_flow.sh "$T"` normalizes them straight
-   into `docs/<T>/sources/` and flags the graph dirty. The graph update + replay + event
-   append run in the next cycle's step 1, which still fires on an empty drain because the
-   dirty flag persists in `.research/state.json`.
+   Each worker fetches within the shared strict budget (atomic reserve/refund, so concurrent
+   workers never overspend `sources_per_cycle`) and flags the graph dirty. The graph update +
+   replay + event append stay serial — they run in the next cycle's step 1, which still fires
+   on an empty drain because the dirty flag persists in `.research/state.json`.
 
 4. **Process.** If `D.process` is `true`: run the Process cycle exactly as defined in
    `.claude/process.md` (pick a candidate topic, draft with inline citations, pass both
