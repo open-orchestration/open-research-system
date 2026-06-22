@@ -12,8 +12,9 @@ separable realtime graph view. The websocket UI is specified as a separable sub-
 Turn the manual research spike into a continuously-running engine with three concurrent flows —
 **search** (find sources), **ingest+graph** (normalize sources and incrementally update the
 knowledge graph), and **process** (turn corpus into findings) — while humans drop sources (files,
-videos, images, links, raw text) into an inbox at any time. Findings are human-gated before they
-become "real."
+videos, images, links, raw text) into an inbox at any time. Findings pass an automated
+independent-reviewer gate before they become "real" (superseded 2026-06-22; originally a
+human gate — a human can still override).
 
 The engine is **wiring, not greenfield**: the repo already has search (`scripts/gather.sh`), ingest
 (`scripts/ingest.sh`), the graph (`.graphify/`), findings (`docs/findings/`), and synthesis
@@ -27,7 +28,7 @@ overlay, and a delta event stream.
 | Runtime | Claude Code `/loop` + `/goal` in an open session | Native loop primitives; zero custom infra |
 | Durability | Session-alive (phase 1) | Simplest; prove the design before durable Routines/Actions |
 | Orchestration | Start as **A** (independent loops + state file), converge to **C** (cheap watcher-loop + reasoning-goal) | Match cost/cadence split without a monolithic controller |
-| Human-in-the-loop | **Gated findings**: search/ingest/graph autonomous; process emits drafts → review queue → human promotes | Loop-engineering "stay in the loop" + spike faithfulness gate |
+| Human-in-the-loop | **Gated findings** (superseded 2026-06-22): originally drafts → review queue → human promotes; now an independent AI reviewer (`.claude/review.md`) auto-promotes/rejects, human override retained | Loop-engineering "stay in the loop" + spike faithfulness gate |
 | Search trigger | **Both** human-seeded queries and auto gap-driven discovery, under a budget cap | Autonomous discovery without runaway cost |
 | Graph updates | `graphify --update` (incremental merge), **not** full rebuilds | graphify supports incremental natively; cheaper, enables realtime deltas |
 
@@ -139,7 +140,7 @@ self-adjusts later if the heuristic proves out.`
 
 Each flow has: a trigger, a queue slice it owns, a subagent fan-out, and a **cheap local verifiable
 success check** (a loop without a check is a loop making mistakes unattended). No flow self-certifies
-*quality* — quality is the human gate.
+*quality* — quality is the review gate (an independent AI reviewer as of 2026-06-22; human override retained).
 
 ### ① Search flow — `/loop` ~10m (converges into the `/goal`)
 - **Reads:** `gaps[]` (human + process-authored), `budget`.
@@ -182,8 +183,8 @@ success check** (a loop without a check is a loop making mistakes unattended). N
   it perceives but the auto-pass missed.
 - **Success check:** every claim cites a real `corpus` id that exists; a faithfulness self-check passes.
   Otherwise keep `draft` and do not surface for review.
-- **Output contract (HITL):** draft → review queue → human **promotes** to `docs/findings/` +
-  `SYNTHESIS.md`, or **rejects**.
+- **Output contract:** draft → independent AI-reviewer gate (`.claude/review.md`) **promotes** to `docs/findings/` +
+  `SYNTHESIS.md`, or **rejects** (superseded 2026-06-22; was a human gate — human override retained).
 
 ### ④ Graph enrichment — asserted edges
 Solves the findings-13 god-node caveat (god-node reading must traverse cross-community **bridges**, not
