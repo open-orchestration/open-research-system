@@ -23,8 +23,8 @@
     },
     "spent": {
       "tokens": 0,
-      "sources": 1,
-      "cycle_started_at": "2026-06-22T20:46:23.337067+00:00"
+      "sources": 7,
+      "cycle_started_at": "2026-06-22T22:01:27.647042+00:00"
     }
   },
   "gaps": [
@@ -338,6 +338,54 @@
       "desc": "GraphRAG generalizability beyond single enterprise domain (LLM-as-judge win-rate measured on ABAP migration only)",
       "origin": "process",
       "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g5b7fa51c",
+      "topic": "16-evaluation-benchmarks",
+      "desc": "deep-research / agentic eval benchmarks: GAIA, BrowseComp, DeepResearch-Bench task design and reported scores 2025-2026",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g746b8918",
+      "topic": "16-evaluation-benchmarks",
+      "desc": "RAG evaluation harnesses: RAGAS, ARES, TruLens metric definitions and validation methodology",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g2d31d5f9",
+      "topic": "16-evaluation-benchmarks",
+      "desc": "multi-hop QA benchmarks (HotpotQA, 2WikiMultiHopQA, MuSiQue) construction and faithfulness/answer-quality metrics",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 1
+    },
+    {
+      "id": "g9f10da22",
+      "topic": "17-specs-standards",
+      "desc": "citation interchange formats: CSL JSON, BibTeX, schema.org ScholarlyArticle field mappings",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g0d8366cb",
+      "topic": "17-specs-standards",
+      "desc": "Model Context Protocol (MCP) specification: resources, tools, prompts, transport",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g4dd8615c",
+      "topic": "17-specs-standards",
+      "desc": "decision-record standards: MADR / ADR schema and lightweight architecture decision record formats",
+      "origin": "human",
+      "status": "done",
       "attempts": 0
     }
   ],
@@ -1090,13 +1138,134 @@
       "extracted_path": "docs/08-grounding-truth/sources/c8ce45d2b-g2a965da5-mechanism-behind-citation-abundance-vs-citation-accuracy-tradeoff-how-per-claim-citation-accuracy-is-computed-fact-2.md",
       "lossy": false,
       "ingested_at": "2026-06-22T20:59:09.797790+00:00"
+    },
+    {
+      "id": "cdfb14ed4",
+      "title": "g5b7fa51c-deep-research-agentic-eval-benchmarks-gaia-browsecomp-deepresearch-bench-task-design-and-reported-scores-2025-2026-4",
+      "source": "file://g5b7fa51c-deep-research-agentic-eval-benchmarks-gaia-browsecomp-deepresearch-bench-task-design-and-reported-scores-2025-2026-4.md",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-16-evaluation-benchmarks/_done/g5b7fa51c-deep-research-agentic-eval-benchmarks-gaia-browsecomp-deepresearch-bench-task-design-and-reported-scores-2025-2026-4.md",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/cdfb14ed4-g5b7fa51c-deep-research-agentic-eval-benchmarks-gaia-browsecomp-deepresearch-bench-task-design-and-reported-scores-2025-2026-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:27.823803+00:00"
+    },
+    {
+      "id": "cb0b01337",
+      "title": "g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-1",
+      "source": "file://g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-1.md",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-16-evaluation-benchmarks/_done/g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-1.md",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/cb0b01337-g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:28.180231+00:00"
+    },
+    {
+      "id": "c6c0834a8",
+      "title": "g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-2",
+      "source": "file://g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-2.md",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-16-evaluation-benchmarks/_done/g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-2.md",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/c6c0834a8-g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:28.344628+00:00"
+    },
+    {
+      "id": "ce320f743",
+      "title": "g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-3",
+      "source": "file://g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-3.md",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-16-evaluation-benchmarks/_done/g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-3.md",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/ce320f743-g746b8918-rag-evaluation-harnesses-ragas-ares-trulens-metric-definitions-and-validation-methodology-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:28.506490+00:00"
+    },
+    {
+      "id": "c3b99c089",
+      "title": "g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-1",
+      "source": "file://g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-1.md",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-17-specs-standards/_done/g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-1.md",
+      "extracted_path": "docs/17-specs-standards/sources/c3b99c089-g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:28.930857+00:00"
+    },
+    {
+      "id": "c847773b8",
+      "title": "g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-3",
+      "source": "file://g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-3.md",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-17-specs-standards/_done/g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-3.md",
+      "extracted_path": "docs/17-specs-standards/sources/c847773b8-g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:29.101579+00:00"
+    },
+    {
+      "id": "c91d7e937",
+      "title": "g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-4",
+      "source": "file://g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-4.md",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-17-specs-standards/_done/g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-4.md",
+      "extracted_path": "docs/17-specs-standards/sources/c91d7e937-g0d8366cb-model-context-protocol-mcp-specification-resources-tools-prompts-transport-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:29.343493+00:00"
+    },
+    {
+      "id": "c83e68685",
+      "title": "g4dd8615c-decision-record-standards-madr-adr-schema-and-lightweight-architecture-decision-record-formats-2",
+      "source": "file://g4dd8615c-decision-record-standards-madr-adr-schema-and-lightweight-architecture-decision-record-formats-2.md",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-17-specs-standards/_done/g4dd8615c-decision-record-standards-madr-adr-schema-and-lightweight-architecture-decision-record-formats-2.md",
+      "extracted_path": "docs/17-specs-standards/sources/c83e68685-g4dd8615c-decision-record-standards-madr-adr-schema-and-lightweight-architecture-decision-record-formats-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:29.533723+00:00"
+    },
+    {
+      "id": "c5a6a2462",
+      "title": "g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-1",
+      "source": "file://g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-1.md",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-17-specs-standards/_done/g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-1.md",
+      "extracted_path": "docs/17-specs-standards/sources/c5a6a2462-g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:29.714365+00:00"
+    },
+    {
+      "id": "cc13e4eb2",
+      "title": "g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-3",
+      "source": "file://g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-3.md",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-17-specs-standards/_done/g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-3.md",
+      "extracted_path": "docs/17-specs-standards/sources/cc13e4eb2-g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:29.988380+00:00"
+    },
+    {
+      "id": "cda819b22",
+      "title": "g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-5",
+      "source": "file://g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-5.md",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-17-specs-standards/_done/g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-5.md",
+      "extracted_path": "docs/17-specs-standards/sources/cda819b22-g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-22T22:02:30.247066+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1321,
-    "edge_count": 1183
+    "node_count": 1360,
+    "edge_count": 1249
   },
   "assertions": {
     "count": 18,
