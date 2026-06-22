@@ -8,21 +8,27 @@ ROOT="${REPO_ROOT:-$(cd "$HERE/.." && pwd)}"
 PY="python3"
 RL="python3 $HERE/runlog.py"
 
-topic="${1:-}"; [ -n "$topic" ] || { echo "usage: ingest_flow.sh <topic>" >&2; exit 2; }
+topic="${1:-}"; [ -n "$topic" ] || { echo "usage: ingest_flow.sh <topic> [--inbox DIR]" >&2; exit 2; }
+shift
+INBOX="$ROOT/ingest"
+while [ $# -gt 0 ]; do
+  case "$1" in --inbox) INBOX="${2:?--inbox requires a DIR}"; shift 2 ;; *) shift ;; esac
+done
+INBOX_REL="$("$PY" -c "import os,sys;print(os.path.relpath(sys.argv[1],sys.argv[2]))" "$INBOX" "$ROOT")"
 dest="$(resolve_topic_dir "$ROOT" "$topic")/sources" || exit 1; mkdir -p "$dest"
 
 # Fail one item: move its native to _failed and skip to the next.
-fail_item() { echo "$2" >&2; mv "$1" "$ROOT/ingest/_failed/" 2>/dev/null; \
+fail_item() { echo "$2" >&2; mv "$1" "$INBOX/_failed/" 2>/dev/null; \
   $RL log --root "$ROOT" --flow ingest --step normalize --status fail --data "{\"reason\":\"$2\"}"; }
 
 shopt -s nullglob
-items=("$ROOT"/ingest/*)
+items=("$INBOX"/*)
 real=(); for f in "${items[@]+"${items[@]}"}"; do
   b="$(basename "$f")"; [ "$b" = ".gitkeep" ] || [ "$b" = "_done" ] || [ "$b" = "_failed" ] || real+=("$f")
 done
-[ "${#real[@]}" -gt 0 ] || { echo "no new sources in ingest/"; exit 0; }
+[ "${#real[@]}" -gt 0 ] || { echo "no new sources in $INBOX"; exit 0; }
 
-mkdir -p "$ROOT/ingest/_done" "$ROOT/ingest/_failed"
+mkdir -p "$INBOX/_done" "$INBOX/_failed"
 added=0
 for f in "${real[@]}"; do
   name="$(basename "$f")"
@@ -57,9 +63,9 @@ for f in "${real[@]}"; do
   esac
 
   "$PY" "$HERE/state.py" add-corpus --root "$ROOT" --id "$id" --title "$title" --source "$source_disp" \
-        --topic "$topic" --native "ingest/_done/$name" --extracted "$rel" >/dev/null \
+        --topic "$topic" --native "$INBOX_REL/_done/$name" --extracted "$rel" >/dev/null \
         || { fail_item "$f" "record failed: $f"; rm -f "$out"; continue; }
-  mv "$f" "$ROOT/ingest/_done/" || { echo "warning: could not archive $f" >&2; }
+  mv "$f" "$INBOX/_done/" || { echo "warning: could not archive $f" >&2; }
   added=$((added+1))
   $RL log --root "$ROOT" --flow ingest --step normalize --status ok \
     --data "{\"corpus_id\":\"$id\",\"type\":\"$type\"}"
