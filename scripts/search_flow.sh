@@ -13,48 +13,55 @@ PER_GAP="${PER_GAP:-5}"
 SP="python3 $HERE/state.py"
 RL="python3 $HERE/runlog.py"
 
-topic=""
-[ "${1:-}" = "--topic" ] && topic="${2:-}"
-[ -n "$topic" ] || { echo "usage: search_flow.sh --topic <topic>" >&2; exit 2; }
-mkdir -p "$ROOT/ingest"
-
-remaining="$($SP budget-remaining --root "$ROOT")"
-[ "$remaining" -gt 0 ] || { echo "search: budget spent ($remaining remaining)"; exit 0; }
+topic=""; INBOX=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --topic) topic="${2:?--topic requires a value}"; shift 2 ;;
+    --inbox) INBOX="${2:?--inbox requires a DIR}"; shift 2 ;;
+    *) shift ;;
+  esac
+done
+[ -n "$topic" ] || { echo "usage: search_flow.sh --topic <topic> [--inbox DIR]" >&2; exit 2; }
+INBOX="${INBOX:-$ROOT/ingest}"
+mkdir -p "$INBOX"
 
 gaps="$($SP list-gaps --root "$ROOT" --topic "$topic" --status queued)"
 [ -n "$gaps" ] || { echo "search: no queued gaps for $topic"; exit 0; }
 
 while IFS= read -r line; do
-  [ "$remaining" -gt 0 ] || break
   [ -n "$line" ] || continue
   gid="$(printf '%s' "$line" | cut -f1)"
   desc="$(printf '%s' "$line" | cut -f3)"
-  n="$PER_GAP"; [ "$remaining" -lt "$n" ] && n="$remaining"
 
-  results="$("$PY" "$SEARCH" "$desc" "$n" 2>/dev/null)" || results="[]"
+  granted="$($SP budget-reserve --root "$ROOT" --sources "$PER_GAP")"
+  [ "$granted" -gt 0 ] || break   # budget exhausted for this cycle
+
+  results="$("$PY" "$SEARCH" "$desc" "$granted" 2>/dev/null)" || results="[]"
   urls="$(printf '%s' "$results" | jq -r '.[].url' 2>/dev/null)"
   kept=0; i=0
   while IFS= read -r url; do
     [ -n "$url" ] || continue
-    [ "$remaining" -gt 0 ] || break
+    [ "$kept" -lt "$granted" ] || break   # reservation filled
     i=$((i+1))
     tmp="$(mktemp)"
     "$PY" "$FETCH" "$url" > "$tmp" 2>/dev/null || { rm -f "$tmp"; continue; }
     if python3 "$HERE/junk.py" check "$tmp"; then
       slug="$(slugify "$desc")"
-      mv "$tmp" "$ROOT/ingest/${gid}-${slug}-${i}.md"
-      kept=$((kept+1)); remaining=$((remaining-1))
+      mv "$tmp" "$INBOX/${gid}-${slug}-${i}.md"
+      kept=$((kept+1))
     else
       rm -f "$tmp"
     fi
   done <<< "$urls"
 
+  refund=$((granted - kept))
+  [ "$refund" -gt 0 ] && $SP budget-refund --root "$ROOT" --sources "$refund" >/dev/null
+
   if [ "$kept" -gt 0 ]; then
     $SP set-gap --root "$ROOT" --id "$gid" --status done >/dev/null
-    $SP budget-spend --root "$ROOT" --sources "$kept" >/dev/null
     $RL log --root "$ROOT" --flow search --step gather --status ok \
       --data "{\"gap_id\":\"$gid\",\"gap_status\":\"done\",\"sources_added\":$kept}"
-    echo "search: gap $gid -> $kept source(s) into ingest/"
+    echo "search: gap $gid -> $kept source(s) into $INBOX"
   else
     $SP set-gap --root "$ROOT" --id "$gid" --status queued --requeue >/dev/null
     att="$(python3 -c "import json,sys;print(next((g['attempts'] for g in json.load(open(sys.argv[1]+'/.research/state.json'))['gaps'] if g['id']==sys.argv[2]), -1))" "$ROOT" "$gid")"
