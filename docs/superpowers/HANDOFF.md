@@ -20,7 +20,7 @@ ledger — **`.research/state.json`** ("the agent forgets, the repo remembers"):
 The convergence orchestrator (`scripts/orchestrator.py`) decides phase
 (`gather`/`deepen`/`synthesize`) as a stateless function of state signals.
 
-## Current state (HEAD `44bfc7d`; root SYNTHESIS.md re-grounded, uncommitted)
+## Current state (HEAD `5942041`; working tree clean)
 - **8 promoted findings / 2 rejected.** Corpus **79**. Graph **1360 nodes / 1249 links**
   (`dirty:false`). **24 graph assertions** (overlay `.research/graph-assertions.jsonl`).
   Phase `deepen`. 30 gaps done, **23 queued**.
@@ -34,18 +34,19 @@ The convergence orchestrator (`scripts/orchestrator.py`) decides phase
   The **research-methodology half (01/02/03)** is the biggest hole — it's what makes
   outputs rigorous vs merely retrieved.
 
-## UNCOMMITTED right now (commit first thing)
-- **`SYNTHESIS.md`** (repo root) — re-grounded against the 8 promoted findings: cites
-  only real findings, quarantines un-evidenced claims under "Not yet grounded", refreshes
-  stale graph numbers. Commit: `docs(research): re-ground root SYNTHESIS against the 8 promoted findings`.
-- NOT mine, leave alone: `public/dashboard.html` (modified separately in the user's IDE).
+## Working tree (clean at handoff)
+All research work is committed through `5942041`. Outstanding, NOT to be touched/committed:
+- `public/dashboard.html` — modified separately in the user's IDE, not part of research work.
 - Noise, never commit: `.research/*.log`, `graphify-out/`. `.graphify/graph.json` is
   gitignored (rebuildable from corpus + assertion overlay).
-- Two SYNTHESIS files, two owners: `docs/findings/SYNTHESIS.md` = flat auto-index
-  (`promote.py` appends to it — leave to the script); root `SYNTHESIS.md` = human
-  cross-domain distillation (the one just re-grounded). Don't merge them.
-Commit recipe: stage explicitly (never `git add .`/`-A`), Conventional Commit, no
-co-author trailer.
+
+Two SYNTHESIS files, two owners (don't merge them): `docs/findings/SYNTHESIS.md` = flat
+auto-index (`promote.py` appends a line per promote — leave to the script); root
+`SYNTHESIS.md` = human cross-domain distillation, re-grounded against the 8 findings with
+a "Not yet grounded" section. Re-run the re-ground pass after new findings land.
+
+Commit recipe for new work: stage explicitly (never `git add .`/`-A`), Conventional
+Commit `chore(research): …`, no co-author trailer.
 
 ## How to run each operation (verified working this session)
 
@@ -127,7 +128,7 @@ Skip community labeling (cosmetic; the engine consumes graph.json directly). Cle
   committed; replay strips+re-merges every cycle, so graph.json can be deleted/rebuilt freely.
 
 ## Cross-check (this handoff vs the repo)
-Verified against HEAD `44bfc7d` (+ uncommitted root SYNTHESIS.md re-ground): all cited scripts exist
+Verified against HEAD `5942041` (working tree clean): all cited scripts exist
 (`search_flow.sh ingest_flow.sh orchestrator.py state.py assertions.py promote.py
 cite_check.py check_integrity.py graph_events.py runlog.py`); `.claude/` has
 `goal.md loop.md process.md review.md`; state numbers (8/2 findings, corpus 79, 24
@@ -138,8 +139,8 @@ fixed: the prior HANDOFF.md described pre-#6 build state (branch `phase1-researc
 `docs/superpowers/specs/` (6 files; umbrella `2026-06-17-open-research-system-design.md`).
 
 ## Next steps (pick up here)
-DONE this session: committed the 8th/7th findings (`44bfc7d`); re-grounded root
-`SYNTHESIS.md` (uncommitted — commit it first, see above).
+DONE (committed through `5942041`): 8 promoted findings across 7 domains; root
+`SYNTHESIS.md` re-grounded against them. Working tree clean — start straight on the arc below.
 
 **THE NEXT STEP — seed + ground the methodology cluster (01/02/03).** This is the
 rigor half and the single biggest blocker to "definitive": the engine can currently
