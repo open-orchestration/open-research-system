@@ -387,6 +387,70 @@
       "origin": "human",
       "status": "done",
       "attempts": 0
+    },
+    {
+      "id": "gdef18eba",
+      "topic": "16-evaluation-benchmarks",
+      "desc": "DeepResearch-Bench per-model leaderboard scores (drb.futuresearch.ai + PDF; abstract-only in corpus)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g97730f96",
+      "topic": "16-evaluation-benchmarks",
+      "desc": "GAIA and BrowseComp actual task design + reported scores (mislabeled source held DRB instead)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g324348e1",
+      "topic": "16-evaluation-benchmarks",
+      "desc": "primary RAGAS (Es et al 2023) + ARES (2311.09476) metric formulas and validation methodology",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g3e19a7c9",
+      "topic": "16-evaluation-benchmarks",
+      "desc": "quantified LLM-as-judge vs human correlation for RAG eval harnesses",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gccab40e9",
+      "topic": "17-specs-standards",
+      "desc": "official schema.org citation property (CreativeWork/Text expected types) structural spec",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g6fb2909d",
+      "topic": "17-specs-standards",
+      "desc": "MCP authorization/security model + Streamable HTTP vs STDIO transport tradeoffs (OAuth flows)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g58e984b2",
+      "topic": "17-specs-standards",
+      "desc": "CSL-JSON full fixed type enumeration + formal JSON Schema (dhimmel/csl-schema) required-vs-optional vars",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gf369dd48",
+      "topic": "17-specs-standards",
+      "desc": "MCP Resources modeling of an append-only corpus/findings store (URI scheme, list_changed subscription semantics)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
     }
   ],
   "inbox": [],
@@ -1268,7 +1332,7 @@
     "edge_count": 1249
   },
   "assertions": {
-    "count": 18,
+    "count": 24,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -1414,6 +1478,40 @@
       "created_at": "2026-06-22T21:31:05.534612+00:00",
       "promoted_path": "docs/findings/d73a9474e-graphrag-colbert-shared-benchmark-primary-evidence.md",
       "promoted_at": "2026-06-22T21:35:05.985106+00:00"
+    },
+    {
+      "id": "d6fad1a98",
+      "topic": "16-evaluation-benchmarks",
+      "title": "Two evaluation regimes for a deep-research system: frozen-web agent benchmarks vs. decomposed RAG harnesses",
+      "path": "docs/findings/_drafts/d6fad1a98-two-evaluation-regimes-frozen-web-agent-benchmarks-vs-decomposed-rag-harnesses.md",
+      "status": "promoted",
+      "cites": [
+        "cdfb14ed4",
+        "c6c0834a8",
+        "ce320f743"
+      ],
+      "created_at": "2026-06-22T22:13:14.491263+00:00",
+      "promoted_path": "docs/findings/d6fad1a98-two-evaluation-regimes-frozen-web-agent-benchmarks-vs-decomposed-rag-harnesses.md",
+      "promoted_at": "2026-06-22T22:16:13.562880+00:00"
+    },
+    {
+      "id": "d75f0cdee",
+      "topic": "17-specs-standards",
+      "title": "Interoperability primitives for a research engine: what MCP, CSL-JSON, and MADR actually specify",
+      "path": "docs/findings/_drafts/d75f0cdee-interop-primitives-mcp-csl-madr.md",
+      "status": "promoted",
+      "cites": [
+        "c3b99c089",
+        "c847773b8",
+        "c91d7e937",
+        "c5a6a2462",
+        "cc13e4eb2",
+        "cda819b22",
+        "c83e68685"
+      ],
+      "created_at": "2026-06-22T22:13:14.806504+00:00",
+      "promoted_path": "docs/findings/d75f0cdee-interop-primitives-mcp-csl-madr.md",
+      "promoted_at": "2026-06-22T22:16:13.625816+00:00"
     }
   ]
 }

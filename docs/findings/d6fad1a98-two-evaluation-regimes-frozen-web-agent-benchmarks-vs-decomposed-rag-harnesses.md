@@ -1,0 +1,31 @@
+---
+status: draft
+id: d6fad1a98
+topic: 16-evaluation-benchmarks
+---
+
+# Two evaluation regimes for a deep-research system: frozen-web agent benchmarks vs. decomposed RAG harnesses
+
+A system like this one has two distinct things to prove — that its **multi-step web research agent** finds and reasons over correct answers, and that its **retrieval-augmented generation** stays grounded in what it retrieved. The available evidence shows these are evaluated by two different regimes with different reliability properties, and that the agent-benchmark regime rests on a primary paper while the RAG-harness regime is documented here mostly by practitioner blogs that relay official framework docs. This finding separates what each regime measures, what is load-bearing vs. secondhand, and how each applies to evaluating this system.
+
+## Regime 1 — agent benchmarks that control for the changing web (primary-sourced)
+
+The hardest problem in evaluating a web research agent is that the web itself changes under the test, so a score today is not comparable to a score next month. Deep Research Bench (DRB), introduced by FutureSearch, addresses this directly: it consists of **89 multi-step web research task instances of varying difficulty across 8 diverse task categories, with the answers carefully worked out by skilled humans** [cdfb14ed4]. Its central methodological move is a **"RetroSearch" environment with a large frozen set of scraped web pages**, and the paper reports that **offline "RetroSearch" agents perform comparably to "live web" agents, enabling reliable evaluations of models over time** [cdfb14ed4]. DRB also includes **automated evaluations of the lengthy agent traces to report progress over time in hallucinations, tool use, and forgetting** [cdfb14ed4]. The benchmark's motivating gap is stated explicitly: **no direct evaluations of the quality of web research agents exist that control for the continually-changing web** [cdfb14ed4].
+
+This is the regime that most directly matches this system's outer loop (an agent issuing searches, fetching pages, and synthesizing over multi-step traces). The two transferable design ideas are: (a) freeze the corpus so re-runs are comparable, and (b) score the trace — not just the final answer — for hallucination, tool use, and "forgetting." These are load-bearing claims and they come from the primary paper's abstract, not a blog.
+
+## Regime 2 — RAG harnesses that decompose quality into a retrieval/generation split (blog-described, doc-anchored)
+
+The second regime evaluates the grounded-generation layer. Across the practitioner sources, the consistent decomposition is that a RAG pipeline has two distinct failure surfaces — retrieval can fail (wrong chunks fetched) and generation can fail (right chunks ignored or misread) — so quality must be scored on each side separately rather than as one "answer quality" number [ce320f743]. The bestaiweb harness write-up describes the retrieval side as owning **Context Precision and Context Recall** and the generation side as owning **Faithfulness and Answer Relevancy** [ce320f743]. It further notes that the RAGAS docs put the same four core metrics — Faithfulness, Answer Relevancy, Context Precision, Context Recall — at the heart of the library, while the TruLens docs name a tighter "RAG Triad" of Context Relevance, Groundedness, and Answer Relevance: the metric names differ but the decomposition is the same [ce320f743]. A second source independently describes TruLens's "RAG Triad" as context relevance, groundedness (faithfulness), and answer relevance [c6c0834a8].
+
+On the frameworks themselves, the consulting-blog source describes **RAGAS** as the most widely adopted RAG eval framework, a Python library focused on LLM-as-judge metrics [c6c0834a8]; **TruLens** as providing the RAG Triad plus custom feedback functions and instrumentation of LangChain/LlamaIndex apps for automatic tracing [c6c0834a8]; and **ARES** as an academic framework focused on using a *trained judge model* rather than an off-the-shelf LLM [c6c0834a8]. That same source points to the ARES paper at arXiv:2311.09476 and the official RAGAS and TruLens docs as the primary references [c6c0834a8].
+
+These framework claims are blog-described, so they are attributed as "X describes" and none of this finding's thesis hinges on a blog-reported number. The metric *definitions* the blogs relay (e.g., faithfulness as the share of answer claims supported by retrieved context) are consistent with the official RAGAS/TruLens docs the same sources cite, which is why they are usable as orientation rather than as proof.
+
+## The reliability caveat both regimes share
+
+The RAG regime's scoring mechanism is LLM-as-judge, and its chief documented weakness is judge variance: one source lists RAGAS's weaknesses as relying heavily on LLM-as-judge "which has variance," default prompts that often need domain customization, and slowness on large eval sets [c6c0834a8]. ARES's design choice of a *trained* judge model rather than an off-the-shelf LLM [c6c0834a8] is best read as a direct response to that variance problem. The agent-benchmark regime carries the analogous risk in its automated trace evaluations [cdfb14ed4]; DRB's answer to *its* hardest reliability problem (web drift) is the frozen RetroSearch corpus [cdfb14ed4] rather than the judge.
+
+## Application to evaluating this system
+
+The two regimes are complementary, not interchangeable, and this system needs both. For the web-research agent, the DRB pattern is directly applicable: freeze a corpus of fetched pages so cycles are comparable over time, and evaluate the agent's trace for hallucination, tool use, and forgetting — not only the final report [cdfb14ed4]. For the grounded-synthesis layer, the RAG decomposition gives the unit-level scoring contract: separate retrieval scoring (context precision/recall) from generation scoring (faithfulness/answer relevancy) so a regression can be attributed to the side that broke [ce320f743], with groundedness/faithfulness as the anti-hallucination metric the docs center [c6c0834a8] [ce320f743]. In both regimes, the judge is the weak link, so judge scores should be treated as data to be validated, not as ground truth [c6c0834a8].

@@ -6,3 +6,5 @@
 - [Faithfulness measurement machinery: structured LLM-judging, NLI entailment, and the faithfulness-vs-correctness evidence split](dfa42bc8a-faithfulness-measurement-machinery.md) — 08-grounding-truth
 - [Extraction method and community structure are the cost-fidelity levers when compiling a source-of-truth knowledge-graph corpus](d37b490ee-extraction-method-and-community-structure-cost-fidelity-levers.md) — 09-knowledge-compilation-graphs
 - [GraphRAG and ColBERT vs hybrid retrieval: what shared-benchmark primary sources actually measure](d73a9474e-graphrag-colbert-shared-benchmark-primary-evidence.md) — 06-rag-retrieval
+- [Two evaluation regimes for a deep-research system: frozen-web agent benchmarks vs. decomposed RAG harnesses](d6fad1a98-two-evaluation-regimes-frozen-web-agent-benchmarks-vs-decomposed-rag-harnesses.md) — 16-evaluation-benchmarks
+- [Interoperability primitives for a research engine: what MCP, CSL-JSON, and MADR actually specify](d75f0cdee-interop-primitives-mcp-csl-madr.md) — 17-specs-standards
