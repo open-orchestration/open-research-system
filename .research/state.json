@@ -23,8 +23,8 @@
     },
     "spent": {
       "tokens": 0,
-      "sources": 5,
-      "cycle_started_at": "2026-06-23T17:26:30.430764+00:00"
+      "sources": 6,
+      "cycle_started_at": "2026-06-23T18:36:35.105065+00:00"
     }
   },
   "gaps": [
@@ -640,6 +640,94 @@
       "id": "g2cafde98",
       "topic": "07-agentic-orchestration",
       "desc": "Multi-agent debate convergence beyond single-domain/single-judge/n=100 (current result is macroeconomics, one judge model)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g27a2664d",
+      "topic": "12-tooling-landscape",
+      "desc": "Agent orchestration frameworks compared: LangGraph vs LlamaIndex vs DSPy vs AutoGen — execution/control-flow model and tradeoffs, from docs and papers not marketing",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "gaf821e52",
+      "topic": "12-tooling-landscape",
+      "desc": "When to use an agent framework versus a raw model SDK; abstraction cost and lock-in tradeoffs",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "gbd0f33ac",
+      "topic": "12-tooling-landscape",
+      "desc": "LLM observability and tracing tooling for agent pipelines: LangSmith, OpenTelemetry GenAI semantic conventions, Langfuse",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gfd49fe77",
+      "topic": "13-reference-systems-case-studies",
+      "desc": "STORM (Stanford) deep-research system architecture: outline-driven multi-perspective question asking and research-then-write, from the paper",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g09083381",
+      "topic": "13-reference-systems-case-studies",
+      "desc": "GPT-Researcher open-source deep-research agent: planner-executor architecture, source aggregation, report generation",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g453915fc",
+      "topic": "13-reference-systems-case-studies",
+      "desc": "Open-source deep-research reference architectures: two-stage research-then-write, multi-agent decomposition (e.g. open deep research, local-deep-researcher)",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 1
+    },
+    {
+      "id": "g570ec33f",
+      "topic": "12-tooling-landscape",
+      "desc": "Primary LangGraph/LlamaIndex/DSPy/AutoGen official docs and repos to doc-anchor each execution model (current taxonomy is blog-convergent only)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g7d75ddab",
+      "topic": "12-tooling-landscape",
+      "desc": "DSPy arXiv paper (optimization-beats-prompts claim referenced only second-hand)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g2d6b3b0c",
+      "topic": "12-tooling-landscape",
+      "desc": "Neutral reproducible benchmark for framework latency/cost/accuracy (all current quantitative comparisons are blog-sourced, unverifiable)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g77ddbc9c",
+      "topic": "13-reference-systems-case-studies",
+      "desc": "GPT-Researcher internal planner/executor/publisher module architecture from the repo or docs subpages (captured source is only the docs landing page)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g4ae1798d",
+      "topic": "13-reference-systems-case-studies",
+      "desc": "Measured evaluation/cost/latency for GPT-Researcher and a head-to-head of STORM simulated-conversation breadth vs a flat planner",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -1724,16 +1812,159 @@
       "extracted_path": "docs/03-decision-frameworks/sources/c521f3f34-gff589abf-analysis-of-competing-hypotheses-ach-structured-analytic-technique-for-intelligence-and-decisions-5.md",
       "lossy": false,
       "ingested_at": "2026-06-23T17:27:39.097563+00:00"
+    },
+    {
+      "id": "ceffb4254",
+      "title": "g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-1",
+      "source": "file://g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-1.md",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-12-tooling-landscape/_done/g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-1.md",
+      "extracted_path": "docs/12-tooling-landscape/sources/ceffb4254-g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:39.326619+00:00"
+    },
+    {
+      "id": "c16f75073",
+      "title": "g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-2",
+      "source": "file://g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-2.md",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-12-tooling-landscape/_done/g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-2.md",
+      "extracted_path": "docs/12-tooling-landscape/sources/c16f75073-g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:39.470751+00:00"
+    },
+    {
+      "id": "cfa5d5702",
+      "title": "g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-3",
+      "source": "file://g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-3.md",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-12-tooling-landscape/_done/g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-3.md",
+      "extracted_path": "docs/12-tooling-landscape/sources/cfa5d5702-g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:39.614424+00:00"
+    },
+    {
+      "id": "c8bb89d7e",
+      "title": "g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-4",
+      "source": "file://g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-4.md",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-12-tooling-landscape/_done/g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-4.md",
+      "extracted_path": "docs/12-tooling-landscape/sources/c8bb89d7e-g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:39.755275+00:00"
+    },
+    {
+      "id": "c9929aba1",
+      "title": "g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-5",
+      "source": "file://g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-5.md",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-12-tooling-landscape/_done/g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-5.md",
+      "extracted_path": "docs/12-tooling-landscape/sources/c9929aba1-g27a2664d-agent-orchestration-frameworks-compared-langgraph-vs-llamaindex-vs-dspy-vs-autogen-execution-control-flow-model-and-tradeoffs-from-docs-and-papers-not-marketing-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:39.896430+00:00"
+    },
+    {
+      "id": "c1fcdd537",
+      "title": "gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-1",
+      "source": "file://gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-1.md",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-12-tooling-landscape/_done/gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-1.md",
+      "extracted_path": "docs/12-tooling-landscape/sources/c1fcdd537-gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:40.051824+00:00"
+    },
+    {
+      "id": "cd8246394",
+      "title": "gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-2",
+      "source": "file://gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-2.md",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-12-tooling-landscape/_done/gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-2.md",
+      "extracted_path": "docs/12-tooling-landscape/sources/cd8246394-gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:40.194240+00:00"
+    },
+    {
+      "id": "c5a8a3639",
+      "title": "gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-3",
+      "source": "file://gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-3.md",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-12-tooling-landscape/_done/gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-3.md",
+      "extracted_path": "docs/12-tooling-landscape/sources/c5a8a3639-gaf821e52-when-to-use-an-agent-framework-versus-a-raw-model-sdk-abstraction-cost-and-lock-in-tradeoffs-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:40.336180+00:00"
+    },
+    {
+      "id": "cfc0c8e73",
+      "title": "g09083381-gpt-researcher-open-source-deep-research-agent-planner-executor-architecture-source-aggregation-report-generation-4",
+      "source": "file://g09083381-gpt-researcher-open-source-deep-research-agent-planner-executor-architecture-source-aggregation-report-generation-4.md",
+      "topic": "13-reference-systems-case-studies",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-13-reference-systems-case-studies/_done/g09083381-gpt-researcher-open-source-deep-research-agent-planner-executor-architecture-source-aggregation-report-generation-4.md",
+      "extracted_path": "docs/13-reference-systems-case-studies/sources/cfc0c8e73-g09083381-gpt-researcher-open-source-deep-research-agent-planner-executor-architecture-source-aggregation-report-generation-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:40.678733+00:00"
+    },
+    {
+      "id": "c2713ec8f",
+      "title": "gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-1",
+      "source": "file://gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-1.md",
+      "topic": "13-reference-systems-case-studies",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-13-reference-systems-case-studies/_done/gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-1.md",
+      "extracted_path": "docs/13-reference-systems-case-studies/sources/c2713ec8f-gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:40.822928+00:00"
+    },
+    {
+      "id": "c9c58e239",
+      "title": "gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-3",
+      "source": "file://gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-3.md",
+      "topic": "13-reference-systems-case-studies",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-13-reference-systems-case-studies/_done/gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-3.md",
+      "extracted_path": "docs/13-reference-systems-case-studies/sources/c9c58e239-gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:40.967546+00:00"
+    },
+    {
+      "id": "cc06c6ce1",
+      "title": "gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-4",
+      "source": "file://gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-4.md",
+      "topic": "13-reference-systems-case-studies",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-13-reference-systems-case-studies/_done/gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-4.md",
+      "extracted_path": "docs/13-reference-systems-case-studies/sources/cc06c6ce1-gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:41.109002+00:00"
+    },
+    {
+      "id": "c3bf6d346",
+      "title": "gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-5",
+      "source": "file://gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-5.md",
+      "topic": "13-reference-systems-case-studies",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-13-reference-systems-case-studies/_done/gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-5.md",
+      "extracted_path": "docs/13-reference-systems-case-studies/sources/c3bf6d346-gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T18:37:41.250800+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1436,
-    "edge_count": 1364
+    "node_count": 1521,
+    "edge_count": 1482
   },
   "assertions": {
-    "count": 38,
+    "count": 43,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -2031,6 +2262,43 @@
       "created_at": "2026-06-23T18:25:47.384990+00:00",
       "promoted_path": "docs/findings/df8e7fa14-head-to-head-that-isnt-comparative-accuracy-debate-convergence-economics.md",
       "promoted_at": "2026-06-23T18:29:24.840682+00:00"
+    },
+    {
+      "id": "d28841446",
+      "topic": "12-tooling-landscape",
+      "title": "Agent orchestration frameworks: a durable execution-model taxonomy, not a best-framework ranking",
+      "path": "docs/findings/_drafts/d28841446-execution-model-taxonomy-not-best-framework-ranking.md",
+      "status": "promoted",
+      "cites": [
+        "ceffb4254",
+        "c16f75073",
+        "cfa5d5702",
+        "c8bb89d7e",
+        "c9929aba1",
+        "c1fcdd537",
+        "cd8246394",
+        "c5a8a3639"
+      ],
+      "created_at": "2026-06-23T18:48:29.908986+00:00",
+      "promoted_path": "docs/findings/d28841446-execution-model-taxonomy-not-best-framework-ranking.md",
+      "promoted_at": "2026-06-23T18:51:32.181373+00:00"
+    },
+    {
+      "id": "dbc0e9395",
+      "topic": "13-reference-systems-case-studies",
+      "title": "Primary-source case studies: STORM's research-then-write pipeline (paper-backed) and GPT-Researcher's planner-executor, with provenance tiering",
+      "path": "docs/findings/_drafts/dbc0e9395-storm-paper-backed-pipeline-vs-gpt-researcher-with-provenance-tiering.md",
+      "status": "promoted",
+      "cites": [
+        "c2713ec8f",
+        "c3bf6d346",
+        "c9c58e239",
+        "cc06c6ce1",
+        "cfc0c8e73"
+      ],
+      "created_at": "2026-06-23T18:55:35.999285+00:00",
+      "promoted_path": "docs/findings/dbc0e9395-storm-paper-backed-pipeline-vs-gpt-researcher-with-provenance-tiering.md",
+      "promoted_at": "2026-06-23T18:57:28.920261+00:00"
     }
   ]
 }

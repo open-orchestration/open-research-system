@@ -6,8 +6,8 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **13 promoted findings across 10 of 17 domains** (01, 02, 03, 05, 06,
-07, 08, 09, 16, 17). The methodology half (01 epistemics, 02 statistical/causal, 03
+Grounding status: **15 promoted findings across 12 of 17 domains** (01, 02, 03, 05, 06,
+07, 08, 09, 12, 13, 16, 17). The methodology half (01 epistemics, 02 statistical/causal, 03
 decision frameworks) is now grounded — the engine can defend its *epistemic credibility*,
 not just its architecture/eval/interop. The applied/tooling/case-study domains (04,
 10–15) are not yet researched — so the planning-template, prompting, and
@@ -149,6 +149,35 @@ auditable weighted-criteria entries rather than mandating the full ACH ritual. (
 record *format* itself is not yet grounded — corpus has the scoring methods, not the ADR
 template.)
 
+### Tooling: choose by execution model, not by ranking — and treat framework comparisons as opinion
+Agent frameworks differ on a **durable execution-model axis** that outlives any "best
+framework" listicle: LangGraph is a graph/state-machine (nodes, conditional edges, typed
+state, checkpointing), LlamaIndex is data/query-engine-first, DSPy is a compile-time prompt
+*optimizer* used alongside an orchestrator (not a replacement for one), and AutoGen routes
+multi-agent *conversation* (GroupChat) rather than a graph. Only the framework-vs-raw-SDK
+tradeoff (a framework wraps the LLM with persistent identity, tools, memory, runtime loop;
+the SDK keeps flexibility at the cost of building that yourself) is anchored to a primary
+doc; the four-way taxonomy is multi-source-blog-convergent, and every comparative
+ranking/latency/cost/adoption number is vendor/blog opinion, not evidence
+([execution-model taxonomy](docs/findings/d28841446-execution-model-taxonomy-not-best-framework-ranking.md)).
+**Implication:** pick orchestration by the control-flow shape the task needs; do not trust
+framework leaderboards; doc-anchor the taxonomy before betting on it.
+
+### Reference systems: STORM proves research-then-write + multi-perspective questioning (paper-backed)
+The strongest primary-sourced case study is **STORM** (Shao et al., NAACL 2024): a two-stage
+pipeline that separates **pre-writing** (perspective-guided question asking + simulated
+expert conversations → outline) from **writing** (outline → cited article), measured on
+FreshWiki to produce articles judged **+25% more organized and +10% broader in coverage**
+than an outline-driven RAG baseline — and honest about its own failure modes (source-bias
+transfer, over-association of unrelated facts). STORM also tiers models per task (cheap LM
+for conversation/question-gen, powerful LM for outline/article). **GPT-Researcher** is a
+second reference point (open-source planner-executor → report) but only its high-level
+positioning is corpus-grounded; its internals are not
+([STORM/GPT-Researcher case studies](docs/findings/dbc0e9395-storm-paper-backed-pipeline-vs-gpt-researcher-with-provenance-tiering.md)).
+**Implication:** separate research from writing as distinct stages; drive breadth with
+multi-perspective sub-questioning; tier model cost per stage — these are now evidenced
+patterns, not speculation.
+
 ## Tensions & open questions (from the promoted findings)
 - **Citation accuracy vs volume** — measured but mechanistically unexplained; no source in
   corpus shows *why* one agent over-cites or how per-claim accuracy is computed
@@ -175,16 +204,20 @@ yet** — they await the empty domains and must not be treated as evidenced:
   (DAGs, do-calculus, potential outcomes) but not experiment-design power; that gap is queued.
 - **MADR/ADR decision-record *format*** (fields, template, Nygard practice) — 03 grounds the
   *scoring methods* (ACH, weighted MCDM) but not the record schema; queued as a 03 gap.
-- **Two-stage research-then-write, multi-perspective sub-questioning (STORM/GPT-Researcher)** — 13 (0 corpus).
-- **Cost-tiered prompting (few-shot→CoT→self-consistency→ToT)** — 10 (0 corpus).
+- **Cost-tiered prompting (few-shot→CoT→self-consistency→ToT)** — 10 (0 corpus). (STORM
+  evidences *per-stage model tiering* as a pattern, but the prompting-technique ladder itself
+  is ungathered.)
 - **Orchestrator-worker cost model (the ~15×-tokens / 3–5-subagent / ~90%-latency figures)** —
-  these came from the old topic-07 stub; the *promoted* 07 finding covers halt-bounding only.
+  these came from the old topic-07 stub; the *promoted* 07 findings cover halt-bounding and
+  the no-clean-head-to-head provenance result, not the cost multipliers.
 - **MLflow-style reproducible tracked runs, indexing-pipeline tooling** — 11 (0 corpus).
-- **Tooling landscape (LangGraph/LlamaIndex/DSPy/AutoGen comparison)** — 12 (0 corpus).
 - **Canonical papers (ReAct, Toolformer, multi-agent surveys) and IR textbook grounding** — 14, 15 (0/stub).
+- **Doc-anchored framework taxonomy & GPT-Researcher internals** — 12's taxonomy is
+  blog-convergent (only the framework-vs-SDK axis is primary-doc-anchored) and 13's
+  GPT-Researcher internals are not corpus-grounded; both have queued gaps for official docs/repos.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1436 nodes / 1364 links** (38 of those
+A graphify pass over the corpus currently yields **1521 nodes / 1482 links** (43 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
