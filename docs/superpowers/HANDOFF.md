@@ -20,22 +20,21 @@ ledger — **`.research/state.json`** ("the agent forgets, the repo remembers"):
 The convergence orchestrator (`scripts/orchestrator.py`) decides phase
 (`gather`/`deepen`/`synthesize`) as a stateless function of state signals.
 
-## Current state (HEAD `8d9dbfd`; working tree clean modulo `public/dashboard.html`)
-- **15 promoted findings / 3 rejected.** Corpus **111**. Graph **1521 nodes / 1482 links**
-  (`dirty:false`). **43 graph assertions** (overlay `.research/graph-assertions.jsonl`).
+## Current state (HEAD `ac8965d`; working tree clean modulo `public/dashboard.html`)
+- **19 promoted findings / 4 rejected.** Corpus **150**. Graph **1612 nodes / 1609 links**
+  (`dirty:false`). **57 graph assertions** (overlay `.research/graph-assertions.jsonl`).
   Phase `deepen`.
-- **12 of 17 domains grounded** (have a primary-sourced promoted finding):
-  01 epistemics, 02 statistical-causal, 03 decision-frameworks, 05 deep-research (2),
-  06 rag-retrieval (2), 07 agentic-orchestration (2), 08 grounding-truth,
-  09 knowledge-graphs, 12 tooling-landscape, 13 reference-systems,
-  16 evaluation-benchmarks, 17 specs-standards.
-  **Methodology half (01/02/03) AND the tooling/reference-systems case studies (12/13)
-  are now grounded.**
-- **5 domains still empty/thin** (the remaining gap to "definitive"):
-  04 applied-playbooks, 10 context-prompt-eng, 11 pipeline-eng, 14 papers, 15 textbooks.
+- **16 of 17 domains grounded** — only **15 textbooks-longform** remains ungrounded.
+  Grounded: 01 epistemics, 02 statistical-causal, 03 decision-frameworks, 04 applied-playbooks,
+  05 deep-research (2), 06 rag-retrieval (2), 07 agentic-orchestration (2), 08 grounding-truth,
+  09 knowledge-graphs, 10 context-prompt-eng, 11 pipeline-eng, 12 tooling-landscape,
+  13 reference-systems, 14 papers, 16 evaluation-benchmarks, 17 specs-standards.
+- **15 textbooks-longform** is the lone empty domain: its draft was REJECTED because the
+  metric/tf-idf formulas traced to blog summaries while the Stanford IR-book / SLP3 sources
+  were TOC/abstract pages only. Needs the actual chapter prose.
 
 ## Working tree (clean at handoff)
-All research work is committed through `8d9dbfd`. Outstanding, NOT to be touched/committed:
+All research work is committed through `ac8965d`. Outstanding, NOT to be touched/committed:
 - `public/dashboard.html` — modified separately in the user's IDE, not part of research work.
 - Noise, never commit: `.research/*.log`, `graphify-out/`. `.graphify/graph.json` is
   gitignored (rebuildable from corpus + assertion overlay).
@@ -128,7 +127,7 @@ Skip community labeling (cosmetic; the engine consumes graph.json directly). Cle
   committed; replay strips+re-merges every cycle, so graph.json can be deleted/rebuilt freely.
 
 ## Cross-check (this handoff vs the repo)
-Verified against HEAD `8d9dbfd` (working tree clean modulo the unrelated
+Verified against HEAD `ac8965d` (working tree clean modulo the unrelated
 `public/dashboard.html`): all cited scripts exist (`search_flow.sh ingest_flow.sh
 orchestrator.py state.py assertions.py promote.py cite_check.py check_integrity.py
 graph_events.py runlog.py`); `.claude/` has `goal.md loop.md process.md review.md`; state
@@ -139,49 +138,46 @@ Design specs live in `docs/superpowers/specs/` (6 files; umbrella
 `2026-06-17-open-research-system-design.md`).
 
 ## Next steps (pick up here)
-DONE (committed through `8d9dbfd`):
-- **Methodology cluster (01/02/03) grounded** (`ecd3a60`): 02 Pearl/Rubin causal; 01
-  GRADE/PRISMA/Cochrane + claim-extraction/NLI + calibration; 03 ACH + weighted-criteria MCDM.
-- **05/07 backlog deepened, 06 rejected** (`06ca23c`): 05 "benchmark-accuracy is the only
-  cross-vendor comparable"; 07 "the head-to-head that isn't"; 06 draft rejected for citing
-  an AI-aggregator (emergentmind) as if arXiv — the provenance gate held.
-- **Applied/tooling half started — 12 + 13 grounded** (`8d9dbfd`): 12 agent-framework
-  execution-model taxonomy (graph/state · query-engine · compile-time-optimizer ·
-  conversation), framed as a durable axis not a ranking; 13 STORM (NAACL-paper-backed
-  two-stage research-then-write, +25%/+10% on FreshWiki) + GPT-Researcher. 13's assertions
-  ground the formerly-speculative synthesis nodes (two-stage, multi-perspective, tiering).
-- Root `SYNTHESIS.md` re-grounded after each arc (now 15 findings / 12 domains).
+DONE (committed through `ac8965d`): all 17 domains attempted; **16 grounded**. The arcs:
+methodology 01/02/03 (`ecd3a60`); 05/07 deepened + 06 reject (`06ca23c`); tooling/reference
+12/13 (`8d9dbfd`); applied/literature 04/10/11/14 + 15 reject (`ac8965d`). Root
+`SYNTHESIS.md` re-grounded after each (now 19 findings / 16 domains).
 
-**THE NEXT STEP — finish the applied half (04 / 10 / 11), then the literature spine (14/15).**
-Same gather→fold→process arc each. Suggested gaps (`state.py add-gap --origin human`, ~3 each):
-- 10 context-prompt-eng: prompting-technique ladder (few-shot → CoT → self-consistency → ToT)
-  with when-each-wins evidence; context-window management / retrieval-augmented prompting;
-  structured-output / JSON-schema prompting.
-- 11 pipeline-eng: reproducible tracked runs (MLflow / experiment tracking); indexing-pipeline
-  orchestration (incremental re-index, freshness); eval-in-CI for RAG/agent regressions.
-- 04 applied-playbooks: end-to-end "build a deep-research agent" playbooks — blog-heavy domain,
-  anchor to anything primary and attribute the rest.
-- 14 papers / 15 textbooks: canonical papers (ReAct, Toolformer, Self-RAG, multi-agent surveys)
-  + an IR textbook (Manning IR) — pure-primary domains, easy provenance.
+**The engine has covered the breadth.** What's left is depth/quality, not new domains. Pick up
+on whichever of these matters most — each is small and self-contained, NOT a full arc:
 
-**Provenance is THE live reject axis** (3 rejects, 2 on this exact failure): tell every drafter
-to open each source, read its `source_url`, and label primary-paper/official-doc/repo vs
-aggregator/blog/marketing — load-bearing claims must rest on primaries; blog claims are
-attributed and non-load-bearing. The 07 and 13 findings are the model of an honest
-provenance-tiered result; the 06 reject is the cautionary tale (aggregator dressed as arXiv).
+1. **Ground 15 textbooks (the lone empty domain)** — REDRAFT, no full re-gather needed. The
+   sources are in corpus but the IR-book/SLP3 captures were TOC/abstract pages. Gather the
+   actual chapter prose (a queued 15 gap names `nlp.stanford.edu/IR-book/html/htmledition` and
+   the SLP3 PDF), then draft a finding whose tf-idf/MAP/nDCG/precision-recall definitions cite
+   the textbook chapters, not blogs. This is the one domain that flips 16→17.
 
-Also pending / lower-priority:
-- **Re-assert 07's cross-links.** `df8e7fa14`'s own graph node now exists after the 12/13 fold —
-  add its 3 skipped assertions (→ `d5c35de17` halt-decision, → `findings_07_multiagent_15x_cost`,
-  → `concept_halt_decision_axis`); verify exact node ids in `.graphify/graph.json` first.
-- **06 still wants the real arXiv ColBERT primaries** (2004.12832, 2112.01488) — gap queued.
-- **12 taxonomy + 13 GPT-Researcher internals want doc-anchoring** — gaps queued for official
-  framework docs/repos (taxonomy is blog-convergent; only framework-vs-SDK is primary-anchored).
-- **02 A/B-test power gap and 03 MADR-record-format gap** still queued (budget-skipped / dry).
+2. **Close the queued narrow gaps** (each upgrades a blog-tier claim to primary). Search-drain
+   then redraft/deepen the owning finding:
+   - 10: originating prompting papers (Wei 2201.11903 CoT, Wang 2203.11171 self-consistency,
+     Yao 2305.10601 ToT) — flips the ladder numbers from blog-relayed to paper-anchored.
+   - 06: real arXiv ColBERT primaries (2004.12832, 2112.01488) — enables a clean redraft of the
+     rejected late-interaction-economics angle.
+   - 11: official ingestion-docs / CDC spec for index-freshness (currently blog-only).
+   - 12 framework docs / 13 GPT-Researcher repo for doc-anchoring; 02 A/B-test power; 03 MADR
+     record-format. All have queued gaps.
 
-**Definitive bar:** grounded technical engine (05-09) + eval (16) + standards (17) +
-methodology (01/02/03) + tooling/reference-systems (12/13) are DONE. NOT yet "definitive"
-until the remaining applied/literature domains (04/10/11/14/15) are grounded and SYNTHESIS's
-"Not yet grounded" shrinks to genuinely-unresearched corners (currently: cost-tiered prompting
-ladder for 10, pipeline-eng for 11, A/B power for 02, MADR record-format for 03, doc-anchoring
-for 12/13, plus 04/14/15).
+3. **Re-assert 07's cross-links** — `df8e7fa14`'s own graph node exists now; add its 3 skipped
+   assertions (→ `d5c35de17`, → `findings_07_multiagent_15x_cost`, → `concept_halt_decision_axis`).
+   Verify exact node ids in `.graphify/graph.json` first.
+
+**Provenance is THE reject axis** (4 rejects, 3 on this exact failure). Every drafter must open
+each source, read its `source_url`, and label primary-paper/official-doc/repo vs
+aggregator/blog/marketing — load-bearing claims rest on primaries, blog claims are attributed
+and non-load-bearing. The promotable shape is **split-honest**: a genuine-primary load-bearing
+core + openly-demoted blog material (findings 10/11/04/14 are models). The cautionary tales: 06
+(aggregator dressed as arXiv) and 15 ("textbook bedrock" whose formulas were blog-sourced).
+
+**Gotcha surfaced this arc — source-node ids drift across re-extraction.** An earlier 05
+assertion pointed at a `sources_…` node that the next fold renamed, failing integrity. Fix was
+to re-point the overlay line to the current id. **Prefer stable concept/synthesis/findings
+nodes over `sources_…` nodes when asserting** — they survive rebuilds; source nodes don't.
+
+**Definitive bar:** 16 of 17 domains grounded; SYNTHESIS's "Not yet grounded" is down to 15
+textbooks + a handful of narrow queued corners. Grounding 15 and closing item-2's gaps is the
+last mile to "definitive."
