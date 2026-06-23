@@ -6,11 +6,12 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **8 promoted findings across 7 of 17 domains** (05, 06, 07, 08, 09,
-16, 17). The methodology half (01 epistemics, 02 statistical/causal, 03 decision
-frameworks) and the applied/tooling/case-study domains (04, 10–15) are not yet
-researched — so the planning, prompting, and reference-architecture layers below are
-deliberately marked open.
+Grounding status: **11 promoted findings across 10 of 17 domains** (01, 02, 03, 05, 06,
+07, 08, 09, 16, 17). The methodology half (01 epistemics, 02 statistical/causal, 03
+decision frameworks) is now grounded — the engine can defend its *epistemic credibility*,
+not just its architecture/eval/interop. The applied/tooling/case-study domains (04,
+10–15) are not yet researched — so the planning-template, prompting, and
+reference-architecture layers below remain deliberately open.
 
 ## What the evidence supports
 
@@ -86,6 +87,53 @@ status/date/context front-matter)
 **Implication:** emit CSL-JSON for citations and MADR records for non-obvious choices;
 expose the engine over MCP.
 
+### Epistemics: grade evidence, reconcile contradictions, bound your own confidence
+Three established human-methodology pillars map onto the engine's gates. **Source
+credibility / evidence synthesis** — GRADE rates certainty (High/Moderate/Low/Very Low),
+downgrading on risk-of-bias, inconsistency, indirectness, imprecision, and publication
+bias, with the per-domain rationale documented; PRISMA mandates *reporting* the
+search-and-selection trail; Cochrane supplies the method layer. **Claim
+extraction / contradiction resolution** — pipelines split text into atomic, decontextualized
+claims (Claimify reports ~99% entailed by the source sentence) and run NLI three-way
+(entailment/contradiction/neutral) to surface conflicts for verification. **Calibration**
+— confidence must be validated against observed frequency, not asserted
+([grade/reconcile/calibrate](docs/findings/dc577f3e2-grade-reconcile-calibrate-evidence-pipeline.md)).
+**Implication:** the citation gate is the engine's GRADE-style per-claim rationale; the
+multi-judge review gate is its faithfulness-entailment check; both inherit GRADE/PRISMA's
+discipline of separating *what was found* from *how certain it is* — and must stay
+calibrated, since the calibration evidence in corpus is narrow (a vision-detection paper).
+
+### Causal rigor: Pearl's do-calculus and Rubin's potential outcomes are complementary engines
+Two traditions answer the same question — what causes what from observational data.
+**Pearl**: a DAG encodes assumptions; the do-operator distinguishes intervention from
+observation; the backdoor criterion picks the adjustment set that blocks confounding
+(front-door handles unobserved confounders via a mediator); do-calculus is the complete
+identifiability machinery. **Rubin**: potential outcomes frame the *fundamental problem of
+causal inference* (only one outcome is observable per unit), identified under
+unconfoundedness/ignorability + SUTVA, with the propensity score the coarsest balancing
+score. Entrop's recognition that DAG d-separation and Rubin ignorability are the same
+condition is the bridge
+([two calculi](docs/findings/d2c5150e6-pearl-do-calculus-rubin-potential-outcomes-complementary.md)).
+**Implication:** for the engine's own experiments, separate estimand from estimator,
+probe positivity/overlap before trusting an effect, and treat **SUTVA as the assumption
+most likely to break silently** when units share a cache, model, or rate limit.
+
+### Decision-making: ACH for contested findings, weighted criteria for auditable records
+**Analysis of Competing Hypotheses** enumerates hypotheses, builds an evidence×hypothesis
+matrix, and scores by *fewest inconsistencies* — surviving disconfirmation, not
+accumulating confirmation (evidence consistent with all hypotheses has zero diagnostic
+value). Its enduring value is **auditability**, not bias-reduction: a 2024 peer-reviewed
+synthesis (Wilcox & Mandel) finds ACH as a whole shows little-to-no benefit on judgment
+quality and discourages mandating it. **Weighted multi-criteria** scoring is method-dependent
+— different weighting schemes reorder the *entire* ranking, so multiple methods should be
+used and the weights+method recorded
+([ACH & weighted criteria](docs/findings/d1b3c3b4c-ach-and-weighted-criteria-for-contested-judgments.md)).
+**Implication:** adopt ACH's *structure* (explicit hypothesis set, seek disconfirmation)
+for cross-source conflict detection and the reviewer gate, but record decisions as
+auditable weighted-criteria entries rather than mandating the full ACH ritual. (The MADR
+record *format* itself is not yet grounded — corpus has the scoring methods, not the ADR
+template.)
+
 ## Tensions & open questions (from the promoted findings)
 - **Citation accuracy vs volume** — measured but mechanistically unexplained; no source in
   corpus shows *why* one agent over-cites or how per-claim accuracy is computed
@@ -106,9 +154,10 @@ expose the engine over MCP.
 ## Not yet grounded
 The earlier spike asserted these as a complete pipeline; **no promoted finding backs them
 yet** — they await the empty domains and must not be treated as evidenced:
-- **Protocol-first planning / PRISMA-style screening record** — needs 01 epistemics.
-- **Statistical & causal rigor** (DAGs, do-calculus, potential outcomes, A/B power) — 02 (0 corpus).
-- **MADR-for-decisions methodology & ACH conflict resolution** — 03 (4 corpus, no finding).
+- **A/B-test power & effect-size methodology** — 02's finding covers causal identification
+  (DAGs, do-calculus, potential outcomes) but not experiment-design power; that gap is queued.
+- **MADR/ADR decision-record *format*** (fields, template, Nygard practice) — 03 grounds the
+  *scoring methods* (ACH, weighted MCDM) but not the record schema; queued as a 03 gap.
 - **Two-stage research-then-write, multi-perspective sub-questioning (STORM/GPT-Researcher)** — 13 (0 corpus).
 - **Cost-tiered prompting (few-shot→CoT→self-consistency→ToT)** — 10 (0 corpus).
 - **Orchestrator-worker cost model (the ~15×-tokens / 3–5-subagent / ~90%-latency figures)** —
@@ -118,7 +167,7 @@ yet** — they await the empty domains and must not be treated as evidenced:
 - **Canonical papers (ReAct, Toolformer, multi-agent surveys) and IR textbook grounding** — 14, 15 (0/stub).
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1360 nodes / 1249 links** (24 of those
+A graphify pass over the corpus currently yields **1436 nodes / 1358 links** (32 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

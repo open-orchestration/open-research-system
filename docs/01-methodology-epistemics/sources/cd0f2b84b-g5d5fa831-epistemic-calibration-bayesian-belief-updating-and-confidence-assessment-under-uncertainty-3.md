@@ -1,0 +1,35 @@
+# Bayesian Confidence Calibration for Epistemic Uncertainty Modelling
+[Fabian Küppers](https://www.linkedin.com/in/fabian-k%C3%BCppers-726353201/)1, [Jan Kronenberger](https://trustinai.github.io/bconfcal/)1, [Jonas Schneider](https://www.linkedin.com/in/jonas-schneider-ai/)2,  [Anselm Haselhoff](https://trustin.ai)1
+1Ruhr West University of Applied Sciences, Germany; 2e:fs TechHub GmbH, Germany Intelligent Vehicles Symposium (IV), 2021
+[ Paper ](https://ieeexplore.ieee.org/document/9575841) [ Code ](https://github.com/EFS-OpenSource/calibration-framework) [ arXiv ](https://arxiv.org/abs/2109.10092)
+## Abstract
+Modern neural networks have found to be miscalibrated in terms of confidence calibration, i.e., their predicted confidence scores do not reflect the observed accuracy or precision. Recent work has introduced methods for post-hoc confidence calibration for classification as well as for object detection to address this issue. Especially in safety critical applications, it is crucial to obtain a reliable self-assessment of a model. But what if the calibration method itself is uncertain, e.g., due to an insufficient knowledge base? We introduce Bayesian confidence calibration - a framework to obtain calibrated confidence estimates in conjunction with an uncertainty of the calibration method. Commonly, Bayesian neural networks (BNN) are used to indicate a network's uncertainty about a certain prediction. BNNs are interpreted as neural networks that use distributions instead of weights for inference. We transfer this idea of using distributions to confidence calibration. For this purpose, we use stochastic variational inference to build a calibration mapping that outputs a probability distribution rather than a single calibrated estimate. Using this approach, we achieve state-of-the-art calibration performance for object detection calibration. Finally, we show that this additional type of uncertainty can be used as a sufficient criterion for covariate shift detection. 
+![Stochastic variational inference \(SVI\) for calibration](https://trustinai.github.io/bconfcal/static/images/carousel1.png)
+##  Using stochastic variational inference (SVI), we are able to obtain not only a single calibrated estimate but also an additional prediction interval quantifying the epistemic uncertainty within the calibration mapping. We use a position-dependent calibration framework, but place distributions over the calibration parameters to infer a sample distribution for a single prediction. 
+![Stochastic variational inference \(SVI\) for calibration](https://trustinai.github.io/bconfcal/static/images/carousel2.png)
+##  An object detection model outputs a confidence estimate attached to each bounding box with a certain position and shape. This information is used for position & scale dependent confidence calibration. Instead of maximum likelihood estimation, we utilize stochastic variational inference to predict a sample distribution for each detection. On the one hand, this sample distribution reflects the observed frequency and on the other hand the epistemic uncertainty of the calibration model for a certain confidence, position and shape. Using highest density interval estimation, it is thus possible to denote a prediction interval for each calibrated estimate. 
+![Stochastic variational inference \(SVI\) for calibration](https://trustinai.github.io/bconfcal/static/images/carousel1.png)
+##  Using stochastic variational inference (SVI), we are able to obtain not only a single calibrated estimate but also an additional prediction interval quantifying the epistemic uncertainty within the calibration mapping. We use a position-dependent calibration framework, but place distributions over the calibration parameters to infer a sample distribution for a single prediction. 
+![Stochastic variational inference \(SVI\) for calibration](https://trustinai.github.io/bconfcal/static/images/carousel2.png)
+##  An object detection model outputs a confidence estimate attached to each bounding box with a certain position and shape. This information is used for position & scale dependent confidence calibration. Instead of maximum likelihood estimation, we utilize stochastic variational inference to predict a sample distribution for each detection. On the one hand, this sample distribution reflects the observed frequency and on the other hand the epistemic uncertainty of the calibration model for a certain confidence, position and shape. Using highest density interval estimation, it is thus possible to denote a prediction interval for each calibrated estimate. 
+![Stochastic variational inference \(SVI\) for calibration](https://trustinai.github.io/bconfcal/static/images/carousel1.png)
+##  Using stochastic variational inference (SVI), we are able to obtain not only a single calibrated estimate but also an additional prediction interval quantifying the epistemic uncertainty within the calibration mapping. We use a position-dependent calibration framework, but place distributions over the calibration parameters to infer a sample distribution for a single prediction. 
+![Stochastic variational inference \(SVI\) for calibration](https://trustinai.github.io/bconfcal/static/images/carousel2.png)
+##  An object detection model outputs a confidence estimate attached to each bounding box with a certain position and shape. This information is used for position & scale dependent confidence calibration. Instead of maximum likelihood estimation, we utilize stochastic variational inference to predict a sample distribution for each detection. On the one hand, this sample distribution reflects the observed frequency and on the other hand the epistemic uncertainty of the calibration model for a certain confidence, position and shape. Using highest density interval estimation, it is thus possible to denote a prediction interval for each calibrated estimate. 
+![Stochastic variational inference \(SVI\) for calibration](https://trustinai.github.io/bconfcal/static/images/carousel1.png)
+##  Using stochastic variational inference (SVI), we are able to obtain not only a single calibrated estimate but also an additional prediction interval quantifying the epistemic uncertainty within the calibration mapping. We use a position-dependent calibration framework, but place distributions over the calibration parameters to infer a sample distribution for a single prediction. 
+## BibTeX
+
+```
+@InProceedings{Kueppers_2021_IV,
+   author = {Küppers, Fabian and Kronenberger, Jan and Schneider, Jonas and Haselhoff, Anselm},
+   title = {Bayesian Confidence Calibration for Epistemic Uncertainty Modelling},
+   booktitle = {Proceedings of the IEEE Intelligent Vehicles Symposium (IV)},
+   month = {July},
+   year = {2021},
+}
+```
+
+This page was built using the [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template) which was adopted from the [Nerfies](https://nerfies.github.io) project page.   
+This website is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/). 
+

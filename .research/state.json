@@ -23,8 +23,8 @@
     },
     "spent": {
       "tokens": 0,
-      "sources": 7,
-      "cycle_started_at": "2026-06-22T22:01:27.647042+00:00"
+      "sources": 5,
+      "cycle_started_at": "2026-06-23T17:26:30.430764+00:00"
     }
   },
   "gaps": [
@@ -448,6 +448,142 @@
       "id": "gf369dd48",
       "topic": "17-specs-standards",
       "desc": "MCP Resources modeling of an append-only corpus/findings store (URI scheme, list_changed subscription semantics)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g6f13f8cc",
+      "topic": "02-statistical-causal-inference",
+      "desc": "Pearl causal DAGs, do-calculus, and the backdoor criterion for confounder adjustment",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g97dfb94a",
+      "topic": "02-statistical-causal-inference",
+      "desc": "Potential outcomes (Rubin) framework, counterfactuals, and average treatment effect estimation",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g483338f1",
+      "topic": "02-statistical-causal-inference",
+      "desc": "Statistical power, effect size, and A-B test methodology for experiment design",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g06f700b6",
+      "topic": "01-methodology-epistemics",
+      "desc": "Source credibility and evidence synthesis: Cochrane systematic review, PRISMA, GRADE certainty rating",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g5faddf86",
+      "topic": "01-methodology-epistemics",
+      "desc": "Claim extraction, cross-referencing, and contradiction resolution across sources",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g5d5fa831",
+      "topic": "01-methodology-epistemics",
+      "desc": "Epistemic calibration: Bayesian belief updating and confidence assessment under uncertainty",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "gff589abf",
+      "topic": "03-decision-frameworks",
+      "desc": "Analysis of Competing Hypotheses (ACH) structured analytic technique for intelligence and decisions",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g8799995f",
+      "topic": "03-decision-frameworks",
+      "desc": "MADR and decision-matrix (weighted-criteria) methods for AI-assisted decision records",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g284a18b9",
+      "topic": "03-decision-frameworks",
+      "desc": "Multi-criteria decision analysis (MCDA) and the analytic hierarchy process for tradeoff ranking",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 1
+    },
+    {
+      "id": "ge2ff9cf2",
+      "topic": "02-statistical-causal-inference",
+      "desc": "Worked end-to-end ATE estimation example: data to propensity to weighted/matched estimate; doubly-robust and IPW estimator derivations",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g67421383",
+      "topic": "02-statistical-causal-inference",
+      "desc": "Alternative identification strategies: instrumental variables, difference-in-differences, regression discontinuity",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g449073fd",
+      "topic": "02-statistical-causal-inference",
+      "desc": "Empirical base rates: how often SUTVA/ignorability fails in real AI-experiment settings",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g9879bed2",
+      "topic": "01-methodology-epistemics",
+      "desc": "Official GRADE Working Group / GRADE handbook primary source (current corpus only has a vendor blog restating GRADE)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g1ec16448",
+      "topic": "01-methodology-epistemics",
+      "desc": "Quantified confidence calibration for text/research-system outputs (only calibration source is a vision/object-detection paper)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "ge467b63d",
+      "topic": "01-methodology-epistemics",
+      "desc": "Automated contradiction resolution operating specifically on web-research findings (corpus has only generic NLI/fact-checking framing)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g5abb13ba",
+      "topic": "03-decision-frameworks",
+      "desc": "MADR/ADR template, fields, and ADR practice (adr.github.io / Nygard) — corpus 'MADR' sources are MCDM/weighted-scoring, not the decision-record format itself",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gc3f92f30",
+      "topic": "03-decision-frameworks",
+      "desc": "AI-system-specific evidence for applying ACH or weighted scoring inside an LLM research pipeline",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -1323,16 +1459,225 @@
       "extracted_path": "docs/17-specs-standards/sources/cda819b22-g9f10da22-citation-interchange-formats-csl-json-bibtex-schema-org-scholarlyarticle-field-mappings-5.md",
       "lossy": false,
       "ingested_at": "2026-06-22T22:02:30.247066+00:00"
+    },
+    {
+      "id": "c29d066dc",
+      "title": "g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-1",
+      "source": "file://g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-1.md",
+      "topic": "01-methodology-epistemics",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-01-methodology-epistemics/_done/g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-1.md",
+      "extracted_path": "docs/01-methodology-epistemics/sources/c29d066dc-g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:36.230688+00:00"
+    },
+    {
+      "id": "cc2b152ec",
+      "title": "g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-2",
+      "source": "file://g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-2.md",
+      "topic": "01-methodology-epistemics",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-01-methodology-epistemics/_done/g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-2.md",
+      "extracted_path": "docs/01-methodology-epistemics/sources/cc2b152ec-g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:36.372208+00:00"
+    },
+    {
+      "id": "c325692a1",
+      "title": "g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-3",
+      "source": "file://g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-3.md",
+      "topic": "01-methodology-epistemics",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-01-methodology-epistemics/_done/g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-3.md",
+      "extracted_path": "docs/01-methodology-epistemics/sources/c325692a1-g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:36.542052+00:00"
+    },
+    {
+      "id": "c0d5f9ccd",
+      "title": "g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-4",
+      "source": "file://g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-4.md",
+      "topic": "01-methodology-epistemics",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-01-methodology-epistemics/_done/g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-4.md",
+      "extracted_path": "docs/01-methodology-epistemics/sources/c0d5f9ccd-g06f700b6-source-credibility-and-evidence-synthesis-cochrane-systematic-review-prisma-grade-certainty-rating-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:36.682043+00:00"
+    },
+    {
+      "id": "c6d1362a1",
+      "title": "g5d5fa831-epistemic-calibration-bayesian-belief-updating-and-confidence-assessment-under-uncertainty-1",
+      "source": "file://g5d5fa831-epistemic-calibration-bayesian-belief-updating-and-confidence-assessment-under-uncertainty-1.md",
+      "topic": "01-methodology-epistemics",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-01-methodology-epistemics/_done/g5d5fa831-epistemic-calibration-bayesian-belief-updating-and-confidence-assessment-under-uncertainty-1.md",
+      "extracted_path": "docs/01-methodology-epistemics/sources/c6d1362a1-g5d5fa831-epistemic-calibration-bayesian-belief-updating-and-confidence-assessment-under-uncertainty-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:36.826130+00:00"
+    },
+    {
+      "id": "cd0f2b84b",
+      "title": "g5d5fa831-epistemic-calibration-bayesian-belief-updating-and-confidence-assessment-under-uncertainty-3",
+      "source": "file://g5d5fa831-epistemic-calibration-bayesian-belief-updating-and-confidence-assessment-under-uncertainty-3.md",
+      "topic": "01-methodology-epistemics",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-01-methodology-epistemics/_done/g5d5fa831-epistemic-calibration-bayesian-belief-updating-and-confidence-assessment-under-uncertainty-3.md",
+      "extracted_path": "docs/01-methodology-epistemics/sources/cd0f2b84b-g5d5fa831-epistemic-calibration-bayesian-belief-updating-and-confidence-assessment-under-uncertainty-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:36.966812+00:00"
+    },
+    {
+      "id": "c7b505a18",
+      "title": "g5faddf86-claim-extraction-cross-referencing-and-contradiction-resolution-across-sources-2",
+      "source": "file://g5faddf86-claim-extraction-cross-referencing-and-contradiction-resolution-across-sources-2.md",
+      "topic": "01-methodology-epistemics",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-01-methodology-epistemics/_done/g5faddf86-claim-extraction-cross-referencing-and-contradiction-resolution-across-sources-2.md",
+      "extracted_path": "docs/01-methodology-epistemics/sources/c7b505a18-g5faddf86-claim-extraction-cross-referencing-and-contradiction-resolution-across-sources-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:37.109006+00:00"
+    },
+    {
+      "id": "c3a6803c7",
+      "title": "g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-1",
+      "source": "file://g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-1.md",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-02-statistical-causal-inference/_done/g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-1.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/c3a6803c7-g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:37.314351+00:00"
+    },
+    {
+      "id": "c3e4277ef",
+      "title": "g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-2",
+      "source": "file://g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-2.md",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-02-statistical-causal-inference/_done/g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-2.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/c3e4277ef-g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:37.457218+00:00"
+    },
+    {
+      "id": "ce7635d71",
+      "title": "g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-3",
+      "source": "file://g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-3.md",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-02-statistical-causal-inference/_done/g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-3.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/ce7635d71-g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:37.599297+00:00"
+    },
+    {
+      "id": "c28d754ad",
+      "title": "g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-4",
+      "source": "file://g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-4.md",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-02-statistical-causal-inference/_done/g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-4.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/c28d754ad-g6f13f8cc-pearl-causal-dags-do-calculus-and-the-backdoor-criterion-for-confounder-adjustment-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:37.745107+00:00"
+    },
+    {
+      "id": "c8d67f5ca",
+      "title": "g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-1",
+      "source": "file://g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-1.md",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-02-statistical-causal-inference/_done/g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-1.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/c8d67f5ca-g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:37.886991+00:00"
+    },
+    {
+      "id": "c9b3b6fa1",
+      "title": "g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-2",
+      "source": "file://g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-2.md",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-02-statistical-causal-inference/_done/g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-2.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/c9b3b6fa1-g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:38.028635+00:00"
+    },
+    {
+      "id": "c7944da9a",
+      "title": "g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-3",
+      "source": "file://g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-3.md",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-02-statistical-causal-inference/_done/g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-3.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/c7944da9a-g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:38.171526+00:00"
+    },
+    {
+      "id": "c3e20420a",
+      "title": "g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-4",
+      "source": "file://g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-4.md",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-02-statistical-causal-inference/_done/g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-4.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/c3e20420a-g97dfb94a-potential-outcomes-rubin-framework-counterfactuals-and-average-treatment-effect-estimation-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:38.312800+00:00"
+    },
+    {
+      "id": "c3bc7a0b1",
+      "title": "g8799995f-madr-and-decision-matrix-weighted-criteria-methods-for-ai-assisted-decision-records-2",
+      "source": "file://g8799995f-madr-and-decision-matrix-weighted-criteria-methods-for-ai-assisted-decision-records-2.md",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-03-decision-frameworks/_done/g8799995f-madr-and-decision-matrix-weighted-criteria-methods-for-ai-assisted-decision-records-2.md",
+      "extracted_path": "docs/03-decision-frameworks/sources/c3bc7a0b1-g8799995f-madr-and-decision-matrix-weighted-criteria-methods-for-ai-assisted-decision-records-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:38.512152+00:00"
+    },
+    {
+      "id": "c510bd8a1",
+      "title": "g8799995f-madr-and-decision-matrix-weighted-criteria-methods-for-ai-assisted-decision-records-4",
+      "source": "file://g8799995f-madr-and-decision-matrix-weighted-criteria-methods-for-ai-assisted-decision-records-4.md",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-03-decision-frameworks/_done/g8799995f-madr-and-decision-matrix-weighted-criteria-methods-for-ai-assisted-decision-records-4.md",
+      "extracted_path": "docs/03-decision-frameworks/sources/c510bd8a1-g8799995f-madr-and-decision-matrix-weighted-criteria-methods-for-ai-assisted-decision-records-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:38.653899+00:00"
+    },
+    {
+      "id": "cc594055a",
+      "title": "gff589abf-analysis-of-competing-hypotheses-ach-structured-analytic-technique-for-intelligence-and-decisions-3",
+      "source": "file://gff589abf-analysis-of-competing-hypotheses-ach-structured-analytic-technique-for-intelligence-and-decisions-3.md",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-03-decision-frameworks/_done/gff589abf-analysis-of-competing-hypotheses-ach-structured-analytic-technique-for-intelligence-and-decisions-3.md",
+      "extracted_path": "docs/03-decision-frameworks/sources/cc594055a-gff589abf-analysis-of-competing-hypotheses-ach-structured-analytic-technique-for-intelligence-and-decisions-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:38.954664+00:00"
+    },
+    {
+      "id": "c521f3f34",
+      "title": "gff589abf-analysis-of-competing-hypotheses-ach-structured-analytic-technique-for-intelligence-and-decisions-5",
+      "source": "file://gff589abf-analysis-of-competing-hypotheses-ach-structured-analytic-technique-for-intelligence-and-decisions-5.md",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-03-decision-frameworks/_done/gff589abf-analysis-of-competing-hypotheses-ach-structured-analytic-technique-for-intelligence-and-decisions-5.md",
+      "extracted_path": "docs/03-decision-frameworks/sources/c521f3f34-gff589abf-analysis-of-competing-hypotheses-ach-structured-analytic-technique-for-intelligence-and-decisions-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T17:27:39.097563+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1360,
-    "edge_count": 1249
+    "node_count": 1436,
+    "edge_count": 1358
   },
   "assertions": {
-    "count": 24,
+    "count": 32,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -1512,6 +1857,66 @@
       "created_at": "2026-06-22T22:13:14.806504+00:00",
       "promoted_path": "docs/findings/d75f0cdee-interop-primitives-mcp-csl-madr.md",
       "promoted_at": "2026-06-22T22:16:13.625816+00:00"
+    },
+    {
+      "id": "d2c5150e6",
+      "topic": "02-statistical-causal-inference",
+      "title": "Two Calculi for the Same Question: Pearl's do-Calculus and Rubin's Potential Outcomes as Complementary Engines for Identifying Causal Effects",
+      "path": "docs/findings/_drafts/d2c5150e6-pearl-do-calculus-rubin-potential-outcomes-complementary.md",
+      "status": "promoted",
+      "cites": [
+        "c3a6803c7",
+        "c3e4277ef",
+        "ce7635d71",
+        "c28d754ad",
+        "c8d67f5ca",
+        "c9b3b6fa1",
+        "c7944da9a",
+        "c3e20420a"
+      ],
+      "created_at": "2026-06-23T17:39:32.713748+00:00",
+      "promoted_path": "docs/findings/d2c5150e6-pearl-do-calculus-rubin-potential-outcomes-complementary.md",
+      "promoted_at": "2026-06-23T17:42:42.962463+00:00"
+    },
+    {
+      "id": "dc577f3e2",
+      "topic": "01-methodology-epistemics",
+      "title": "Grade, reconcile, calibrate: how a rigorous research system rates evidence, resolves contradictions, and bounds its own confidence",
+      "path": "docs/findings/_drafts/dc577f3e2-grade-reconcile-calibrate-evidence-pipeline.md",
+      "status": "promoted",
+      "cites": [
+        "c0d5f9ccd",
+        "c29d066dc",
+        "c325692a1",
+        "cc2b152ec",
+        "c7b505a18",
+        "cde4586b2",
+        "ca4fbe169",
+        "c6d1362a1",
+        "cd0f2b84b"
+      ],
+      "created_at": "2026-06-23T17:48:04.802009+00:00",
+      "promoted_path": "docs/findings/dc577f3e2-grade-reconcile-calibrate-evidence-pipeline.md",
+      "promoted_at": "2026-06-23T17:51:08.481875+00:00"
+    },
+    {
+      "id": "d1b3c3b4c",
+      "topic": "03-decision-frameworks",
+      "title": "Structuring contested judgments: ACH for competing findings and weighted criteria for auditable AI decision records",
+      "path": "docs/findings/_drafts/d1b3c3b4c-ach-and-weighted-criteria-for-contested-judgments.md",
+      "status": "promoted",
+      "cites": [
+        "cf07b946c",
+        "c03622383",
+        "c7b513d7d",
+        "c3bc7a0b1",
+        "c510bd8a1",
+        "cc594055a",
+        "c521f3f34"
+      ],
+      "created_at": "2026-06-23T17:58:03.256486+00:00",
+      "promoted_path": "docs/findings/d1b3c3b4c-ach-and-weighted-criteria-for-contested-judgments.md",
+      "promoted_at": "2026-06-23T18:01:43.379864+00:00"
     }
   ]
 }

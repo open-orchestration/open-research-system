@@ -8,3 +8,6 @@
 - [GraphRAG and ColBERT vs hybrid retrieval: what shared-benchmark primary sources actually measure](d73a9474e-graphrag-colbert-shared-benchmark-primary-evidence.md) — 06-rag-retrieval
 - [Two evaluation regimes for a deep-research system: frozen-web agent benchmarks vs. decomposed RAG harnesses](d6fad1a98-two-evaluation-regimes-frozen-web-agent-benchmarks-vs-decomposed-rag-harnesses.md) — 16-evaluation-benchmarks
 - [Interoperability primitives for a research engine: what MCP, CSL-JSON, and MADR actually specify](d75f0cdee-interop-primitives-mcp-csl-madr.md) — 17-specs-standards
+- [Two Calculi for the Same Question: Pearl's do-Calculus and Rubin's Potential Outcomes as Complementary Engines for Identifying Causal Effects](d2c5150e6-pearl-do-calculus-rubin-potential-outcomes-complementary.md) — 02-statistical-causal-inference
+- [Grade, reconcile, calibrate: how a rigorous research system rates evidence, resolves contradictions, and bounds its own confidence](dc577f3e2-grade-reconcile-calibrate-evidence-pipeline.md) — 01-methodology-epistemics
+- [Structuring contested judgments: ACH for competing findings and weighted criteria for auditable AI decision records](d1b3c3b4c-ach-and-weighted-criteria-for-contested-judgments.md) — 03-decision-frameworks
