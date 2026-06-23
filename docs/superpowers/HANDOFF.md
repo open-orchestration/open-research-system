@@ -20,7 +20,7 @@ ledger — **`.research/state.json`** ("the agent forgets, the repo remembers"):
 The convergence orchestrator (`scripts/orchestrator.py`) decides phase
 (`gather`/`deepen`/`synthesize`) as a stateless function of state signals.
 
-## Current state (HEAD `295101f`)
+## Current state (HEAD `44bfc7d`; root SYNTHESIS.md re-grounded, uncommitted)
 - **8 promoted findings / 2 rejected.** Corpus **79**. Graph **1360 nodes / 1249 links**
   (`dirty:false`). **24 graph assertions** (overlay `.research/graph-assertions.jsonl`).
   Phase `deepen`. 30 gaps done, **23 queued**.
@@ -35,15 +35,17 @@ The convergence orchestrator (`scripts/orchestrator.py`) decides phase
   outputs rigorous vs merely retrieved.
 
 ## UNCOMMITTED right now (commit first thing)
-- `docs/findings/d6fad1a98-*.md` (16 finding), `docs/findings/d75f0cdee-*.md` (17 finding) —
-  both promoted this session.
-- `.research/state.json`, `.research/graph-assertions.jsonl` (6 new lines),
-  `docs/findings/SYNTHESIS.md` (auto-appended).
+- **`SYNTHESIS.md`** (repo root) — re-grounded against the 8 promoted findings: cites
+  only real findings, quarantines un-evidenced claims under "Not yet grounded", refreshes
+  stale graph numbers. Commit: `docs(research): re-ground root SYNTHESIS against the 8 promoted findings`.
 - NOT mine, leave alone: `public/dashboard.html` (modified separately in the user's IDE).
 - Noise, never commit: `.research/*.log`, `graphify-out/`. `.graphify/graph.json` is
-  gitignored (graph is rebuildable from corpus + assertion overlay).
-Commit recipe: stage the two findings + the three ledger files explicitly (never
-`git add .`/`-A`), Conventional Commit `chore(research): …`, no co-author trailer.
+  gitignored (rebuildable from corpus + assertion overlay).
+- Two SYNTHESIS files, two owners: `docs/findings/SYNTHESIS.md` = flat auto-index
+  (`promote.py` appends to it — leave to the script); root `SYNTHESIS.md` = human
+  cross-domain distillation (the one just re-grounded). Don't merge them.
+Commit recipe: stage explicitly (never `git add .`/`-A`), Conventional Commit, no
+co-author trailer.
 
 ## How to run each operation (verified working this session)
 
@@ -125,7 +127,7 @@ Skip community labeling (cosmetic; the engine consumes graph.json directly). Cle
   committed; replay strips+re-merges every cycle, so graph.json can be deleted/rebuilt freely.
 
 ## Cross-check (this handoff vs the repo)
-Verified against HEAD `295101f`: all cited scripts exist
+Verified against HEAD `44bfc7d` (+ uncommitted root SYNTHESIS.md re-ground): all cited scripts exist
 (`search_flow.sh ingest_flow.sh orchestrator.py state.py assertions.py promote.py
 cite_check.py check_integrity.py graph_events.py runlog.py`); `.claude/` has
 `goal.md loop.md process.md review.md`; state numbers (8/2 findings, corpus 79, 24
@@ -136,17 +138,33 @@ fixed: the prior HANDOFF.md described pre-#6 build state (branch `phase1-researc
 `docs/superpowers/specs/` (6 files; umbrella `2026-06-17-open-research-system-design.md`).
 
 ## Next steps (pick up here)
-1. **Commit the uncommitted findings** (above) — clean integrity-green checkpoint.
-2. **Re-ground `SYNTHESIS.md`.** It still cites stub findings (e.g. `[04]`, `[13]`,
-   0-corpus domains) as if evidenced. Rewrite to cite only the 8 promoted findings and
-   flag every claim still resting on a stub. It currently over-claims a complete pipeline.
-3. **Seed the methodology cluster (01/02/03)** — the rigor half. Add gaps (causal
-   inference / Bayesian-vs-frequentist / effect-size; epistemics / source-credibility /
-   evidence-synthesis; decision frameworks / ACH / MADR-for-decisions), search-drain,
-   ingest+graph, process. Then 12 tooling-landscape and 13 reference-systems.
-4. **Process the existing backlog** (no new search needed): 05 (11 uncited), 06 (8),
-   07 (8), 03 (4) still have un-synthesized primary sources.
-5. **Definitive bar:** grounded technical engine (05-09) + eval (16) + standards (17)
-   are done; the system can defend its architecture, its evaluation, and its
-   interoperability. It is NOT yet "definitive" until the methodology half (01/02/03) is
-   grounded and SYNTHESIS is re-grounded against real findings.
+DONE this session: committed the 8th/7th findings (`44bfc7d`); re-grounded root
+`SYNTHESIS.md` (uncommitted — commit it first, see above).
+
+**THE NEXT STEP — seed + ground the methodology cluster (01/02/03).** This is the
+rigor half and the single biggest blocker to "definitive": the engine can currently
+defend its architecture/eval/interop but not its *epistemic credibility*. Do it as one
+full gather→fold→process arc, exactly like the 16/17 seed this session:
+1. **Add gaps** (`state.py add-gap --origin human`), ~3 per domain:
+   - 02 statistical-causal: Pearl DAGs/do-calculus/backdoor criterion; potential-outcomes
+     & counterfactuals; statistical power / effect size / A-B test methodology.
+   - 01 epistemics: source-credibility & evidence-synthesis (Cochrane/PRISMA, GRADE);
+     claim extraction / cross-referencing / contradiction resolution.
+   - 03 decision-frameworks: Analysis of Competing Hypotheses (ACH); MADR/decision-matrix
+     for AI-assisted decisions.
+2. **Search-drain** them (per-topic, `budget-reset` before each — see runbook above), in
+   background.
+3. **Ingest+graph** the landed sources (stage per-topic inbox → `ingest_flow --inbox` →
+   `rm -rf .research/inbox-*` → graphify `--update` → replay → integrity).
+4. **Process** each into a finding (drafter → verify → reviewer gate). Anchor claims to
+   primary sources (Pearl, Cochrane, the ACH literature) — these domains have real
+   primary literature, so provenance should be easy to satisfy.
+
+Then: process the existing backlog (no new search — 05:11 uncited, 06:8, 07:8, 03:4),
+and seed 12 tooling-landscape + 13 reference-systems. After 01/02/03 land, re-run the
+re-grounding pass on `SYNTHESIS.md` (move the now-grounded methodology claims out of
+"Not yet grounded").
+
+**Definitive bar:** grounded technical engine (05-09) + eval (16) + standards (17) are
+done. NOT yet "definitive" until the methodology half (01/02/03) is grounded and the
+"Not yet grounded" section of SYNTHESIS has shrunk to genuinely-unresearched corners.
