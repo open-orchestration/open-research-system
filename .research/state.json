@@ -23,8 +23,8 @@
     },
     "spent": {
       "tokens": 0,
-      "sources": 6,
-      "cycle_started_at": "2026-06-23T18:36:35.105065+00:00"
+      "sources": 8,
+      "cycle_started_at": "2026-06-23T19:16:31.896570+00:00"
     }
   },
   "gaps": [
@@ -728,6 +728,190 @@
       "id": "g4ae1798d",
       "topic": "13-reference-systems-case-studies",
       "desc": "Measured evaluation/cost/latency for GPT-Researcher and a head-to-head of STORM simulated-conversation breadth vs a flat planner",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g20cb78fe",
+      "topic": "10-context-prompt-engineering",
+      "desc": "Prompting-technique ladder: few-shot vs chain-of-thought vs self-consistency vs tree-of-thoughts, with when-each-wins evidence from the originating papers",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g7b0dee52",
+      "topic": "10-context-prompt-engineering",
+      "desc": "Context-window management and long-context degradation: lost-in-the-middle, retrieval-augmented prompting, context compression",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "gc4e28042",
+      "topic": "10-context-prompt-engineering",
+      "desc": "Structured-output and JSON-schema constrained decoding for reliable LLM tool/function calling",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g401ae500",
+      "topic": "11-research-pipeline-engineering",
+      "desc": "Reproducible experiment tracking for ML/LLM pipelines: MLflow tracking, run/artifact/metric logging, model registry",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g132231f3",
+      "topic": "11-research-pipeline-engineering",
+      "desc": "Indexing-pipeline orchestration: incremental re-index, document freshness, change-data-capture for RAG corpora",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g3eef643d",
+      "topic": "11-research-pipeline-engineering",
+      "desc": "Evaluation-in-CI for RAG and agent systems: regression gates, golden datasets, continuous eval",
+      "origin": "human",
+      "status": "queued",
+      "attempts": 1
+    },
+    {
+      "id": "g114d78d3",
+      "topic": "04-applied-research-playbooks",
+      "desc": "End-to-end playbooks for building a deep-research agent: architecture decisions, orchestration, source handling, from practitioner write-ups and official cookbooks",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g6e3413d5",
+      "topic": "04-applied-research-playbooks",
+      "desc": "Production RAG playbooks: chunking strategy, eval-driven iteration, failure-mode mitigation from deployed systems",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g62e22e76",
+      "topic": "04-applied-research-playbooks",
+      "desc": "Multi-agent system design patterns and anti-patterns from production engineering writeups",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g3bab4ad6",
+      "topic": "14-papers",
+      "desc": "ReAct (Yao et al.) reasoning-and-acting interleaving — the originating paper, method and results",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g2c1df002",
+      "topic": "14-papers",
+      "desc": "Self-RAG (Asai et al.) self-reflective retrieval-augmented generation — originating paper, reflection tokens, results",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g2ef13fa9",
+      "topic": "14-papers",
+      "desc": "Toolformer and the LLM multi-agent / tool-use survey literature — canonical papers",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g8311433f",
+      "topic": "15-textbooks-longform",
+      "desc": "Introduction to Information Retrieval (Manning, Raghavan, Schutze): ranked retrieval, tf-idf, evaluation metrics",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "gf91dc695",
+      "topic": "15-textbooks-longform",
+      "desc": "Speech and Language Processing (Jurafsky and Martin): vector semantics, embeddings, neural LM fundamentals",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g28679615",
+      "topic": "15-textbooks-longform",
+      "desc": "Evaluation methodology for IR/NLP from authoritative textbooks: precision/recall/MAP/nDCG definitions and pitfalls",
+      "origin": "human",
+      "status": "done",
+      "attempts": 0
+    },
+    {
+      "id": "g64e0a010",
+      "topic": "14-papers",
+      "desc": "Self-RAG and Toolformer full per-benchmark results tables (in-corpus sources have only abstract-level 'outperforms' claims and the papers' results sections)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g50593678",
+      "topic": "14-papers",
+      "desc": "Toolformer exact zero-shot performance deltas (no in-corpus source gives the numbers)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g05e33d9b",
+      "topic": "15-textbooks-longform",
+      "desc": "Actual IR-book chapter prose (nlp.stanford.edu/IR-book/html/htmledition) and SLP3 PDF chapters to ground metric/tf-idf FORMULAS — current formula text traces to blog summaries while textbook sources are only TOC/abstract pages",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g4ffe60d9",
+      "topic": "10-context-prompt-engineering",
+      "desc": "Originating reasoning-technique papers (Wei 2201.11903 CoT, Wang 2203.11171 self-consistency, Yao 2305.10601 ToT, GPT-3 few-shot) — every reasoning-benchmark number is currently blog-relayed, not primary-sourced",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g14b00688",
+      "topic": "10-context-prompt-engineering",
+      "desc": "Chain-of-Draft and token-budget-aware reasoning primary source (currently cited by one blog, unverified)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g541ae49b",
+      "topic": "11-research-pipeline-engineering",
+      "desc": "Official/authoritative docs for indexing-pipeline orchestration, incremental re-index, CDC, document freshness (LlamaIndex/LangChain ingestion docs or a CDC/RAG spec) — all four indexing claims currently rest on practitioner blogs",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g988d2800",
+      "topic": "04-applied-research-playbooks",
+      "desc": "OpenAI cookbook deep_research_api notebook BODY (in-corpus capture rendered page-chrome only, existence not method); independent/peer-reviewed reproduction of production-RAG retrieval numbers (all current are single dev-agency self-reports)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gecdb8232",
+      "topic": "04-applied-research-playbooks",
+      "desc": "Re-fetch multi-agent design patterns/anti-patterns source — gap g62e22e76's cd1728c0b was a mis-fetch (Altium PCB-design page), leaving multi-agent anti-patterns under-sourced",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -1955,16 +2139,445 @@
       "extracted_path": "docs/13-reference-systems-case-studies/sources/c3bf6d346-gfd49fe77-storm-stanford-deep-research-system-architecture-outline-driven-multi-perspective-question-asking-and-research-then-write-from-the-paper-5.md",
       "lossy": false,
       "ingested_at": "2026-06-23T18:37:41.250800+00:00"
+    },
+    {
+      "id": "c87627e75",
+      "title": "g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-1",
+      "source": "file://g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-1.md",
+      "topic": "14-papers",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-14-papers/_done/g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-1.md",
+      "extracted_path": "docs/14-papers/sources/c87627e75-g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:49.793373+00:00"
+    },
+    {
+      "id": "c1ff42e4d",
+      "title": "g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-2",
+      "source": "file://g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-2.md",
+      "topic": "14-papers",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-14-papers/_done/g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-2.md",
+      "extracted_path": "docs/14-papers/sources/c1ff42e4d-g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:49.936731+00:00"
+    },
+    {
+      "id": "c54d2906e",
+      "title": "g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-3",
+      "source": "file://g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-3.md",
+      "topic": "14-papers",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-14-papers/_done/g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-3.md",
+      "extracted_path": "docs/14-papers/sources/c54d2906e-g2c1df002-self-rag-asai-et-al-self-reflective-retrieval-augmented-generation-originating-paper-reflection-tokens-results-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:50.078696+00:00"
+    },
+    {
+      "id": "c787b37e4",
+      "title": "g2ef13fa9-toolformer-and-the-llm-multi-agent-tool-use-survey-literature-canonical-papers-1",
+      "source": "file://g2ef13fa9-toolformer-and-the-llm-multi-agent-tool-use-survey-literature-canonical-papers-1.md",
+      "topic": "14-papers",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-14-papers/_done/g2ef13fa9-toolformer-and-the-llm-multi-agent-tool-use-survey-literature-canonical-papers-1.md",
+      "extracted_path": "docs/14-papers/sources/c787b37e4-g2ef13fa9-toolformer-and-the-llm-multi-agent-tool-use-survey-literature-canonical-papers-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:50.223389+00:00"
+    },
+    {
+      "id": "c0eda480d",
+      "title": "g2ef13fa9-toolformer-and-the-llm-multi-agent-tool-use-survey-literature-canonical-papers-2",
+      "source": "file://g2ef13fa9-toolformer-and-the-llm-multi-agent-tool-use-survey-literature-canonical-papers-2.md",
+      "topic": "14-papers",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-14-papers/_done/g2ef13fa9-toolformer-and-the-llm-multi-agent-tool-use-survey-literature-canonical-papers-2.md",
+      "extracted_path": "docs/14-papers/sources/c0eda480d-g2ef13fa9-toolformer-and-the-llm-multi-agent-tool-use-survey-literature-canonical-papers-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:50.367118+00:00"
+    },
+    {
+      "id": "c945ec53b",
+      "title": "g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-1",
+      "source": "file://g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-1.md",
+      "topic": "14-papers",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-14-papers/_done/g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-1.md",
+      "extracted_path": "docs/14-papers/sources/c945ec53b-g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:50.507947+00:00"
+    },
+    {
+      "id": "cb67d0c08",
+      "title": "g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-3",
+      "source": "file://g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-3.md",
+      "topic": "14-papers",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-14-papers/_done/g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-3.md",
+      "extracted_path": "docs/14-papers/sources/cb67d0c08-g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:50.647825+00:00"
+    },
+    {
+      "id": "c109a5136",
+      "title": "g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-4",
+      "source": "file://g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-4.md",
+      "topic": "14-papers",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-14-papers/_done/g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-4.md",
+      "extracted_path": "docs/14-papers/sources/c109a5136-g3bab4ad6-react-yao-et-al-reasoning-and-acting-interleaving-the-originating-paper-method-and-results-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:50.791905+00:00"
+    },
+    {
+      "id": "cc5061927",
+      "title": "g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-1",
+      "source": "file://g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-1.md",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-15-textbooks-longform/_done/g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-1.md",
+      "extracted_path": "docs/15-textbooks-longform/sources/cc5061927-g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:50.997740+00:00"
+    },
+    {
+      "id": "cd084662f",
+      "title": "g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-2",
+      "source": "file://g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-2.md",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-15-textbooks-longform/_done/g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-2.md",
+      "extracted_path": "docs/15-textbooks-longform/sources/cd084662f-g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:51.140327+00:00"
+    },
+    {
+      "id": "c6ed06790",
+      "title": "g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-3",
+      "source": "file://g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-3.md",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-15-textbooks-longform/_done/g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-3.md",
+      "extracted_path": "docs/15-textbooks-longform/sources/c6ed06790-g28679615-evaluation-methodology-for-ir-nlp-from-authoritative-textbooks-precision-recall-map-ndcg-definitions-and-pitfalls-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:51.282705+00:00"
+    },
+    {
+      "id": "c1fbccfab",
+      "title": "g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-1",
+      "source": "file://g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-1.md",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-15-textbooks-longform/_done/g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-1.md",
+      "extracted_path": "docs/15-textbooks-longform/sources/c1fbccfab-g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:51.424538+00:00"
+    },
+    {
+      "id": "c6bd43b17",
+      "title": "g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-2",
+      "source": "file://g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-2.md",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-15-textbooks-longform/_done/g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-2.md",
+      "extracted_path": "docs/15-textbooks-longform/sources/c6bd43b17-g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:51.567524+00:00"
+    },
+    {
+      "id": "cc3ea859c",
+      "title": "g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-3",
+      "source": "file://g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-3.md",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-15-textbooks-longform/_done/g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-3.md",
+      "extracted_path": "docs/15-textbooks-longform/sources/cc3ea859c-g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:51.729473+00:00"
+    },
+    {
+      "id": "ced7b1b52",
+      "title": "g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-5",
+      "source": "file://g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-5.md",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-15-textbooks-longform/_done/g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-5.md",
+      "extracted_path": "docs/15-textbooks-longform/sources/ced7b1b52-g8311433f-introduction-to-information-retrieval-manning-raghavan-schutze-ranked-retrieval-tf-idf-evaluation-metrics-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:51.870996+00:00"
+    },
+    {
+      "id": "cee7c940c",
+      "title": "gf91dc695-speech-and-language-processing-jurafsky-and-martin-vector-semantics-embeddings-neural-lm-fundamentals-1",
+      "source": "file://gf91dc695-speech-and-language-processing-jurafsky-and-martin-vector-semantics-embeddings-neural-lm-fundamentals-1.md",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-15-textbooks-longform/_done/gf91dc695-speech-and-language-processing-jurafsky-and-martin-vector-semantics-embeddings-neural-lm-fundamentals-1.md",
+      "extracted_path": "docs/15-textbooks-longform/sources/cee7c940c-gf91dc695-speech-and-language-processing-jurafsky-and-martin-vector-semantics-embeddings-neural-lm-fundamentals-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:52.058538+00:00"
+    },
+    {
+      "id": "cc96aa816",
+      "title": "g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-2",
+      "source": "file://g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-2.md",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-10-context-prompt-engineering/_done/g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-2.md",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/cc96aa816-g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:52.265727+00:00"
+    },
+    {
+      "id": "cbd52a6c4",
+      "title": "g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-3",
+      "source": "file://g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-3.md",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-10-context-prompt-engineering/_done/g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-3.md",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/cbd52a6c4-g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:52.407695+00:00"
+    },
+    {
+      "id": "c1950481e",
+      "title": "g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-4",
+      "source": "file://g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-4.md",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-10-context-prompt-engineering/_done/g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-4.md",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/c1950481e-g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:52.547606+00:00"
+    },
+    {
+      "id": "cc90d07d5",
+      "title": "g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-5",
+      "source": "file://g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-5.md",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-10-context-prompt-engineering/_done/g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-5.md",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/cc90d07d5-g20cb78fe-prompting-technique-ladder-few-shot-vs-chain-of-thought-vs-self-consistency-vs-tree-of-thoughts-with-when-each-wins-evidence-from-the-originating-papers-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:52.694735+00:00"
+    },
+    {
+      "id": "c256b43f4",
+      "title": "g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-1",
+      "source": "file://g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-1.md",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-10-context-prompt-engineering/_done/g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-1.md",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/c256b43f4-g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:52.839361+00:00"
+    },
+    {
+      "id": "cbd60351a",
+      "title": "g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-2",
+      "source": "file://g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-2.md",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-10-context-prompt-engineering/_done/g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-2.md",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/cbd60351a-g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:52.983160+00:00"
+    },
+    {
+      "id": "c444afd85",
+      "title": "g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-3",
+      "source": "file://g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-3.md",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-10-context-prompt-engineering/_done/g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-3.md",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/c444afd85-g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:53.127294+00:00"
+    },
+    {
+      "id": "c8479a2e6",
+      "title": "g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-4",
+      "source": "file://g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-4.md",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-10-context-prompt-engineering/_done/g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-4.md",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/c8479a2e6-g7b0dee52-context-window-management-and-long-context-degradation-lost-in-the-middle-retrieval-augmented-prompting-context-compression-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:53.270249+00:00"
+    },
+    {
+      "id": "c9cd9a883",
+      "title": "g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-1",
+      "source": "file://g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-1.md",
+      "topic": "11-research-pipeline-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-11-research-pipeline-engineering/_done/g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-1.md",
+      "extracted_path": "docs/11-research-pipeline-engineering/sources/c9cd9a883-g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:53.469755+00:00"
+    },
+    {
+      "id": "c84b2680a",
+      "title": "g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-2",
+      "source": "file://g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-2.md",
+      "topic": "11-research-pipeline-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-11-research-pipeline-engineering/_done/g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-2.md",
+      "extracted_path": "docs/11-research-pipeline-engineering/sources/c84b2680a-g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:53.613932+00:00"
+    },
+    {
+      "id": "ccd7354d5",
+      "title": "g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-3",
+      "source": "file://g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-3.md",
+      "topic": "11-research-pipeline-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-11-research-pipeline-engineering/_done/g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-3.md",
+      "extracted_path": "docs/11-research-pipeline-engineering/sources/ccd7354d5-g132231f3-indexing-pipeline-orchestration-incremental-re-index-document-freshness-change-data-capture-for-rag-corpora-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:53.757072+00:00"
+    },
+    {
+      "id": "c69be1c5c",
+      "title": "g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-1",
+      "source": "file://g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-1.md",
+      "topic": "11-research-pipeline-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-11-research-pipeline-engineering/_done/g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-1.md",
+      "extracted_path": "docs/11-research-pipeline-engineering/sources/c69be1c5c-g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:53.898722+00:00"
+    },
+    {
+      "id": "ca6ba2e55",
+      "title": "g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-2",
+      "source": "file://g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-2.md",
+      "topic": "11-research-pipeline-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-11-research-pipeline-engineering/_done/g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-2.md",
+      "extracted_path": "docs/11-research-pipeline-engineering/sources/ca6ba2e55-g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:54.046077+00:00"
+    },
+    {
+      "id": "c4780274d",
+      "title": "g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-4",
+      "source": "file://g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-4.md",
+      "topic": "11-research-pipeline-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-11-research-pipeline-engineering/_done/g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-4.md",
+      "extracted_path": "docs/11-research-pipeline-engineering/sources/c4780274d-g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:54.188762+00:00"
+    },
+    {
+      "id": "cfabd5e1b",
+      "title": "g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-5",
+      "source": "file://g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-5.md",
+      "topic": "11-research-pipeline-engineering",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-11-research-pipeline-engineering/_done/g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-5.md",
+      "extracted_path": "docs/11-research-pipeline-engineering/sources/cfabd5e1b-g401ae500-reproducible-experiment-tracking-for-ml-llm-pipelines-mlflow-tracking-run-artifact-metric-logging-model-registry-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:54.330202+00:00"
+    },
+    {
+      "id": "c81451a7e",
+      "title": "g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-1",
+      "source": "file://g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-1.md",
+      "topic": "04-applied-research-playbooks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-04-applied-research-playbooks/_done/g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-1.md",
+      "extracted_path": "docs/04-applied-research-playbooks/sources/c81451a7e-g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:54.534947+00:00"
+    },
+    {
+      "id": "c9076a7c4",
+      "title": "g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-2",
+      "source": "file://g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-2.md",
+      "topic": "04-applied-research-playbooks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-04-applied-research-playbooks/_done/g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-2.md",
+      "extracted_path": "docs/04-applied-research-playbooks/sources/c9076a7c4-g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:54.678653+00:00"
+    },
+    {
+      "id": "c7be4e16f",
+      "title": "g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-3",
+      "source": "file://g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-3.md",
+      "topic": "04-applied-research-playbooks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-04-applied-research-playbooks/_done/g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-3.md",
+      "extracted_path": "docs/04-applied-research-playbooks/sources/c7be4e16f-g114d78d3-end-to-end-playbooks-for-building-a-deep-research-agent-architecture-decisions-orchestration-source-handling-from-practitioner-write-ups-and-official-cookbooks-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:54.820917+00:00"
+    },
+    {
+      "id": "cd1728c0b",
+      "title": "g62e22e76-multi-agent-system-design-patterns-and-anti-patterns-from-production-engineering-writeups-1",
+      "source": "file://g62e22e76-multi-agent-system-design-patterns-and-anti-patterns-from-production-engineering-writeups-1.md",
+      "topic": "04-applied-research-playbooks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-04-applied-research-playbooks/_done/g62e22e76-multi-agent-system-design-patterns-and-anti-patterns-from-production-engineering-writeups-1.md",
+      "extracted_path": "docs/04-applied-research-playbooks/sources/cd1728c0b-g62e22e76-multi-agent-system-design-patterns-and-anti-patterns-from-production-engineering-writeups-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:54.963572+00:00"
+    },
+    {
+      "id": "ca7ef615f",
+      "title": "g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-2",
+      "source": "file://g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-2.md",
+      "topic": "04-applied-research-playbooks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-04-applied-research-playbooks/_done/g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-2.md",
+      "extracted_path": "docs/04-applied-research-playbooks/sources/ca7ef615f-g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:55.106897+00:00"
+    },
+    {
+      "id": "c67e4a6e0",
+      "title": "g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-3",
+      "source": "file://g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-3.md",
+      "topic": "04-applied-research-playbooks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-04-applied-research-playbooks/_done/g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-3.md",
+      "extracted_path": "docs/04-applied-research-playbooks/sources/c67e4a6e0-g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-3.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:55.251350+00:00"
+    },
+    {
+      "id": "c7981aff3",
+      "title": "g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-4",
+      "source": "file://g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-4.md",
+      "topic": "04-applied-research-playbooks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-04-applied-research-playbooks/_done/g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-4.md",
+      "extracted_path": "docs/04-applied-research-playbooks/sources/c7981aff3-g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-4.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:55.425677+00:00"
+    },
+    {
+      "id": "cdf469c3b",
+      "title": "g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-5",
+      "source": "file://g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-5.md",
+      "topic": "04-applied-research-playbooks",
+      "lifecycle": "active",
+      "native_path": ".research/inbox-04-applied-research-playbooks/_done/g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-5.md",
+      "extracted_path": "docs/04-applied-research-playbooks/sources/cdf469c3b-g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-5.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T19:17:55.570139+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1521,
-    "edge_count": 1482
+    "node_count": 1612,
+    "edge_count": 1609
   },
   "assertions": {
-    "count": 43,
+    "count": 57,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -2299,6 +2912,104 @@
       "created_at": "2026-06-23T18:55:35.999285+00:00",
       "promoted_path": "docs/findings/dbc0e9395-storm-paper-backed-pipeline-vs-gpt-researcher-with-provenance-tiering.md",
       "promoted_at": "2026-06-23T18:57:28.920261+00:00"
+    },
+    {
+      "id": "de3e9818e",
+      "topic": "14-papers",
+      "title": "The foundational agent/RAG papers: ReAct, Self-RAG, Toolformer and the tool-learning survey, and what the engine inherits",
+      "path": "docs/findings/_drafts/de3e9818e-foundational-agent-rag-papers.md",
+      "status": "promoted",
+      "cites": [
+        "c945ec53b",
+        "c109a5136",
+        "cb67d0c08",
+        "c87627e75",
+        "c1ff42e4d",
+        "c54d2906e",
+        "c787b37e4",
+        "c0eda480d"
+      ],
+      "created_at": "2026-06-23T19:28:59.519304+00:00",
+      "promoted_path": "docs/findings/de3e9818e-foundational-agent-rag-papers.md",
+      "promoted_at": "2026-06-23T19:31:01.543481+00:00"
+    },
+    {
+      "id": "d8b594416",
+      "topic": "15-textbooks-longform",
+      "title": "Textbook bedrock for retrieval scoring and evaluation: tf-idf, vector space, and ranked-retrieval metrics",
+      "path": "docs/findings/_drafts/d8b594416-textbook-bedrock-retrieval-scoring-evaluation.md",
+      "status": "rejected",
+      "cites": [
+        "c1fbccfab",
+        "ced7b1b52",
+        "cc3ea859c",
+        "c6bd43b17",
+        "cee7c940c",
+        "cc5061927",
+        "cd084662f",
+        "c6ed06790"
+      ],
+      "created_at": "2026-06-23T19:35:00.778300+00:00",
+      "promoted_path": null,
+      "reject_reason": "ai-independent: 'textbook bedrock' thesis unmet — every load-bearing metric/tf-idf formula (MAP, nDCG, fall-out, precision/recall/F1) rests on blog summaries (geeksforgeeks/dasroot/edge-ai-vision); the genuine Stanford IR-book/SLP3 sources are TOC/abstract pages with zero prose formulas, so textbooks anchor only chapter-standing; honest about it but the sourcing fails exactly the thesis"
+    },
+    {
+      "id": "d0cce1cec",
+      "topic": "10-context-prompt-engineering",
+      "title": "Prompting-Technique Ladder and Context Management: What Is Paper-Anchored vs Blog-Relayed",
+      "path": "docs/findings/_drafts/d0cce1cec-prompting-ladder-context-management-paper-anchored-vs-blog-relayed.md",
+      "status": "promoted",
+      "cites": [
+        "c8479a2e6",
+        "c1950481e",
+        "cc96aa816",
+        "cbd52a6c4",
+        "cc90d07d5",
+        "c256b43f4",
+        "cbd60351a",
+        "c444afd85"
+      ],
+      "created_at": "2026-06-23T19:43:55.425643+00:00",
+      "promoted_path": "docs/findings/d0cce1cec-prompting-ladder-context-management-paper-anchored-vs-blog-relayed.md",
+      "promoted_at": "2026-06-23T19:47:30.317724+00:00"
+    },
+    {
+      "id": "d470b6824",
+      "topic": "11-research-pipeline-engineering",
+      "title": "Reproducible tracking is docs-anchored; index freshness is a blog-relayed engineering pattern",
+      "path": "docs/findings/_drafts/d470b6824-reproducible-tracking-docs-anchored-index-freshness-blog-relayed.md",
+      "status": "promoted",
+      "cites": [
+        "c69be1c5c",
+        "c4780274d",
+        "c9cd9a883",
+        "c84b2680a",
+        "ccd7354d5",
+        "ca6ba2e55",
+        "cfabd5e1b"
+      ],
+      "created_at": "2026-06-23T19:52:59.474495+00:00",
+      "promoted_path": "docs/findings/d470b6824-reproducible-tracking-docs-anchored-index-freshness-blog-relayed.md",
+      "promoted_at": "2026-06-23T19:54:41.479133+00:00"
+    },
+    {
+      "id": "d603c3334",
+      "topic": "04-applied-research-playbooks",
+      "title": "Applied playbooks split by evidence tier: deep-research architecture anchored to a survey and practitioner write-up; production-RAG retrieval craft is blog-consensus",
+      "path": "docs/findings/_drafts/d603c3334-convergent-playbook-anchored-architecture-blog-consensus-rag-craft.md",
+      "status": "promoted",
+      "cites": [
+        "c9076a7c4",
+        "c7be4e16f",
+        "c81451a7e",
+        "ca7ef615f",
+        "c67e4a6e0",
+        "c7981aff3",
+        "cdf469c3b"
+      ],
+      "created_at": "2026-06-23T20:01:00.160407+00:00",
+      "promoted_path": "docs/findings/d603c3334-convergent-playbook-anchored-architecture-blog-consensus-rag-craft.md",
+      "promoted_at": "2026-06-23T20:03:04.486265+00:00"
     }
   ]
 }

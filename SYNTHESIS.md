@@ -6,12 +6,16 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **15 promoted findings across 12 of 17 domains** (01, 02, 03, 05, 06,
-07, 08, 09, 12, 13, 16, 17). The methodology half (01 epistemics, 02 statistical/causal, 03
-decision frameworks) is now grounded — the engine can defend its *epistemic credibility*,
-not just its architecture/eval/interop. The applied/tooling/case-study domains (04,
-10–15) are not yet researched — so the planning-template, prompting, and
-reference-architecture layers below remain deliberately open.
+Grounding status: **19 promoted findings across 16 of 17 domains** (01, 02, 03, 04, 05,
+06, 07, 08, 09, 10, 11, 12, 13, 14, 16, 17). Only **15 textbooks-longform** remains
+ungrounded — its draft was rejected because the metric/tf-idf *formulas* traced to blog
+summaries while the Stanford IR-book sources were TOC/abstract pages only (needs the actual
+chapter prose). The methodology half (01 epistemics, 02 statistical/causal, 03
+decision frameworks) is grounded — the engine can defend its *epistemic credibility*, not
+just its architecture/eval/interop — and so is the applied/tooling/case-study half (04
+playbooks, 10 prompting/context, 11 pipeline-ops, 12 tooling, 13 reference-systems, 14
+foundational papers). What remains is narrow: textbook bedrock (15) and the queued
+per-domain corners listed under [Not yet grounded](#not-yet-grounded).
 
 ## What the evidence supports
 
@@ -178,6 +182,44 @@ positioning is corpus-grounded; its internals are not
 multi-perspective sub-questioning; tier model cost per stage — these are now evidenced
 patterns, not speculation.
 
+### Foundations: the canonical papers the whole engine inherits
+The agent/RAG mechanisms this system rests on are paper-established: **ReAct** (interleave
+thought/action/observation; arXiv:2210.03629), **Self-RAG** (retrieve on demand, then
+self-assess relevance/support/utility via reflection tokens; arXiv:2310.11511), and
+**Toolformer** (self-supervised decide-which/when/args for tool calls; arXiv:2302.04761),
+with the tool-learning survey mapping the internal-vs-external planner space
+([foundational papers](docs/findings/de3e9818e-foundational-agent-rag-papers.md)).
+**Implication:** the engine's loop *is* ReAct; its citation-gate + faithfulness check *is*
+Self-RAG's per-segment support assessment; its search/ingest tools *are* Toolformer's
+decide-when-to-call discipline — these are inherited theory, not invention.
+
+### Prompting & context: escalate cost only when it pays; don't stuff the context window
+On the prompting ladder (few-shot → CoT → self-consistency → ToT), the in-corpus *numbers*
+are blog-relayed (the originating papers aren't yet gathered) and so non-load-bearing; the
+one paper-anchored result is **lost-in-the-middle** (arXiv:2307.03172): long-context accuracy
+is highest when relevant text sits at the beginning or end and degrades in the middle, even
+for long-context models — so prefer **targeted retrieval over context-stuffing**, and
+escalate the reasoning ladder only when expected value beats added token cost
+([prompting/context](docs/findings/d0cce1cec-prompting-ladder-context-management-paper-anchored-vs-blog-relayed.md)).
+
+### Operations: reproducible tracking is docs-settled; index freshness is convention
+**MLflow** (official docs) supplies the reproducibility model the engine already mirrors —
+runs/params/metrics/artifacts + a registry with **stage promotion and lineage** (the analogue
+of this engine's draft→finding promotion and finding→cited-corpus-id lineage). Index-freshness
+practice (incremental re-index, change detection, drift-prioritized reprocessing) is only
+blog-relayed but converges on treating indexing as a **cost-managed selective-reprocess**
+problem, not full re-index
+([pipeline ops](docs/findings/d470b6824-reproducible-tracking-docs-anchored-index-freshness-blog-relayed.md)).
+
+### Applied playbooks: architecture converges (anchored); RAG retrieval craft is blog-consensus
+A genuine arXiv DR survey and a reputable practitioner build-log (mcp-agent, derived from
+Anthropic's "Building Effective Agents") independently converge on the
+**planner/orchestrator → dynamic subagents → synthesis** spine, with two generalizable moves:
+**prefer deterministic code checks over LLM self-judgment**, and **externalize memory** rather
+than bind to the context window. The production-RAG craft (structure-aware chunking, hybrid +
+rerank, filter-before-search) is dev-agency blog-consensus — sensible defaults, not evidence
+([applied playbooks](docs/findings/d603c3334-convergent-playbook-anchored-architecture-blog-consensus-rag-craft.md)).
+
 ## Tensions & open questions (from the promoted findings)
 - **Citation accuracy vs volume** — measured but mechanistically unexplained; no source in
   corpus shows *why* one agent over-cites or how per-claim accuracy is computed
@@ -204,20 +246,25 @@ yet** — they await the empty domains and must not be treated as evidenced:
   (DAGs, do-calculus, potential outcomes) but not experiment-design power; that gap is queued.
 - **MADR/ADR decision-record *format*** (fields, template, Nygard practice) — 03 grounds the
   *scoring methods* (ACH, weighted MCDM) but not the record schema; queued as a 03 gap.
-- **Cost-tiered prompting (few-shot→CoT→self-consistency→ToT)** — 10 (0 corpus). (STORM
-  evidences *per-stage model tiering* as a pattern, but the prompting-technique ladder itself
-  is ungathered.)
+- **IR/NLP textbook bedrock (tf-idf, MAP/nDCG, precision/recall definitions)** — 15 still
+  ungrounded: the draft was rejected because the formulas traced to blog summaries while the
+  Stanford IR-book / SLP3 sources were TOC/abstract pages; needs the actual chapter prose
+  (nlp.stanford.edu/IR-book/html, SLP3 PDF). Gap queued.
+- **Prompting-ladder *numbers*** — 10's finding anchors lost-in-the-middle and the
+  cost-tiering principle, but the CoT/self-consistency/ToT *benchmark numbers* are blog-relayed;
+  the originating papers (Wei 2201.11903, Wang 2203.11171, Yao 2305.10601) are queued.
+- **Index-freshness as spec** — 11's reproducible-tracking half is docs-anchored, but the
+  incremental-reindex/CDC/freshness claims are blog-only; an official ingestion-docs / CDC-spec
+  anchor is queued.
 - **Orchestrator-worker cost model (the ~15×-tokens / 3–5-subagent / ~90%-latency figures)** —
   these came from the old topic-07 stub; the *promoted* 07 findings cover halt-bounding and
   the no-clean-head-to-head provenance result, not the cost multipliers.
-- **MLflow-style reproducible tracked runs, indexing-pipeline tooling** — 11 (0 corpus).
-- **Canonical papers (ReAct, Toolformer, multi-agent surveys) and IR textbook grounding** — 14, 15 (0/stub).
-- **Doc-anchored framework taxonomy & GPT-Researcher internals** — 12's taxonomy is
-  blog-convergent (only the framework-vs-SDK axis is primary-doc-anchored) and 13's
-  GPT-Researcher internals are not corpus-grounded; both have queued gaps for official docs/repos.
+- **A/B-test power, MADR record-format, doc-anchored framework taxonomy, GPT-Researcher
+  internals, real arXiv ColBERT primaries** — all have queued gaps (see the tensions above
+  and the per-domain notes); each is a narrow ungathered corner, not an empty domain.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1521 nodes / 1482 links** (43 of those
+A graphify pass over the corpus currently yields **1612 nodes / 1609 links** (57 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
