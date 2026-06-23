@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **11 promoted findings across 10 of 17 domains** (01, 02, 03, 05, 06,
+Grounding status: **13 promoted findings across 10 of 17 domains** (01, 02, 03, 05, 06,
 07, 08, 09, 16, 17). The methodology half (01 epistemics, 02 statistical/causal, 03
 decision frameworks) is now grounded — the engine can defend its *epistemic credibility*,
 not just its architecture/eval/interop. The applied/tooling/case-study domains (04,
@@ -37,6 +37,21 @@ over-cites, another cites less but more accurately)
 ([DeepResearch-Bench](docs/findings/dc6ee6f7f-deepresearch-bench-agents-beat-search-llms-citation-accuracy-tradeoff.md)).
 **Implication:** the differentiator is the orchestration layer, not the base model; and
 "more citations" is not "better grounded" — they must be measured separately.
+
+For frontier *named* agents specifically, **benchmark accuracy (GAIA/BrowseComp,
+vendor-neutral leaderboards) is the only cross-vendor comparable** — cost, latency, and
+"internal architecture of closed agents" are vendor-reported or third-party-reconstructed,
+not independently verified, and must be carried as attributed, never as fact
+([benchmark-accuracy-only](docs/findings/d369c3d06-benchmark-accuracy-is-the-only-cross-vendor-comparable.md)).
+And the self-correction methods (ReAct/Reflexion/CRAG/Self-RAG) have **no clean
+same-benchmark head-to-head** — published deltas come from different papers on different
+setups; only the CRAG benchmark and a controlled multi-agent-debate study are genuine
+primaries, while per-iteration cost figures are author estimates
+([the head-to-head that isn't](docs/findings/df8e7fa14-head-to-head-that-isnt-comparative-accuracy-debate-convergence-economics.md)).
+**Meta-implication:** across deep-research and orchestration, the durable evidence is
+benchmark accuracy under stated conditions; cost/latency/architecture are the axis where
+vendor marketing masquerades as fact — tier provenance explicitly or the gate rejects (it
+did, twice this corpus).
 
 ### Self-correcting loops: the halt decision is the hard part, and it must be externally bounded
 ReAct / Reflexion / CRAG / Self-RAG / multi-agent debate are better understood by *where
@@ -147,8 +162,10 @@ template.)
   ([08](docs/findings/dfa42bc8a-faithfulness-measurement-machinery.md),
   [16](docs/findings/d6fad1a98-two-evaluation-regimes-frozen-web-agent-benchmarks-vs-decomposed-rag-harnesses.md)).
 - **Reranker economics unquantified by primaries** — concrete latency/$/NDCG numbers in
-  corpus came from marketing blogs (a finding was rejected over it); a controlled
-  ColBERT-vs-cross-encoder benchmark is still ungathered
+  corpus still come from marketing blogs or an AI-summary aggregator (emergentmind). A
+  *second* 06 finding was rejected this session for citing that aggregator while claiming
+  arXiv provenance; the controlled ColBERT-vs-cross-encoder benchmark and the actual arXiv
+  ColBERT primaries (2004.12832, 2112.01488) are still ungathered
   ([06](docs/findings/d73a9474e-graphrag-colbert-shared-benchmark-primary-evidence.md)).
 
 ## Not yet grounded
@@ -167,7 +184,7 @@ yet** — they await the empty domains and must not be treated as evidenced:
 - **Canonical papers (ReAct, Toolformer, multi-agent surveys) and IR textbook grounding** — 14, 15 (0/stub).
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1436 nodes / 1358 links** (32 of those
+A graphify pass over the corpus currently yields **1436 nodes / 1364 links** (38 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

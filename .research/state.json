@@ -587,6 +587,62 @@
       "origin": "process",
       "status": "queued",
       "attempts": 0
+    },
+    {
+      "id": "g16877ba2",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "Independently-measured (non-vendor) wall-clock latency and per-query cost distributions for frontier deep-research agents",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g8c585ff5",
+      "topic": "05-ai-deep-research-systems",
+      "desc": "Neutral apples-to-apples re-run of BrowseComp/DeepResearch-Bench across vendors (current scores are single-vendor self-reported)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gade3c1ff",
+      "topic": "06-rag-retrieval",
+      "desc": "Controlled same-corpus ColBERT-vs-cross-encoder head-to-head with per-query latency AND NDCG under identical conditions (currently per-query latency/cost is practitioner-only)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g6b3b56d5",
+      "topic": "06-rag-retrieval",
+      "desc": "GraphRAG benchmarked against a TUNED hybrid on a shared corpus with controlled quality metrics (current GraphRAG sources are blogs with cost figures and qualitative win-matrices)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g1099431b",
+      "topic": "06-rag-retrieval",
+      "desc": "Primary arXiv ColBERT papers themselves (2004.12832 Khattab, 2112.01488 ColBERTv2/Santhanam) for recall@1k / rerank-latency / FLOPs / storage numbers — corpus currently has only an emergentmind aggregator restating them",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g19f5173b",
+      "topic": "07-agentic-orchestration",
+      "desc": "Same-benchmark head-to-head of ReAct/Reflexion/CRAG/Self-RAG on PopQA/TriviaQA (current per-method deltas are from different papers/benchmarks relayed by a blog)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g2cafde98",
+      "topic": "07-agentic-orchestration",
+      "desc": "Multi-agent debate convergence beyond single-domain/single-judge/n=100 (current result is macroeconomics, one judge model)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
     }
   ],
   "inbox": [],
@@ -1674,10 +1730,10 @@
     "dirty": false,
     "last_update": null,
     "node_count": 1436,
-    "edge_count": 1358
+    "edge_count": 1364
   },
   "assertions": {
-    "count": 32,
+    "count": 38,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -1917,6 +1973,64 @@
       "created_at": "2026-06-23T17:58:03.256486+00:00",
       "promoted_path": "docs/findings/d1b3c3b4c-ach-and-weighted-criteria-for-contested-judgments.md",
       "promoted_at": "2026-06-23T18:01:43.379864+00:00"
+    },
+    {
+      "id": "d369c3d06",
+      "topic": "05-ai-deep-research-systems",
+      "title": "Benchmark accuracy is the only cross-vendor comparable for frontier deep-research agents; cost, latency, and internal architecture are vendor-reported and not independently verified",
+      "path": "docs/findings/_drafts/d369c3d06-benchmark-accuracy-is-the-only-cross-vendor-comparable.md",
+      "status": "promoted",
+      "cites": [
+        "c99407eeb",
+        "cf650704e",
+        "cc9ebf39f",
+        "c2713d958",
+        "ceb7cfb9f",
+        "c18cb025a",
+        "c3d36ff44",
+        "cbda2cb4e",
+        "cfa313c43"
+      ],
+      "created_at": "2026-06-23T18:09:21.354920+00:00",
+      "promoted_path": "docs/findings/d369c3d06-benchmark-accuracy-is-the-only-cross-vendor-comparable.md",
+      "promoted_at": "2026-06-23T18:12:22.817511+00:00"
+    },
+    {
+      "id": "d5b5eb166",
+      "topic": "06-rag-retrieval",
+      "title": "Late-interaction economics: what peer-reviewed ColBERT evidence settles and what stays vendor-reported",
+      "path": "docs/findings/_drafts/d5b5eb166-late-interaction-economics-peer-reviewed-vs-vendor-reported.md",
+      "status": "rejected",
+      "cites": [
+        "cf35fa065",
+        "c9d345293",
+        "c4b99f896",
+        "cc958dce4",
+        "c3b9d1ab1"
+      ],
+      "created_at": "2026-06-23T18:18:26.126595+00:00",
+      "promoted_path": null,
+      "reject_reason": "ai-independent: load-bearing 'peer-reviewed' ColBERT economics (recall@1k, rerank latency, FLOPs, ColBERTv2 storage, MRR@10) all rest on c9d345293=emergentmind.com (AI-summary aggregator) yet draft asserts them as arXiv-anchored; no actual arXiv primary in corpus; same vendor-blog GraphRAG sources as existing finding"
+    },
+    {
+      "id": "df8e7fa14",
+      "topic": "07-agentic-orchestration",
+      "title": "The head-to-head that isn't: comparative accuracy, debate convergence, and per-iteration economics of self-correcting agent loops",
+      "path": "docs/findings/_drafts/df8e7fa14-head-to-head-that-isnt-comparative-accuracy-debate-convergence-economics.md",
+      "status": "promoted",
+      "cites": [
+        "c1acffb70",
+        "c764cbe7d",
+        "c8393450b",
+        "c6e7ab381",
+        "c7de7f558",
+        "cc583c0d6",
+        "c8c70c097",
+        "ce3791ef9"
+      ],
+      "created_at": "2026-06-23T18:25:47.384990+00:00",
+      "promoted_path": "docs/findings/df8e7fa14-head-to-head-that-isnt-comparative-accuracy-debate-convergence-economics.md",
+      "promoted_at": "2026-06-23T18:29:24.840682+00:00"
     }
   ]
 }
