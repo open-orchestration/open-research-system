@@ -23,8 +23,8 @@
     },
     "spent": {
       "tokens": 0,
-      "sources": 8,
-      "cycle_started_at": "2026-06-23T19:16:31.896570+00:00"
+      "sources": 3,
+      "cycle_started_at": "2026-06-23T20:10:41.219724+00:00"
     }
   },
   "gaps": [
@@ -873,7 +873,7 @@
       "topic": "15-textbooks-longform",
       "desc": "Actual IR-book chapter prose (nlp.stanford.edu/IR-book/html/htmledition) and SLP3 PDF chapters to ground metric/tf-idf FORMULAS — current formula text traces to blog summaries while textbook sources are only TOC/abstract pages",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -912,6 +912,30 @@
       "id": "gecdb8232",
       "topic": "04-applied-research-playbooks",
       "desc": "Re-fetch multi-agent design patterns/anti-patterns source — gap g62e22e76's cd1728c0b was a mis-fetch (Altium PCB-design page), leaving multi-agent anti-patterns under-sourced",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g3c6bc0ad",
+      "topic": "15-textbooks-longform",
+      "desc": "Genuine SLP3 vector-semantics & embeddings chapter (tf-idf in NLP, PPMI, cosine similarity) — the ingested ch6 PDF is actually Neural Networks in the Jan-2026 draft; correct chapter still needs ingesting",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gd61bcd87",
+      "topic": "15-textbooks-longform",
+      "desc": "Cosine-similarity normalization of the vector-space score (Score / product of norms) — IR-book tf-idf page stops at unnormalized overlap Score; cosine ungrounded",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gfa66fdc9",
+      "topic": "15-textbooks-longform",
+      "desc": "IR-book formal justification of the idf form (the 'optimal weight g' page the chapter defers to)",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -2568,13 +2592,79 @@
       "extracted_path": "docs/04-applied-research-playbooks/sources/cdf469c3b-g6e3413d5-production-rag-playbooks-chunking-strategy-eval-driven-iteration-failure-mode-mitigation-from-deployed-systems-5.md",
       "lossy": false,
       "ingested_at": "2026-06-23T19:17:55.570139+00:00"
+    },
+    {
+      "id": "c7101583a",
+      "title": "irbook-evaluation-of-ranked-retrieval-results-map-ndcg",
+      "source": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/irbook-evaluation-of-ranked-retrieval-results-map-ndcg.url",
+      "extracted_path": "docs/15-textbooks-longform/sources/c7101583a-irbook-evaluation-of-ranked-retrieval-results-map-ndcg.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T20:14:28.680399+00:00"
+    },
+    {
+      "id": "c5c86be0c",
+      "title": "irbook-evaluation-of-unranked-retrieval-sets-precision-recall-f",
+      "source": "https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-unranked-retrieval-sets-1.html",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/irbook-evaluation-of-unranked-retrieval-sets-precision-recall-f.url",
+      "extracted_path": "docs/15-textbooks-longform/sources/c5c86be0c-irbook-evaluation-of-unranked-retrieval-sets-precision-recall-f.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T20:14:30.824470+00:00"
+    },
+    {
+      "id": "c3d6ca44f",
+      "title": "irbook-inverse-document-frequency",
+      "source": "https://nlp.stanford.edu/IR-book/html/htmledition/inverse-document-frequency-1.html",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/irbook-inverse-document-frequency.url",
+      "extracted_path": "docs/15-textbooks-longform/sources/c3d6ca44f-irbook-inverse-document-frequency.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T20:14:32.854332+00:00"
+    },
+    {
+      "id": "c6031ef87",
+      "title": "irbook-term-frequency-and-weighting",
+      "source": "https://nlp.stanford.edu/IR-book/html/htmledition/term-frequency-and-weighting-1.html",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/irbook-term-frequency-and-weighting.url",
+      "extracted_path": "docs/15-textbooks-longform/sources/c6031ef87-irbook-term-frequency-and-weighting.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T20:14:34.906509+00:00"
+    },
+    {
+      "id": "cdafe8773",
+      "title": "irbook-tf-idf-weighting",
+      "source": "https://nlp.stanford.edu/IR-book/html/htmledition/tf-idf-weighting-1.html",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/irbook-tf-idf-weighting.url",
+      "extracted_path": "docs/15-textbooks-longform/sources/cdafe8773-irbook-tf-idf-weighting.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T20:14:36.963232+00:00"
+    },
+    {
+      "id": "cb0370497",
+      "title": "slp3-ch6-vector-semantics-and-embeddings",
+      "source": "file://slp3-ch6-vector-semantics-and-embeddings.pdf",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/slp3-ch6-vector-semantics-and-embeddings.pdf",
+      "extracted_path": "docs/15-textbooks-longform/sources/cb0370497-slp3-ch6-vector-semantics-and-embeddings.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T20:14:39.136568+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1612,
-    "edge_count": 1609
+    "node_count": 1638,
+    "edge_count": 1638
   },
   "assertions": {
     "count": 57,
@@ -3010,6 +3100,24 @@
       "created_at": "2026-06-23T20:01:00.160407+00:00",
       "promoted_path": "docs/findings/d603c3334-convergent-playbook-anchored-architecture-blog-consensus-rag-craft.md",
       "promoted_at": "2026-06-23T20:03:04.486265+00:00"
+    },
+    {
+      "id": "d2fbbb962",
+      "topic": "15-textbooks-longform",
+      "title": "Textbook-grounded retrieval scoring and ranked-retrieval evaluation metrics",
+      "path": "docs/findings/_drafts/d2fbbb962-textbook-grounded-retrieval-scoring-and-evaluation-metrics.md",
+      "status": "promoted",
+      "cites": [
+        "c6031ef87",
+        "c3d6ca44f",
+        "cdafe8773",
+        "c5c86be0c",
+        "c7101583a",
+        "cb0370497"
+      ],
+      "created_at": "2026-06-23T20:30:15.972601+00:00",
+      "promoted_path": "docs/findings/d2fbbb962-textbook-grounded-retrieval-scoring-and-evaluation-metrics.md",
+      "promoted_at": "2026-06-23T20:33:36.462991+00:00"
     }
   ]
 }

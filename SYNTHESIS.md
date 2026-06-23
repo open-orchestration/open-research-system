@@ -6,16 +6,16 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **19 promoted findings across 16 of 17 domains** (01, 02, 03, 04, 05,
-06, 07, 08, 09, 10, 11, 12, 13, 14, 16, 17). Only **15 textbooks-longform** remains
-ungrounded — its draft was rejected because the metric/tf-idf *formulas* traced to blog
-summaries while the Stanford IR-book sources were TOC/abstract pages only (needs the actual
-chapter prose). The methodology half (01 epistemics, 02 statistical/causal, 03
-decision frameworks) is grounded — the engine can defend its *epistemic credibility*, not
-just its architecture/eval/interop — and so is the applied/tooling/case-study half (04
-playbooks, 10 prompting/context, 11 pipeline-ops, 12 tooling, 13 reference-systems, 14
-foundational papers). What remains is narrow: textbook bedrock (15) and the queued
-per-domain corners listed under [Not yet grounded](#not-yet-grounded).
+Grounding status: **20 promoted findings across all 17 of 17 domains** (01–17). Every
+domain now has at least one finding that passed the citation + faithfulness +
+independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
+02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
+*epistemic credibility*, not just its architecture/eval/interop — as is the
+applied/tooling/case-study half (04 playbooks, 10 prompting/context, 11 pipeline-ops, 12
+tooling, 13 reference-systems, 14 foundational papers), and now the **textbook bedrock**
+(15: tf-idf and the retrieval-evaluation metrics, grounded on the IR-book chapters). What
+remains is not an empty domain but a set of narrow per-domain corners — blog-tier claims
+awaiting a primary upgrade — listed under [Not yet grounded](#not-yet-grounded).
 
 ## What the evidence supports
 
@@ -193,6 +193,22 @@ with the tool-learning survey mapping the internal-vs-external planner space
 Self-RAG's per-segment support assessment; its search/ingest tools *are* Toolformer's
 decide-when-to-call discipline — these are inherited theory, not invention.
 
+### Textbook bedrock: tf-idf and the retrieval-evaluation metrics, grounded on the canonical chapters
+The engine's retrieval-scoring and evaluation vocabulary is now defined from the field's
+canonical textbook chapter prose rather than blog summaries. *Introduction to Information
+Retrieval* (Manning, Raghavan & Schütze; chs. 6 & 8) supplies **idf_t = log(N/df_t)**,
+the composite **tf-idf_{t,d} = tf_{t,d} × idf_t** and the document-as-vector overlap
+score; the set-based measures (precision, recall, **F = 2PR/(P+R)**) with the textbook's
+own argument for why **accuracy fails under class skew** (>99.9% nonrelevant); and the
+ranked-retrieval measures (precision–recall curve, interpolated precision, **MAP**,
+Precision@k, **R-precision ≡ break-even point**, and **nDCG** for graded relevance)
+([textbook bedrock](docs/findings/d2fbbb962-textbook-grounded-retrieval-scoring-and-evaluation-metrics.md)).
+The finding is openly honest about a corpus defect it surfaced — the ingested "SLP3 ch.6"
+file is actually the *Neural Networks* chapter, so cosine/embeddings stay ungrounded (gap
+queued). **Implication:** these are the primary definitions a downstream metric component
+can trust as bedrock; the earlier blog-sourced draft was rejected, and this replaces it on
+chapter prose — closing the last ungrounded domain.
+
 ### Prompting & context: escalate cost only when it pays; don't stuff the context window
 On the prompting ladder (few-shot → CoT → self-consistency → ToT), the in-corpus *numbers*
 are blog-relayed (the originating papers aren't yet gathered) and so non-load-bearing; the
@@ -240,16 +256,18 @@ rerank, filter-before-search) is dev-agency blog-consensus — sensible defaults
   ([06](docs/findings/d73a9474e-graphrag-colbert-shared-benchmark-primary-evidence.md)).
 
 ## Not yet grounded
-The earlier spike asserted these as a complete pipeline; **no promoted finding backs them
-yet** — they await the empty domains and must not be treated as evidenced:
+Every domain is grounded, but these specific claims are **not yet backed by a promoted
+finding** — each is a narrow corner awaiting a primary-source upgrade, and must not be
+treated as evidenced until gathered:
 - **A/B-test power & effect-size methodology** — 02's finding covers causal identification
   (DAGs, do-calculus, potential outcomes) but not experiment-design power; that gap is queued.
 - **MADR/ADR decision-record *format*** (fields, template, Nygard practice) — 03 grounds the
   *scoring methods* (ACH, weighted MCDM) but not the record schema; queued as a 03 gap.
-- **IR/NLP textbook bedrock (tf-idf, MAP/nDCG, precision/recall definitions)** — 15 still
-  ungrounded: the draft was rejected because the formulas traced to blog summaries while the
-  Stanford IR-book / SLP3 sources were TOC/abstract pages; needs the actual chapter prose
-  (nlp.stanford.edu/IR-book/html, SLP3 PDF). Gap queued.
+- **Vector-semantics / cosine (the modern continuation of tf-idf)** — 15's textbook bedrock
+  now grounds tf-idf and the IR-evaluation metrics on the IR-book chapters, but cosine
+  normalization and embeddings stay ungrounded: the ingested "SLP3 ch.6" file is actually the
+  *Neural Networks* chapter, so the genuine vector-semantics/embeddings chapter (tf-idf in NLP,
+  PPMI, cosine) is still queued.
 - **Prompting-ladder *numbers*** — 10's finding anchors lost-in-the-middle and the
   cost-tiering principle, but the CoT/self-consistency/ToT *benchmark numbers* are blog-relayed;
   the originating papers (Wei 2201.11903, Wang 2203.11171, Yao 2305.10601) are queued.
@@ -264,7 +282,7 @@ yet** — they await the empty domains and must not be treated as evidenced:
   and the per-domain notes); each is a narrow ungathered corner, not an empty domain.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1612 nodes / 1609 links** (57 of those
+A graphify pass over the corpus currently yields **1638 nodes / 1638 links** (57 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

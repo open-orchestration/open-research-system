@@ -19,3 +19,4 @@
 - [Prompting-Technique Ladder and Context Management: What Is Paper-Anchored vs Blog-Relayed](d0cce1cec-prompting-ladder-context-management-paper-anchored-vs-blog-relayed.md) — 10-context-prompt-engineering
 - [Reproducible tracking is docs-anchored; index freshness is a blog-relayed engineering pattern](d470b6824-reproducible-tracking-docs-anchored-index-freshness-blog-relayed.md) — 11-research-pipeline-engineering
 - [Applied playbooks split by evidence tier: deep-research architecture anchored to a survey and practitioner write-up; production-RAG retrieval craft is blog-consensus](d603c3334-convergent-playbook-anchored-architecture-blog-consensus-rag-craft.md) — 04-applied-research-playbooks
+- [Textbook-grounded retrieval scoring and ranked-retrieval evaluation metrics](d2fbbb962-textbook-grounded-retrieval-scoring-and-evaluation-metrics.md) — 15-textbooks-longform
