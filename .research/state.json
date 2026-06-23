@@ -2664,10 +2664,10 @@
     "dirty": false,
     "last_update": null,
     "node_count": 1638,
-    "edge_count": 1638
+    "edge_count": 1641
   },
   "assertions": {
-    "count": 57,
+    "count": 60,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [

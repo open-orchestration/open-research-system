@@ -282,7 +282,7 @@ treated as evidenced until gathered:
   and the per-domain notes); each is a narrow ungathered corner, not an empty domain.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1638 nodes / 1638 links** (57 of those
+A graphify pass over the corpus currently yields **1638 nodes / 1641 links** (60 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
