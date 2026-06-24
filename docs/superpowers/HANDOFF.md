@@ -20,18 +20,20 @@ ledger — **`.research/state.json`** ("the agent forgets, the repo remembers"):
 The convergence orchestrator (`scripts/orchestrator.py`) decides phase
 (`gather`/`deepen`/`synthesize`) as a stateless function of state signals.
 
-## Current state (HEAD `ac8965d`; working tree clean modulo `public/dashboard.html`)
-- **19 promoted findings / 4 rejected.** Corpus **150**. Graph **1612 nodes / 1609 links**
-  (`dirty:false`). **57 graph assertions** (overlay `.research/graph-assertions.jsonl`).
+## Current state (HEAD `172379c`; working tree clean modulo `public/dashboard.html`)
+- **21 promoted findings / 4 rejected.** Corpus **159**. Graph **1653 nodes / 1662 links**
+  (`dirty:false`). **60 graph assertions** (overlay `.research/graph-assertions.jsonl`).
   Phase `deepen`.
-- **16 of 17 domains grounded** — only **15 textbooks-longform** remains ungrounded.
-  Grounded: 01 epistemics, 02 statistical-causal, 03 decision-frameworks, 04 applied-playbooks,
-  05 deep-research (2), 06 rag-retrieval (2), 07 agentic-orchestration (2), 08 grounding-truth,
-  09 knowledge-graphs, 10 context-prompt-eng, 11 pipeline-eng, 12 tooling-landscape,
-  13 reference-systems, 14 papers, 16 evaluation-benchmarks, 17 specs-standards.
-- **15 textbooks-longform** is the lone empty domain: its draft was REJECTED because the
-  metric/tf-idf formulas traced to blog summaries while the Stanford IR-book / SLP3 sources
-  were TOC/abstract pages only. Needs the actual chapter prose.
+- **17 of 17 domains grounded** — the breadth bar is fully met. Every domain has ≥1 finding
+  past the citation + faithfulness + independent-reviewer gates. Grounded: 01 epistemics,
+  02 statistical-causal, 03 decision-frameworks, 04 applied-playbooks, 05 deep-research (2),
+  06 rag-retrieval (2), 07 agentic-orchestration (2), 08 grounding-truth, 09 knowledge-graphs,
+  10 context-prompt-eng (2), 11 pipeline-eng, 12 tooling-landscape, 13 reference-systems,
+  14 papers, 15 textbooks-longform, 16 evaluation-benchmarks, 17 specs-standards.
+- **No empty domains remain.** 15 was grounded this session on the actual IR-book chapter
+  prose (d2fbbb962); 10 was upgraded blog→paper-anchored (d0b1fc5c6, the CoT/self-consistency/
+  ToT originating papers); 07's head-to-head cross-links re-asserted. What's left is depth:
+  narrow per-domain gaps that upgrade a blog-tier claim to primary (see Next steps).
 
 ## Working tree (clean at handoff)
 All research work is committed through `ac8965d`. Outstanding, NOT to be touched/committed:
@@ -138,33 +140,36 @@ Design specs live in `docs/superpowers/specs/` (6 files; umbrella
 `2026-06-17-open-research-system-design.md`).
 
 ## Next steps (pick up here)
-DONE (committed through `ac8965d`): all 17 domains attempted; **16 grounded**. The arcs:
+DONE this session (committed through `172379c`): **all 17 domains grounded.** The arcs:
 methodology 01/02/03 (`ecd3a60`); 05/07 deepened + 06 reject (`06ca23c`); tooling/reference
-12/13 (`8d9dbfd`); applied/literature 04/10/11/14 + 15 reject (`ac8965d`). Root
-`SYNTHESIS.md` re-grounded after each (now 19 findings / 16 domains).
+12/13 (`8d9dbfd`); applied/literature 04/10/11/14 + 15 reject (`ac8965d`); **ground 15 on the
+IR-book chapter prose (`d5bee4b`); re-assert 07's 3 head-to-head cross-links (`40782e0`);
+paper-anchor the 10 prompting ladder (`172379c`).** Root `SYNTHESIS.md` re-grounded after each
+(now 21 findings / 17 domains).
 
-**The engine has covered the breadth.** What's left is depth/quality, not new domains. Pick up
-on whichever of these matters most — each is small and self-contained, NOT a full arc:
+**Breadth is fully done; the last mile is the remaining narrow item-2 gaps.** Each upgrades a
+blog-tier claim to primary on an *already-grounded* domain — small and self-contained, NOT a
+full 17-domain sweep. The proven technique for primaries that the search engine keeps missing
+(it lands on TOC/landing pages): bypass `search.py` and feed the **exact** URLs as `.url`
+files (HTML chapters) or download the **PDF** into `ingest/` directly (arXiv papers) — ingest
+records the real URL/file as provenance, then run the normal fold→draft→review→promote arc.
+This is how 15 (IR-book `.url` chapters) and 10 (arXiv PDFs) were grounded this session.
 
-1. **Ground 15 textbooks (the lone empty domain)** — REDRAFT, no full re-gather needed. The
-   sources are in corpus but the IR-book/SLP3 captures were TOC/abstract pages. Gather the
-   actual chapter prose (a queued 15 gap names `nlp.stanford.edu/IR-book/html/htmledition` and
-   the SLP3 PDF), then draft a finding whose tf-idf/MAP/nDCG/precision-recall definitions cite
-   the textbook chapters, not blogs. This is the one domain that flips 16→17.
-
-2. **Close the queued narrow gaps** (each upgrades a blog-tier claim to primary). Search-drain
-   then redraft/deepen the owning finding:
-   - 10: originating prompting papers (Wei 2201.11903 CoT, Wang 2203.11171 self-consistency,
-     Yao 2305.10601 ToT) — flips the ladder numbers from blog-relayed to paper-anchored.
-   - 06: real arXiv ColBERT primaries (2004.12832, 2112.01488) — enables a clean redraft of the
-     rejected late-interaction-economics angle.
-   - 11: official ingestion-docs / CDC spec for index-freshness (currently blog-only).
-   - 12 framework docs / 13 GPT-Researcher repo for doc-anchoring; 02 A/B-test power; 03 MADR
-     record-format. All have queued gaps.
-
-3. **Re-assert 07's cross-links** — `df8e7fa14`'s own graph node exists now; add its 3 skipped
-   assertions (→ `d5c35de17`, → `findings_07_multiagent_15x_cost`, → `concept_halt_decision_axis`).
-   Verify exact node ids in `.graphify/graph.json` first.
+Remaining queued gaps (pick whichever matters most):
+- **06: real arXiv ColBERT primaries** (2004.12832 Khattab, 2112.01488 ColBERTv2/Santhanam) —
+  enables a clean redraft of the rejected late-interaction-economics angle. 06 currently has
+  the most uncited corpus; gaps `g1099431b`/`ga344680a`/`gade3c1ff` name these.
+- **11: official ingestion-docs / CDC spec** for index-freshness (currently blog-only; gap
+  `g541ae49b`).
+- **12: framework docs** (LangGraph/LlamaIndex/DSPy/AutoGen official docs, DSPy arXiv) to
+  doc-anchor the execution-model taxonomy (gaps `g570ec33f`/`g7d75ddab`).
+- **13: GPT-Researcher repo/docs** for planner/executor/publisher internals (gaps
+  `g77ddbc9c`/`g4ae1798d`).
+- **02: A/B-test power / effect-size** experiment-design (gap `g483338f1`); **03: MADR/ADR
+  record format** (gap `g5abb13ba`).
+- **15 follow-up:** the ingested "SLP3 ch.6" PDF is actually the *Neural Networks* chapter —
+  the genuine vector-semantics/embeddings chapter (tf-idf in NLP, PPMI, cosine) is still
+  ungathered (gap queued); cosine normalization stays ungrounded.
 
 **Provenance is THE reject axis** (4 rejects, 3 on this exact failure). Every drafter must open
 each source, read its `source_url`, and label primary-paper/official-doc/repo vs
@@ -178,6 +183,6 @@ assertion pointed at a `sources_…` node that the next fold renamed, failing in
 to re-point the overlay line to the current id. **Prefer stable concept/synthesis/findings
 nodes over `sources_…` nodes when asserting** — they survive rebuilds; source nodes don't.
 
-**Definitive bar:** 16 of 17 domains grounded; SYNTHESIS's "Not yet grounded" is down to 15
-textbooks + a handful of narrow queued corners. Grounding 15 and closing item-2's gaps is the
-last mile to "definitive."
+**Definitive bar:** 17 of 17 domains grounded — breadth complete. SYNTHESIS's "Not yet
+grounded" is now only a handful of narrow queued corners (each a blog→primary upgrade on an
+already-grounded domain). Closing those is the last mile to "definitive."
