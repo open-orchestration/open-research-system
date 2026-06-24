@@ -889,7 +889,7 @@
       "topic": "10-context-prompt-engineering",
       "desc": "Chain-of-Draft and token-budget-aware reasoning primary source (currently cited by one blog, unverified)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -3554,13 +3554,24 @@
       "extracted_path": "docs/02-statistical-causal-inference/sources/c213028d1-g67421383-lee-lemieux-rdd-3.md",
       "lossy": false,
       "ingested_at": "2026-06-24T19:34:26.097511+00:00"
+    },
+    {
+      "id": "c810db9f5",
+      "title": "g14b00688-chain-of-draft-2502.18600-1",
+      "source": "https://arxiv.org/abs/2502.18600",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g14b00688-chain-of-draft-2502.18600-1.md",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/c810db9f5-g14b00688-chain-of-draft-2502-18600-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T19:45:29.021072+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2256,
-    "edge_count": 2475
+    "node_count": 2295,
+    "edge_count": 2518
   },
   "assertions": {
     "count": 66,
@@ -4389,6 +4400,17 @@
       "created_at": "2026-06-24T19:41:08.224163+00:00",
       "promoted_path": "docs/findings/df8ca1aeb-quasi-experimental-identification-iv-did-rdd.md",
       "promoted_at": "2026-06-24T19:43:33.342523+00:00"
+    },
+    {
+      "id": "d6432467b",
+      "topic": "10-context-prompt-engineering",
+      "title": "Chain of Draft: Primary-Source Numbers for Token-Budget Reasoning (Upgrading a Blog-Relayed Claim)",
+      "path": "docs/findings/_drafts/d6432467b-chain-of-draft-token-budget-reasoning-primary.md",
+      "status": "promoted",
+      "cites": [],
+      "created_at": "2026-06-24T19:51:22.953990+00:00",
+      "promoted_path": "docs/findings/d6432467b-chain-of-draft-token-budget-reasoning-primary.md",
+      "promoted_at": "2026-06-24T19:53:31.990892+00:00"
     }
   ]
 }

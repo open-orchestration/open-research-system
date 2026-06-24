@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **46 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **47 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -468,6 +468,14 @@ degrades in the middle, even for long-context models — so prefer **targeted re
 context-stuffing**, and escalate the reasoning ladder only when expected value beats added
 token cost
 ([prompting/context](docs/findings/d0cce1cec-prompting-ladder-context-management-paper-anchored-vs-blog-relayed.md)).
+The cheap rung of that ladder — **Chain of Draft** (Xu et al., Zoom, arXiv:2502.18600) — is now
+primary-grounded rather than blog-relayed: prompting the model to keep a *minimal draft per step*
+("five words at most," not enforced) instead of verbose CoT cuts output dramatically. On GSM8K
+this is an honest **trade, not a free lunch** — accuracy drops ~4 points (GPT-4o 95.4%→91.1%;
+Claude 3.5 Sonnet 95.8%→91.4%) for ~79% fewer output tokens (205→44; 190→40) and large latency
+cuts (4.2s→1.0s; 3.1s→1.6s); the abstract's "matches or surpasses CoT at as little as 7.6% of
+the tokens" is an *across-task* claim, not the GSM8K figure
+([Chain of Draft](docs/findings/d6432467b-chain-of-draft-token-budget-reasoning-primary.md)).
 
 ### Operations: reproducible tracking is docs-settled; index freshness is convention
 **MLflow** (official docs) supplies the reproducibility model the engine already mirrors —
@@ -575,7 +583,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2256 nodes / 2475 links** (66 of those
+A graphify pass over the corpus currently yields **2295 nodes / 2518 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

@@ -46,3 +46,4 @@
 - [FSM-guided constrained decoding: regex/grammar → finite-state index for reliable structured LLM output](d270b0177-fsm-guided-constrained-decoding-json-schema-structured-output.md) — 10-context-prompt-engineering
 - [Confidence Sequences: The Nonparametric, LIL-Rate Machinery Behind Anytime-Valid A/B Inference](d541a8e56-nonparametric-time-uniform-confidence-sequences-lil-rate.md) — 02-statistical-causal-inference
 - [Quasi-experimental identification when you cannot randomize: IV/LATE, difference-in-differences, and regression discontinuity each buy a local effect with a design-specific assumption](df8ca1aeb-quasi-experimental-identification-iv-did-rdd.md) — 02-statistical-causal-inference
+- [Chain of Draft: Primary-Source Numbers for Token-Budget Reasoning (Upgrading a Blog-Relayed Claim)](d6432467b-chain-of-draft-token-budget-reasoning-primary.md) — 10-context-prompt-engineering
