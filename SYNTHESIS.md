@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **21 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **22 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -31,7 +31,14 @@ late-interaction trades index size for sub-linear rerank cost — all from peer-
 sources, not vendor blogs
 ([GraphRAG/ColBERT shared-benchmark evidence](docs/findings/d73a9474e-graphrag-colbert-shared-benchmark-primary-evidence.md)).
 **Implication:** default to hybrid+rerank; prove naive retrieval insufficient on *your*
-corpus before adding GraphRAG or late-interaction.
+corpus before adding GraphRAG or late-interaction. The *cost* case for late interaction is
+now primary-grounded: the ColBERT/ColBERTv2 papers themselves show it reallocates
+BERT-grade understanding to a one-time offline document encoding, collapsing query-time cost
+to embedding transfer plus a pruning-friendly MaxSim (~170× speedup, ~14,000× fewer
+FLOPs/query vs a BERT reranker at competitive MRR@10); the design's one liability — a
+per-token index an order of magnitude larger — is what v2's residual compression cuts from
+154 GiB to 16–25 GiB (6–10×) at 50–250 ms/query with no reported quality loss
+([late-interaction economics](docs/findings/d6ccd6b1c-late-interaction-colbert-economics.md)).
 
 ### Deep-research agents beat search-augmented chat LLMs — but citation accuracy and volume trade off
 On DeepResearch-Bench, purpose-built deep-research agents measurably outscore
@@ -257,12 +264,15 @@ rerank, filter-before-search) is dev-agency blog-consensus — sensible defaults
   must be validated against a human-labeled set before it can gate anything
   ([08](docs/findings/dfa42bc8a-faithfulness-measurement-machinery.md),
   [16](docs/findings/d6fad1a98-two-evaluation-regimes-frozen-web-agent-benchmarks-vs-decomposed-rag-harnesses.md)).
-- **Reranker economics unquantified by primaries** — concrete latency/$/NDCG numbers in
-  corpus still come from marketing blogs or an AI-summary aggregator (emergentmind). A
-  *second* 06 finding was rejected this session for citing that aggregator while claiming
-  arXiv provenance; the controlled ColBERT-vs-cross-encoder benchmark and the actual arXiv
-  ColBERT primaries (2004.12832, 2112.01488) are still ungathered
-  ([06](docs/findings/d73a9474e-graphrag-colbert-shared-benchmark-primary-evidence.md)).
+- **Cross-encoder reranker economics still unquantified by primaries** — the ColBERT
+  *late-interaction* economics are now primary-grounded from the arXiv papers themselves
+  (2004.12832, 2112.01488: FLOPs, latency, recall, index-storage compression)
+  ([06](docs/findings/d6ccd6b1c-late-interaction-colbert-economics.md)). What remains
+  blog-only is the *cross-encoder* reranker side: concrete latency/$/NDCG figures still come
+  from marketing blogs or an AI-summary aggregator (emergentmind) — a 06 finding was rejected
+  this session for citing that aggregator while claiming arXiv provenance — and there is still
+  no controlled, same-corpus ColBERT-vs-cross-encoder head-to-head NDCG/recall table from a
+  peer-reviewed source.
 
 ## Not yet grounded
 Every domain is grounded, but these specific claims are **not yet backed by a promoted
@@ -289,11 +299,12 @@ treated as evidenced until gathered:
   these came from the old topic-07 stub; the *promoted* 07 findings cover halt-bounding and
   the no-clean-head-to-head provenance result, not the cost multipliers.
 - **A/B-test power, MADR record-format, doc-anchored framework taxonomy, GPT-Researcher
-  internals, real arXiv ColBERT primaries** — all have queued gaps (see the tensions above
-  and the per-domain notes); each is a narrow ungathered corner, not an empty domain.
+  internals, controlled cross-encoder-vs-ColBERT head-to-head** — all have queued gaps (see
+  the tensions above and the per-domain notes); each is a narrow ungathered corner, not an
+  empty domain.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1653 nodes / 1662 links** (60 of those
+A graphify pass over the corpus currently yields **1680 nodes / 1716 links** (62 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

@@ -329,7 +329,7 @@
       "topic": "06-rag-retrieval",
       "desc": "peer-reviewed controlled ColBERT-vs-cross-encoder NDCG/Recall head-to-head table (current ColBERT controlled sources are blogs/aggregators)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -609,7 +609,7 @@
       "topic": "06-rag-retrieval",
       "desc": "Controlled same-corpus ColBERT-vs-cross-encoder head-to-head with per-query latency AND NDCG under identical conditions (currently per-query latency/cost is practitioner-only)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -625,7 +625,7 @@
       "topic": "06-rag-retrieval",
       "desc": "Primary arXiv ColBERT papers themselves (2004.12832 Khattab, 2112.01488 ColBERTv2/Santhanam) for recall@1k / rerank-latency / FLOPs / storage numbers — corpus currently has only an emergentmind aggregator restating them",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -952,6 +952,30 @@
       "id": "g254bbd76",
       "topic": "10-context-prompt-engineering",
       "desc": "Cost-normalized (accuracy per token/dollar) head-to-head of CoT vs self-consistency vs ToT on a shared benchmark — escalation economics remain qualitative, not a measured curve",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g33e50ecc",
+      "topic": "06-rag-retrieval",
+      "desc": "ColBERTv2 end-to-end indexing wall-clock / GPU-hours cost (v2 quantifies storage+latency but not its own index build time)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g37400f5d",
+      "topic": "06-rag-retrieval",
+      "desc": "late-interaction query latency at 100M-1B passage corpora (both papers' latency numbers are MS MARCO ~9M scale only)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g7191a792",
+      "topic": "06-rag-retrieval",
+      "desc": "late-interaction vs learned-sparse (SPLADEv2) normalized cost-per-query at equal hardware (papers report quality not cost-normalized comparison)",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -2707,16 +2731,38 @@
       "extracted_path": "docs/10-context-prompt-engineering/sources/c24586afe-arxiv-2305-10601-yao-tree-of-thoughts.md",
       "lossy": false,
       "ingested_at": "2026-06-23T20:38:38.717465+00:00"
+    },
+    {
+      "id": "cbb096e41",
+      "title": "colbert-khattab-2020",
+      "source": "https://arxiv.org/abs/2004.12832",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/colbert-khattab-2020.pdf",
+      "extracted_path": "docs/06-rag-retrieval/sources/cbb096e41-colbert-khattab-2020.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T13:11:12.359090+00:00"
+    },
+    {
+      "id": "c7b11e5a5",
+      "title": "colbertv2-santhanam-2021",
+      "source": "https://arxiv.org/abs/2112.01488",
+      "topic": "06-rag-retrieval",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/colbertv2-santhanam-2021.pdf",
+      "extracted_path": "docs/06-rag-retrieval/sources/c7b11e5a5-colbertv2-santhanam-2021.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T13:11:13.954474+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1653,
-    "edge_count": 1662
+    "node_count": 1680,
+    "edge_count": 1716
   },
   "assertions": {
-    "count": 60,
+    "count": 62,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -3182,6 +3228,20 @@
       "created_at": "2026-06-24T12:38:18.546616+00:00",
       "promoted_path": "docs/findings/d0b1fc5c6-paper-anchored-prompting-ladder.md",
       "promoted_at": "2026-06-24T12:40:25.018060+00:00"
+    },
+    {
+      "id": "d6ccd6b1c",
+      "topic": "06-rag-retrieval",
+      "title": "Late-interaction retrieval economics: what the ColBERT primaries actually establish",
+      "path": "docs/findings/_drafts/d6ccd6b1c-late-interaction-colbert-economics.md",
+      "status": "promoted",
+      "cites": [
+        "cbb096e41",
+        "c7b11e5a5"
+      ],
+      "created_at": "2026-06-24T13:22:28.786566+00:00",
+      "promoted_path": "docs/findings/d6ccd6b1c-late-interaction-colbert-economics.md",
+      "promoted_at": "2026-06-24T13:26:22.258150+00:00"
     }
   ]
 }
