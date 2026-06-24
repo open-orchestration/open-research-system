@@ -1121,7 +1121,7 @@
       "topic": "02-statistical-causal-inference",
       "desc": "Always-valid multiple-testing control (FWER/FDR under continuous monitoring) — Johari mentions it but the mechanics are not grounded",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -3639,13 +3639,24 @@
       "extracted_path": "docs/16-evaluation-benchmarks/sources/c4f5787db-process-jsonschemabench-2501-10868-1.md",
       "lossy": false,
       "ingested_at": "2026-06-24T20:39:02.525431+00:00"
+    },
+    {
+      "id": "ca971f6ec",
+      "title": "g32860b29-yang-online-fdr-ab-testing-1",
+      "source": "https://arxiv.org/abs/1706.05378",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g32860b29-yang-online-fdr-ab-testing-1.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/ca971f6ec-g32860b29-yang-online-fdr-ab-testing-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T20:48:59.754439+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2452,
-    "edge_count": 2758
+    "node_count": 2473,
+    "edge_count": 2786
   },
   "assertions": {
     "count": 66,
@@ -4540,6 +4551,17 @@
       "created_at": "2026-06-24T20:44:55.127480+00:00",
       "promoted_path": "docs/findings/dd09194c4-jsonschemabench-constrained-decoding-reliability.md",
       "promoted_at": "2026-06-24T20:46:40.898652+00:00"
+    },
+    {
+      "id": "d42ec736c",
+      "topic": "02-statistical-causal-inference",
+      "title": "Online FDR Control for Streams of A/B Tests: Interleaving Always-Valid MAB p-values with LORD",
+      "path": "docs/findings/_drafts/d42ec736c-online-fdr-continuous-ab-test-streams-lord.md",
+      "status": "promoted",
+      "cites": [],
+      "created_at": "2026-06-24T20:54:37.767475+00:00",
+      "promoted_path": "docs/findings/d42ec736c-online-fdr-continuous-ab-test-streams-lord.md",
+      "promoted_at": "2026-06-24T20:57:00.724381+00:00"
     }
   ]
 }

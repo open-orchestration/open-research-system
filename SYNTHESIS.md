@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **52 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **53 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -339,7 +339,16 @@ sub-Gaussian/sub-gamma/matrix-martingale framework also yields SATE under Neyman
 ([confidence sequences](docs/findings/d541a8e56-nonparametric-time-uniform-confidence-sequences-lil-rate.md)).
 **Decision rule:** pre-register *n* and look once → Kohavi sizing; monitor continuously and stop
 when convinced → always-valid / mSPRT — an autonomous engine reacting to its own results is by
-construction in the second case. Identification (Pearl/Rubin) says *when* an effect is estimable;
+construction in the second case. And when the engine runs **many** continuously-monitored tests
+over time, single-test validity is not enough — it must control the **false-discovery rate across
+the family**, now grounded on Yang, Ramdas, Jamieson & Wainwright (arXiv:1706.05378)
+([online FDR for A/B-test streams](docs/findings/d42ec736c-online-fdr-continuous-ab-test-streams-lord.md)):
+interleave **always-valid sequential p-values** (so each test can be peeked at any time) with an
+**online-FDR algorithm** — LORD (Javanmard-Montanari), an *alpha-investing* scheme that starts with
+an α-wealth `W(0)<α` and spends a fraction of it per test, earning wealth back on each rejection — to
+get **any-time mFDR control** over the whole stream. Single test → always-valid p-values/mSPRT;
+stream of tests → online FDR on top.
+Identification (Pearl/Rubin) says *when* an effect is estimable;
 this says *how big an experiment* must be to see it, and *how to stop early without lying*.
 
 When randomization is impossible, three **quasi-experimental designs** each buy identification
@@ -595,10 +604,10 @@ treated as evidenced until gathered:
   What stays queued is **sample-size cost under
   SUTVA violations / interference** (gd78c76ea): the always-valid result assumes *independent*
   units, so shared cache/model/rate-limit coupling and network/marketplace effects need a
-  separate primary (cluster-randomization / network-interference literature). Also queued:
-  **always-valid multiple-testing control (FWER/FDR under continuous monitoring)** (g32860b29) —
-  Howard et al. develops single-target confidence sequences only, so familywise/false-discovery
-  machinery under continuous monitoring still needs an online-FDR primary.
+  separate primary (cluster-randomization / network-interference literature). (The
+  always-valid *multiple-testing* corner — FDR under continuous monitoring — is **now grounded**
+  on Yang et al.'s online-FDR/LORD framework, d42ec736c; what remains beyond it is the stricter
+  *FWER* criterion under continuous monitoring, which that mFDR-centered paper does not target.)
 - **ADR digit-padding convention (minor residual)** — Nygard's original five-section template
   AND the decision-log numbering/supersede convention are now grounded on Nygard's own 2011 post
   + Nat Pryce's `adr-tools`
@@ -642,7 +651,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2452 nodes / 2758 links** (66 of those
+A graphify pass over the corpus currently yields **2473 nodes / 2786 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

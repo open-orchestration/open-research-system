@@ -52,3 +52,4 @@
 - [Estimating the ATE under ignorability: propensity-score stratification, IPW, and the doubly-robust estimator's two chances to be right](d77c7f685-propensity-score-ipw-doubly-robust-ate-estimation.md) — 02-statistical-causal-inference
 - [biblatex extends legacy BibTeX: web-native/modern entry types (@online, @thesis, @dataset, @software) and modern fields (urldate, eprint, doi, pubstate)](de47719c4-biblatex-expanded-entry-types-modern-fields.md) — 17-specs-standards
 - [JSONSchemaBench: constrained decoding is not a uniform capability — frameworks differ ~2x in real-world schema support, yet constrained decoding helps downstream quality (up to 4%)](dd09194c4-jsonschemabench-constrained-decoding-reliability.md) — 16-evaluation-benchmarks
+- [Online FDR Control for Streams of A/B Tests: Interleaving Always-Valid MAB p-values with LORD](d42ec736c-online-fdr-continuous-ab-test-streams-lord.md) — 02-statistical-causal-inference
