@@ -401,7 +401,7 @@
       "topic": "16-evaluation-benchmarks",
       "desc": "GAIA and BrowseComp actual task design + reported scores (mislabeled source held DRB instead)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1176,6 +1176,14 @@
       "id": "g3518bee2",
       "topic": "17-specs-standards",
       "desc": "field-level CSL-variable <-> BibTeX-field <-> schema.org-property bidirectional crosswalk table (current concordance is type-level only)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g2828a80a",
+      "topic": "16-evaluation-benchmarks",
+      "desc": "BrowseComp test-time scaling: Deep Research best-of-N / parallel-sampling pass-rate gains + per-difficulty distribution (beyond headline 51.5%)",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -3272,13 +3280,35 @@
       "extracted_path": "docs/17-specs-standards/sources/c4cc2cbe7-gccab40e9-schemaorg-citation-property.md",
       "lossy": false,
       "ingested_at": "2026-06-24T16:59:34.220480+00:00"
+    },
+    {
+      "id": "cedea9fbe",
+      "title": "g5b7fa51c-browsecomp-browsing-agents-benchmark",
+      "source": "https://arxiv.org/abs/2504.12516",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g5b7fa51c-browsecomp-browsing-agents-benchmark.pdf",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/cedea9fbe-g5b7fa51c-browsecomp-browsing-agents-benchmark.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T17:13:38.789511+00:00"
+    },
+    {
+      "id": "c57655b9e",
+      "title": "g97730f96-gaia-benchmark-general-ai-assistants",
+      "source": "https://arxiv.org/abs/2311.12983",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g97730f96-gaia-benchmark-general-ai-assistants.pdf",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/c57655b9e-g97730f96-gaia-benchmark-general-ai-assistants.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T17:13:40.706885+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1992,
-    "edge_count": 2141
+    "node_count": 2021,
+    "edge_count": 2181
   },
   "assertions": {
     "count": 66,
@@ -3959,6 +3989,20 @@
       "created_at": "2026-06-24T17:08:41.428679+00:00",
       "promoted_path": "docs/findings/d59d1279b-citation-interchange-formats-csl-bibtex-schemaorg.md",
       "promoted_at": "2026-06-24T17:11:37.432696+00:00"
+    },
+    {
+      "id": "d69d7458e",
+      "topic": "16-evaluation-benchmarks",
+      "title": "GAIA and BrowseComp: task design and reported human-vs-agent accuracy scores",
+      "path": "docs/findings/_drafts/d69d7458e-gaia-browsecomp-task-design-scores.md",
+      "status": "promoted",
+      "cites": [
+        "c57655b9e",
+        "cedea9fbe"
+      ],
+      "created_at": "2026-06-24T17:20:59.119419+00:00",
+      "promoted_path": "docs/findings/d69d7458e-gaia-browsecomp-task-design-scores.md",
+      "promoted_at": "2026-06-24T17:22:29.406306+00:00"
     }
   ]
 }

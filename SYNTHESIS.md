@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **35 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **36 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -55,6 +55,15 @@ vendor-neutral leaderboards) is the only cross-vendor comparable** — cost, lat
 "internal architecture of closed agents" are vendor-reported or third-party-reconstructed,
 not independently verified, and must be carried as attributed, never as fact
 ([benchmark-accuracy-only](docs/findings/d369c3d06-benchmark-accuracy-is-the-only-cross-vendor-comparable.md)).
+Those two cross-vendor benchmarks are **now grounded on their primary papers**: **GAIA**
+(arXiv:2311.12983; 466 questions across three difficulty levels graded by quasi-exact-match)
+embodies an asymmetry-of-difficulty design — human respondents 92% vs GPT-4-with-plugins 15% —
+while **BrowseComp** (OpenAI, arXiv:2504.12516; 1,266 problems inverted from hard-to-find/
+easy-to-verify seed answers) reports human trainers solving only 29.2% yet OpenAI Deep Research
+reaching 51.5% (vs GPT-4o 0.6%, o1 9.9%). The shared signature — a wide human-vs-model gap that
+purpose-built browsing/tool-use agents close far more than chat models — is exactly why these
+are the comparables a deep-research engine should be scored against
+([GAIA/BrowseComp scores](docs/findings/d69d7458e-gaia-browsecomp-task-design-scores.md)).
 And the self-correction methods (ReAct/Reflexion/CRAG/Self-RAG) have **no clean
 same-benchmark head-to-head** — published deltas come from different papers on different
 setups; only the CRAG benchmark and a controlled multi-agent-debate study are genuine
@@ -456,7 +465,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1992 nodes / 2141 links** (66 of those
+A graphify pass over the corpus currently yields **2021 nodes / 2181 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

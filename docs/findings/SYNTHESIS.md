@@ -35,3 +35,4 @@
 - [FActScore atomic-fact precision and RARR attribution editing: two grounding-truth primitives, grounded on their own papers](d1ad78766-factscore-atomic-precision-and-rarr-attribution-editing.md) — 08-grounding-truth
 - [MCP 2025-06-18 spec internals: primitives, transports, OAuth authorization, and Resources as an append-only corpus store](d3c246500-mcp-spec-internals-primitives-transports-auth-resources.md) — 17-specs-standards
 - [Citation interchange formats: CSL-JSON type enum + required fields, BibTeX entry-type field tables, schema.org citation/ScholarlyArticle](d59d1279b-citation-interchange-formats-csl-bibtex-schemaorg.md) — 17-specs-standards
+- [GAIA and BrowseComp: task design and reported human-vs-agent accuracy scores](d69d7458e-gaia-browsecomp-task-design-scores.md) — 16-evaluation-benchmarks
