@@ -753,7 +753,7 @@
       "topic": "10-context-prompt-engineering",
       "desc": "Structured-output and JSON-schema constrained decoding for reliable LLM tool/function calling",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1208,6 +1208,14 @@
       "id": "g904d04e5",
       "topic": "01-methodology-epistemics",
       "desc": "current GRADE vocabulary upgrade: newer GRADE source using 'certainty of evidence' + 'strong vs conditional recommendation' (handbook in corpus is the Oct-2013 'quality'/'weak' edition)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g3460ddda",
+      "topic": "10-context-prompt-engineering",
+      "desc": "JSON-schema-keyword-level constraint compilation (schema -> regex -> FSM) primary: Outlines 2307.09702 grounds FSM/regex/CFG but not schema-keyword compilation specifically",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -3491,13 +3499,24 @@
       "extracted_path": "docs/17-specs-standards/sources/c93368f06-gdb207ceb-mcp-tools-spec.md",
       "lossy": false,
       "ingested_at": "2026-06-24T18:31:54.358167+00:00"
+    },
+    {
+      "id": "c328a44fb",
+      "title": "gc4e28042-outlines-guided-generation",
+      "source": "https://arxiv.org/abs/2307.09702",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/gc4e28042-outlines-guided-generation.pdf",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/c328a44fb-gc4e28042-outlines-guided-generation.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T18:42:27.498809+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2196,
-    "edge_count": 2404
+    "node_count": 2205,
+    "edge_count": 2413
   },
   "assertions": {
     "count": 66,
@@ -4291,6 +4310,19 @@
       "created_at": "2026-06-24T18:38:28.507845+00:00",
       "promoted_path": "docs/findings/d4562e116-mcp-tools-prompts-message-shapes-security.md",
       "promoted_at": "2026-06-24T18:40:54.731618+00:00"
+    },
+    {
+      "id": "d270b0177",
+      "topic": "10-context-prompt-engineering",
+      "title": "FSM-guided constrained decoding: regex/grammar → finite-state index for reliable structured LLM output",
+      "path": "docs/findings/_drafts/d270b0177-fsm-guided-constrained-decoding-json-schema-structured-output.md",
+      "status": "promoted",
+      "cites": [
+        "c328a44fb"
+      ],
+      "created_at": "2026-06-24T18:47:42.394519+00:00",
+      "promoted_path": "docs/findings/d270b0177-fsm-guided-constrained-decoding-json-schema-structured-output.md",
+      "promoted_at": "2026-06-24T18:49:28.070173+00:00"
     }
   ]
 }

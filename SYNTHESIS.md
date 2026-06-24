@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **43 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **44 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -141,6 +141,17 @@ answer relevance** — that together guard against hallucination
 **Implication:** the engine's faithfulness judge must (a) decompose per-axis (RAG-Triad), (b) control
 position/verbosity/self-enhancement bias, and (c) calibrate on chance-corrected κ/π, never raw
 percent agreement.
+
+That per-axis judge only works if its output is *reliably structured*. The mechanism is **now
+grounded**: FSM-guided constrained decoding (Outlines, arXiv:2307.09702) recasts guided generation
+as transitions over a finite-state machine, compiles a regex (and, via a pushdown automaton +
+LALR(1), context-free grammars / data formats like JSON) into a precomputed state→allowed-token
+index, and masks the LLM's logits to only valid tokens each step — making the per-token validity
+check **O(1) on average** (vs an O(N) full-vocabulary scan) and the output conform *by construction*
+rather than by parse-and-retry
+([FSM-guided constrained decoding](docs/findings/d270b0177-fsm-guided-constrained-decoding-json-schema-structured-output.md)).
+**Implication:** the engine's structured judge should emit constrained output, not free text it
+then has to re-parse — correctness is cheaper enforced at decode time than recovered after.
 
 ### Knowledge graph: extraction method and community structure are the cost-fidelity levers
 When compiling a source-of-truth KG corpus, the two measured levers are *how triples are
@@ -534,7 +545,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2196 nodes / 2404 links** (66 of those
+A graphify pass over the corpus currently yields **2205 nodes / 2413 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
