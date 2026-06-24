@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **24 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **25 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -189,9 +189,15 @@ FreshWiki to produce articles judged **+25% more organized and +10% broader in c
 than an outline-driven RAG baseline — and honest about its own failure modes (source-bias
 transfer, over-association of unrelated facts). STORM also tiers models per task (cheap LM
 for conversation/question-gen, powerful LM for outline/article). **GPT-Researcher** is a
-second reference point (open-source planner-executor → report) but only its high-level
-positioning is corpus-grounded; its internals are not
-([STORM/GPT-Researcher case studies](docs/findings/dbc0e9395-storm-paper-backed-pipeline-vs-gpt-researcher-with-provenance-tiering.md)).
+second reference point, and its internals are now **repo/doc-grounded** rather than
+landing-page-only: a `planner`/`execution` agent core (planner generates research questions,
+execution agents gather per-question, publisher aggregates) plus a separate 7-role LangGraph
+"editorial team" (Chief Editor, Researcher, Editor, Reviewer, Revisor, Writer, Publisher)
+that runs Researcher/Reviewer/Revisor in parallel per outline topic; the project
+*self-reports* "~5 minutes" and "~$0.4 per research (o3-mini on high reasoning effort)" for
+its recursive Deep Research workflow — a vendor self-report, not an independent benchmark
+([STORM/GPT-Researcher case studies](docs/findings/dbc0e9395-storm-paper-backed-pipeline-vs-gpt-researcher-with-provenance-tiering.md),
+[GPT-Researcher internals](docs/findings/da592d4f8-gpt-researcher-internals.md)).
 **Implication:** separate research from writing as distinct stages; drive breadth with
 multi-perspective sub-questioning; tier model cost per stage — these are now evidenced
 patterns, not speculation.
@@ -313,14 +319,16 @@ treated as evidenced until gathered:
 - **Orchestrator-worker cost model (the ~15×-tokens / 3–5-subagent / ~90%-latency figures)** —
   these came from the old topic-07 stub; the *promoted* 07 findings cover halt-bounding and
   the no-clean-head-to-head provenance result, not the cost multipliers.
-- **A/B-test power, MADR record-format, GPT-Researcher internals, controlled
-  cross-encoder-vs-ColBERT head-to-head** — all have queued gaps (see the tensions above and
-  the per-domain notes); each is a narrow ungathered corner, not an empty domain. (The
-  framework execution-model taxonomy is now doc-anchored; what remains there is only
-  comparative ranking/cost numbers, which are inherently vendor opinion.)
+- **A/B-test power, MADR record-format, controlled cross-encoder-vs-ColBERT head-to-head,
+  independent GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head** — all have
+  queued gaps (see the tensions above and the per-domain notes); each is a narrow ungathered
+  corner, not an empty domain. (GPT-Researcher's *internals* are now repo/doc-grounded; what
+  stays open is a third-party measurement of its self-reported ~5min/~$0.4 figures. The
+  framework execution-model taxonomy is doc-anchored; what remains there is only comparative
+  ranking/cost numbers, which are inherently vendor opinion.)
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1733 nodes / 1791 links** (64 of those
+A graphify pass over the corpus currently yields **1752 nodes / 1823 links** (65 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

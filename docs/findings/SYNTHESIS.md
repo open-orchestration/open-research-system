@@ -24,3 +24,4 @@
 - [Late-interaction retrieval economics: what the ColBERT primaries actually establish](d6ccd6b1c-late-interaction-colbert-economics.md) — 06-rag-retrieval
 - [Agent-framework execution models, stated in each framework's own documented primitives](de92d6feb-execution-models-doc-anchored.md) — 12-tooling-landscape
 - [Vector semantics grounded: the distributional hypothesis, cosine similarity, and dense (word2vec) embeddings from SLP3 Ch.5](ddc396092-vector-semantics-cosine-embeddings.md) — 15-textbooks-longform
+- [GPT-Researcher's documented internals: the planner-executor-publisher loop, the 7-role LangGraph editorial team, and its self-reported deep-research cost/latency](da592d4f8-gpt-researcher-internals.md) — 13-reference-systems-case-studies

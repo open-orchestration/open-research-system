@@ -721,7 +721,7 @@
       "topic": "13-reference-systems-case-studies",
       "desc": "GPT-Researcher internal planner/executor/publisher module architecture from the repo or docs subpages (captured source is only the docs landing page)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1024,6 +1024,22 @@
       "id": "g307e4da9",
       "topic": "15-textbooks-longform",
       "desc": "clean rendering of word2vec SGNS sigmoid/logistic loss + embedding update equations (present in source but garbled by PDF conversion)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gb02c7fd4",
+      "topic": "13-reference-systems-case-studies",
+      "desc": "independent (third-party) measurement of GPT-Researcher cost/latency; README ~5min/~$0.4 figures are self-reported with no sample size/query mix/methodology",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g32a8d1e8",
+      "topic": "13-reference-systems-case-studies",
+      "desc": "GPT-Researcher cost/latency for the single-agent core loop and the LangGraph editorial team (published figure covers only the o3-mini Deep Research recursive workflow)",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -2856,16 +2872,38 @@
       "extracted_path": "docs/15-textbooks-longform/sources/c52f288b7-slp3-ch5-vector-semantics-embeddings.md",
       "lossy": false,
       "ingested_at": "2026-06-24T13:42:17.295397+00:00"
+    },
+    {
+      "id": "cb547d339",
+      "title": "gpt-researcher-multi-agents",
+      "source": "https://docs.gptr.dev/docs/gpt-researcher/multi_agents/langgraph",
+      "topic": "13-reference-systems-case-studies",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/gpt-researcher-multi-agents.url",
+      "extracted_path": "docs/13-reference-systems-case-studies/sources/cb547d339-gpt-researcher-multi-agents.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T13:56:38.480099+00:00"
+    },
+    {
+      "id": "c1bb33cc6",
+      "title": "gpt-researcher-readme",
+      "source": "https://raw.githubusercontent.com/assafelovic/gpt-researcher/master/README.md",
+      "topic": "13-reference-systems-case-studies",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/gpt-researcher-readme.url",
+      "extracted_path": "docs/13-reference-systems-case-studies/sources/c1bb33cc6-gpt-researcher-readme.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T13:56:40.466898+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1733,
-    "edge_count": 1791
+    "node_count": 1752,
+    "edge_count": 1823
   },
   "assertions": {
-    "count": 64,
+    "count": 65,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -3374,6 +3412,20 @@
       "created_at": "2026-06-24T13:50:46.703354+00:00",
       "promoted_path": "docs/findings/ddc396092-vector-semantics-cosine-embeddings.md",
       "promoted_at": "2026-06-24T13:54:02.799865+00:00"
+    },
+    {
+      "id": "da592d4f8",
+      "topic": "13-reference-systems-case-studies",
+      "title": "GPT-Researcher's documented internals: the planner-executor-publisher loop, the 7-role LangGraph editorial team, and its self-reported deep-research cost/latency",
+      "path": "docs/findings/_drafts/da592d4f8-gpt-researcher-internals.md",
+      "status": "promoted",
+      "cites": [
+        "c1bb33cc6",
+        "cb547d339"
+      ],
+      "created_at": "2026-06-24T14:02:57.439757+00:00",
+      "promoted_path": "docs/findings/da592d4f8-gpt-researcher-internals.md",
+      "promoted_at": "2026-06-24T14:08:23.353617+00:00"
     }
   ]
 }
