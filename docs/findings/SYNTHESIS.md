@@ -42,3 +42,4 @@
 - [BM25 ranking formula (tf saturation + length normalization) and the probabilistic justification of idf](d0fefa5d5-bm25-formula-and-probabilistic-idf-justification.md) — 15-textbooks-longform
 - [GRADE evidence-certainty system from the official handbook: four levels, five downgrade + three upgrade domains, certainty vs recommendation](d628b3d0f-grade-official-handbook-certainty-domains.md) — 01-methodology-epistemics
 - [Self-RAG and Toolformer: full per-benchmark result tables and zero-shot deltas](d154759ce-selfrag-toolformer-full-benchmark-results.md) — 14-papers
+- [MCP Tools and Prompts message shapes and the Security Best Practices (confused deputy, token passthrough, session hijacking)](d4562e116-mcp-tools-prompts-message-shapes-security.md) — 17-specs-standards

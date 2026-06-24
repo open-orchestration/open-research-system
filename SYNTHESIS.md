@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **42 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **43 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -210,6 +210,15 @@ finding/source a URI-identified resource (custom scheme, RFC 3986), discovered v
 encoding the append (a new finding promoted → the list grew) and **`subscribe` +
 `notifications/resources/updated`** the rare in-place change (a finding → superseded)
 ([MCP spec internals](docs/findings/d3c246500-mcp-spec-internals-primitives-transports-auth-resources.md)).
+The **Tools and Prompts wire contracts plus the Security Best Practices** complete that MCP picture:
+Tools (`tools/list` paginated + `tools/call`; a Tool's `inputSchema`/`outputSchema`/`annotations`;
+results carry `content` + `isError`; `notifications/tools/list_changed`) are **model-controlled** with
+a human-in-the-loop consent expectation, while Prompts (`prompts/list`/`prompts/get`, argument
+completion, `PromptMessage`) are **user-controlled** (slash-command style). The spec's mandatory
+security rules bind any HTTP exposure: per-client user consent against the **confused-deputy**
+problem, a flat prohibition on **token passthrough** (validate audience), and secure
+non-deterministic, user-bound session IDs against **session hijacking**
+([MCP tools/prompts + security](docs/findings/d4562e116-mcp-tools-prompts-message-shapes-security.md)).
 The **citation-interchange formats are now grounded at the spec level**, complementing the
 high-level interop primitive: CSL-JSON fixes a closed **45-type** item enumeration with only
 `type` and `id` required per item and a ~103-variable set (incl. structured name- and
@@ -525,7 +534,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2156 nodes / 2360 links** (66 of those
+A graphify pass over the corpus currently yields **2196 nodes / 2404 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

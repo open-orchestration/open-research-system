@@ -1161,7 +1161,7 @@
       "topic": "17-specs-standards",
       "desc": "MCP tools/* and prompts/* message-shape spec pages + the Security Best Practices and Lifecycle/version-negotiation pages (referenced by the ingested 2025-06-18 spec pages but not ingested)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -3458,13 +3458,46 @@
       "extracted_path": "docs/14-papers/sources/c118a1750-g64e0a010-selfrag-full-results.md",
       "lossy": false,
       "ingested_at": "2026-06-24T18:21:29.979118+00:00"
+    },
+    {
+      "id": "cc324bc4a",
+      "title": "gdb207ceb-mcp-prompts-spec",
+      "source": "https://modelcontextprotocol.io/specification/2025-06-18/server/prompts",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/gdb207ceb-mcp-prompts-spec.md",
+      "extracted_path": "docs/17-specs-standards/sources/cc324bc4a-gdb207ceb-mcp-prompts-spec.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T18:31:54.077095+00:00"
+    },
+    {
+      "id": "cf13e1cfc",
+      "title": "gdb207ceb-mcp-security-best-practices",
+      "source": "https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/gdb207ceb-mcp-security-best-practices.md",
+      "extracted_path": "docs/17-specs-standards/sources/cf13e1cfc-gdb207ceb-mcp-security-best-practices.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T18:31:54.217882+00:00"
+    },
+    {
+      "id": "c93368f06",
+      "title": "gdb207ceb-mcp-tools-spec",
+      "source": "https://modelcontextprotocol.io/specification/2025-06-18/server/tools",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/gdb207ceb-mcp-tools-spec.md",
+      "extracted_path": "docs/17-specs-standards/sources/c93368f06-gdb207ceb-mcp-tools-spec.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T18:31:54.358167+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2156,
-    "edge_count": 2360
+    "node_count": 2196,
+    "edge_count": 2404
   },
   "assertions": {
     "count": 66,
@@ -4243,6 +4276,21 @@
       "created_at": "2026-06-24T18:28:41.249058+00:00",
       "promoted_path": "docs/findings/d154759ce-selfrag-toolformer-full-benchmark-results.md",
       "promoted_at": "2026-06-24T18:30:37.260536+00:00"
+    },
+    {
+      "id": "d4562e116",
+      "topic": "17-specs-standards",
+      "title": "MCP Tools and Prompts message shapes and the Security Best Practices (confused deputy, token passthrough, session hijacking)",
+      "path": "docs/findings/_drafts/d4562e116-mcp-tools-prompts-message-shapes-security.md",
+      "status": "promoted",
+      "cites": [
+        "c93368f06",
+        "cc324bc4a",
+        "cf13e1cfc"
+      ],
+      "created_at": "2026-06-24T18:38:28.507845+00:00",
+      "promoted_path": "docs/findings/d4562e116-mcp-tools-prompts-message-shapes-security.md",
+      "promoted_at": "2026-06-24T18:40:54.731618+00:00"
     }
   ]
 }
