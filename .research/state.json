@@ -1169,7 +1169,7 @@
       "topic": "17-specs-standards",
       "desc": "biblatex expanded entry types (@online @thesis @dataset) field tables beyond legacy BibTeX btxdoc set",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -3609,13 +3609,24 @@
       "extracted_path": "docs/02-statistical-causal-inference/sources/ca5712e1b-ge2ff9cf2-lunceford-davidian-ipw-doubly-robust-1.md",
       "lossy": false,
       "ingested_at": "2026-06-24T20:15:24.063940+00:00"
+    },
+    {
+      "id": "c0228eaf6",
+      "title": "g0ac0c33b-biblatex-manual-entry-types-1",
+      "source": "https://mirrors.ctan.org/macros/latex/contrib/biblatex/doc/biblatex.pdf",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g0ac0c33b-biblatex-manual-entry-types-1.md",
+      "extracted_path": "docs/17-specs-standards/sources/c0228eaf6-g0ac0c33b-biblatex-manual-entry-types-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T20:25:30.065608+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2367,
-    "edge_count": 2624
+    "node_count": 2416,
+    "edge_count": 2700
   },
   "assertions": {
     "count": 66,
@@ -4488,6 +4499,17 @@
       "created_at": "2026-06-24T20:20:45.703785+00:00",
       "promoted_path": "docs/findings/d77c7f685-propensity-score-ipw-doubly-robust-ate-estimation.md",
       "promoted_at": "2026-06-24T20:23:15.290529+00:00"
+    },
+    {
+      "id": "de47719c4",
+      "topic": "17-specs-standards",
+      "title": "biblatex extends legacy BibTeX: web-native/modern entry types (@online, @thesis, @dataset, @software) and modern fields (urldate, eprint, doi, pubstate)",
+      "path": "docs/findings/_drafts/de47719c4-biblatex-expanded-entry-types-modern-fields.md",
+      "status": "promoted",
+      "cites": [],
+      "created_at": "2026-06-24T20:33:56.992520+00:00",
+      "promoted_path": "docs/findings/de47719c4-biblatex-expanded-entry-types-modern-fields.md",
+      "promoted_at": "2026-06-24T20:36:07.133949+00:00"
     }
   ]
 }

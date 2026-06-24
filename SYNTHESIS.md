@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **50 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **51 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -240,6 +240,16 @@ property (expected `CreativeWork`/`Text`, on `CreativeWork`) and the `Thing > Cr
 Article > ScholarlyArticle` type. A type-level concordance across the three lets a citation-gated
 engine round-trip a finding's cited sources between formats
 ([citation interchange formats](docs/findings/d59d1279b-citation-interchange-formats-csl-bibtex-schemaorg.md)).
+Beyond *legacy* BibTeX, the **biblatex** manual (CTAN) is now grounded for the **web-native and
+modern entry types** a research engine actually needs — citing websites, preprints, theses and
+datasets, not just books/articles
+([biblatex modern entry types](docs/findings/de47719c4-biblatex-expanded-entry-types-modern-fields.md)):
+`@online`/`@electronic`/`@www` (an online resource; required author/editor, title, year/date **plus
+a locator** `doi/eprint/url`), `@thesis` (required `type` + `institution`, with `@mastersthesis`/
+`@phdthesis` defaulting the type), `@dataset` (raw-data collections), and `@software` (aliased to
+`@misc`) — together with modern fields the legacy btxdoc set lacks (`urldate`, `eprint`/`eprinttype`,
+`doi`, `pubstate`). biblatex's data model differs slightly from traditional BibTeX, so legacy
+`.bib` files may need editing.
 **Implication:** emit CSL-JSON for citations and MADR records for non-obvious choices; expose
 the engine over MCP — stdio for a co-located server, the full OAuth 2.1 resource-server
 obligations only when serving remote/multi-client, and `listChanged`-dominant Resources as the
@@ -619,7 +629,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2367 nodes / 2624 links** (66 of those
+A graphify pass over the corpus currently yields **2416 nodes / 2700 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
