@@ -1009,7 +1009,7 @@
       "topic": "15-textbooks-longform",
       "desc": "PPMI/PMI weighting defining formula (SLP3 Ch.5 only mentions PPMI in passing as word2vec's implicit weighting; no defining treatment ingested)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1017,7 +1017,7 @@
       "topic": "15-textbooks-longform",
       "desc": "SLP3 Ch.11 tf-idf-in-NLP framing (Ch.5 defers tf-idf to Ch.11, which is not ingested)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1088,6 +1088,30 @@
       "id": "gd78c76ea",
       "topic": "02-statistical-causal-inference",
       "desc": "sample-size cost under SUTVA violations / interference (shared cache, rate limits) where units are not independent",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g1a6f7e17",
+      "topic": "15-textbooks-longform",
+      "desc": "BM25 defining formula (saturation + length normalization) in NLP framing — SLP3 Ch.11 §11.1.2 names BM25 but the full formula was not extracted",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g171a7e1d",
+      "topic": "15-textbooks-longform",
+      "desc": "PPMI context-distribution smoothing (PPMI_alpha / k-shift tuning) — only the base max(PMI,0) clip is grounded",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g6af89086",
+      "topic": "15-textbooks-longform",
+      "desc": "Clean SGNS per-pair sigmoid/logistic objective (Levy-Goldberg local objective behind w.c=PMI-log k) — garbled by PDF conversion in both SLP3 Ch.5 and Levy-Goldberg",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -2986,13 +3010,46 @@
       "extracted_path": "docs/02-statistical-causal-inference/sources/c2a793560-kohavi-2009-controlled-experiments-web.md",
       "lossy": false,
       "ingested_at": "2026-06-24T14:30:02.154680+00:00"
+    },
+    {
+      "id": "cc475631e",
+      "title": "church-hanks-1990-word-association-mutual-information-lexicography",
+      "source": "https://aclanthology.org/J90-1003.pdf",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/church-hanks-1990-word-association-mutual-information-lexicography.pdf",
+      "extracted_path": "docs/15-textbooks-longform/sources/cc475631e-church-hanks-1990-word-association-mutual-information-lexicography.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T15:21:11.954421+00:00"
+    },
+    {
+      "id": "c8860abb2",
+      "title": "levy-goldberg-2014-neural-word-embedding-implicit-matrix-factorization",
+      "source": "https://papers.nips.cc/paper/5477-neural-word-embedding-as-implicit-matrix-factorization.pdf",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/levy-goldberg-2014-neural-word-embedding-implicit-matrix-factorization.pdf",
+      "extracted_path": "docs/15-textbooks-longform/sources/c8860abb2-levy-goldberg-2014-neural-word-embedding-implicit-matrix-factorization.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T15:21:12.969952+00:00"
+    },
+    {
+      "id": "c1008a26d",
+      "title": "slp3-ch11-information-retrieval-and-rag",
+      "source": "https://web.stanford.edu/~jurafsky/slp3/11.pdf",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/slp3-ch11-information-retrieval-and-rag.pdf",
+      "extracted_path": "docs/15-textbooks-longform/sources/c1008a26d-slp3-ch11-information-retrieval-and-rag.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T15:21:14.486954+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1798,
-    "edge_count": 1912
+    "node_count": 1835,
+    "edge_count": 1957
   },
   "assertions": {
     "count": 66,
@@ -3558,6 +3615,21 @@
       "created_at": "2026-06-24T14:37:40.644556+00:00",
       "promoted_path": "docs/findings/d740bae09-ab-test-power-effect-size-experiment-design.md",
       "promoted_at": "2026-06-24T14:39:23.935689+00:00"
+    },
+    {
+      "id": "d7289dbd9",
+      "topic": "15-textbooks-longform",
+      "title": "Term-weighting formulas grounded: PMI/PPMI (Church-Hanks, Levy-Goldberg) and tf-idf-in-NLP (SLP3 Ch.11), with the word2vec ↔ shifted-PMI bridge",
+      "path": "docs/findings/_drafts/d7289dbd9-tf-idf-ppmi-weighting-primary-formulas.md",
+      "status": "promoted",
+      "cites": [
+        "cc475631e",
+        "c8860abb2",
+        "c1008a26d"
+      ],
+      "created_at": "2026-06-24T15:35:35.079622+00:00",
+      "promoted_path": "docs/findings/d7289dbd9-tf-idf-ppmi-weighting-primary-formulas.md",
+      "promoted_at": "2026-06-24T15:37:35.301690+00:00"
     }
   ]
 }

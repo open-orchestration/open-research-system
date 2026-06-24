@@ -251,10 +251,17 @@ reflects co-occurrence *direction* rather than word frequency — the specifical
 previously-ungrounded item), the sparse→dense motivation, and **word2vec / skip-gram with
 negative sampling** (static embeddings as a self-supervised classifier's learned weights)
 ([vector semantics](docs/findings/ddc396092-vector-semantics-cosine-embeddings.md)). That
-finding is split-honest about its scope: SLP3 Ch.5 *defers tf-idf to its Ch.11* and mentions
-PPMI only in passing, so a defining PPMI formula stays ungrounded. **Implication:** these are
-the primary definitions a downstream scoring/embedding component can trust as bedrock;
-cosine — long the named open corner — is now closed on chapter prose.
+finding noted SLP3 Ch.5 *defers tf-idf to its Ch.11* and mentions PPMI only in passing; a
+**companion finding now closes both corners on their genuine primaries** — the **PMI/PPMI
+defining formulas** (Church & Hanks 1990's association ratio `I(x,y)=log₂[P(x,y)/(P(x)P(y))]`;
+Levy & Goldberg 2014's `PMI=log[#(w,c)·|D|/(#(w)·#(c))]`, `PPMI=max(PMI,0)`, and the result
+that **word2vec/SGNS implicitly factorizes a shifted PMI matrix**, `w⃗·c⃗ = PMI − log k`) and
+the **tf-idf-in-NLP** formula (`tf-idf = tf·idf`, with `tf = 1+log₁₀count`, `idf = log₁₀(N/df)`)
+plus the tf-idf cosine relevance score on the genuine SLP3 Ch.11
+([term-weighting formulas](docs/findings/d7289dbd9-tf-idf-ppmi-weighting-primary-formulas.md)).
+**Implication:** these are the primary definitions a downstream scoring/embedding component can
+trust as bedrock; cosine, PPMI, and the word2vec↔PMI bridge — long the named open corners — are
+now closed on primary prose.
 
 ### Prompting & context: escalate cost only when it pays; don't stuff the context window
 On the prompting ladder (few-shot → CoT → self-consistency → ToT), the rungs are now
@@ -333,11 +340,14 @@ treated as evidenced until gathered:
   ([ADR/MADR format](docs/findings/decf6989c-adr-madr-decision-record-format.md)), but the
   corpus has MADR's expanded schema, not Nygard's original four fields, and the log
   numbering/file-naming scheme (the "ADR-0123" reference) is unspecified in-corpus. Both queued.
-- **PPMI weighting formula** — cosine, the distributional hypothesis, and word2vec are now
-  grounded on the genuine SLP3 Ch.5 "Embeddings" chapter
-  ([vector semantics](docs/findings/ddc396092-vector-semantics-cosine-embeddings.md)), but
-  that chapter *defers tf-idf to its Ch.11* and mentions PPMI only in passing as word2vec's
-  implicit weighting — no defining PMI/PPMI formula is in any ingested chapter yet (queued).
+- **BM25 formula + PPMI smoothing + SGNS objective** — the **PMI/PPMI defining formulas**,
+  the **word2vec↔shifted-PMI bridge**, and **tf-idf-in-NLP** are now grounded on their genuine
+  primaries (Church & Hanks 1990, Levy & Goldberg 2014, SLP3 Ch.11)
+  ([term-weighting formulas](docs/findings/d7289dbd9-tf-idf-ppmi-weighting-primary-formulas.md)),
+  closing the former "defining PPMI formula" corner. What stays queued is narrower: BM25's full
+  saturation/length-normalization form (SLP3 Ch.11 names it but the formula was not extracted),
+  PPMI context-distribution smoothing (`PPMI_α`/k-shift tuning, beyond the base `max(PMI,0)` clip),
+  and a clean rendering of the SGNS per-pair sigmoid/logistic loss (garbled by PDF conversion).
 - **Prompting-ladder cost-normalized curve** — the CoT/self-consistency/ToT *benchmark
   numbers* are now paper-anchored from the originating works (Wei 2201.11903, Wang 2203.11171,
   Yao 2305.10601), but no source gives an accuracy-per-token/dollar head-to-head on a shared
@@ -353,15 +363,15 @@ treated as evidenced until gathered:
   the no-clean-head-to-head provenance result, not the cost multipliers.
 - **Remaining narrow corners:** controlled cross-encoder-vs-ColBERT head-to-head; independent
   GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head; Nygard's original ADR
-  template + decision-log numbering; sequential/peeking A/B corrections; a defining PPMI
-  formula. Each has a queued gap (see the tensions above and per-domain notes); each is a
+  template + decision-log numbering; sequential/peeking A/B corrections; BM25's full formula
+  and PPMI smoothing. Each has a queued gap (see the tensions above and per-domain notes); each is a
   narrow ungathered corner, not an empty domain — the headline blog→primary upgrades (06
   ColBERT economics, 12 execution-model taxonomy, 15 vector semantics, 13 GPT-Researcher
   internals, 11 index-freshness, 03 ADR/MADR, 02 A/B power) are all now grounded on
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1798 nodes / 1912 links** (66 of those
+A graphify pass over the corpus currently yields **1835 nodes / 1957 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
