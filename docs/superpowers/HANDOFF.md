@@ -20,34 +20,45 @@ ledger — **`.research/state.json`** ("the agent forgets, the repo remembers"):
 The convergence orchestrator (`scripts/orchestrator.py`) decides phase
 (`gather`/`deepen`/`synthesize`) as a stateless function of state signals.
 
-## Current state (HEAD `f4aab5e`; working tree clean modulo `public/dashboard.html`)
-- **34 promoted findings / 5 rejected.** Corpus **186** active. Graph **1969 nodes / 2114 links**
+## Current state (HEAD `aa3e7fd`; working tree clean modulo `public/dashboard.html`)
+- **44 promoted findings / 5 rejected.** Corpus **208** active. Graph **2205 nodes / 2413 links**
   (`dirty:false`). **66 graph assertions** (overlay `.research/graph-assertions.jsonl`).
-  Phase `deepen`.
-- **17 of 17 domains grounded** — breadth bar fully met. The seven narrow item-2 blog→primary
-  corners were closed in a prior session; this session worked the **deeper frontier**.
-- **This session — six deep-frontier arcs (one a reject→redraft), each full gather→ingest→fold→draft→review→promote:**
-  - **15** PMI/PPMI defining formulas (Church-Hanks 1990 + Levy-Goldberg 2014 shifted-PMI) + tf-idf-in-NLP
-    (SLP3 Ch.11) — d7289dbd9, `3822ef7`. Closed g1919d0da, g857b90f5.
-  - **02** continuous-monitoring/peeking A/B corrections — always-valid inference + mSPRT (Johari et al.,
-    *Operations Research*/arXiv:1512.04922). First draft **d21f3389c REJECTED** by the AI reviewer (it inverted
-    the M-vs-log(1/α) efficiency condition); redrafted **dc588b7cc PROMOTED**, `aa5f6e8`. Closed g3d3c22b9.
-  - **03** Nygard's original five-section ADR template + decision-log numbering (his 2011 post + Nat Pryce
-    adr-tools) — d657c1d86, `b45431a`. Closed g4a91aeef, gf8ab7685.
-  - **16** RAGAS + ARES primary metric formulas (Es et al. 2309.15217 F=|V|/|S|, AR cosine; Saad-Falcon
-    2311.09476 judges+PPI) — d636208ea, `73ae911`. Closed g324348e1.
-  - **08** FActScore atomic-fact precision + RARR attribution editing (Min 2305.14251, Gao 2210.08726) —
-    d1ad78766, `13a4bc0`. Closed g4668dd58.
-  - **17** MCP spec internals (official 2025-06-18 spec: primitives, stdio vs Streamable HTTP, OAuth 2.1,
-    Resources subscribe/list_changed mapped onto the append-only store) — d3c246500, `f4aab5e`. Closed
-    g0d8366cb, g6fb2909d, gf369dd48.
-  Root `SYNTHESIS.md` re-grounded after each (now 34 findings, graph 1969/2114).
-- **Two named-hard gaps confirmed dead-source this session** (search + direct-fetch both failed):
-  **06** peer-reviewed controlled ColBERT-vs-cross-encoder NDCG table (ga344680a) — no single clean published
-  table exists; the candidate arXiv 2408.16672 is the Jina-ColBERT-v2 *model* paper, not a controlled
-  head-to-head. **13** independent third-party GPT-Researcher cost/latency + STORM-vs-flat measurement
-  (gb02c7fd4/g4ae1798d) — only the project's own repo/FAQ exist; no third-party measurement. Both left
-  queued (honest dead-source, not done).
+  Phase `deepen`. **59 queued gaps** remain.
+- **17 of 17 domains grounded** — breadth bar fully met. Prior sessions closed breadth + the seven
+  item-2 blog→primary corners + six deep formula/spec arcs (PMI/PPMI, always-valid inference, Nygard
+  ADR, RAGAS/ARES, FActScore/RARR, MCP spec internals).
+- **This session — TEN reachable-frontier arcs**, each full gather→ingest→fold→draft→self-verify→
+  independent-review→promote→re-ground→commit (all PROMOTED on first review; zero rejects; the only
+  edits were honest pre-promote demotions of over-claims the reviewers or self-checks caught):
+  - **17** Citation interchange formats — CSL-JSON official schema (45-type enum, required `[type,id]`),
+    BibTeX btxdoc §3.1 entry-type field tables, schema.org `citation`/`ScholarlyArticle` — d59d1279b, `d5cd7b4`.
+    Closed g9f10da22, g58e984b2, gccab40e9.
+  - **16/05** GAIA (arXiv:2311.12983; 466 Q, human 92% vs GPT-4 15%) + BrowseComp (arXiv:2504.12516;
+    1,266 Q, human 29.2% vs Deep Research 51.5%) task design + scores — d69d7458e, `7ac04c0`. Closed
+    g97730f96, g23784af9, g5b7fa51c.
+  - **16** Multi-hop QA benchmarks — HotpotQA (1809.09600, 112,779 Q, joint EM/F1), 2WikiMultiHopQA
+    (2011.01060, 192,606 Q), MuSiQue (2108.00573, ~25K 2-4hop) — dcd1309fb, `5fb1a89`. Closed g2d31d5f9.
+  - **09** KG2RAG full-PDF (arXiv:2502.06864) — chunk-expansion (m=1) algorithm + HotpotQA magnitudes
+    (retrieval F1 0.436 vs 0.357) — d6c359091, `7a7ce48`. Closed g2af7d2ae.
+  - **16** LLM-as-judge reliability — MT-Bench (2306.05685; position-bias 65%, 85% vs 81% human agreement),
+    Judging-the-Judges (2406.12624; Scott's π), TruLens RAG-Triad — d4c45dd7e, `a779589`. Closed g3a31cd3d,
+    gebd8db54, g3e19a7c9. (NOTE: the gap's `2401.10020` was MIS-LABELED — that id is "Self-Rewarding LMs";
+    substituted the genuine judge primaries.)
+  - **15** BM25 formula (IR-book Okapi HTML; k_1∈[1.2,2], b=0.75) + probabilistic idf justification
+    (RSJ relevance weight, idf=log(N/df) at S=s=0) — d0fefa5d5, `be481c3`. Closed g1a6f7e17, gfa66fdc9.
+  - **01** GRADE official Working Group handbook (4 levels, 5 downgrade + 3 upgrade domains, certainty≠
+    recommendation) — upgraded a vendor-blog source to primary — d628b3d0f, `cba71a4`. Closed g9879bed2.
+  - **14** Self-RAG (2310.11511) + Toolformer (2302.04761) full per-benchmark result tables — d154759ce,
+    `5e4fbae`. Closed g64e0a010, g50593678.
+  - **17** MCP Tools/Prompts wire shapes + Security Best Practices (confused-deputy, token-passthrough,
+    session-hijacking) — completes the MCP corner alongside d3c246500 — d4562e116, `bfbc668`. Closed gdb207ceb.
+  - **10** FSM-guided constrained decoding (Outlines, 2307.09702; regex→FSM index, O(1) masking) — d270b0177,
+    `aa3e7fd`. Closed gc4e28042.
+  Root `SYNTHESIS.md` re-grounded after each (now 44 findings, graph 2205/2413).
+- **Gather technique that worked every time:** for clean math/spec content, prefer **HTML** primaries
+  (IR-book, schema.org, MCP spec) — markitdown preserves LaTeX-in-img-alt-text and avoids PDF garble that
+  bit the prior PMI/SGNS arc. arXiv PDFs still fine for prose+tables (grep the number whitespace-insensitively
+  before trusting it). Always patch the corpus `source` to the real URL for `.md`/PDF ingests.
 
 ## Working tree (clean at handoff)
 All research work is committed through `ac8965d`. Outstanding, NOT to be touched/committed:
@@ -143,52 +154,53 @@ Skip community labeling (cosmetic; the engine consumes graph.json directly). Cle
   committed; replay strips+re-merges every cycle, so graph.json can be deleted/rebuilt freely.
 
 ## Cross-check (this handoff vs the repo)
-Verified against HEAD `f4aab5e` (working tree clean modulo the unrelated
+Verified against HEAD `aa3e7fd` (working tree clean modulo the unrelated
 `public/dashboard.html`): all cited scripts exist (`search_flow.sh ingest_flow.sh
 orchestrator.py state.py assertions.py promote.py cite_check.py check_integrity.py
 graph_events.py runlog.py`); `.claude/` has `goal.md loop.md process.md review.md`; state
-numbers (34/5 findings, corpus 186 active, 66 assertions, 17/17 grounded domains, graph
-1969/2114) read live from state.json + graph.json; the graphify `--update` recipe below is the
-exact flow run this session 6× (detect→drop state.json/dashboard.html→AST→cache→ONE extraction
-subagent per ≤22-file chunk→build_merge→to_json→replay), run 7× this session. Design specs
+numbers (44/5 findings, corpus 208 active, 66 assertions, 17/17 grounded domains, graph
+2205/2413) read live from state.json + graph.json; the graphify `--update` recipe below is the
+exact flow run this session 10× (detect→restrict detect.json to ONLY the new source `.md`s→AST
+empty→ONE extraction subagent per ≤22-file chunk→build_merge(prune=changed sources only)→
+build_from_json+cluster+to_json→replay→graph_events→set-graph→integrity). Design specs
 live in `docs/superpowers/specs/` (6 files; umbrella `2026-06-17-open-research-system-design.md`).
 
 ## Next steps (pick up here)
-DONE this session (committed `3822ef7`→`f4aab5e`): **six deep-frontier arcs** (15 PMI/PPMI+tf-idf,
-02 always-valid/peeking, 03 Nygard ADR, 16 RAGAS/ARES, 08 FActScore/RARR, 17 MCP spec internals —
-see Current state for per-arc commits + closed gaps; the 02 arc demonstrates the reject→redraft loop
-working: the AI reviewer caught an inverted efficiency condition, the redraft fixed it and promoted).
-Root `SYNTHESIS.md` re-grounded after each. The proven gather technique (search engine keeps landing
-on TOC/landing pages): bypass `search.py` and feed the **exact** URL as a `.url` file (official-doc
-pages, via crawl4ai — records the real URL as provenance) or `curl` the **PDF** into `ingest/`
-(arXiv/journal). ALWAYS grep the fetched bytes for the load-bearing formula/term before ingesting
-(markitdown squashes whitespace — grep whitespace-insensitively), and **patch the corpus `source` to
-the real URL** for PDFs (ingest records them `file://`; `.url`/link ingests already record the URL).
-The reviewer is strict and **verifies numbers/formulas against the source** — self-verify every
-reported figure (grep the source) before dispatching the reviewer; honestly demote anything garbled
-by PDF→markdown conversion rather than reporting it as exact.
+DONE this session (committed `d5cd7b4`→`aa3e7fd`): **ten reachable-frontier arcs** — see Current state
+for per-arc finding ids, commits, and closed gaps. All promoted on first independent review (zero rejects
+this session). The proven gather technique: bypass `search.py`, feed the **exact** primary URL. For clean
+math/spec, prefer **HTML** sources (IR-book, schema.org, MCP spec, GRADE handbook) — markitdown keeps
+LaTeX in img-alt-text and avoids the PDF garble that forced honest demotions in the prior PMI/SGNS arc;
+arXiv **PDFs** are fine for prose+result-tables. ALWAYS grep the fetched bytes for the load-bearing
+number/formula whitespace-insensitively before ingesting, **patch the corpus `source` to the real URL**,
+and self-verify every reported figure against the source before the reviewer (who re-greps them). Two
+recurring traps fixed inline this session: (a) extraction subagents *guess* cross-corpus node ids for
+similarity edges — harmless, dedup/prune handles them; (b) a gap's named arXiv id can be WRONG (the
+"Judging-the-Judges 2401.10020" was actually "Self-Rewarding LMs") — verify the fetched title matches.
 
-**What's left (142 open gaps) is the deeper frontier — but several are still REACHABLE clean
-primaries**, not dead-source. Honest priority for a next session:
-- **Citation interchange formats** (17, `g9f10da22`/`g58e984b2`/`gccab40e9`) — CSL-JSON full type
-  enumeration + JSON Schema (dhimmel/csl-schema), BibTeX, schema.org `ScholarlyArticle`/citation
-  property. All official specs / fetchable. Cleanest remaining win.
-- **GAIA + BrowseComp task design + reported scores** (16/05, `g97730f96`/`g23784af9`/`g5b5fa51c`) —
-  GAIA = arXiv:2311.12983, BrowseComp = OpenAI paper/blog. Fetchable primaries; a prior source was
-  mislabeled (held DRB instead) so this needs the genuine papers.
-- **Multi-hop QA benchmarks** (16, `g2d31d5f9`) — HotpotQA / 2WikiMultiHopQA / MuSiQue construction +
-  metrics, all arXiv primaries.
-- **KG2RAG full-PDF** (09, `g2af7d2ae`) — HotpotQA result magnitudes + chunk-expansion algorithm
-  (corpus has abstract-only c520aee3f); fetch the full arXiv PDF.
-- **RAGAS/ARES bias magnitudes + Judging-the-Judges** (08, `g3a31cd3d`) — the metric *formulas* are now
-  grounded (d636208ea); what remains is the reproducible-bias-magnitude numbers + Judging-the-Judges
-  (2401.10020). TruLens RAG-Triad primary also still open (`gebd8db54`).
+**What's left (59 queued gaps). Still-REACHABLE clean primaries for a next session (highest-leverage first):**
+- **Confidence sequences / always-valid multiple testing** (02, `gf72694e5`/`g32860b29`) — Howard, Ramdas,
+  McAuliffe, Sekhon "Time-uniform… confidence sequences" (arXiv:1810.08240) + FWER/FDR under continuous
+  monitoring. Math-heavy PDF (garble risk — state canonical form + note lossiness); extends the grounded
+  always-valid finding dc588b7cc.
+- **Causal identification strategies** (02, `g67421383`, + worked-ATE `ge2ff9cf2`) — IV / diff-in-diff / RDD.
+  Foundational; needs careful primary sourcing (original method papers, not a book).
+- **Reasoning-technique additions** (10) — Chain-of-Draft / token-budget reasoning (`g14b00688`, arXiv:2502.18600);
+  structured-decoding schema-keyword compilation (`g3460ddda`, applied layer atop the now-grounded Outlines FSM).
+- **Framework orchestration primitives** (12) — LangGraph Send/Command (`g7ee5f8a1`), AutoGen Topic/Subscription
+  pub-sub (`g5d365921`) — official framework docs, clean but less durable than papers.
+- **MCDA / AHP** (03, `g284a18b9`) — Saaty's analytic hierarchy process (consistency ratio). Reachable prose+formula.
+- **biblatex expanded entry types** (17, `g0ac0c33b`) + **field-level CSL↔BibTeX↔schema.org crosswalk** (`g3518bee2`)
+  — low-value extensions of the citation-formats finding (CTAN biblatex.pdf).
 - **DEAD-SOURCE (leave queued, don't burn an arc re-confirming):** 06 controlled ColBERT-vs-cross-encoder
-  single-table head-to-head (`ga344680a`); 13 independent GPT-Researcher cost/latency + STORM-vs-flat
-  measurement (`gb02c7fd4`/`g4ae1798d`). Both probed this session — no clean primary exists.
+  single-table head-to-head (`ga344680a`/`g1fef4d1f`); 13 independent third-party GPT-Researcher cost/latency +
+  STORM-vs-flat measurement (`gb02c7fd4`/`g4ae1798d`/`g32a8d1e8`); 12 neutral reproducible cross-framework
+  latency/cost/accuracy benchmark (`g2d6b3b0c`); 02 sample-size under SUTVA/interference (`gd78c76ea`, needs
+  network-interference/cluster-randomization literature) + empirical SUTVA-failure base rates (`g449073fd`);
+  11 vendor-neutral CDC/index-freshness *standard* (`g172a5217`/`g860ec004`, no neutral spec exists — stays
+  framework-doc-relayed). Each probed across sessions — no clean primary exists.
 - Other older breadth-frontier gaps (true-GraphRAG shared-benchmark numbers, deep-research closed-agent
-  internals, interference/SUTVA A/B sizing `gd78c76ea`) remain; the interference one needs a different
-  primary (network-interference / cluster-randomization literature) than the always-valid result.
+  internals) remain in the queue; reachability unverified — probe before committing an arc.
 
 **Verify live before trusting any of the above** — `state.py candidates`, `list-gaps`,
 `check_integrity.py`. Gap ids drift as work proceeds.
@@ -205,12 +217,16 @@ assertion pointed at a `sources_…` node that the next fold renamed, failing in
 to re-point the overlay line to the current id. **Prefer stable concept/synthesis/findings
 nodes over `sources_…` nodes when asserting** — they survive rebuilds; source nodes don't.
 
-**Definitive bar:** 17 of 17 domains grounded — breadth complete — the seven item-2 blog→primary
-corners closed in a prior session, and this session **six deep-frontier formula/spec arcs** (PMI/PPMI,
-always-valid inference, Nygard's original ADR, RAGAS/ARES, FActScore/RARR, MCP spec internals) grounded
-on peer-reviewed papers + official specs. SYNTHESIS's "Not yet grounded" is now split-honest between
-(a) **still-reachable clean primaries** the next session should take (citation interchange formats CSL-JSON/
-BibTeX/schema.org, GAIA/BrowseComp scores, multi-hop QA benchmark construction, KG2RAG full-PDF) and
+**Definitive bar:** 17 of 17 domains grounded — breadth complete. Across sessions the corpus now holds
+**44 promoted findings** on peer-reviewed papers + official specs: prior sessions closed breadth, the
+seven item-2 blog→primary corners, and six deep formula/spec arcs (PMI/PPMI, always-valid inference,
+Nygard ADR, RAGAS/ARES, FActScore/RARR, MCP spec internals); **this session added ten reachable-frontier
+arcs** (citation interchange formats, GAIA/BrowseComp, multi-hop QA benchmarks, KG2RAG full-PDF, LLM-judge
+reliability + RAG-Triad, BM25 + probabilistic idf, GRADE official handbook, Self-RAG/Toolformer result
+tables, MCP Tools/Prompts + security, FSM-guided constrained decoding). SYNTHESIS's "Not yet grounded" is
+split-honest between (a) **still-reachable clean primaries** the next session can take (confidence sequences,
+IV/DiD/RDD identification, Chain-of-Draft, framework orchestration primitives, MCDA/AHP, biblatex) and
 (b) **confirmed dead-source** corners the direct-fetch path can't get (controlled ColBERT-vs-cross-encoder
-single-table head-to-head; independent third-party GPT-Researcher measurement) — left queued, honestly
+single-table head-to-head; independent third-party GPT-Researcher measurement; neutral cross-framework
+benchmark; SUTVA-interference sizing; vendor-neutral CDC/freshness standard) — left queued, honestly
 labeled, not faked as done.
