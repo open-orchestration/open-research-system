@@ -31,3 +31,4 @@
 - [Term-weighting formulas grounded: PMI/PPMI (Church-Hanks, Levy-Goldberg) and tf-idf-in-NLP (SLP3 Ch.11), with the word2vec ↔ shifted-PMI bridge](d7289dbd9-tf-idf-ppmi-weighting-primary-formulas.md) — 15-textbooks-longform
 - [Always-Valid Inference and the mSPRT: Controlling Type I Error When You Continuously Monitor an A/B Test](dc588b7cc-always-valid-inference-msprt-continuous-monitoring.md) — 02-statistical-causal-inference
 - [Nygard's original five-section ADR template and the decision-log numbering/supersede convention](d657c1d86-nygard-original-adr-template-decision-log-numbering.md) — 03-decision-frameworks
+- [Primary metric formulas of RAGAS and ARES: reference-free LLM-prompting (F=|V|/|S|, AR cosine) vs fine-tuned judges debiased with prediction-powered inference](d636208ea-ragas-ares-primary-rag-evaluation-formulas.md) — 16-evaluation-benchmarks

@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **31 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **32 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -101,8 +101,22 @@ hallucination/tool-use/forgetting, not just the final answer; primary-sourced). 
 **RAG stays grounded** — evaluated by decomposed harnesses (RAGAS/ARES/TruLens) that split
 quality into retrieval vs generation metrics
 ([two evaluation regimes](docs/findings/d6fad1a98-two-evaluation-regimes-frozen-web-agent-benchmarks-vs-decomposed-rag-harnesses.md)).
+The two leading harnesses' **primary metric formulas** are now grounded on their own papers,
+and they differ on a real reliability axis. **RAGAS** (Es et al., arXiv:2309.15217) is
+*reference-free* and LLM-prompted: **faithfulness `F = |V|/|S|`** (answer decomposed into
+statements; the fraction verdicted as inferable from the context), **answer relevance
+`AR = (1/n)·Σ sim(q,qᵢ)`** (mean cosine between the question and *n* LLM-generated questions),
+and **context relevance** (essential sentences / total). **ARES** (Saad-Falcon et al.,
+arXiv:2311.09476) instead **fine-tunes lightweight DeBERTa-v3 judges** on synthetic
+query–passage–answer triples and then **debiases them with prediction-powered inference (PPI,
+Angelopoulos 2023)** over a ~150-point human-labeled set — buying **confidence intervals** that
+RAGAS's point scores lack, and ranking systems closer to humans (Kendall's τ ≈ +0.065/+0.132
+over RAGAS in their study)
+([RAGAS/ARES formulas](docs/findings/d636208ea-ragas-ares-primary-rag-evaluation-formulas.md)).
 **Implication:** freeze the corpus for comparable re-runs; evaluate the trace; keep the
-agent-benchmark and RAG-harness regimes separate.
+agent-benchmark and RAG-harness regimes separate; and inside the RAG-harness regime, a
+calibrated judge-with-error-bars (ARES/PPI) beats a bare LLM-prompted point score — which is
+exactly the discipline the engine's own faithfulness gate must adopt.
 
 ### Interoperability: build adapters against the actual specs (MCP, CSL-JSON, MADR)
 Three independent seams, each with an official spec: expose capabilities to AI clients via
@@ -402,7 +416,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1889 nodes / 2019 links** (66 of those
+A graphify pass over the corpus currently yields **1915 nodes / 2050 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

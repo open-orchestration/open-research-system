@@ -409,7 +409,7 @@
       "topic": "16-evaluation-benchmarks",
       "desc": "primary RAGAS (Es et al 2023) + ARES (2311.09476) metric formulas and validation methodology",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1136,6 +1136,14 @@
       "id": "g89e6496b",
       "topic": "03-decision-frameworks",
       "desc": "Exact zero-padded ADR digit width (literal 'ADR-0123' four-digit form) — Nygard uses 'adr-NNN' and adr-tools auto-numbers, but neither states a fixed digit padding; only MADR's example shows four digits",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gebd8db54",
+      "topic": "16-evaluation-benchmarks",
+      "desc": "TruLens RAG-Triad primary (groundedness / context-relevance / answer-relevance metric definitions) — still blog-attributed, not grounded on a primary source",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -3100,13 +3108,35 @@
       "extracted_path": "docs/03-decision-frameworks/sources/c692ba2f1-nygard-2011-documenting-architecture-decisions.md",
       "lossy": false,
       "ingested_at": "2026-06-24T15:59:57.564614+00:00"
+    },
+    {
+      "id": "c1ee9053c",
+      "title": "es-2023-ragas-automated-rag-evaluation",
+      "source": "https://arxiv.org/abs/2309.15217",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/es-2023-ragas-automated-rag-evaluation.pdf",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/c1ee9053c-es-2023-ragas-automated-rag-evaluation.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T16:09:57.700633+00:00"
+    },
+    {
+      "id": "ccb6561db",
+      "title": "saad-falcon-2023-ares-automated-rag-evaluation-system",
+      "source": "https://arxiv.org/abs/2311.09476",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/saad-falcon-2023-ares-automated-rag-evaluation-system.pdf",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/ccb6561db-saad-falcon-2023-ares-automated-rag-evaluation-system.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T16:09:58.882171+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1889,
-    "edge_count": 2019
+    "node_count": 1915,
+    "edge_count": 2050
   },
   "assertions": {
     "count": 66,
@@ -3727,6 +3757,20 @@
       "created_at": "2026-06-24T16:05:29.046509+00:00",
       "promoted_path": "docs/findings/d657c1d86-nygard-original-adr-template-decision-log-numbering.md",
       "promoted_at": "2026-06-24T16:06:20.856960+00:00"
+    },
+    {
+      "id": "d636208ea",
+      "topic": "16-evaluation-benchmarks",
+      "title": "Primary metric formulas of RAGAS and ARES: reference-free LLM-prompting (F=|V|/|S|, AR cosine) vs fine-tuned judges debiased with prediction-powered inference",
+      "path": "docs/findings/_drafts/d636208ea-ragas-ares-primary-rag-evaluation-formulas.md",
+      "status": "promoted",
+      "cites": [
+        "c1ee9053c",
+        "ccb6561db"
+      ],
+      "created_at": "2026-06-24T16:17:40.799269+00:00",
+      "promoted_path": "docs/findings/d636208ea-ragas-ares-primary-rag-evaluation-formulas.md",
+      "promoted_at": "2026-06-24T16:20:20.856898+00:00"
     }
   ]
 }
