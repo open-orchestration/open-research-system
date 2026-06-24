@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **32 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **33 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -81,8 +81,21 @@ NLI/entailment substrate; it is distinct from factual correctness, which anchors
 different evidence. The metric is only trustworthy after calibration against human labels
 (position-swap, no verbosity reward)
 ([faithfulness machinery](docs/findings/dfa42bc8a-faithfulness-measurement-machinery.md)).
-**Implication:** the engine's own promotion gate *is* a faithfulness check, so it inherits
-exactly these confounds — it must judge structurally and stay calibrated.
+Two further grounding/attribution primitives are now grounded on their own papers, completing
+a **three-point spectrum**: **FActScore** (Min et al., arXiv:2305.14251) measures *factual
+precision* against a knowledge source — decompose a generation into atomic facts and score
+**f(y) = (1/|A_y|)·Σ I[a supported by C]** (the fraction entailed by source C, an abstain
+scoring 0); its retrieval+LM estimator tracks human FActScore at <2% error (Pearson r≈0.99).
+**RARR** (Gao et al., arXiv:2210.08726) instead *repairs* attribution post-hoc — "Editing for
+Attribution": research (generate questions, retrieve evidence) then revise an arbitrary LM
+output to be attributable while **preserving** the original, scored on **Attribution** (AIS)
+and **Preservation** (a Levenshtein-edit-distance term), with human-vs-auto correlations 0.74 /
+0.62 ([FActScore & RARR](docs/findings/d1ad78766-factscore-atomic-precision-and-rarr-attribution-editing.md)).
+The three points: **evaluate-vs-context** (RAGAS/ARES) · **evaluate-vs-knowledge-source**
+(FActScore) · **repair-into-attributable** (RARR) — all reducible to one retrieval + entailment
+substrate. **Implication:** the engine's own promotion gate *is* a faithfulness check, so it
+inherits exactly these confounds — it must judge structurally, stay calibrated against human
+labels, and (per ARES) prefer error-bars over bare point scores.
 
 ### Knowledge graph: extraction method and community structure are the cost-fidelity levers
 When compiling a source-of-truth KG corpus, the two measured levers are *how triples are
@@ -416,7 +429,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1915 nodes / 2050 links** (66 of those
+A graphify pass over the corpus currently yields **1934 nodes / 2075 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
