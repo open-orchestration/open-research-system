@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **39 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **40 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -477,10 +477,15 @@ treated as evidenced until gathered:
   the **word2vec↔shifted-PMI bridge**, and **tf-idf-in-NLP** are now grounded on their genuine
   primaries (Church & Hanks 1990, Levy & Goldberg 2014, SLP3 Ch.11)
   ([term-weighting formulas](docs/findings/d7289dbd9-tf-idf-ppmi-weighting-primary-formulas.md)),
-  closing the former "defining PPMI formula" corner. What stays queued is narrower: BM25's full
-  saturation/length-normalization form (SLP3 Ch.11 names it but the formula was not extracted),
-  PPMI context-distribution smoothing (`PPMI_α`/k-shift tuning, beyond the base `max(PMI,0)` clip),
-  and a clean rendering of the SGNS per-pair sigmoid/logistic loss (garbled by PDF conversion).
+  closing the former "defining PPMI formula" corner. **BM25's full saturation/length-normalization
+  form is now also grounded** — the IIR textbook's Okapi-BM25 page gives `RSV_d = Σ log(N/df_t)·
+  (k_1+1)tf / (k_1((1−b)+b·L_d/L_ave)+tf)` with k_1∈[1.2,2], b=0.75, plus the probabilistic-IR
+  derivation showing idf=log(N/df_t) is the no-relevance (S=s=0) limit of the Robertson–Spärck-Jones
+  relevance weight (clean LaTeX from the IR-book HTML, not garbled PDF)
+  ([BM25 + probabilistic idf](docs/findings/d0fefa5d5-bm25-formula-and-probabilistic-idf-justification.md)).
+  What stays queued is narrower still: PPMI context-distribution smoothing (`PPMI_α`/k-shift tuning,
+  beyond the base `max(PMI,0)` clip) and a clean rendering of the SGNS per-pair sigmoid/logistic
+  loss (garbled by PDF conversion).
 - **Prompting-ladder cost-normalized curve** — the CoT/self-consistency/ToT *benchmark
   numbers* are now paper-anchored from the originating works (Wei 2201.11903, Wang 2203.11171,
   Yao 2305.10601), but no source gives an accuracy-per-token/dollar head-to-head on a shared
@@ -495,15 +500,15 @@ treated as evidenced until gathered:
   these came from the old topic-07 stub; the *promoted* 07 findings cover halt-bounding and
   the no-clean-head-to-head provenance result, not the cost multipliers.
 - **Remaining narrow corners:** controlled cross-encoder-vs-ColBERT head-to-head; independent
-  GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head; ADR digit-padding (minor); A/B sizing under interference/SUTVA; BM25's full formula
-  and PPMI smoothing. Each has a queued gap (see the tensions above and per-domain notes); each is a
+  GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head; ADR digit-padding (minor); A/B sizing under interference/SUTVA;
+  PPMI context-distribution smoothing + clean SGNS-loss rendering. Each has a queued gap (see the tensions above and per-domain notes); each is a
   narrow ungathered corner, not an empty domain — the headline blog→primary upgrades (06
   ColBERT economics, 12 execution-model taxonomy, 15 vector semantics, 13 GPT-Researcher
   internals, 11 index-freshness, 03 ADR/MADR, 02 A/B power) are all now grounded on
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2090 nodes / 2281 links** (66 of those
+A graphify pass over the corpus currently yields **2100 nodes / 2296 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

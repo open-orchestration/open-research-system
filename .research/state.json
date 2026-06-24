@@ -937,7 +937,7 @@
       "topic": "15-textbooks-longform",
       "desc": "IR-book formal justification of the idf form (the 'optimal weight g' page the chapter defers to)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1097,7 +1097,7 @@
       "topic": "15-textbooks-longform",
       "desc": "BM25 defining formula (saturation + length normalization) in NLP framing — SLP3 Ch.11 §11.1.2 names BM25 but the full formula was not extracted",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -3395,13 +3395,35 @@
       "extracted_path": "docs/16-evaluation-benchmarks/sources/c5f5c1369-gebd8db54-trulens-rag-triad.md",
       "lossy": false,
       "ingested_at": "2026-06-24T17:47:35.899839+00:00"
+    },
+    {
+      "id": "cae65f68e",
+      "title": "g1a6f7e17-irbook-okapi-bm25",
+      "source": "https://nlp.stanford.edu/IR-book/html/htmledition/okapi-bm25-a-non-binary-model-1.html",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g1a6f7e17-irbook-okapi-bm25.md",
+      "extracted_path": "docs/15-textbooks-longform/sources/cae65f68e-g1a6f7e17-irbook-okapi-bm25.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T18:02:06.930267+00:00"
+    },
+    {
+      "id": "cbcf935dd",
+      "title": "gfa66fdc9-irbook-idf-probabilistic-justification",
+      "source": "https://nlp.stanford.edu/IR-book/html/htmledition/probability-estimates-in-theory-1.html",
+      "topic": "15-textbooks-longform",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/gfa66fdc9-irbook-idf-probabilistic-justification.md",
+      "extracted_path": "docs/15-textbooks-longform/sources/cbcf935dd-gfa66fdc9-irbook-idf-probabilistic-justification.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T18:02:07.072230+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2090,
-    "edge_count": 2281
+    "node_count": 2100,
+    "edge_count": 2296
   },
   "assertions": {
     "count": 66,
@@ -4139,6 +4161,20 @@
       "created_at": "2026-06-24T17:54:48.083512+00:00",
       "promoted_path": "docs/findings/d4c45dd7e-llm-as-judge-reliability-bias-human-correlation-rag-triad.md",
       "promoted_at": "2026-06-24T17:58:47.520051+00:00"
+    },
+    {
+      "id": "d0fefa5d5",
+      "topic": "15-textbooks-longform",
+      "title": "BM25 ranking formula (tf saturation + length normalization) and the probabilistic justification of idf",
+      "path": "docs/findings/_drafts/d0fefa5d5-bm25-formula-and-probabilistic-idf-justification.md",
+      "status": "promoted",
+      "cites": [
+        "cae65f68e",
+        "cbcf935dd"
+      ],
+      "created_at": "2026-06-24T18:08:01.577190+00:00",
+      "promoted_path": "docs/findings/d0fefa5d5-bm25-formula-and-probabilistic-idf-justification.md",
+      "promoted_at": "2026-06-24T18:09:32.997428+00:00"
     }
   ]
 }

@@ -39,3 +39,4 @@
 - [Multi-hop QA benchmarks: HotpotQA, 2WikiMultiHopQA, MuSiQue construction and evaluation metrics](dcd1309fb-multihop-qa-benchmarks-hotpotqa-2wiki-musique.md) — 16-evaluation-benchmarks
 - [KG2RAG: knowledge-graph-guided chunk expansion algorithm and HotpotQA result magnitudes](d6c359091-kg2rag-chunk-expansion-algorithm-hotpotqa-magnitudes.md) — 09-knowledge-compilation-graphs
 - [LLM-as-judge reliability: bias magnitudes, judge-human correlation, and the TruLens RAG-Triad decomposition](d4c45dd7e-llm-as-judge-reliability-bias-human-correlation-rag-triad.md) — 16-evaluation-benchmarks
+- [BM25 ranking formula (tf saturation + length normalization) and the probabilistic justification of idf](d0fefa5d5-bm25-formula-and-probabilistic-idf-justification.md) — 15-textbooks-longform
