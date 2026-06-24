@@ -985,7 +985,7 @@
       "topic": "12-tooling-landscape",
       "desc": "AutoGen Topic/Subscription pub-sub broadcast model (official 'Topic and Subscription' page; nav-only on captured page)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -993,7 +993,7 @@
       "topic": "12-tooling-landscape",
       "desc": "LangGraph Send/Command primitives (dynamic fan-out + combined state-update-plus-goto) doc-anchored",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -3565,13 +3565,35 @@
       "extracted_path": "docs/10-context-prompt-engineering/sources/c810db9f5-g14b00688-chain-of-draft-2502-18600-1.md",
       "lossy": false,
       "ingested_at": "2026-06-24T19:45:29.021072+00:00"
+    },
+    {
+      "id": "cce59d029",
+      "title": "g5d365921-autogen-topic-subscription-2",
+      "source": "https://microsoft.github.io/autogen/stable/user-guide/core-user-guide/core-concepts/topic-and-subscription.html",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g5d365921-autogen-topic-subscription-2.md",
+      "extracted_path": "docs/12-tooling-landscape/sources/cce59d029-g5d365921-autogen-topic-subscription-2.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T19:55:47.789566+00:00"
+    },
+    {
+      "id": "cc413ffed",
+      "title": "g7ee5f8a1-langgraph-send-command-1",
+      "source": "https://docs.langchain.com/oss/python/langgraph/graph-api",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g7ee5f8a1-langgraph-send-command-1.md",
+      "extracted_path": "docs/12-tooling-landscape/sources/cc413ffed-g7ee5f8a1-langgraph-send-command-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T19:55:47.934043+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2295,
-    "edge_count": 2518
+    "node_count": 2326,
+    "edge_count": 2561
   },
   "assertions": {
     "count": 66,
@@ -4411,6 +4433,17 @@
       "created_at": "2026-06-24T19:51:22.953990+00:00",
       "promoted_path": "docs/findings/d6432467b-chain-of-draft-token-budget-reasoning-primary.md",
       "promoted_at": "2026-06-24T19:53:31.990892+00:00"
+    },
+    {
+      "id": "d1fb5a112",
+      "topic": "12-tooling-landscape",
+      "title": "Two dispatch philosophies, grounded in their own docs: LangGraph Send/Command (explicit graph edges + per-branch state) vs AutoGen Topic/Subscription (decoupled publish/subscribe)",
+      "path": "docs/findings/_drafts/d1fb5a112-langgraph-send-command-autogen-topic-subscription-primitives.md",
+      "status": "promoted",
+      "cites": [],
+      "created_at": "2026-06-24T20:01:11.733572+00:00",
+      "promoted_path": "docs/findings/d1fb5a112-langgraph-send-command-autogen-topic-subscription-primitives.md",
+      "promoted_at": "2026-06-24T20:03:09.382674+00:00"
     }
   ]
 }

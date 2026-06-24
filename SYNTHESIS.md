@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **47 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **48 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -385,6 +385,19 @@ teleprompters (quantitatively raising program quality "from 33% to 82%" and "fro
 models ([doc-anchored execution models](docs/findings/de92d6feb-execution-models-doc-anchored.md)).
 Still vendor/blog opinion, not evidence: every comparative ranking/latency/cost/adoption
 number.
+The concrete **control-flow primitives** of two of these models are now grounded on each
+framework's own docs, and they encode two opposing dispatch philosophies
+([Send/Command vs Topic/Subscription](docs/findings/d1fb5a112-langgraph-send-command-autogen-topic-subscription-primitives.md)).
+**LangGraph** routes by *explicit graph edges with per-branch state*: `Send` is the dynamic
+fan-out primitive for map-reduce when the number of branches (edges) isn't known ahead of time
+and different `State` versions must coexist; `Command` fuses a state *update* and a *goto* route
+in a single node return (with `Command.PARENT` to route in a parent graph) instead of conditional
+edges. **AutoGen** routes by *decoupled publish/subscribe*: a Topic = (Topic Type, Topic Source),
+`TypeSubscription` maps Topic Type → Agent Type (the "preferred, portable, data-independent" form),
+and **broadcast** is one-to-many where the sender names a *topic*, not recipient agent IDs (vs
+direct messaging's one-to-one with an explicit recipient). The throughline: the sender names
+*targets* (LangGraph) vs the sender names a *topic and lets subscriptions resolve delivery*
+(AutoGen) — the same fan-out/communication need, two execution models.
 **Implication:** pick orchestration by the control-flow shape the task needs; do not trust
 framework leaderboards — the *shapes* are now primary-grounded, the *rankings* are not.
 
@@ -583,7 +596,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2295 nodes / 2518 links** (66 of those
+A graphify pass over the corpus currently yields **2326 nodes / 2561 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
