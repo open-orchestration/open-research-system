@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **44 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **45 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -305,6 +305,15 @@ patience *M* vs `log(1/α)` (aggressive / Goldilocks / conservative); in the Gol
 any mSPRT's relative efficiency → 1 as α→0, with the run-length-minimizing mixture obtained by
 matching `H` to the prior over effect sizes
 ([always-valid inference](docs/findings/dc588b7cc-always-valid-inference-msprt-continuous-monitoring.md)).
+The **nonparametric machinery Johari only references** is now grounded on its own primary
+(Howard, Ramdas, McAuliffe & Sekhon, arXiv:1810.08240): a **confidence sequence** is a sequence
+of intervals with the uniform guarantee `P(∀t≥1 : θ_t ∈ CI_t) ≥ 1−α` (eq 1), and for a
+1-sub-Gaussian mean the concrete CS is `µ̂_t ± 1.7·√[(loglog(2t) + 0.72·log(10.4/α))/t]` (eq 2),
+shrinking at the **law-of-the-iterated-logarithm rate** `O(√(t⁻¹loglog t))`. The load-bearing
+design lever: a **linear** boundary is time-uniformly valid but never shrinks to zero width,
+while a **curved** (normal-mixture / "stitched") boundary is valid *and* shrinks — the same
+sub-Gaussian/sub-gamma/matrix-martingale framework also yields SATE under Neyman–Rubin
+([confidence sequences](docs/findings/d541a8e56-nonparametric-time-uniform-confidence-sequences-lil-rate.md)).
 **Decision rule:** pre-register *n* and look once → Kohavi sizing; monitor continuously and stop
 when convinced → always-valid / mSPRT — an autonomous engine reacting to its own results is by
 construction in the second case. Identification (Pearl/Rubin) says *when* an effect is estimable;
@@ -498,10 +507,16 @@ treated as evidenced until gathered:
   2009, [d740bae09](docs/findings/d740bae09-ab-test-power-effect-size-experiment-design.md)) AND
   the continuous-monitoring/peeking correction (always-valid inference + mSPRT, Johari et al.,
   [dc588b7cc](docs/findings/dc588b7cc-always-valid-inference-msprt-continuous-monitoring.md)) are
-  now both grounded on peer-reviewed primaries. What stays queued is **sample-size cost under
+  now both grounded on peer-reviewed primaries, as is the **nonparametric LIL-rate
+  confidence-sequence machinery** Johari only references (Howard et al.,
+  [d541a8e56](docs/findings/d541a8e56-nonparametric-time-uniform-confidence-sequences-lil-rate.md)).
+  What stays queued is **sample-size cost under
   SUTVA violations / interference** (gd78c76ea): the always-valid result assumes *independent*
   units, so shared cache/model/rate-limit coupling and network/marketplace effects need a
-  separate primary (cluster-randomization / network-interference literature).
+  separate primary (cluster-randomization / network-interference literature). Also queued:
+  **always-valid multiple-testing control (FWER/FDR under continuous monitoring)** (g32860b29) —
+  Howard et al. develops single-target confidence sequences only, so familywise/false-discovery
+  machinery under continuous monitoring still needs an online-FDR primary.
 - **ADR digit-padding convention (minor residual)** — Nygard's original five-section template
   AND the decision-log numbering/supersede convention are now grounded on Nygard's own 2011 post
   + Nat Pryce's `adr-tools`
@@ -545,7 +560,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2205 nodes / 2413 links** (66 of those
+A graphify pass over the corpus currently yields **2229 nodes / 2440 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

@@ -44,3 +44,4 @@
 - [Self-RAG and Toolformer: full per-benchmark result tables and zero-shot deltas](d154759ce-selfrag-toolformer-full-benchmark-results.md) — 14-papers
 - [MCP Tools and Prompts message shapes and the Security Best Practices (confused deputy, token passthrough, session hijacking)](d4562e116-mcp-tools-prompts-message-shapes-security.md) — 17-specs-standards
 - [FSM-guided constrained decoding: regex/grammar → finite-state index for reliable structured LLM output](d270b0177-fsm-guided-constrained-decoding-json-schema-structured-output.md) — 10-context-prompt-engineering
+- [Confidence Sequences: The Nonparametric, LIL-Rate Machinery Behind Anytime-Valid A/B Inference](d541a8e56-nonparametric-time-uniform-confidence-sequences-lil-rate.md) — 02-statistical-causal-inference

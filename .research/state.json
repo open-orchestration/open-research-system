@@ -1129,7 +1129,7 @@
       "topic": "02-statistical-causal-inference",
       "desc": "Finite-M / non-exponential-family always-valid inference (LIL-based confidence sequences, Howard et al.) — referenced but not derived in Johari",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -3510,13 +3510,24 @@
       "extracted_path": "docs/10-context-prompt-engineering/sources/c328a44fb-gc4e28042-outlines-guided-generation.md",
       "lossy": false,
       "ingested_at": "2026-06-24T18:42:27.498809+00:00"
+    },
+    {
+      "id": "c90529a6e",
+      "title": "gf72694e5-howard-confidence-sequences-1",
+      "source": "https://arxiv.org/abs/1810.08240",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/gf72694e5-howard-confidence-sequences-1.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/c90529a6e-gf72694e5-howard-confidence-sequences-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T19:18:26.865817+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2205,
-    "edge_count": 2413
+    "node_count": 2229,
+    "edge_count": 2440
   },
   "assertions": {
     "count": 66,
@@ -4323,6 +4334,17 @@
       "created_at": "2026-06-24T18:47:42.394519+00:00",
       "promoted_path": "docs/findings/d270b0177-fsm-guided-constrained-decoding-json-schema-structured-output.md",
       "promoted_at": "2026-06-24T18:49:28.070173+00:00"
+    },
+    {
+      "id": "d541a8e56",
+      "topic": "02-statistical-causal-inference",
+      "title": "Confidence Sequences: The Nonparametric, LIL-Rate Machinery Behind Anytime-Valid A/B Inference",
+      "path": "docs/findings/_drafts/d541a8e56-nonparametric-time-uniform-confidence-sequences-lil-rate.md",
+      "status": "promoted",
+      "cites": [],
+      "created_at": "2026-06-24T19:26:53.954070+00:00",
+      "promoted_path": "docs/findings/d541a8e56-nonparametric-time-uniform-confidence-sequences-lil-rate.md",
+      "promoted_at": "2026-06-24T19:29:12.236289+00:00"
     }
   ]
 }
