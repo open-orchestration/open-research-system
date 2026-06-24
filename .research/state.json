@@ -577,7 +577,7 @@
       "topic": "03-decision-frameworks",
       "desc": "MADR/ADR template, fields, and ADR practice (adr.github.io / Nygard) — corpus 'MADR' sources are MCDM/weighted-scoring, not the decision-record format itself",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1056,6 +1056,22 @@
       "id": "g860ec004",
       "topic": "11-research-pipeline-engineering",
       "desc": "ingestion trigger cadence (event-driven vs scheduled vs hybrid) and drift detection (checksums, retrieval-quality metrics) — still blog-relayed, no doc anchor",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gf8ab7685",
+      "topic": "03-decision-frameworks",
+      "desc": "decision-log numbering/file-naming convention (status refs ADR-0123 but the scheme is unspecified in adr.github.io + MADR template)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g4a91aeef",
+      "topic": "03-decision-frameworks",
+      "desc": "Nygard's original four-field ADR template (Title/Context/Decision/Status/Consequences) from his 2011 post — corpus has MADR's expanded schema, not Nygard's original",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -2921,16 +2937,38 @@
       "extracted_path": "docs/11-research-pipeline-engineering/sources/c86c66bc5-llamaindex-ingestion-pipeline.md",
       "lossy": false,
       "ingested_at": "2026-06-24T14:10:42.097781+00:00"
+    },
+    {
+      "id": "cd5366499",
+      "title": "adr-github-io-overview",
+      "source": "https://adr.github.io/",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/adr-github-io-overview.url",
+      "extracted_path": "docs/03-decision-frameworks/sources/cd5366499-adr-github-io-overview.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T14:20:35.845764+00:00"
+    },
+    {
+      "id": "c6da6f093",
+      "title": "madr-template",
+      "source": "https://raw.githubusercontent.com/adr/madr/main/template/adr-template.md",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/madr-template.url",
+      "extracted_path": "docs/03-decision-frameworks/sources/c6da6f093-madr-template.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T14:20:38.223797+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1767,
-    "edge_count": 1847
+    "node_count": 1786,
+    "edge_count": 1890
   },
   "assertions": {
-    "count": 65,
+    "count": 66,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -3466,6 +3504,20 @@
       "created_at": "2026-06-24T14:16:53.377751+00:00",
       "promoted_path": "docs/findings/da2a65c0c-index-freshness-ingestion-pipeline.md",
       "promoted_at": "2026-06-24T14:18:39.689619+00:00"
+    },
+    {
+      "id": "decf6989c",
+      "topic": "03-decision-frameworks",
+      "title": "The ADR/MADR decision-record format: what an ADR is, the MADR field schema, and the Nygard lineage",
+      "path": "docs/findings/_drafts/decf6989c-adr-madr-decision-record-format.md",
+      "status": "promoted",
+      "cites": [
+        "cd5366499",
+        "c6da6f093"
+      ],
+      "created_at": "2026-06-24T14:26:13.206545+00:00",
+      "promoted_path": "docs/findings/decf6989c-adr-madr-decision-record-format.md",
+      "promoted_at": "2026-06-24T14:27:39.112350+00:00"
     }
   ]
 }

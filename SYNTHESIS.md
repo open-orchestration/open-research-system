@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **26 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **27 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -157,9 +157,16 @@ used and the weights+method recorded
 ([ACH & weighted criteria](docs/findings/d1b3c3b4c-ach-and-weighted-criteria-for-contested-judgments.md)).
 **Implication:** adopt ACH's *structure* (explicit hypothesis set, seek disconfirmation)
 for cross-source conflict detection and the reviewer gate, but record decisions as
-auditable weighted-criteria entries rather than mandating the full ACH ritual. (The MADR
-record *format* itself is not yet grounded — corpus has the scoring methods, not the ADR
-template.)
+auditable weighted-criteria entries rather than mandating the full ACH ritual. The decision
+*record format* is now grounded too: an **Architectural Decision Record (ADR)** captures a
+single decision and its rationale, and the collection forms a **decision log**; the official
+**MADR** template prescribes the fields — Context and Problem Statement, Decision Drivers,
+Considered Options, Decision Outcome (chosen option + justification), Consequences (Good/Bad),
+Confirmation, and Pros and Cons of the Options — the ADR community site crediting Michael
+Nygard's 2011 post as the popularizing origin
+([ADR/MADR record format](docs/findings/decf6989c-adr-madr-decision-record-format.md)). So the
+scoring *methods* PRODUCE a decision and the ADR/MADR *format* RECORDS it with rationale and
+consequences — complementary halves.
 
 ### Tooling: choose by execution model, not by ranking — and treat framework comparisons as opinion
 Agent frameworks differ on a **durable execution-model axis** that outlives any "best
@@ -306,8 +313,11 @@ finding** — each is a narrow corner awaiting a primary-source upgrade, and mus
 treated as evidenced until gathered:
 - **A/B-test power & effect-size methodology** — 02's finding covers causal identification
   (DAGs, do-calculus, potential outcomes) but not experiment-design power; that gap is queued.
-- **MADR/ADR decision-record *format*** (fields, template, Nygard practice) — 03 grounds the
-  *scoring methods* (ACH, weighted MCDM) but not the record schema; queued as a 03 gap.
+- **Nygard's original four-field ADR template + decision-log numbering convention** — the
+  ADR/MADR record *format* is now grounded on the official ADR site + MADR template
+  ([ADR/MADR format](docs/findings/decf6989c-adr-madr-decision-record-format.md)), but the
+  corpus has MADR's expanded schema, not Nygard's original four fields, and the log
+  numbering/file-naming scheme (the "ADR-0123" reference) is unspecified in-corpus. Both queued.
 - **PPMI weighting formula** — cosine, the distributional hypothesis, and word2vec are now
   grounded on the genuine SLP3 Ch.5 "Embeddings" chapter
   ([vector semantics](docs/findings/ddc396092-vector-semantics-cosine-embeddings.md)), but
@@ -326,16 +336,16 @@ treated as evidenced until gathered:
 - **Orchestrator-worker cost model (the ~15×-tokens / 3–5-subagent / ~90%-latency figures)** —
   these came from the old topic-07 stub; the *promoted* 07 findings cover halt-bounding and
   the no-clean-head-to-head provenance result, not the cost multipliers.
-- **A/B-test power, MADR record-format, controlled cross-encoder-vs-ColBERT head-to-head,
-  independent GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head** — all have
-  queued gaps (see the tensions above and the per-domain notes); each is a narrow ungathered
-  corner, not an empty domain. (GPT-Researcher's *internals* are now repo/doc-grounded; what
-  stays open is a third-party measurement of its self-reported ~5min/~$0.4 figures. The
-  framework execution-model taxonomy is doc-anchored; what remains there is only comparative
-  ranking/cost numbers, which are inherently vendor opinion.)
+- **A/B-test power, controlled cross-encoder-vs-ColBERT head-to-head, independent
+  GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head, Nygard's original ADR
+  template** — all have queued gaps (see the tensions above and the per-domain notes); each is
+  a narrow ungathered corner, not an empty domain. (GPT-Researcher's *internals* are now
+  repo/doc-grounded; the MADR record format is grounded; the framework execution-model taxonomy
+  is doc-anchored — what stays open there is only comparative ranking/cost numbers, inherently
+  vendor opinion.)
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1767 nodes / 1847 links** (65 of those
+A graphify pass over the corpus currently yields **1786 nodes / 1890 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

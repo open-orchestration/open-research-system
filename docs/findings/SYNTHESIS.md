@@ -26,3 +26,4 @@
 - [Vector semantics grounded: the distributional hypothesis, cosine similarity, and dense (word2vec) embeddings from SLP3 Ch.5](ddc396092-vector-semantics-cosine-embeddings.md) — 15-textbooks-longform
 - [GPT-Researcher's documented internals: the planner-executor-publisher loop, the 7-role LangGraph editorial team, and its self-reported deep-research cost/latency](da592d4f8-gpt-researcher-internals.md) — 13-reference-systems-case-studies
 - [LlamaIndex's IngestionPipeline gives the index-freshness mechanism a doc anchor — per-(node+transformation) caching and docstore hash dedup/upserts](da2a65c0c-index-freshness-ingestion-pipeline.md) — 11-research-pipeline-engineering
+- [The ADR/MADR decision-record format: what an ADR is, the MADR field schema, and the Nygard lineage](decf6989c-adr-madr-decision-record-format.md) — 03-decision-frameworks
