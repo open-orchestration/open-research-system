@@ -29,3 +29,4 @@
 - [The ADR/MADR decision-record format: what an ADR is, the MADR field schema, and the Nygard lineage](decf6989c-adr-madr-decision-record-format.md) — 03-decision-frameworks
 - [Designing a randomized experiment that can detect an effect: OEC, power, Type I/II error, and what sets the sample size](d740bae09-ab-test-power-effect-size-experiment-design.md) — 02-statistical-causal-inference
 - [Term-weighting formulas grounded: PMI/PPMI (Church-Hanks, Levy-Goldberg) and tf-idf-in-NLP (SLP3 Ch.11), with the word2vec ↔ shifted-PMI bridge](d7289dbd9-tf-idf-ppmi-weighting-primary-formulas.md) — 15-textbooks-longform
+- [Always-Valid Inference and the mSPRT: Controlling Type I Error When You Continuously Monitor an A/B Test](dc588b7cc-always-valid-inference-msprt-continuous-monitoring.md) — 02-statistical-causal-inference

@@ -1081,7 +1081,7 @@
       "topic": "02-statistical-causal-inference",
       "desc": "sequential/peeking & continuous-monitoring corrections to A/B sample-size (Kohavi 2009 formula assumes fixed-horizon test)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1112,6 +1112,22 @@
       "id": "g6af89086",
       "topic": "15-textbooks-longform",
       "desc": "Clean SGNS per-pair sigmoid/logistic objective (Levy-Goldberg local objective behind w.c=PMI-log k) — garbled by PDF conversion in both SLP3 Ch.5 and Levy-Goldberg",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g32860b29",
+      "topic": "02-statistical-causal-inference",
+      "desc": "Always-valid multiple-testing control (FWER/FDR under continuous monitoring) — Johari mentions it but the mechanics are not grounded",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gf72694e5",
+      "topic": "02-statistical-causal-inference",
+      "desc": "Finite-M / non-exponential-family always-valid inference (LIL-based confidence sequences, Howard et al.) — referenced but not derived in Johari",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -3043,13 +3059,24 @@
       "extracted_path": "docs/15-textbooks-longform/sources/c1008a26d-slp3-ch11-information-retrieval-and-rag.md",
       "lossy": false,
       "ingested_at": "2026-06-24T15:21:14.486954+00:00"
+    },
+    {
+      "id": "c6c0f3857",
+      "title": "johari-pekelis-walsh-always-valid-inference-continuous-monitoring-ab-tests",
+      "source": "https://arxiv.org/abs/1512.04922",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/johari-pekelis-walsh-always-valid-inference-continuous-monitoring-ab-tests.pdf",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/c6c0f3857-johari-pekelis-walsh-always-valid-inference-continuous-monitoring-ab-tests.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T15:41:10.186302+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1835,
-    "edge_count": 1957
+    "node_count": 1867,
+    "edge_count": 1993
   },
   "assertions": {
     "count": 66,
@@ -3630,6 +3657,32 @@
       "created_at": "2026-06-24T15:35:35.079622+00:00",
       "promoted_path": "docs/findings/d7289dbd9-tf-idf-ppmi-weighting-primary-formulas.md",
       "promoted_at": "2026-06-24T15:37:35.301690+00:00"
+    },
+    {
+      "id": "d21f3389c",
+      "topic": "02-statistical-causal-inference",
+      "title": "Always-Valid Inference and the mSPRT: Controlling Type I Error When You Continuously Monitor an A/B Test",
+      "path": "docs/findings/_drafts/d21f3389c-always-valid-inference-msprt-continuous-monitoring.md",
+      "status": "rejected",
+      "cites": [
+        "c6c0f3857"
+      ],
+      "created_at": "2026-06-24T15:48:38.037443+00:00",
+      "promoted_path": null,
+      "reject_reason": "ai-independent: efficiency claim mis-attributed as 'Theorem 2, M=O(log alpha^-1) => phi->1'; source result is Proposition 2 with the inverse condition M/log(1/alpha)->infinity. All other formulas (Def 1, Eq 1/3/7/8, Thm 1 duality, martingale threshold) faithful; provenance+canon strong. Fixable."
+    },
+    {
+      "id": "dc588b7cc",
+      "topic": "02-statistical-causal-inference",
+      "title": "Always-Valid Inference and the mSPRT: Controlling Type I Error When You Continuously Monitor an A/B Test",
+      "path": "docs/findings/_drafts/dc588b7cc-always-valid-inference-msprt-continuous-monitoring.md",
+      "status": "promoted",
+      "cites": [
+        "c6c0f3857"
+      ],
+      "created_at": "2026-06-24T15:53:14.116372+00:00",
+      "promoted_path": "docs/findings/dc588b7cc-always-valid-inference-msprt-continuous-monitoring.md",
+      "promoted_at": "2026-06-24T15:56:03.170565+00:00"
     }
   ]
 }

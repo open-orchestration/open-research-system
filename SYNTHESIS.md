@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **28 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **30 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -154,8 +154,23 @@ experiments on the web," DMKD 2009): pick one **OEC** in advance; **Effect** = m
 90%) — larger when the OEC variance σ² is high or the minimum detectable effect Δ is small —
 with **A/A tests** validating the system and estimating variance before trusting any result
 ([A/B experiment design](docs/findings/d740bae09-ab-test-power-effect-size-experiment-design.md)).
-Identification (Pearl/Rubin) says *when* an effect is estimable; this says *how big an
-experiment* must be to see it.
+That sizing is correct **only under a fixed-horizon discipline** — commit to *n* in advance,
+test once. The moment an operator (or an autonomous engine) *peeks* at the running test and
+stops on what it sees, the fixed-horizon Type I guarantee is void. The **continuous-monitoring
+complement** is now grounded on its peer-reviewed primary (Johari, Pekelis & Walsh, "Always
+Valid Inference," *Operations Research* / arXiv:1512.04922): **always-valid p-values** control
+Type I error at *any* data-dependent stopping time (Definition 1: `P_{θ0}(p_T ≤ s) ≤ s` for any
+stopping time *T*), constructed via a duality with **sequential tests of power one** and the
+**mixture sequential probability ratio test (mSPRT)** — stop when the mixture likelihood ratio
+`Λ^H_n = ∫ (f_θ/f_{θ0})^n dH(θ)` crosses `α^{-1}` (a martingale threshold). Efficiency splits by
+patience *M* vs `log(1/α)` (aggressive / Goldilocks / conservative); in the Goldilocks regime
+any mSPRT's relative efficiency → 1 as α→0, with the run-length-minimizing mixture obtained by
+matching `H` to the prior over effect sizes
+([always-valid inference](docs/findings/dc588b7cc-always-valid-inference-msprt-continuous-monitoring.md)).
+**Decision rule:** pre-register *n* and look once → Kohavi sizing; monitor continuously and stop
+when convinced → always-valid / mSPRT — an autonomous engine reacting to its own results is by
+construction in the second case. Identification (Pearl/Rubin) says *when* an effect is estimable;
+this says *how big an experiment* must be to see it, and *how to stop early without lying*.
 
 ### Decision-making: ACH for contested findings, weighted criteria for auditable records
 **Analysis of Competing Hypotheses** enumerates hypotheses, builds an evidence×hypothesis
@@ -330,11 +345,14 @@ rerank, filter-before-search) is dev-agency blog-consensus — sensible defaults
 Every domain is grounded, but these specific claims are **not yet backed by a promoted
 finding** — each is a narrow corner awaiting a primary-source upgrade, and must not be
 treated as evidenced until gathered:
-- **Sequential/peeking A/B corrections & sizing under interference** — A/B-test power,
-  sample-size, OEC, and Type I/II error are now grounded on Kohavi et al. 2009
-  ([A/B experiment design](docs/findings/d740bae09-ab-test-power-effect-size-experiment-design.md)),
-  but that primary assumes a fixed-horizon test; continuous-monitoring/peeking corrections and
-  sample-size cost under SUTVA violations (units sharing a cache/model/rate-limit) stay queued.
+- **A/B sizing under interference / SUTVA violations** — fixed-horizon power/sizing (Kohavi
+  2009, [d740bae09](docs/findings/d740bae09-ab-test-power-effect-size-experiment-design.md)) AND
+  the continuous-monitoring/peeking correction (always-valid inference + mSPRT, Johari et al.,
+  [dc588b7cc](docs/findings/dc588b7cc-always-valid-inference-msprt-continuous-monitoring.md)) are
+  now both grounded on peer-reviewed primaries. What stays queued is **sample-size cost under
+  SUTVA violations / interference** (gd78c76ea): the always-valid result assumes *independent*
+  units, so shared cache/model/rate-limit coupling and network/marketplace effects need a
+  separate primary (cluster-randomization / network-interference literature).
 - **Nygard's original four-field ADR template + decision-log numbering convention** — the
   ADR/MADR record *format* is now grounded on the official ADR site + MADR template
   ([ADR/MADR format](docs/findings/decf6989c-adr-madr-decision-record-format.md)), but the
@@ -363,7 +381,7 @@ treated as evidenced until gathered:
   the no-clean-head-to-head provenance result, not the cost multipliers.
 - **Remaining narrow corners:** controlled cross-encoder-vs-ColBERT head-to-head; independent
   GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head; Nygard's original ADR
-  template + decision-log numbering; sequential/peeking A/B corrections; BM25's full formula
+  template + decision-log numbering; A/B sizing under interference/SUTVA; BM25's full formula
   and PPMI smoothing. Each has a queued gap (see the tensions above and per-domain notes); each is a
   narrow ungathered corner, not an empty domain — the headline blog→primary upgrades (06
   ColBERT economics, 12 execution-model taxonomy, 15 vector semantics, 13 GPT-Researcher
@@ -371,7 +389,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1835 nodes / 1957 links** (66 of those
+A graphify pass over the corpus currently yields **1867 nodes / 1993 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
