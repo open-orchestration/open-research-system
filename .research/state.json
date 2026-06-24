@@ -939,6 +939,22 @@
       "origin": "process",
       "status": "queued",
       "attempts": 0
+    },
+    {
+      "id": "gb3ca9311",
+      "topic": "10-context-prompt-engineering",
+      "desc": "Prompting-ladder behavior on 2025-era reasoning-tuned / frontier models — CoT/self-consistency/ToT primaries only test PaLM-540B/GPT-4-era models; emergence-scale threshold and rung ranking on current models untested",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g254bbd76",
+      "topic": "10-context-prompt-engineering",
+      "desc": "Cost-normalized (accuracy per token/dollar) head-to-head of CoT vs self-consistency vs ToT on a shared benchmark — escalation economics remain qualitative, not a measured curve",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
     }
   ],
   "inbox": [],
@@ -2658,13 +2674,46 @@
       "extracted_path": "docs/15-textbooks-longform/sources/cb0370497-slp3-ch6-vector-semantics-and-embeddings.md",
       "lossy": false,
       "ingested_at": "2026-06-23T20:14:39.136568+00:00"
+    },
+    {
+      "id": "cf83dbc59",
+      "title": "arxiv-2201.11903-wei-chain-of-thought-prompting",
+      "source": "file://arxiv-2201.11903-wei-chain-of-thought-prompting.pdf",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/arxiv-2201.11903-wei-chain-of-thought-prompting.pdf",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/cf83dbc59-arxiv-2201-11903-wei-chain-of-thought-prompting.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T20:38:35.464381+00:00"
+    },
+    {
+      "id": "cf02b8fc1",
+      "title": "arxiv-2203.11171-wang-self-consistency-cot",
+      "source": "file://arxiv-2203.11171-wang-self-consistency-cot.pdf",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/arxiv-2203.11171-wang-self-consistency-cot.pdf",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/cf02b8fc1-arxiv-2203-11171-wang-self-consistency-cot.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T20:38:37.305577+00:00"
+    },
+    {
+      "id": "c24586afe",
+      "title": "arxiv-2305.10601-yao-tree-of-thoughts",
+      "source": "file://arxiv-2305.10601-yao-tree-of-thoughts.pdf",
+      "topic": "10-context-prompt-engineering",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/arxiv-2305.10601-yao-tree-of-thoughts.pdf",
+      "extracted_path": "docs/10-context-prompt-engineering/sources/c24586afe-arxiv-2305-10601-yao-tree-of-thoughts.md",
+      "lossy": false,
+      "ingested_at": "2026-06-23T20:38:38.717465+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1638,
-    "edge_count": 1641
+    "node_count": 1653,
+    "edge_count": 1662
   },
   "assertions": {
     "count": 60,
@@ -3118,6 +3167,21 @@
       "created_at": "2026-06-23T20:30:15.972601+00:00",
       "promoted_path": "docs/findings/d2fbbb962-textbook-grounded-retrieval-scoring-and-evaluation-metrics.md",
       "promoted_at": "2026-06-23T20:33:36.462991+00:00"
+    },
+    {
+      "id": "d0b1fc5c6",
+      "topic": "10-context-prompt-engineering",
+      "title": "Paper-anchored prompting ladder: chain-of-thought, self-consistency, and tree-of-thoughts from the originating papers",
+      "path": "docs/findings/_drafts/d0b1fc5c6-paper-anchored-prompting-ladder.md",
+      "status": "promoted",
+      "cites": [
+        "cf83dbc59",
+        "cf02b8fc1",
+        "c24586afe"
+      ],
+      "created_at": "2026-06-24T12:38:18.546616+00:00",
+      "promoted_path": "docs/findings/d0b1fc5c6-paper-anchored-prompting-ladder.md",
+      "promoted_at": "2026-06-24T12:40:25.018060+00:00"
     }
   ]
 }

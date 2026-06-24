@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **20 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **21 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -210,12 +210,21 @@ can trust as bedrock; the earlier blog-sourced draft was rejected, and this repl
 chapter prose — closing the last ungrounded domain.
 
 ### Prompting & context: escalate cost only when it pays; don't stuff the context window
-On the prompting ladder (few-shot → CoT → self-consistency → ToT), the in-corpus *numbers*
-are blog-relayed (the originating papers aren't yet gathered) and so non-load-bearing; the
-one paper-anchored result is **lost-in-the-middle** (arXiv:2307.03172): long-context accuracy
-is highest when relevant text sits at the beginning or end and degrades in the middle, even
-for long-context models — so prefer **targeted retrieval over context-stuffing**, and
-escalate the reasoning ladder only when expected value beats added token cost
+On the prompting ladder (few-shot → CoT → self-consistency → ToT), the rungs are now
+**paper-anchored** from the originating works, retiring the earlier blog-relayed numbers:
+**chain-of-thought** is an *emergent* ability of scale — with PaLM-540B + 8 exemplars it
+lifts GSM8K 17.9→56.9% (+39 pts) but does not help (and can hurt) small models
+(arXiv:2201.11903); **self-consistency** samples diverse reasoning paths and majority-votes
+the answer, adding ~+17.9 pts on GSM8K at the cost of N× inference (arXiv:2203.11171); and
+**tree-of-thoughts** adds deliberate BFS/DFS search with LM self-evaluation, taking
+Game-of-24 from 4% (GPT-4 CoT) to 74% but at materially higher API cost and only where the
+task actually needs search (arXiv:2305.10601)
+([paper-anchored ladder](docs/findings/d0b1fc5c6-paper-anchored-prompting-ladder.md)).
+The complementary context-management half is **lost-in-the-middle** (arXiv:2307.03172):
+long-context accuracy is highest when relevant text sits at the beginning or end and
+degrades in the middle, even for long-context models — so prefer **targeted retrieval over
+context-stuffing**, and escalate the reasoning ladder only when expected value beats added
+token cost
 ([prompting/context](docs/findings/d0cce1cec-prompting-ladder-context-management-paper-anchored-vs-blog-relayed.md)).
 
 ### Operations: reproducible tracking is docs-settled; index freshness is convention
@@ -268,9 +277,11 @@ treated as evidenced until gathered:
   normalization and embeddings stay ungrounded: the ingested "SLP3 ch.6" file is actually the
   *Neural Networks* chapter, so the genuine vector-semantics/embeddings chapter (tf-idf in NLP,
   PPMI, cosine) is still queued.
-- **Prompting-ladder *numbers*** — 10's finding anchors lost-in-the-middle and the
-  cost-tiering principle, but the CoT/self-consistency/ToT *benchmark numbers* are blog-relayed;
-  the originating papers (Wei 2201.11903, Wang 2203.11171, Yao 2305.10601) are queued.
+- **Prompting-ladder cost-normalized curve** — the CoT/self-consistency/ToT *benchmark
+  numbers* are now paper-anchored from the originating works (Wei 2201.11903, Wang 2203.11171,
+  Yao 2305.10601), but no source gives an accuracy-per-token/dollar head-to-head on a shared
+  benchmark, nor results on 2025-era reasoning-tuned models, so the escalation economics stay a
+  qualitative rule, not a measured curve. Two 10 gaps queued.
 - **Index-freshness as spec** — 11's reproducible-tracking half is docs-anchored, but the
   incremental-reindex/CDC/freshness claims are blog-only; an official ingestion-docs / CDC-spec
   anchor is queued.
@@ -282,7 +293,7 @@ treated as evidenced until gathered:
   and the per-domain notes); each is a narrow ungathered corner, not an empty domain.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1638 nodes / 1641 links** (60 of those
+A graphify pass over the corpus currently yields **1653 nodes / 1662 links** (60 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

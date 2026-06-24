@@ -20,3 +20,4 @@
 - [Reproducible tracking is docs-anchored; index freshness is a blog-relayed engineering pattern](d470b6824-reproducible-tracking-docs-anchored-index-freshness-blog-relayed.md) — 11-research-pipeline-engineering
 - [Applied playbooks split by evidence tier: deep-research architecture anchored to a survey and practitioner write-up; production-RAG retrieval craft is blog-consensus](d603c3334-convergent-playbook-anchored-architecture-blog-consensus-rag-craft.md) — 04-applied-research-playbooks
 - [Textbook-grounded retrieval scoring and ranked-retrieval evaluation metrics](d2fbbb962-textbook-grounded-retrieval-scoring-and-evaluation-metrics.md) — 15-textbooks-longform
+- [Paper-anchored prompting ladder: chain-of-thought, self-consistency, and tree-of-thoughts from the originating papers](d0b1fc5c6-paper-anchored-prompting-ladder.md) — 10-context-prompt-engineering
