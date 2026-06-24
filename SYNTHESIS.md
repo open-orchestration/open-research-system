@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **33 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **34 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -138,8 +138,25 @@ emit machine-readable citations via **CSL-JSON** (typed array of items, `id`/`ty
 `date-parts`); record the engine's own decisions via **MADR** (lean Markdown template,
 status/date/context front-matter)
 ([interop primitives](docs/findings/d75f0cdee-interop-primitives-mcp-csl-madr.md)).
-**Implication:** emit CSL-JSON for citations and MADR records for non-obvious choices;
-expose the engine over MCP.
+The **MCP spec internals are now grounded** on the official 2025-06-18 spec: the host/client/
+server model over JSON-RPC; the three server primitives (resources/tools/prompts); the two
+transports — **stdio** (subprocess, env-based credentials, client SHOULD support it) vs
+**Streamable HTTP** (HTTP POST + optional SSE, `Mcp-Session-Id`, the `MCP-Protocol-Version`
+header, replacing the deprecated HTTP+SSE) with localhost-bind / Origin-validation /
+DNS-rebinding hardening; and the **OAuth 2.1 authorization** model for HTTP transport (the MCP
+server as an OAuth *resource server* — Protected Resource Metadata RFC 9728, AS Metadata
+RFC 8414, Dynamic Client Registration RFC 7591, **PKCE**, Resource-Indicator audience binding
+RFC 8707, plus the confused-deputy / no-token-passthrough cautions; authorization is *optional*
+and HTTP-only). Crucially, **Resources** model the engine's append-only store directly: each
+finding/source a URI-identified resource (custom scheme, RFC 3986), discovered via paginated
+`resources/list` and fetched via `resources/read`, with **`notifications/resources/list_changed`**
+encoding the append (a new finding promoted → the list grew) and **`subscribe` +
+`notifications/resources/updated`** the rare in-place change (a finding → superseded)
+([MCP spec internals](docs/findings/d3c246500-mcp-spec-internals-primitives-transports-auth-resources.md)).
+**Implication:** emit CSL-JSON for citations and MADR records for non-obvious choices; expose
+the engine over MCP — stdio for a co-located server, the full OAuth 2.1 resource-server
+obligations only when serving remote/multi-client, and `listChanged`-dominant Resources as the
+spec-faithful encoding of "the repo remembers."
 
 ### Epistemics: grade evidence, reconcile contradictions, bound your own confidence
 Three established human-methodology pillars map onto the engine's gates. **Source
@@ -429,7 +446,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1934 nodes / 2075 links** (66 of those
+A graphify pass over the corpus currently yields **1969 nodes / 2114 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

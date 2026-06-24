@@ -433,7 +433,7 @@
       "topic": "17-specs-standards",
       "desc": "MCP authorization/security model + Streamable HTTP vs STDIO transport tradeoffs (OAuth flows)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -449,7 +449,7 @@
       "topic": "17-specs-standards",
       "desc": "MCP Resources modeling of an append-only corpus/findings store (URI scheme, list_changed subscription semantics)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1152,6 +1152,14 @@
       "id": "g8ea06357",
       "topic": "08-grounding-truth",
       "desc": "RARR per-benchmark result-table deltas (attribution gain + preservation % for PaLM/LaMDA on NQ/SQA/QReCC) and FActScore atomic-fact decomposition prompt — present but lossy in PDF->md conversion; need clean re-extraction",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gdb207ceb",
+      "topic": "17-specs-standards",
+      "desc": "MCP tools/* and prompts/* message-shape spec pages + the Security Best Practices and Lifecycle/version-negotiation pages (referenced by the ingested 2025-06-18 spec pages but not ingested)",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -3160,13 +3168,57 @@
       "extracted_path": "docs/08-grounding-truth/sources/ce1c38128-min-2023-factscore-atomic-factual-precision.md",
       "lossy": false,
       "ingested_at": "2026-06-24T16:22:21.997716+00:00"
+    },
+    {
+      "id": "c6a01ecb9",
+      "title": "mcp-spec-architecture-primitives",
+      "source": "https://modelcontextprotocol.io/specification/2025-06-18/architecture",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/mcp-spec-architecture-primitives.url",
+      "extracted_path": "docs/17-specs-standards/sources/c6a01ecb9-mcp-spec-architecture-primitives.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T16:33:10.990400+00:00"
+    },
+    {
+      "id": "cd2811bcf",
+      "title": "mcp-spec-authorization-oauth",
+      "source": "https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/mcp-spec-authorization-oauth.url",
+      "extracted_path": "docs/17-specs-standards/sources/cd2811bcf-mcp-spec-authorization-oauth.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T16:33:13.715886+00:00"
+    },
+    {
+      "id": "cfd67269f",
+      "title": "mcp-spec-resources-uri-subscribe-listchanged",
+      "source": "https://modelcontextprotocol.io/specification/2025-06-18/server/resources",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/mcp-spec-resources-uri-subscribe-listchanged.url",
+      "extracted_path": "docs/17-specs-standards/sources/cfd67269f-mcp-spec-resources-uri-subscribe-listchanged.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T16:33:16.482164+00:00"
+    },
+    {
+      "id": "ce4efcb5b",
+      "title": "mcp-spec-transports-stdio-streamable-http",
+      "source": "https://modelcontextprotocol.io/specification/2025-06-18/basic/transports",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/mcp-spec-transports-stdio-streamable-http.url",
+      "extracted_path": "docs/17-specs-standards/sources/ce4efcb5b-mcp-spec-transports-stdio-streamable-http.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T16:33:18.870716+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1934,
-    "edge_count": 2075
+    "node_count": 1969,
+    "edge_count": 2114
   },
   "assertions": {
     "count": 66,
@@ -3815,6 +3867,22 @@
       "created_at": "2026-06-24T16:28:49.786808+00:00",
       "promoted_path": "docs/findings/d1ad78766-factscore-atomic-precision-and-rarr-attribution-editing.md",
       "promoted_at": "2026-06-24T16:31:24.415367+00:00"
+    },
+    {
+      "id": "d3c246500",
+      "topic": "17-specs-standards",
+      "title": "MCP 2025-06-18 spec internals: primitives, transports, OAuth authorization, and Resources as an append-only corpus store",
+      "path": "docs/findings/_drafts/d3c246500-mcp-spec-internals-primitives-transports-auth-resources.md",
+      "status": "promoted",
+      "cites": [
+        "c6a01ecb9",
+        "ce4efcb5b",
+        "cd2811bcf",
+        "cfd67269f"
+      ],
+      "created_at": "2026-06-24T16:40:34.280040+00:00",
+      "promoted_path": "docs/findings/d3c246500-mcp-spec-internals-primitives-transports-auth-resources.md",
+      "promoted_at": "2026-06-24T16:44:00.605568+00:00"
     }
   ]
 }

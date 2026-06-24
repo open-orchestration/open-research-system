@@ -33,3 +33,4 @@
 - [Nygard's original five-section ADR template and the decision-log numbering/supersede convention](d657c1d86-nygard-original-adr-template-decision-log-numbering.md) — 03-decision-frameworks
 - [Primary metric formulas of RAGAS and ARES: reference-free LLM-prompting (F=|V|/|S|, AR cosine) vs fine-tuned judges debiased with prediction-powered inference](d636208ea-ragas-ares-primary-rag-evaluation-formulas.md) — 16-evaluation-benchmarks
 - [FActScore atomic-fact precision and RARR attribution editing: two grounding-truth primitives, grounded on their own papers](d1ad78766-factscore-atomic-precision-and-rarr-attribution-editing.md) — 08-grounding-truth
+- [MCP 2025-06-18 spec internals: primitives, transports, OAuth authorization, and Resources as an append-only corpus store](d3c246500-mcp-spec-internals-primitives-transports-auth-resources.md) — 17-specs-standards
