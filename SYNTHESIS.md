@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **40 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **41 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -219,7 +219,14 @@ spec-faithful encoding of "the repo remembers."
 Three established human-methodology pillars map onto the engine's gates. **Source
 credibility / evidence synthesis** — GRADE rates certainty (High/Moderate/Low/Very Low),
 downgrading on risk-of-bias, inconsistency, indirectness, imprecision, and publication
-bias, with the per-domain rationale documented; PRISMA mandates *reporting* the
+bias, with the per-domain rationale documented. This GRADE mechanics is **now grounded on the
+official GRADE Working Group handbook** (not a vendor restatement): RCTs start High and
+observational studies Low; the **five downgrade domains** above plus **three upgrade domains**
+(large effect, dose-response gradient, plausible confounding that would only reduce the effect)
+adjust that starting point; and certainty in the evidence is held *separate* from the strength
+of a recommendation (which also weighs benefits/harms, values, and resources)
+([GRADE handbook](docs/findings/d628b3d0f-grade-official-handbook-certainty-domains.md)).
+PRISMA mandates *reporting* the
 search-and-selection trail; Cochrane supplies the method layer. **Claim
 extraction / contradiction resolution** — pipelines split text into atomic, decontextualized
 claims (Claimify reports ~99% entailed by the source sentence) and run NLI three-way
@@ -508,7 +515,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2100 nodes / 2296 links** (66 of those
+A graphify pass over the corpus currently yields **2120 nodes / 2320 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
