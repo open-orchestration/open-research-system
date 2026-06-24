@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **38 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **39 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -115,6 +115,22 @@ The three points: **evaluate-vs-context** (RAGAS/ARES) · **evaluate-vs-knowledg
 substrate. **Implication:** the engine's own promotion gate *is* a faithfulness check, so it
 inherits exactly these confounds — it must judge structurally, stay calibrated against human
 labels, and (per ARES) prefer error-bars over bare point scores.
+
+How far can that LLM-judge be trusted? The reliability evidence is **now grounded on primaries**.
+MT-Bench (Zheng et al., arXiv:2306.05685) shows a strong judge (GPT-4) reaches **~85% agreement
+with human preferences vs ~81% human-human** — i.e. *judge-human agreement matches human-human* —
+but only after controlling named biases it quantifies: **position bias** (GPT-4 only 65.0%
+order-consistent), **verbosity bias** (a repetitive-list attack fooled weaker judges ~91% of the
+time, GPT-4 8.7%), self-enhancement, and weak math/reasoning grading. "Judging the Judges" (Thakur
+et al., arXiv:2406.12624) adds the sharper warning: **raw percent agreement overstates alignment** —
+on chance-corrected **Scott's π** even the best judges (Llama-3-70B, GPT-4-Turbo) land only in the
+high-80s and ~8 points behind human judges. Operationally, the **TruLens RAG-Triad** decomposes the
+judgment into three tractable per-axis feedback functions — **context relevance · groundedness ·
+answer relevance** — that together guard against hallucination
+([LLM-judge reliability](docs/findings/d4c45dd7e-llm-as-judge-reliability-bias-human-correlation-rag-triad.md)).
+**Implication:** the engine's faithfulness judge must (a) decompose per-axis (RAG-Triad), (b) control
+position/verbosity/self-enhancement bias, and (c) calibrate on chance-corrected κ/π, never raw
+percent agreement.
 
 ### Knowledge graph: extraction method and community structure are the cost-fidelity levers
 When compiling a source-of-truth KG corpus, the two measured levers are *how triples are
@@ -487,7 +503,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2070 nodes / 2254 links** (66 of those
+A graphify pass over the corpus currently yields **2090 nodes / 2281 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
