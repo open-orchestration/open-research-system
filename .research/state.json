@@ -1065,7 +1065,7 @@
       "topic": "03-decision-frameworks",
       "desc": "decision-log numbering/file-naming convention (status refs ADR-0123 but the scheme is unspecified in adr.github.io + MADR template)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1073,7 +1073,7 @@
       "topic": "03-decision-frameworks",
       "desc": "Nygard's original four-field ADR template (Title/Context/Decision/Status/Consequences) from his 2011 post — corpus has MADR's expanded schema, not Nygard's original",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1128,6 +1128,14 @@
       "id": "gf72694e5",
       "topic": "02-statistical-causal-inference",
       "desc": "Finite-M / non-exponential-family always-valid inference (LIL-based confidence sequences, Howard et al.) — referenced but not derived in Johari",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g89e6496b",
+      "topic": "03-decision-frameworks",
+      "desc": "Exact zero-padded ADR digit width (literal 'ADR-0123' four-digit form) — Nygard uses 'adr-NNN' and adr-tools auto-numbers, but neither states a fixed digit padding; only MADR's example shows four digits",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -3070,13 +3078,35 @@
       "extracted_path": "docs/02-statistical-causal-inference/sources/c6c0f3857-johari-pekelis-walsh-always-valid-inference-continuous-monitoring-ab-tests.md",
       "lossy": false,
       "ingested_at": "2026-06-24T15:41:10.186302+00:00"
+    },
+    {
+      "id": "c1601728e",
+      "title": "npryce-adr-tools-numbering-and-supersede-convention",
+      "source": "https://github.com/npryce/adr-tools",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/npryce-adr-tools-numbering-and-supersede-convention.url",
+      "extracted_path": "docs/03-decision-frameworks/sources/c1601728e-npryce-adr-tools-numbering-and-supersede-convention.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T15:59:54.977638+00:00"
+    },
+    {
+      "id": "c692ba2f1",
+      "title": "nygard-2011-documenting-architecture-decisions",
+      "source": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/nygard-2011-documenting-architecture-decisions.url",
+      "extracted_path": "docs/03-decision-frameworks/sources/c692ba2f1-nygard-2011-documenting-architecture-decisions.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T15:59:57.564614+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1867,
-    "edge_count": 1993
+    "node_count": 1889,
+    "edge_count": 2019
   },
   "assertions": {
     "count": 66,
@@ -3683,6 +3713,20 @@
       "created_at": "2026-06-24T15:53:14.116372+00:00",
       "promoted_path": "docs/findings/dc588b7cc-always-valid-inference-msprt-continuous-monitoring.md",
       "promoted_at": "2026-06-24T15:56:03.170565+00:00"
+    },
+    {
+      "id": "d657c1d86",
+      "topic": "03-decision-frameworks",
+      "title": "Nygard's original five-section ADR template and the decision-log numbering/supersede convention",
+      "path": "docs/findings/_drafts/d657c1d86-nygard-original-adr-template-decision-log-numbering.md",
+      "status": "promoted",
+      "cites": [
+        "c692ba2f1",
+        "c1601728e"
+      ],
+      "created_at": "2026-06-24T16:05:29.046509+00:00",
+      "promoted_path": "docs/findings/d657c1d86-nygard-original-adr-template-decision-log-numbering.md",
+      "promoted_at": "2026-06-24T16:06:20.856960+00:00"
     }
   ]
 }

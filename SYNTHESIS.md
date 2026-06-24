@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **30 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **31 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -191,9 +191,20 @@ single decision and its rationale, and the collection forms a **decision log**; 
 Considered Options, Decision Outcome (chosen option + justification), Consequences (Good/Bad),
 Confirmation, and Pros and Cons of the Options — the ADR community site crediting Michael
 Nygard's 2011 post as the popularizing origin
-([ADR/MADR record format](docs/findings/decf6989c-adr-madr-decision-record-format.md)). So the
-scoring *methods* PRODUCE a decision and the ADR/MADR *format* RECORDS it with rationale and
-consequences — complementary halves.
+([ADR/MADR record format](docs/findings/decf6989c-adr-madr-decision-record-format.md)). That
+**origin is now grounded on Nygard's own 2011 post**, which MADR's expanded schema descends
+from: the **original five sections** are *Title* (a short noun phrase), *Context* (the forces
+at play, value-neutral), *Decision* (the response, active voice — "We will …"), *Status*
+(proposed → accepted → deprecated/superseded-with-a-reference), and *Consequences* (the
+resulting context — positive, negative, AND neutral). Nygard also fixes the **decision-log
+numbering convention** the corpus previously lacked: ADRs live at `doc/arch/adr-NNN.md`,
+"numbered sequentially and monotonically," numbers are never reused, and a superseded ADR is
+*kept, not deleted* — operationalized by Nat Pryce's `adr-tools` (`adr new` mints the next
+numbered file; `adr new -s 9` records a bidirectional supersede and flips ADR 9's status)
+([Nygard original + numbering](docs/findings/d657c1d86-nygard-original-adr-template-decision-log-numbering.md)).
+MADR's additions over Nygard's five fields (Decision Drivers, Considered Options, Pros-and-Cons)
+are the *expansion*, not the origin. So the scoring *methods* PRODUCE a decision and the
+ADR/MADR *format* RECORDS it with rationale and consequences — complementary halves.
 
 ### Tooling: choose by execution model, not by ranking — and treat framework comparisons as opinion
 Agent frameworks differ on a **durable execution-model axis** that outlives any "best
@@ -353,11 +364,14 @@ treated as evidenced until gathered:
   SUTVA violations / interference** (gd78c76ea): the always-valid result assumes *independent*
   units, so shared cache/model/rate-limit coupling and network/marketplace effects need a
   separate primary (cluster-randomization / network-interference literature).
-- **Nygard's original four-field ADR template + decision-log numbering convention** — the
-  ADR/MADR record *format* is now grounded on the official ADR site + MADR template
-  ([ADR/MADR format](docs/findings/decf6989c-adr-madr-decision-record-format.md)), but the
-  corpus has MADR's expanded schema, not Nygard's original four fields, and the log
-  numbering/file-naming scheme (the "ADR-0123" reference) is unspecified in-corpus. Both queued.
+- **ADR digit-padding convention (minor residual)** — Nygard's original five-section template
+  AND the decision-log numbering/supersede convention are now grounded on Nygard's own 2011 post
+  + Nat Pryce's `adr-tools`
+  ([Nygard original + numbering](docs/findings/d657c1d86-nygard-original-adr-template-decision-log-numbering.md)),
+  closing the former "Nygard original / numbering unspecified" corner. What stays queued is only
+  the **exact zero-padded digit width** (the literal four-digit "ADR-0123" form): Nygard writes
+  `adr-NNN` and adr-tools auto-numbers, but neither fixes a digit padding — only MADR's example
+  shows four digits. A pedantic residual, not a methodology gap.
 - **BM25 formula + PPMI smoothing + SGNS objective** — the **PMI/PPMI defining formulas**,
   the **word2vec↔shifted-PMI bridge**, and **tf-idf-in-NLP** are now grounded on their genuine
   primaries (Church & Hanks 1990, Levy & Goldberg 2014, SLP3 Ch.11)
@@ -380,8 +394,7 @@ treated as evidenced until gathered:
   these came from the old topic-07 stub; the *promoted* 07 findings cover halt-bounding and
   the no-clean-head-to-head provenance result, not the cost multipliers.
 - **Remaining narrow corners:** controlled cross-encoder-vs-ColBERT head-to-head; independent
-  GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head; Nygard's original ADR
-  template + decision-log numbering; A/B sizing under interference/SUTVA; BM25's full formula
+  GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head; ADR digit-padding (minor); A/B sizing under interference/SUTVA; BM25's full formula
   and PPMI smoothing. Each has a queued gap (see the tensions above and per-domain notes); each is a
   narrow ungathered corner, not an empty domain — the headline blog→primary upgrades (06
   ColBERT economics, 12 execution-model taxonomy, 15 vector semantics, 13 GPT-Researcher
@@ -389,7 +402,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1867 nodes / 1993 links** (66 of those
+A graphify pass over the corpus currently yields **1889 nodes / 2019 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
