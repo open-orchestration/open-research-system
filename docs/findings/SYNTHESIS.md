@@ -27,3 +27,4 @@
 - [GPT-Researcher's documented internals: the planner-executor-publisher loop, the 7-role LangGraph editorial team, and its self-reported deep-research cost/latency](da592d4f8-gpt-researcher-internals.md) — 13-reference-systems-case-studies
 - [LlamaIndex's IngestionPipeline gives the index-freshness mechanism a doc anchor — per-(node+transformation) caching and docstore hash dedup/upserts](da2a65c0c-index-freshness-ingestion-pipeline.md) — 11-research-pipeline-engineering
 - [The ADR/MADR decision-record format: what an ADR is, the MADR field schema, and the Nygard lineage](decf6989c-adr-madr-decision-record-format.md) — 03-decision-frameworks
+- [Designing a randomized experiment that can detect an effect: OEC, power, Type I/II error, and what sets the sample size](d740bae09-ab-test-power-effect-size-experiment-design.md) — 02-statistical-causal-inference

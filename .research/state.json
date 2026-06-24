@@ -473,7 +473,7 @@
       "topic": "02-statistical-causal-inference",
       "desc": "Statistical power, effect size, and A-B test methodology for experiment design",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1072,6 +1072,22 @@
       "id": "g4a91aeef",
       "topic": "03-decision-frameworks",
       "desc": "Nygard's original four-field ADR template (Title/Context/Decision/Status/Consequences) from his 2011 post — corpus has MADR's expanded schema, not Nygard's original",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g3d3c22b9",
+      "topic": "02-statistical-causal-inference",
+      "desc": "sequential/peeking & continuous-monitoring corrections to A/B sample-size (Kohavi 2009 formula assumes fixed-horizon test)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gd78c76ea",
+      "topic": "02-statistical-causal-inference",
+      "desc": "sample-size cost under SUTVA violations / interference (shared cache, rate limits) where units are not independent",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -2959,13 +2975,24 @@
       "extracted_path": "docs/03-decision-frameworks/sources/c6da6f093-madr-template.md",
       "lossy": false,
       "ingested_at": "2026-06-24T14:20:38.223797+00:00"
+    },
+    {
+      "id": "c2a793560",
+      "title": "kohavi-2009-controlled-experiments-web",
+      "source": "https://ai.stanford.edu/~ronnyk/2009controlledExperimentsOnTheWebSurvey.pdf",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/kohavi-2009-controlled-experiments-web.pdf",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/c2a793560-kohavi-2009-controlled-experiments-web.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T14:30:02.154680+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1786,
-    "edge_count": 1890
+    "node_count": 1798,
+    "edge_count": 1912
   },
   "assertions": {
     "count": 66,
@@ -3518,6 +3545,19 @@
       "created_at": "2026-06-24T14:26:13.206545+00:00",
       "promoted_path": "docs/findings/decf6989c-adr-madr-decision-record-format.md",
       "promoted_at": "2026-06-24T14:27:39.112350+00:00"
+    },
+    {
+      "id": "d740bae09",
+      "topic": "02-statistical-causal-inference",
+      "title": "Designing a randomized experiment that can detect an effect: OEC, power, Type I/II error, and what sets the sample size",
+      "path": "docs/findings/_drafts/d740bae09-ab-test-power-effect-size-experiment-design.md",
+      "status": "promoted",
+      "cites": [
+        "c2a793560"
+      ],
+      "created_at": "2026-06-24T14:37:40.644556+00:00",
+      "promoted_path": "docs/findings/d740bae09-ab-test-power-effect-size-experiment-design.md",
+      "promoted_at": "2026-06-24T14:39:23.935689+00:00"
     }
   ]
 }

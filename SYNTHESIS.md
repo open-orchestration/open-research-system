@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **27 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **28 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -144,6 +144,18 @@ condition is the bridge
 **Implication:** for the engine's own experiments, separate estimand from estimator,
 probe positivity/overlap before trusting an effect, and treat **SUTVA as the assumption
 most likely to break silently** when units share a cache, model, or rate limit.
+
+The complementary **experiment-design** half — how to *design* a randomized A/B test that can
+detect an effect — is now grounded on a peer-reviewed primary (Kohavi et al., "Controlled
+experiments on the web," DMKD 2009): pick one **OEC** in advance; **Effect** = mean(Treatment)
+− mean(Control); **statistical power** is the probability of correctly rejecting a false null
+(target ~80–95%, not directly controlled), trading off **Type I** (≈5% at 95% confidence) vs
+**Type II** error; and required **sample size** scales as ≈ `16·σ²/Δ²` for 80% power (21 for
+90%) — larger when the OEC variance σ² is high or the minimum detectable effect Δ is small —
+with **A/A tests** validating the system and estimating variance before trusting any result
+([A/B experiment design](docs/findings/d740bae09-ab-test-power-effect-size-experiment-design.md)).
+Identification (Pearl/Rubin) says *when* an effect is estimable; this says *how big an
+experiment* must be to see it.
 
 ### Decision-making: ACH for contested findings, weighted criteria for auditable records
 **Analysis of Competing Hypotheses** enumerates hypotheses, builds an evidence×hypothesis
@@ -311,8 +323,11 @@ rerank, filter-before-search) is dev-agency blog-consensus — sensible defaults
 Every domain is grounded, but these specific claims are **not yet backed by a promoted
 finding** — each is a narrow corner awaiting a primary-source upgrade, and must not be
 treated as evidenced until gathered:
-- **A/B-test power & effect-size methodology** — 02's finding covers causal identification
-  (DAGs, do-calculus, potential outcomes) but not experiment-design power; that gap is queued.
+- **Sequential/peeking A/B corrections & sizing under interference** — A/B-test power,
+  sample-size, OEC, and Type I/II error are now grounded on Kohavi et al. 2009
+  ([A/B experiment design](docs/findings/d740bae09-ab-test-power-effect-size-experiment-design.md)),
+  but that primary assumes a fixed-horizon test; continuous-monitoring/peeking corrections and
+  sample-size cost under SUTVA violations (units sharing a cache/model/rate-limit) stay queued.
 - **Nygard's original four-field ADR template + decision-log numbering convention** — the
   ADR/MADR record *format* is now grounded on the official ADR site + MADR template
   ([ADR/MADR format](docs/findings/decf6989c-adr-madr-decision-record-format.md)), but the
@@ -336,16 +351,17 @@ treated as evidenced until gathered:
 - **Orchestrator-worker cost model (the ~15×-tokens / 3–5-subagent / ~90%-latency figures)** —
   these came from the old topic-07 stub; the *promoted* 07 findings cover halt-bounding and
   the no-clean-head-to-head provenance result, not the cost multipliers.
-- **A/B-test power, controlled cross-encoder-vs-ColBERT head-to-head, independent
-  GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head, Nygard's original ADR
-  template** — all have queued gaps (see the tensions above and the per-domain notes); each is
-  a narrow ungathered corner, not an empty domain. (GPT-Researcher's *internals* are now
-  repo/doc-grounded; the MADR record format is grounded; the framework execution-model taxonomy
-  is doc-anchored — what stays open there is only comparative ranking/cost numbers, inherently
-  vendor opinion.)
+- **Remaining narrow corners:** controlled cross-encoder-vs-ColBERT head-to-head; independent
+  GPT-Researcher cost/latency + STORM-vs-flat-planner head-to-head; Nygard's original ADR
+  template + decision-log numbering; sequential/peeking A/B corrections; a defining PPMI
+  formula. Each has a queued gap (see the tensions above and per-domain notes); each is a
+  narrow ungathered corner, not an empty domain — the headline blog→primary upgrades (06
+  ColBERT economics, 12 execution-model taxonomy, 15 vector semantics, 13 GPT-Researcher
+  internals, 11 index-freshness, 03 ADR/MADR, 02 A/B power) are all now grounded on
+  primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1786 nodes / 1890 links** (66 of those
+A graphify pass over the corpus currently yields **1798 nodes / 1912 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
