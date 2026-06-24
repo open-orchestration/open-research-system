@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **25 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **26 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -258,10 +258,15 @@ token cost
 ### Operations: reproducible tracking is docs-settled; index freshness is convention
 **MLflow** (official docs) supplies the reproducibility model the engine already mirrors —
 runs/params/metrics/artifacts + a registry with **stage promotion and lineage** (the analogue
-of this engine's draft→finding promotion and finding→cited-corpus-id lineage). Index-freshness
-practice (incremental re-index, change detection, drift-prioritized reprocessing) is only
-blog-relayed but converges on treating indexing as a **cost-managed selective-reprocess**
-problem, not full re-index
+of this engine's draft→finding promotion and finding→cited-corpus-id lineage). The
+index-freshness *mechanism* now has an **official-doc anchor**, not just blog convergence:
+LlamaIndex's IngestionPipeline docs document per-(node+transformation) **caching** (re-runs
+reuse cached results when the cache is persisted) and **docstore-backed document management**
+that maps `doc_id → document_hash` to upsert on a changed hash, skip on an unchanged one, and
+dedup — i.e. selective reprocessing keyed on a content hash rather than full re-index
+([index-freshness mechanism](docs/findings/da2a65c0c-index-freshness-ingestion-pipeline.md)).
+This is one framework's documented mechanism, not a vendor-neutral CDC standard; the
+*trigger cadence* and *drift detection* remain blog-relayed
 ([pipeline ops](docs/findings/d470b6824-reproducible-tracking-docs-anchored-index-freshness-blog-relayed.md)).
 
 ### Applied playbooks: architecture converges (anchored); RAG retrieval craft is blog-consensus
@@ -313,9 +318,11 @@ treated as evidenced until gathered:
   Yao 2305.10601), but no source gives an accuracy-per-token/dollar head-to-head on a shared
   benchmark, nor results on 2025-era reasoning-tuned models, so the escalation economics stay a
   qualitative rule, not a measured curve. Two 10 gaps queued.
-- **Index-freshness as spec** — 11's reproducible-tracking half is docs-anchored, but the
-  incremental-reindex/CDC/freshness claims are blog-only; an official ingestion-docs / CDC-spec
-  anchor is queued.
+- **Vendor-neutral index-freshness spec** — the freshness *mechanism* is now doc-anchored on
+  LlamaIndex's IngestionPipeline (caching + docstore hash dedup/upsert)
+  ([index-freshness](docs/findings/da2a65c0c-index-freshness-ingestion-pipeline.md)), but that
+  is one framework's docs, not a vendor-neutral CDC/freshness *standard*; the trigger cadence
+  (event-driven vs scheduled) and drift detection stay blog-relayed. Those remain queued.
 - **Orchestrator-worker cost model (the ~15×-tokens / 3–5-subagent / ~90%-latency figures)** —
   these came from the old topic-07 stub; the *promoted* 07 findings cover halt-bounding and
   the no-clean-head-to-head provenance result, not the cost multipliers.
@@ -328,7 +335,7 @@ treated as evidenced until gathered:
   ranking/cost numbers, which are inherently vendor opinion.)
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1752 nodes / 1823 links** (65 of those
+A graphify pass over the corpus currently yields **1767 nodes / 1847 links** (65 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

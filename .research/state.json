@@ -897,7 +897,7 @@
       "topic": "11-research-pipeline-engineering",
       "desc": "Official/authoritative docs for indexing-pipeline orchestration, incremental re-index, CDC, document freshness (LlamaIndex/LangChain ingestion docs or a CDC/RAG spec) — all four indexing claims currently rest on practitioner blogs",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1040,6 +1040,22 @@
       "id": "g32a8d1e8",
       "topic": "13-reference-systems-case-studies",
       "desc": "GPT-Researcher cost/latency for the single-agent core loop and the LangGraph editorial team (published figure covers only the o3-mini Deep Research recursive workflow)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g172a5217",
+      "topic": "11-research-pipeline-engineering",
+      "desc": "vendor-neutral CDC / index-freshness spec (not a single framework's docs) for incremental re-index",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g860ec004",
+      "topic": "11-research-pipeline-engineering",
+      "desc": "ingestion trigger cadence (event-driven vs scheduled vs hybrid) and drift detection (checksums, retrieval-quality metrics) — still blog-relayed, no doc anchor",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -2894,13 +2910,24 @@
       "extracted_path": "docs/13-reference-systems-case-studies/sources/c1bb33cc6-gpt-researcher-readme.md",
       "lossy": false,
       "ingested_at": "2026-06-24T13:56:40.466898+00:00"
+    },
+    {
+      "id": "c86c66bc5",
+      "title": "llamaindex-ingestion-pipeline",
+      "source": "https://docs.llamaindex.ai/en/stable/module_guides/loading/ingestion_pipeline/",
+      "topic": "11-research-pipeline-engineering",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/llamaindex-ingestion-pipeline.url",
+      "extracted_path": "docs/11-research-pipeline-engineering/sources/c86c66bc5-llamaindex-ingestion-pipeline.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T14:10:42.097781+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1752,
-    "edge_count": 1823
+    "node_count": 1767,
+    "edge_count": 1847
   },
   "assertions": {
     "count": 65,
@@ -3426,6 +3453,19 @@
       "created_at": "2026-06-24T14:02:57.439757+00:00",
       "promoted_path": "docs/findings/da592d4f8-gpt-researcher-internals.md",
       "promoted_at": "2026-06-24T14:08:23.353617+00:00"
+    },
+    {
+      "id": "da2a65c0c",
+      "topic": "11-research-pipeline-engineering",
+      "title": "LlamaIndex's IngestionPipeline gives the index-freshness mechanism a doc anchor — per-(node+transformation) caching and docstore hash dedup/upserts",
+      "path": "docs/findings/_drafts/da2a65c0c-index-freshness-ingestion-pipeline.md",
+      "status": "promoted",
+      "cites": [
+        "c86c66bc5"
+      ],
+      "created_at": "2026-06-24T14:16:53.377751+00:00",
+      "promoted_path": "docs/findings/da2a65c0c-index-freshness-ingestion-pipeline.md",
+      "promoted_at": "2026-06-24T14:18:39.689619+00:00"
     }
   ]
 }
