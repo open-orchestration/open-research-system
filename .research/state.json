@@ -857,7 +857,7 @@
       "topic": "14-papers",
       "desc": "Self-RAG and Toolformer full per-benchmark results tables (in-corpus sources have only abstract-level 'outperforms' claims and the papers' results sections)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -865,7 +865,7 @@
       "topic": "14-papers",
       "desc": "Toolformer exact zero-shot performance deltas (no in-corpus source gives the numbers)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -3436,13 +3436,35 @@
       "extracted_path": "docs/01-methodology-epistemics/sources/c5b73364f-g9879bed2-grade-handbook-official.md",
       "lossy": false,
       "ingested_at": "2026-06-24T18:11:44.604359+00:00"
+    },
+    {
+      "id": "c4313f7c9",
+      "title": "g50593678-toolformer-full-results",
+      "source": "https://arxiv.org/abs/2302.04761",
+      "topic": "14-papers",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g50593678-toolformer-full-results.pdf",
+      "extracted_path": "docs/14-papers/sources/c4313f7c9-g50593678-toolformer-full-results.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T18:21:27.011083+00:00"
+    },
+    {
+      "id": "c118a1750",
+      "title": "g64e0a010-selfrag-full-results",
+      "source": "https://arxiv.org/abs/2310.11511",
+      "topic": "14-papers",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g64e0a010-selfrag-full-results.pdf",
+      "extracted_path": "docs/14-papers/sources/c118a1750-g64e0a010-selfrag-full-results.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T18:21:29.979118+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2120,
-    "edge_count": 2320
+    "node_count": 2156,
+    "edge_count": 2360
   },
   "assertions": {
     "count": 66,
@@ -4207,6 +4229,20 @@
       "created_at": "2026-06-24T18:17:52.834104+00:00",
       "promoted_path": "docs/findings/d628b3d0f-grade-official-handbook-certainty-domains.md",
       "promoted_at": "2026-06-24T18:19:39.669752+00:00"
+    },
+    {
+      "id": "d154759ce",
+      "topic": "14-papers",
+      "title": "Self-RAG and Toolformer: full per-benchmark result tables and zero-shot deltas",
+      "path": "docs/findings/_drafts/d154759ce-selfrag-toolformer-full-benchmark-results.md",
+      "status": "promoted",
+      "cites": [
+        "c118a1750",
+        "c4313f7c9"
+      ],
+      "created_at": "2026-06-24T18:28:41.249058+00:00",
+      "promoted_path": "docs/findings/d154759ce-selfrag-toolformer-full-benchmark-results.md",
+      "promoted_at": "2026-06-24T18:30:37.260536+00:00"
     }
   ]
 }

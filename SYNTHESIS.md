@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **41 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **42 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -92,6 +92,16 @@ iteration cap + a force-complete guard), not the model's own self-judgment
 ([halt decision](docs/findings/d5c35de17-halt-decision-self-correcting-loops.md)).
 **Implication:** every loop in the engine ships with an explicit external bound; "the
 model decides when it's done" is a bug, not a design.
+The two mechanisms underneath — **self-reflective retrieval control** and **self-taught tool
+use** — are now grounded on the primary papers' full result tables, not just their abstracts:
+**Self-RAG** (arXiv:2310.11511) uses reflection tokens (Retrieve / ISREL / ISSUP / ISUSE) so a
+7B/13B model decides *when* to retrieve and *whether* the evidence supports its output, beating
+Llama2-chat and often ChatGPT across PopQA/TriviaQA/PubHealth/ARC/ASQA; **Toolformer**
+(arXiv:2302.04761) teaches a 6.7B GPT-J to insert API calls self-supervised, lifting zero-shot
+LAMA by ~11.7/5.2/18.6 points and matching far larger models on LAMA and math — though it
+explicitly still *lags* GPT-3 (175B) on open-domain QA, a limitation the paper attributes to its
+simple, non-interactive search
+([Self-RAG/Toolformer results](docs/findings/d154759ce-selfrag-toolformer-full-benchmark-results.md)).
 
 ### Grounding: faithfulness is an atomic-statement metric, computed by structured LLM-judging over NLI entailment
 Faithfulness = share of atomic answer statements entailed by the *exact* retrieved
@@ -515,7 +525,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2120 nodes / 2320 links** (66 of those
+A graphify pass over the corpus currently yields **2156 nodes / 2360 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

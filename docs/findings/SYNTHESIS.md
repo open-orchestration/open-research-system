@@ -41,3 +41,4 @@
 - [LLM-as-judge reliability: bias magnitudes, judge-human correlation, and the TruLens RAG-Triad decomposition](d4c45dd7e-llm-as-judge-reliability-bias-human-correlation-rag-triad.md) — 16-evaluation-benchmarks
 - [BM25 ranking formula (tf saturation + length normalization) and the probabilistic justification of idf](d0fefa5d5-bm25-formula-and-probabilistic-idf-justification.md) — 15-textbooks-longform
 - [GRADE evidence-certainty system from the official handbook: four levels, five downgrade + three upgrade domains, certainty vs recommendation](d628b3d0f-grade-official-handbook-certainty-domains.md) — 01-methodology-epistemics
+- [Self-RAG and Toolformer: full per-benchmark result tables and zero-shot deltas](d154759ce-selfrag-toolformer-full-benchmark-results.md) — 14-papers
