@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **48 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **49 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -346,7 +346,17 @@ used and the weights+method recorded
 ([ACH & weighted criteria](docs/findings/d1b3c3b4c-ach-and-weighted-criteria-for-contested-judgments.md)).
 **Implication:** adopt ACH's *structure* (explicit hypothesis set, seek disconfirmation)
 for cross-source conflict detection and the reviewer gate, but record decisions as
-auditable weighted-criteria entries rather than mandating the full ACH ritual. The decision
+auditable weighted-criteria entries rather than mandating the full ACH ritual.
+When the criteria-weighting itself needs rigor, the **Analytic Hierarchy Process** (Saaty's own
+2008 overview) is a more disciplined MCDA than flat weighted-scoring
+([AHP](docs/findings/d030916c4-saaty-ahp-pairwise-eigenvector-consistency.md)): structure the
+decision as a hierarchy (goal → criteria → alternatives), elicit weights by **pairwise
+comparisons on a 1–9 fundamental scale** (1 equal, 3 moderate, 5 strong, 7 very strong, 9
+extreme) instead of asking for weights directly, synthesize into a derived priority scale, and
+use the built-in **consistency check** (the paper reports a worked consistency ratio of 0.022)
+to flag incoherent judgement — a guard flat weighted-scoring lacks. (The exact consistency-index
+formula CI=(λmax−n)/(n−1), the random-index table, and the CR<0.10 threshold are *not* in this
+overview and remain ungrounded — they need Saaty's earlier papers.) The decision
 *record format* is now grounded too: an **Architectural Decision Record (ADR)** captures a
 single decision and its rationale, and the collection forms a **decision log**; the official
 **MADR** template prescribes the fields — Context and Problem Statement, Decision Drivers,
@@ -596,7 +606,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2326 nodes / 2561 links** (66 of those
+A graphify pass over the corpus currently yields **2345 nodes / 2589 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

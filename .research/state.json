@@ -521,7 +521,7 @@
       "topic": "03-decision-frameworks",
       "desc": "Multi-criteria decision analysis (MCDA) and the analytic hierarchy process for tradeoff ranking",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 1
     },
     {
@@ -3587,13 +3587,24 @@
       "extracted_path": "docs/12-tooling-landscape/sources/cc413ffed-g7ee5f8a1-langgraph-send-command-1.md",
       "lossy": false,
       "ingested_at": "2026-06-24T19:55:47.934043+00:00"
+    },
+    {
+      "id": "cf1c73bf5",
+      "title": "g284a18b9-saaty-ahp-2008-1",
+      "source": "https://doi.org/10.1504/IJSSCI.2008.017590",
+      "topic": "03-decision-frameworks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g284a18b9-saaty-ahp-2008-1.md",
+      "extracted_path": "docs/03-decision-frameworks/sources/cf1c73bf5-g284a18b9-saaty-ahp-2008-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T20:06:13.174663+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2326,
-    "edge_count": 2561
+    "node_count": 2345,
+    "edge_count": 2589
   },
   "assertions": {
     "count": 66,
@@ -4444,6 +4455,17 @@
       "created_at": "2026-06-24T20:01:11.733572+00:00",
       "promoted_path": "docs/findings/d1fb5a112-langgraph-send-command-autogen-topic-subscription-primitives.md",
       "promoted_at": "2026-06-24T20:03:09.382674+00:00"
+    },
+    {
+      "id": "d030916c4",
+      "topic": "03-decision-frameworks",
+      "title": "AHP: pairwise comparisons on a 1-9 scale with a built-in consistency check, a more rigorous MCDA than flat weighted-scoring",
+      "path": "docs/findings/_drafts/d030916c4-saaty-ahp-pairwise-eigenvector-consistency.md",
+      "status": "promoted",
+      "cites": [],
+      "created_at": "2026-06-24T20:11:14.566610+00:00",
+      "promoted_path": "docs/findings/d030916c4-saaty-ahp-pairwise-eigenvector-consistency.md",
+      "promoted_at": "2026-06-24T20:12:50.746549+00:00"
     }
   ]
 }

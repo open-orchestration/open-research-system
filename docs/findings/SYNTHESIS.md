@@ -48,3 +48,4 @@
 - [Quasi-experimental identification when you cannot randomize: IV/LATE, difference-in-differences, and regression discontinuity each buy a local effect with a design-specific assumption](df8ca1aeb-quasi-experimental-identification-iv-did-rdd.md) — 02-statistical-causal-inference
 - [Chain of Draft: Primary-Source Numbers for Token-Budget Reasoning (Upgrading a Blog-Relayed Claim)](d6432467b-chain-of-draft-token-budget-reasoning-primary.md) — 10-context-prompt-engineering
 - [Two dispatch philosophies, grounded in their own docs: LangGraph Send/Command (explicit graph edges + per-branch state) vs AutoGen Topic/Subscription (decoupled publish/subscribe)](d1fb5a112-langgraph-send-command-autogen-topic-subscription-primitives.md) — 12-tooling-landscape
+- [AHP: pairwise comparisons on a 1-9 scale with a built-in consistency check, a more rigorous MCDA than flat weighted-scoring](d030916c4-saaty-ahp-pairwise-eigenvector-consistency.md) — 03-decision-frameworks
