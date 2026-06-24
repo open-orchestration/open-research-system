@@ -425,7 +425,7 @@
       "topic": "17-specs-standards",
       "desc": "official schema.org citation property (CreativeWork/Text expected types) structural spec",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -441,7 +441,7 @@
       "topic": "17-specs-standards",
       "desc": "CSL-JSON full fixed type enumeration + formal JSON Schema (dhimmel/csl-schema) required-vs-optional vars",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1160,6 +1160,22 @@
       "id": "gdb207ceb",
       "topic": "17-specs-standards",
       "desc": "MCP tools/* and prompts/* message-shape spec pages + the Security Best Practices and Lifecycle/version-negotiation pages (referenced by the ingested 2025-06-18 spec pages but not ingested)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g0ac0c33b",
+      "topic": "17-specs-standards",
+      "desc": "biblatex expanded entry types (@online @thesis @dataset) field tables beyond legacy BibTeX btxdoc set",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g3518bee2",
+      "topic": "17-specs-standards",
+      "desc": "field-level CSL-variable <-> BibTeX-field <-> schema.org-property bidirectional crosswalk table (current concordance is type-level only)",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -3212,13 +3228,57 @@
       "extracted_path": "docs/17-specs-standards/sources/ce4efcb5b-mcp-spec-transports-stdio-streamable-http.md",
       "lossy": false,
       "ingested_at": "2026-06-24T16:33:18.870716+00:00"
+    },
+    {
+      "id": "c914e0136",
+      "title": "g58e984b2-csl-json-schema",
+      "source": "https://raw.githubusercontent.com/citation-style-language/schema/master/schemas/input/csl-data.json",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g58e984b2-csl-json-schema.md",
+      "extracted_path": "docs/17-specs-standards/sources/c914e0136-g58e984b2-csl-json-schema.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T16:59:28.943638+00:00"
+    },
+    {
+      "id": "cb94aa1ff",
+      "title": "g9f10da22-bibtex-btxdoc-entry-types",
+      "source": "https://mirrors.ctan.org/biblio/bibtex/base/btxdoc.pdf",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g9f10da22-bibtex-btxdoc-entry-types.pdf",
+      "extracted_path": "docs/17-specs-standards/sources/cb94aa1ff-g9f10da22-bibtex-btxdoc-entry-types.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T16:59:29.914871+00:00"
+    },
+    {
+      "id": "c9537702a",
+      "title": "g9f10da22-schemaorg-scholarlyarticle",
+      "source": "https://schema.org/ScholarlyArticle",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g9f10da22-schemaorg-scholarlyarticle.url",
+      "extracted_path": "docs/17-specs-standards/sources/c9537702a-g9f10da22-schemaorg-scholarlyarticle.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T16:59:32.201992+00:00"
+    },
+    {
+      "id": "c4cc2cbe7",
+      "title": "gccab40e9-schemaorg-citation-property",
+      "source": "https://schema.org/citation",
+      "topic": "17-specs-standards",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/gccab40e9-schemaorg-citation-property.url",
+      "extracted_path": "docs/17-specs-standards/sources/c4cc2cbe7-gccab40e9-schemaorg-citation-property.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T16:59:34.220480+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1969,
-    "edge_count": 2114
+    "node_count": 1992,
+    "edge_count": 2141
   },
   "assertions": {
     "count": 66,
@@ -3883,6 +3943,22 @@
       "created_at": "2026-06-24T16:40:34.280040+00:00",
       "promoted_path": "docs/findings/d3c246500-mcp-spec-internals-primitives-transports-auth-resources.md",
       "promoted_at": "2026-06-24T16:44:00.605568+00:00"
+    },
+    {
+      "id": "d59d1279b",
+      "topic": "17-specs-standards",
+      "title": "Citation interchange formats: CSL-JSON type enum + required fields, BibTeX entry-type field tables, schema.org citation/ScholarlyArticle",
+      "path": "docs/findings/_drafts/d59d1279b-citation-interchange-formats-csl-bibtex-schemaorg.md",
+      "status": "promoted",
+      "cites": [
+        "c914e0136",
+        "cb94aa1ff",
+        "c9537702a",
+        "c4cc2cbe7"
+      ],
+      "created_at": "2026-06-24T17:08:41.428679+00:00",
+      "promoted_path": "docs/findings/d59d1279b-citation-interchange-formats-csl-bibtex-schemaorg.md",
+      "promoted_at": "2026-06-24T17:11:37.432696+00:00"
     }
   ]
 }

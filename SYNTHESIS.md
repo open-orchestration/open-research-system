@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **34 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **35 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -153,6 +153,16 @@ finding/source a URI-identified resource (custom scheme, RFC 3986), discovered v
 encoding the append (a new finding promoted → the list grew) and **`subscribe` +
 `notifications/resources/updated`** the rare in-place change (a finding → superseded)
 ([MCP spec internals](docs/findings/d3c246500-mcp-spec-internals-primitives-transports-auth-resources.md)).
+The **citation-interchange formats are now grounded at the spec level**, complementing the
+high-level interop primitive: CSL-JSON fixes a closed **45-type** item enumeration with only
+`type` and `id` required per item and a ~103-variable set (incl. structured name- and
+date-variables); BibTeX's standard entry types each carry an exact required-vs-optional field
+table (e.g. `@article` requires author/title/journal/year; `@inproceedings`≈`paper-conference`,
+`@phdthesis`≈`thesis`) plus crossref field inheritance; and schema.org exposes the `citation`
+property (expected `CreativeWork`/`Text`, on `CreativeWork`) and the `Thing > CreativeWork >
+Article > ScholarlyArticle` type. A type-level concordance across the three lets a citation-gated
+engine round-trip a finding's cited sources between formats
+([citation interchange formats](docs/findings/d59d1279b-citation-interchange-formats-csl-bibtex-schemaorg.md)).
 **Implication:** emit CSL-JSON for citations and MADR records for non-obvious choices; expose
 the engine over MCP — stdio for a co-located server, the full OAuth 2.1 resource-server
 obligations only when serving remote/multi-client, and `listChanged`-dominant Resources as the
@@ -446,7 +456,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1969 nodes / 2114 links** (66 of those
+A graphify pass over the corpus currently yields **1992 nodes / 2141 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
