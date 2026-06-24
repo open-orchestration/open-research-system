@@ -697,7 +697,7 @@
       "topic": "12-tooling-landscape",
       "desc": "Primary LangGraph/LlamaIndex/DSPy/AutoGen official docs and repos to doc-anchor each execution model (current taxonomy is blog-convergent only)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -705,7 +705,7 @@
       "topic": "12-tooling-landscape",
       "desc": "DSPy arXiv paper (optimization-beats-prompts claim referenced only second-hand)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -976,6 +976,30 @@
       "id": "g7191a792",
       "topic": "06-rag-retrieval",
       "desc": "late-interaction vs learned-sparse (SPLADEv2) normalized cost-per-query at equal hardware (papers report quality not cost-normalized comparison)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g5d365921",
+      "topic": "12-tooling-landscape",
+      "desc": "AutoGen Topic/Subscription pub-sub broadcast model (official 'Topic and Subscription' page; nav-only on captured page)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g7ee5f8a1",
+      "topic": "12-tooling-landscape",
+      "desc": "LangGraph Send/Command primitives (dynamic fan-out + combined state-update-plus-goto) doc-anchored",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "gff418a32",
+      "topic": "12-tooling-landscape",
+      "desc": "cross-framework composition demonstrated by a primary (DSPy module inside a LangGraph node / AutoGen agent) to confirm DSPy orthogonality",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -2753,16 +2777,60 @@
       "extracted_path": "docs/06-rag-retrieval/sources/c7b11e5a5-colbertv2-santhanam-2021.md",
       "lossy": false,
       "ingested_at": "2026-06-24T13:11:13.954474+00:00"
+    },
+    {
+      "id": "ccd7e36d6",
+      "title": "autogen-core-architecture",
+      "source": "https://microsoft.github.io/autogen/stable/user-guide/core-user-guide/core-concepts/architecture.html",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/autogen-core-architecture.url",
+      "extracted_path": "docs/12-tooling-landscape/sources/ccd7e36d6-autogen-core-architecture.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T13:30:33.110380+00:00"
+    },
+    {
+      "id": "c638230a6",
+      "title": "dspy-khattab-2023",
+      "source": "https://arxiv.org/abs/2310.03714",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/dspy-khattab-2023.pdf",
+      "extracted_path": "docs/12-tooling-landscape/sources/c638230a6-dspy-khattab-2023.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T13:30:35.061091+00:00"
+    },
+    {
+      "id": "cf59fd727",
+      "title": "langgraph-low-level-concepts",
+      "source": "https://langchain-ai.github.io/langgraph/concepts/low_level/",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/langgraph-low-level-concepts.url",
+      "extracted_path": "docs/12-tooling-landscape/sources/cf59fd727-langgraph-low-level-concepts.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T13:30:38.217599+00:00"
+    },
+    {
+      "id": "c75bec793",
+      "title": "llamaindex-workflows",
+      "source": "https://docs.llamaindex.ai/en/stable/understanding/workflows/",
+      "topic": "12-tooling-landscape",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/llamaindex-workflows.url",
+      "extracted_path": "docs/12-tooling-landscape/sources/c75bec793-llamaindex-workflows.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T13:30:40.859987+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 1680,
-    "edge_count": 1716
+    "node_count": 1707,
+    "edge_count": 1754
   },
   "assertions": {
-    "count": 62,
+    "count": 64,
     "file": ".research/graph-assertions.jsonl"
   },
   "drafts": [
@@ -3242,6 +3310,22 @@
       "created_at": "2026-06-24T13:22:28.786566+00:00",
       "promoted_path": "docs/findings/d6ccd6b1c-late-interaction-colbert-economics.md",
       "promoted_at": "2026-06-24T13:26:22.258150+00:00"
+    },
+    {
+      "id": "de92d6feb",
+      "topic": "12-tooling-landscape",
+      "title": "Agent-framework execution models, stated in each framework's own documented primitives",
+      "path": "docs/findings/_drafts/de92d6feb-execution-models-doc-anchored.md",
+      "status": "promoted",
+      "cites": [
+        "c638230a6",
+        "cf59fd727",
+        "c75bec793",
+        "ccd7e36d6"
+      ],
+      "created_at": "2026-06-24T13:38:34.848467+00:00",
+      "promoted_path": "docs/findings/de92d6feb-execution-models-doc-anchored.md",
+      "promoted_at": "2026-06-24T13:39:58.803152+00:00"
     }
   ]
 }

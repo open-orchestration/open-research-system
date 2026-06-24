@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **22 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **23 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -165,14 +165,20 @@ Agent frameworks differ on a **durable execution-model axis** that outlives any 
 framework" listicle: LangGraph is a graph/state-machine (nodes, conditional edges, typed
 state, checkpointing), LlamaIndex is data/query-engine-first, DSPy is a compile-time prompt
 *optimizer* used alongside an orchestrator (not a replacement for one), and AutoGen routes
-multi-agent *conversation* (GroupChat) rather than a graph. Only the framework-vs-raw-SDK
-tradeoff (a framework wraps the LLM with persistent identity, tools, memory, runtime loop;
-the SDK keeps flexibility at the cost of building that yourself) is anchored to a primary
-doc; the four-way taxonomy is multi-source-blog-convergent, and every comparative
-ranking/latency/cost/adoption number is vendor/blog opinion, not evidence
+multi-agent *conversation* (GroupChat) rather than a graph
 ([execution-model taxonomy](docs/findings/d28841446-execution-model-taxonomy-not-best-framework-ranking.md)).
+The four-way taxonomy is now **doc-anchored to each framework's own primary docs/paper**,
+not blog-convergent: LangGraph's `StateGraph` (nodes/edges over reducer-merged shared state
+stepped in Pregel-style super-steps), LlamaIndex's `@step` methods consuming/emitting typed
+events with a validated event graph, AutoGen Core's message-passing agents over a
+standalone-or-distributed runtime, and DSPy's declarative modules+signatures compiled by
+teleprompters (quantitatively raising program quality "from 33% to 82%" and "from 32% to
+46%") — DSPy correctly placed as a *compile-time* optimizer orthogonal to the three runtime
+models ([doc-anchored execution models](docs/findings/de92d6feb-execution-models-doc-anchored.md)).
+Still vendor/blog opinion, not evidence: every comparative ranking/latency/cost/adoption
+number.
 **Implication:** pick orchestration by the control-flow shape the task needs; do not trust
-framework leaderboards; doc-anchor the taxonomy before betting on it.
+framework leaderboards — the *shapes* are now primary-grounded, the *rankings* are not.
 
 ### Reference systems: STORM proves research-then-write + multi-perspective questioning (paper-backed)
 The strongest primary-sourced case study is **STORM** (Shao et al., NAACL 2024): a two-stage
@@ -298,13 +304,14 @@ treated as evidenced until gathered:
 - **Orchestrator-worker cost model (the ~15×-tokens / 3–5-subagent / ~90%-latency figures)** —
   these came from the old topic-07 stub; the *promoted* 07 findings cover halt-bounding and
   the no-clean-head-to-head provenance result, not the cost multipliers.
-- **A/B-test power, MADR record-format, doc-anchored framework taxonomy, GPT-Researcher
-  internals, controlled cross-encoder-vs-ColBERT head-to-head** — all have queued gaps (see
-  the tensions above and the per-domain notes); each is a narrow ungathered corner, not an
-  empty domain.
+- **A/B-test power, MADR record-format, GPT-Researcher internals, controlled
+  cross-encoder-vs-ColBERT head-to-head** — all have queued gaps (see the tensions above and
+  the per-domain notes); each is a narrow ungathered corner, not an empty domain. (The
+  framework execution-model taxonomy is now doc-anchored; what remains there is only
+  comparative ranking/cost numbers, which are inherently vendor opinion.)
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1680 nodes / 1716 links** (62 of those
+A graphify pass over the corpus currently yields **1707 nodes / 1754 links** (64 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
