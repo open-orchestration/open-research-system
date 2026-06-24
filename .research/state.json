@@ -1219,6 +1219,14 @@
       "origin": "process",
       "status": "queued",
       "attempts": 0
+    },
+    {
+      "id": "ge419534b",
+      "topic": "16-evaluation-benchmarks",
+      "desc": "Constrained-decoding reliability benchmark: coverage/efficiency/quality across frameworks (JSONSchemaBench arXiv:2501.10868)",
+      "origin": "process",
+      "status": "done",
+      "attempts": 0
     }
   ],
   "inbox": [],
@@ -3620,13 +3628,24 @@
       "extracted_path": "docs/17-specs-standards/sources/c0228eaf6-g0ac0c33b-biblatex-manual-entry-types-1.md",
       "lossy": false,
       "ingested_at": "2026-06-24T20:25:30.065608+00:00"
+    },
+    {
+      "id": "c4f5787db",
+      "title": "process-jsonschemabench-2501.10868-1",
+      "source": "https://arxiv.org/abs/2501.10868",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/process-jsonschemabench-2501.10868-1.md",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/c4f5787db-process-jsonschemabench-2501-10868-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T20:39:02.525431+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2416,
-    "edge_count": 2700
+    "node_count": 2452,
+    "edge_count": 2758
   },
   "assertions": {
     "count": 66,
@@ -4510,6 +4529,17 @@
       "created_at": "2026-06-24T20:33:56.992520+00:00",
       "promoted_path": "docs/findings/de47719c4-biblatex-expanded-entry-types-modern-fields.md",
       "promoted_at": "2026-06-24T20:36:07.133949+00:00"
+    },
+    {
+      "id": "dd09194c4",
+      "topic": "16-evaluation-benchmarks",
+      "title": "JSONSchemaBench: constrained decoding is not a uniform capability — frameworks differ ~2x in real-world schema support, yet constrained decoding helps downstream quality (up to 4%)",
+      "path": "docs/findings/_drafts/dd09194c4-jsonschemabench-constrained-decoding-reliability.md",
+      "status": "promoted",
+      "cites": [],
+      "created_at": "2026-06-24T20:44:55.127480+00:00",
+      "promoted_path": "docs/findings/dd09194c4-jsonschemabench-constrained-decoding-reliability.md",
+      "promoted_at": "2026-06-24T20:46:40.898652+00:00"
     }
   ]
 }

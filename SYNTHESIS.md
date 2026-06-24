@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **51 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **52 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -152,6 +152,19 @@ rather than by parse-and-retry
 ([FSM-guided constrained decoding](docs/findings/d270b0177-fsm-guided-constrained-decoding-json-schema-structured-output.md)).
 **Implication:** the engine's structured judge should emit constrained output, not free text it
 then has to re-parse — correctness is cheaper enforced at decode time than recovered after.
+The method being sound by construction does NOT make it a uniform capability in practice:
+**JSONSchemaBench** (Geng et al., EPFL + Microsoft, arXiv:2501.10868) benchmarks six frameworks
+(Guidance, Outlines, Llama.cpp, XGrammar, OpenAI, Gemini) on **10K real-world JSON schemas**
+across efficiency/coverage/quality
+([constrained-decoding reliability](docs/findings/dd09194c4-jsonschemabench-constrained-decoding-reliability.md)).
+Real-world support varies sharply — the best framework covers **twice as many schemas as the
+worst** (Guidance leads with the single-highest coverage in 19 categories, XGrammar 10, Outlines
+1, Llama.cpp 0) — and there's a permissiveness tradeoff (XGrammar minimizes compilation errors but
+has the most *under-constrained* failures). The reassuring result: constraining the decoder
+**helps** rather than hurts — it speeds generation by ~50% and improves downstream-task quality by
+up to 4%. **Implication for framework choice:** pick by *measured real-world schema coverage*, not
+by the existence of a constrained-decoding feature; constraints are a net win on both speed and
+quality.
 
 ### Knowledge graph: extraction method and community structure are the cost-fidelity levers
 When compiling a source-of-truth KG corpus, the two measured levers are *how triples are
@@ -629,7 +642,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2416 nodes / 2700 links** (66 of those
+A graphify pass over the corpus currently yields **2452 nodes / 2758 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

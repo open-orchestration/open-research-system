@@ -51,3 +51,4 @@
 - [AHP: pairwise comparisons on a 1-9 scale with a built-in consistency check, a more rigorous MCDA than flat weighted-scoring](d030916c4-saaty-ahp-pairwise-eigenvector-consistency.md) — 03-decision-frameworks
 - [Estimating the ATE under ignorability: propensity-score stratification, IPW, and the doubly-robust estimator's two chances to be right](d77c7f685-propensity-score-ipw-doubly-robust-ate-estimation.md) — 02-statistical-causal-inference
 - [biblatex extends legacy BibTeX: web-native/modern entry types (@online, @thesis, @dataset, @software) and modern fields (urldate, eprint, doi, pubstate)](de47719c4-biblatex-expanded-entry-types-modern-fields.md) — 17-specs-standards
+- [JSONSchemaBench: constrained decoding is not a uniform capability — frameworks differ ~2x in real-world schema support, yet constrained decoding helps downstream quality (up to 4%)](dd09194c4-jsonschemabench-constrained-decoding-reliability.md) — 16-evaluation-benchmarks
