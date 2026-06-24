@@ -361,7 +361,7 @@
       "topic": "16-evaluation-benchmarks",
       "desc": "multi-hop QA benchmarks (HotpotQA, 2WikiMultiHopQA, MuSiQue) construction and faithfulness/answer-quality metrics",
       "origin": "human",
-      "status": "queued",
+      "status": "done",
       "attempts": 1
     },
     {
@@ -3302,13 +3302,46 @@
       "extracted_path": "docs/16-evaluation-benchmarks/sources/c57655b9e-g97730f96-gaia-benchmark-general-ai-assistants.md",
       "lossy": false,
       "ingested_at": "2026-06-24T17:13:40.706885+00:00"
+    },
+    {
+      "id": "cfbdd7c46",
+      "title": "g2d31d5f9-2wikimultihopqa",
+      "source": "https://arxiv.org/abs/2011.01060",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g2d31d5f9-2wikimultihopqa.pdf",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/cfbdd7c46-g2d31d5f9-2wikimultihopqa.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T17:23:54.413018+00:00"
+    },
+    {
+      "id": "ce34e3bd9",
+      "title": "g2d31d5f9-hotpotqa-multihop",
+      "source": "https://arxiv.org/abs/1809.09600",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g2d31d5f9-hotpotqa-multihop.pdf",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/ce34e3bd9-g2d31d5f9-hotpotqa-multihop.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T17:23:55.664238+00:00"
+    },
+    {
+      "id": "cf13bf0c4",
+      "title": "g2d31d5f9-musique",
+      "source": "https://arxiv.org/abs/2108.00573",
+      "topic": "16-evaluation-benchmarks",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g2d31d5f9-musique.pdf",
+      "extracted_path": "docs/16-evaluation-benchmarks/sources/cf13bf0c4-g2d31d5f9-musique.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T17:23:57.395575+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2021,
-    "edge_count": 2181
+    "node_count": 2055,
+    "edge_count": 2231
   },
   "assertions": {
     "count": 66,
@@ -4003,6 +4036,21 @@
       "created_at": "2026-06-24T17:20:59.119419+00:00",
       "promoted_path": "docs/findings/d69d7458e-gaia-browsecomp-task-design-scores.md",
       "promoted_at": "2026-06-24T17:22:29.406306+00:00"
+    },
+    {
+      "id": "dcd1309fb",
+      "topic": "16-evaluation-benchmarks",
+      "title": "Multi-hop QA benchmarks: HotpotQA, 2WikiMultiHopQA, MuSiQue construction and evaluation metrics",
+      "path": "docs/findings/_drafts/dcd1309fb-multihop-qa-benchmarks-hotpotqa-2wiki-musique.md",
+      "status": "promoted",
+      "cites": [
+        "ce34e3bd9",
+        "cfbdd7c46",
+        "cf13bf0c4"
+      ],
+      "created_at": "2026-06-24T17:30:45.042114+00:00",
+      "promoted_path": "docs/findings/dcd1309fb-multihop-qa-benchmarks-hotpotqa-2wiki-musique.md",
+      "promoted_at": "2026-06-24T17:34:24.920596+00:00"
     }
   ]
 }

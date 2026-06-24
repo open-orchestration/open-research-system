@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **36 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **37 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -64,6 +64,16 @@ reaching 51.5% (vs GPT-4o 0.6%, o1 9.9%). The shared signature — a wide human-
 purpose-built browsing/tool-use agents close far more than chat models — is exactly why these
 are the comparables a deep-research engine should be scored against
 ([GAIA/BrowseComp scores](docs/findings/d69d7458e-gaia-browsecomp-task-design-scores.md)).
+Below the agentic benchmarks sit the **multi-hop QA family** — now grounded on its primary
+papers — which is what actually stresses *evidence chaining*: **HotpotQA** (arXiv:1809.09600;
+~112,779 Q, bridge+comparison, sentence-level *supporting facts*, distractor vs fullwiki, with
+a *joint* answer×support EM/F1), **2WikiMultiHopQA** (arXiv:2011.01060; ~192,606 Q, Wikidata-triple
+*evidence/reasoning paths*), and **MuSiQue** (arXiv:2108.00573; ~25K 2–4-hop questions built by
+*single-hop composition* specifically to defeat disconnected-reasoning shortcuts). The escalating
+design — supporting-facts → structured reasoning paths → composition-controlled shortcut resistance
+— matters because the supporting-fact/evidence supervision is exactly the per-claim grounding
+signal a citation-gated engine must produce
+([multi-hop QA benchmarks](docs/findings/dcd1309fb-multihop-qa-benchmarks-hotpotqa-2wiki-musique.md)).
 And the self-correction methods (ReAct/Reflexion/CRAG/Self-RAG) have **no clean
 same-benchmark head-to-head** — published deltas come from different papers on different
 setups; only the CRAG benchmark and a controlled multi-agent-debate study are genuine
@@ -465,7 +475,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2021 nodes / 2181 links** (66 of those
+A graphify pass over the corpus currently yields **2055 nodes / 2231 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
