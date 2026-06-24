@@ -6,14 +6,15 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **23 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **24 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
 *epistemic credibility*, not just its architecture/eval/interop — as is the
 applied/tooling/case-study half (04 playbooks, 10 prompting/context, 11 pipeline-ops, 12
 tooling, 13 reference-systems, 14 foundational papers), and now the **textbook bedrock**
-(15: tf-idf and the retrieval-evaluation metrics, grounded on the IR-book chapters). What
+(15: tf-idf and the retrieval-evaluation metrics on the IR-book chapters, plus vector
+semantics — cosine, the distributional hypothesis, word2vec — on the genuine SLP3 chapter). What
 remains is not an empty domain but a set of narrow per-domain corners — blog-tier claims
 awaiting a primary upgrade — listed under [Not yet grounded](#not-yet-grounded).
 
@@ -216,11 +217,19 @@ own argument for why **accuracy fails under class skew** (>99.9% nonrelevant); a
 ranked-retrieval measures (precision–recall curve, interpolated precision, **MAP**,
 Precision@k, **R-precision ≡ break-even point**, and **nDCG** for graded relevance)
 ([textbook bedrock](docs/findings/d2fbbb962-textbook-grounded-retrieval-scoring-and-evaluation-metrics.md)).
-The finding is openly honest about a corpus defect it surfaced — the ingested "SLP3 ch.6"
-file is actually the *Neural Networks* chapter, so cosine/embeddings stay ungrounded (gap
-queued). **Implication:** these are the primary definitions a downstream metric component
-can trust as bedrock; the earlier blog-sourced draft was rejected, and this replaces it on
-chapter prose — closing the last ungrounded domain.
+**Vector semantics is now grounded too**, on the genuine SLP3 chapter (Jurafsky & Martin,
+2026 draft, Ch.5 "Embeddings") that the earlier mislabeled ingest missed — the prior "SLP3
+ch.6" file was actually the *Neural Networks* chapter. The new finding grounds the
+**distributional hypothesis**, the count-based word-context/term-document matrices, **cosine
+similarity** (the length-normalized dot product, `a·b = |a||b|cosθ`, normalized so similarity
+reflects co-occurrence *direction* rather than word frequency — the specifically-named
+previously-ungrounded item), the sparse→dense motivation, and **word2vec / skip-gram with
+negative sampling** (static embeddings as a self-supervised classifier's learned weights)
+([vector semantics](docs/findings/ddc396092-vector-semantics-cosine-embeddings.md)). That
+finding is split-honest about its scope: SLP3 Ch.5 *defers tf-idf to its Ch.11* and mentions
+PPMI only in passing, so a defining PPMI formula stays ungrounded. **Implication:** these are
+the primary definitions a downstream scoring/embedding component can trust as bedrock;
+cosine — long the named open corner — is now closed on chapter prose.
 
 ### Prompting & context: escalate cost only when it pays; don't stuff the context window
 On the prompting ladder (few-shot → CoT → self-consistency → ToT), the rungs are now
@@ -288,11 +297,11 @@ treated as evidenced until gathered:
   (DAGs, do-calculus, potential outcomes) but not experiment-design power; that gap is queued.
 - **MADR/ADR decision-record *format*** (fields, template, Nygard practice) — 03 grounds the
   *scoring methods* (ACH, weighted MCDM) but not the record schema; queued as a 03 gap.
-- **Vector-semantics / cosine (the modern continuation of tf-idf)** — 15's textbook bedrock
-  now grounds tf-idf and the IR-evaluation metrics on the IR-book chapters, but cosine
-  normalization and embeddings stay ungrounded: the ingested "SLP3 ch.6" file is actually the
-  *Neural Networks* chapter, so the genuine vector-semantics/embeddings chapter (tf-idf in NLP,
-  PPMI, cosine) is still queued.
+- **PPMI weighting formula** — cosine, the distributional hypothesis, and word2vec are now
+  grounded on the genuine SLP3 Ch.5 "Embeddings" chapter
+  ([vector semantics](docs/findings/ddc396092-vector-semantics-cosine-embeddings.md)), but
+  that chapter *defers tf-idf to its Ch.11* and mentions PPMI only in passing as word2vec's
+  implicit weighting — no defining PMI/PPMI formula is in any ingested chapter yet (queued).
 - **Prompting-ladder cost-normalized curve** — the CoT/self-consistency/ToT *benchmark
   numbers* are now paper-anchored from the originating works (Wei 2201.11903, Wang 2203.11171,
   Yao 2305.10601), but no source gives an accuracy-per-token/dollar head-to-head on a shared
@@ -311,7 +320,7 @@ treated as evidenced until gathered:
   comparative ranking/cost numbers, which are inherently vendor opinion.)
 
 ## Graph reading
-A graphify pass over the corpus currently yields **1707 nodes / 1754 links** (64 of those
+A graphify pass over the corpus currently yields **1733 nodes / 1791 links** (64 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
