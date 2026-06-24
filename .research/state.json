@@ -529,7 +529,7 @@
       "topic": "02-statistical-causal-inference",
       "desc": "Worked end-to-end ATE estimation example: data to propensity to weighted/matched estimate; doubly-robust and IPW estimator derivations",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -3598,13 +3598,24 @@
       "extracted_path": "docs/03-decision-frameworks/sources/cf1c73bf5-g284a18b9-saaty-ahp-2008-1.md",
       "lossy": false,
       "ingested_at": "2026-06-24T20:06:13.174663+00:00"
+    },
+    {
+      "id": "ca5712e1b",
+      "title": "ge2ff9cf2-lunceford-davidian-ipw-doubly-robust-1",
+      "source": "https://doi.org/10.1002/sim.1903",
+      "topic": "02-statistical-causal-inference",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/ge2ff9cf2-lunceford-davidian-ipw-doubly-robust-1.md",
+      "extracted_path": "docs/02-statistical-causal-inference/sources/ca5712e1b-ge2ff9cf2-lunceford-davidian-ipw-doubly-robust-1.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T20:15:24.063940+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2345,
-    "edge_count": 2589
+    "node_count": 2367,
+    "edge_count": 2624
   },
   "assertions": {
     "count": 66,
@@ -4466,6 +4477,17 @@
       "created_at": "2026-06-24T20:11:14.566610+00:00",
       "promoted_path": "docs/findings/d030916c4-saaty-ahp-pairwise-eigenvector-consistency.md",
       "promoted_at": "2026-06-24T20:12:50.746549+00:00"
+    },
+    {
+      "id": "d77c7f685",
+      "topic": "02-statistical-causal-inference",
+      "title": "Estimating the ATE under ignorability: propensity-score stratification, IPW, and the doubly-robust estimator's two chances to be right",
+      "path": "docs/findings/_drafts/d77c7f685-propensity-score-ipw-doubly-robust-ate-estimation.md",
+      "status": "promoted",
+      "cites": [],
+      "created_at": "2026-06-24T20:20:45.703785+00:00",
+      "promoted_path": "docs/findings/d77c7f685-propensity-score-ipw-doubly-robust-ate-estimation.md",
+      "promoted_at": "2026-06-24T20:23:15.290529+00:00"
     }
   ]
 }

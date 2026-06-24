@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **49 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **50 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -334,6 +334,19 @@ discontinuous function of a running variable at a cutoff (sharp), or its probabi
 credible local identification under a design-specific assumption beats an incredible
 population estimate.
 
+Identification only says an effect is estimable; the **estimation half — under
+selection-on-observables (ignorability)** — is now grounded too (Lunceford & Davidian 2004,
+*Statistics in Medicine*)
+([propensity-score / IPW / doubly-robust](docs/findings/d77c7f685-propensity-score-ipw-doubly-robust-ate-estimation.md)).
+The **propensity score** e(X)=P(treat|X) drives two adjustment families — **stratification** by
+PS quantiles and **inverse-probability weighting (IPW)** — and IPW is consistent only if the PS
+model is correctly specified. The headline is the **doubly-robust (augmented)** estimator:
+augment IPW with outcome-regression models and the estimate stays consistent if **either** the
+PS model **or** the outcome models are right (not both) — "two chances to be right," broad
+protection against model misspecification. Crucial caveat: double-robustness guards against
+*model* misspecification, **not** unmeasured confounding — ignorability is the upstream
+assumption this machinery presupposes and cannot test.
+
 ### Decision-making: ACH for contested findings, weighted criteria for auditable records
 **Analysis of Competing Hypotheses** enumerates hypotheses, builds an evidence×hypothesis
 matrix, and scores by *fewest inconsistencies* — surviving disconfirmation, not
@@ -606,7 +619,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2345 nodes / 2589 links** (66 of those
+A graphify pass over the corpus currently yields **2367 nodes / 2624 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
