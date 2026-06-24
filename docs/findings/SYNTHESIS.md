@@ -37,3 +37,4 @@
 - [Citation interchange formats: CSL-JSON type enum + required fields, BibTeX entry-type field tables, schema.org citation/ScholarlyArticle](d59d1279b-citation-interchange-formats-csl-bibtex-schemaorg.md) — 17-specs-standards
 - [GAIA and BrowseComp: task design and reported human-vs-agent accuracy scores](d69d7458e-gaia-browsecomp-task-design-scores.md) — 16-evaluation-benchmarks
 - [Multi-hop QA benchmarks: HotpotQA, 2WikiMultiHopQA, MuSiQue construction and evaluation metrics](dcd1309fb-multihop-qa-benchmarks-hotpotqa-2wiki-musique.md) — 16-evaluation-benchmarks
+- [KG2RAG: knowledge-graph-guided chunk expansion algorithm and HotpotQA result magnitudes](d6c359091-kg2rag-chunk-expansion-algorithm-hotpotqa-magnitudes.md) — 09-knowledge-compilation-graphs

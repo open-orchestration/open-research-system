@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **37 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **38 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -122,8 +122,20 @@ extracted* (a dependency-parser extractor retains ~94% of LLM-extraction context
 precision at a fraction of the cost) and *how community/centrality structure is exploited*
 (heavy-tailed degree distributions justify surfacing high-degree hub/"god" nodes)
 ([KG cost-fidelity levers](docs/findings/d37b490ee-extraction-method-and-community-structure-cost-fidelity-levers.md)).
+At *retrieval* time, **KG2RAG** (arXiv:2502.06864, NAACL 2025) shows the payoff of the same
+graph structure: it builds a chunk-level KG offline, takes semantically-retrieved **seed
+chunks**, then does **KG-guided chunk expansion** (default **m = 1** hop) to pull in related
+chunks the embedding retriever missed, and finally **organizes context** via an MST per
+connected component + cross-encoder rerank. On HotpotQA the expansion's biggest win is
+*retrieval* quality — F1 0.436 vs 0.357 and precision 0.301 vs 0.224 over a reranked semantic
+baseline — which carries to a smaller response-F1 gain (0.663 vs 0.653 distractor, 0.631 vs
+0.587 fullwiki); the ablations confirm expansion drives recall and organization drives
+precision
+([KG2RAG chunk expansion](docs/findings/d6c359091-kg2rag-chunk-expansion-algorithm-hotpotqa-magnitudes.md)).
 **Implication:** the index build, not query time, is the cost center; tier the models
-(cheap extraction, expensive summary).
+(cheap extraction, expensive summary). And once a chunk-KG exists, one-hop expansion off
+semantic seeds is a cheap, measurable recall lever — the same finding→source→concept graph
+this engine maintains can serve retrieval, not just navigation.
 
 ### Evaluation: two distinct regimes, with different reliability properties
 A research system has two things to prove. (1) Its **web-research agent** finds and
@@ -475,7 +487,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2055 nodes / 2231 links** (66 of those
+A graphify pass over the corpus currently yields **2070 nodes / 2254 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

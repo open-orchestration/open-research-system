@@ -281,7 +281,7 @@
       "topic": "09-knowledge-compilation-graphs",
       "desc": "KG2RAG full-PDF: HotpotQA result magnitudes + chunk-expansion algorithm detail (c520aee3f abstract-only)",
       "origin": "process",
-      "status": "queued",
+      "status": "done",
       "attempts": 0
     },
     {
@@ -1184,6 +1184,14 @@
       "id": "g2828a80a",
       "topic": "16-evaluation-benchmarks",
       "desc": "BrowseComp test-time scaling: Deep Research best-of-N / parallel-sampling pass-rate gains + per-difficulty distribution (beyond headline 51.5%)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
+    },
+    {
+      "id": "g3a67e237",
+      "topic": "09-knowledge-compilation-graphs",
+      "desc": "KG2RAG per-query expansion/organization latency + token cost (paper reports avg chunk counts only, no wall-clock/USD)",
       "origin": "process",
       "status": "queued",
       "attempts": 0
@@ -3335,13 +3343,24 @@
       "extracted_path": "docs/16-evaluation-benchmarks/sources/cf13bf0c4-g2d31d5f9-musique.md",
       "lossy": false,
       "ingested_at": "2026-06-24T17:23:57.395575+00:00"
+    },
+    {
+      "id": "c340e0b25",
+      "title": "g2af7d2ae-kg2rag-full-paper",
+      "source": "https://arxiv.org/abs/2502.06864",
+      "topic": "09-knowledge-compilation-graphs",
+      "lifecycle": "active",
+      "native_path": "ingest/_done/g2af7d2ae-kg2rag-full-paper.pdf",
+      "extracted_path": "docs/09-knowledge-compilation-graphs/sources/c340e0b25-g2af7d2ae-kg2rag-full-paper.md",
+      "lossy": false,
+      "ingested_at": "2026-06-24T17:35:29.684283+00:00"
     }
   ],
   "graph": {
     "dirty": false,
     "last_update": null,
-    "node_count": 2055,
-    "edge_count": 2231
+    "node_count": 2070,
+    "edge_count": 2254
   },
   "assertions": {
     "count": 66,
@@ -4051,6 +4070,19 @@
       "created_at": "2026-06-24T17:30:45.042114+00:00",
       "promoted_path": "docs/findings/dcd1309fb-multihop-qa-benchmarks-hotpotqa-2wiki-musique.md",
       "promoted_at": "2026-06-24T17:34:24.920596+00:00"
+    },
+    {
+      "id": "d6c359091",
+      "topic": "09-knowledge-compilation-graphs",
+      "title": "KG2RAG: knowledge-graph-guided chunk expansion algorithm and HotpotQA result magnitudes",
+      "path": "docs/findings/_drafts/d6c359091-kg2rag-chunk-expansion-algorithm-hotpotqa-magnitudes.md",
+      "status": "promoted",
+      "cites": [
+        "c340e0b25"
+      ],
+      "created_at": "2026-06-24T17:42:18.824860+00:00",
+      "promoted_path": "docs/findings/d6c359091-kg2rag-chunk-expansion-algorithm-hotpotqa-magnitudes.md",
+      "promoted_at": "2026-06-24T17:44:04.955692+00:00"
     }
   ]
 }
