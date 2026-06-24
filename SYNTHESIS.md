@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **45 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **46 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -319,6 +319,21 @@ when convinced → always-valid / mSPRT — an autonomous engine reacting to its
 construction in the second case. Identification (Pearl/Rubin) says *when* an effect is estimable;
 this says *how big an experiment* must be to see it, and *how to stop early without lying*.
 
+When randomization is impossible, three **quasi-experimental designs** each buy identification
+with a *different* assumption, and each identifies a *local* effect rather than the population
+ATE ([IV/DiD/RDD](docs/findings/df8ca1aeb-quasi-experimental-identification-iv-did-rdd.md)).
+**Instrumental variables / LATE** (Imbens & Angrist 1994): under an *exclusion restriction* plus
+*monotonicity* (no "defiers"), IV identifies the **Local Average Treatment Effect** — the effect
+on the sub-population whose treatment status the instrument actually moves (the compliers), not
+everyone. **Difference-in-differences** (Card & Krueger 1994's NJ-vs-PA minimum-wage study):
+the second difference cancels time-common shocks under a *parallel-trends* assumption, yielding
+the effect on the treated. **Regression discontinuity** (Lee & Lemieux 2010): treatment is a
+discontinuous function of a running variable at a cutoff (sharp), or its probability jumps there
+(fuzzy); under *continuity* of the conditional expectations at the cutoff the variation is
+"as good as randomized" — but the effect is identified *only at the cutoff*. The throughline:
+credible local identification under a design-specific assumption beats an incredible
+population estimate.
+
 ### Decision-making: ACH for contested findings, weighted criteria for auditable records
 **Analysis of Competing Hypotheses** enumerates hypotheses, builds an evidence×hypothesis
 matrix, and scores by *fewest inconsistencies* — surviving disconfirmation, not
@@ -560,7 +575,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2229 nodes / 2440 links** (66 of those
+A graphify pass over the corpus currently yields **2256 nodes / 2475 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges
