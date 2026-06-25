@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **54 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **55 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -374,7 +374,18 @@ boundary-specific **leave-one-out cross-validation** or an RD-tuned plug-in agai
 bias–variance tradeoff, and show robustness over windows and polynomial orders; then **falsify**
 the design with the **McCrary density test** for manipulation/sorting and a
 **continuity-of-covariates** check — treating RD like a randomized experiment whose
-randomization must be empirically defended, not assumed.
+randomization must be empirically defended, not assumed. The *named primitives* behind that
+defense are grounded on their own primaries
+([RD falsification toolkit](docs/findings/dd02167c3-rdd-falsification-mccrary-polynomials-placebo.md)):
+**McCrary's (2008) density test** — null = continuity of the running-variable density at the
+cutoff, statistic θ̂ = ln f̂⁺ − ln f̂⁻ (log-difference of one-sided local-linear density
+intercepts), asymptotically normal under the null; **Gelman & Imbens (2019)** against
+high-order global polynomials — they place "huge weights on points far from the discontinuity"
+(noisy estimates), are sensitive to the order chosen, and give poor CI coverage, so use *local
+linear/quadratic* instead; and the **Cattaneo-Idrobo-Titiunik (2020)** falsification battery —
+density/binomial manipulation test, continuity of predetermined covariates and placebo outcomes,
+artificial **placebo-cutoff** tests (no jump should appear where treatment doesn't change),
+donut-hole and bandwidth sensitivity — each only *indirect* evidence, never proof of validity.
 
 Identification only says an effect is estimable; the **estimation half — under
 selection-on-observables (ignorability)** — is now grounded too (Lunceford & Davidian 2004,
@@ -661,7 +672,7 @@ treated as evidenced until gathered:
   primaries/official docs.
 
 ## Graph reading
-A graphify pass over the corpus currently yields **2473 nodes / 2786 links** (66 of those
+A graphify pass over the corpus currently yields **2487 nodes / 2804 links** (66 of those
 links are human-free asserted edges in the committed overlay, tagged `_origin:asserted`;
 `.graphify/GRAPH_REPORT.md`). The graph now contains the *findings* as concept nodes, not
 just the sources — so traversal crosses finding→source→concept, and the asserted edges

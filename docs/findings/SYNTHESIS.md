@@ -54,3 +54,4 @@
 - [JSONSchemaBench: constrained decoding is not a uniform capability — frameworks differ ~2x in real-world schema support, yet constrained decoding helps downstream quality (up to 4%)](dd09194c4-jsonschemabench-constrained-decoding-reliability.md) — 16-evaluation-benchmarks
 - [Online FDR Control for Streams of A/B Tests: Interleaving Always-Valid MAB p-values with LORD](d42ec736c-online-fdr-continuous-ab-test-streams-lord.md) — 02-statistical-causal-inference
 - [RDD in practice: local-linear estimation at a boundary, cross-validated bandwidth, and the McCrary/covariate falsification tests that make the design testable](d8d9c5187-rdd-estimation-bandwidth-validity-lee-lemieux.md) — 02-statistical-causal-inference
+- [Falsifying an RD design: the McCrary density test for manipulation, the case against high-order polynomials, and the placebo-cutoff/covariate battery](dd02167c3-rdd-falsification-mccrary-polynomials-placebo.md) — 02-statistical-causal-inference
