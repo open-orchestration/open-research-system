@@ -20,10 +20,28 @@ ledger — **`.research/state.json`** ("the agent forgets, the repo remembers"):
 The convergence orchestrator (`scripts/orchestrator.py`) decides phase
 (`gather`/`deepen`/`synthesize`) as a stateless function of state signals.
 
-## Current state (HEAD `6e7e1e6`; working tree clean modulo `public/dashboard.html`)
-- **53 promoted findings / 5 rejected.** Corpus **220** active. Graph **2473 nodes / 2786 links**
-  (`dirty:false`). **66 graph assertions** (overlay `.research/graph-assertions.jsonl`).
-  Phase `deepen`. **50 queued gaps** remain (all dead-source or no-clean-primary — see Next steps).
+## Current state (HEAD `16f3150`; working tree clean modulo `public/dashboard.html`)
+- **54 promoted findings / 5 rejected.** Corpus **220** active. Graph **2473 nodes / 2786 links**
+  (`dirty:false`; unchanged — this session was a process-cycle finding off already-ingested corpus, no fold).
+  **66 graph assertions** (overlay `.research/graph-assertions.jsonl`).
+  Phase `deepen`. **51 queued gaps** (all dead-source/no-clean-primary/redundant — see Next steps).
+- **This session — one process-cycle finding, no gap-chasing** (PROMOTED on first independent review):
+  **02** **RDD estimation & validity in practice** (Lee & Lemieux, NBER w14723, `c213028d1`): RD as a
+  *local randomized experiment* → **local linear** at the boundary (global polynomials + raw kernel
+  averages biased; LL "reduces the bias by an order of magnitude", Hahn et al. 2001) → bandwidth by
+  boundary-specific **leave-one-out cross-validation** / RD-tuned plug-in (ROT const 2.702, ∝N^−1/5) →
+  falsify with **McCrary** density test + **continuity-of-covariates** check. d8d9c5187, `16f3150`.
+  Deliberately complements the identification-level finding df8ca1aeb (which it cross-references) instead
+  of re-deriving it. Queued one honest residual gap `ge53e646b` (named placebo/non-cutoff test +
+  polynomial-order-selection criterion — not in Lee-Lemieux; would need Cattaneo rdrobust / Gelman-Imbens).
+- **The process/candidates cycle is now also exhausted of defensible material.** All three ≥3-uncited
+  topics were assessed live this session: **06** = the dead-source RAG-head-to-head corpus (skip, confirmed);
+  **15-textbooks** = its uncited corpus is the blog trio (geeksforgeeks / dasroot.net / edge-ai-vision —
+  reject-tier provenance) plus IIR/J&M **landing pages with no formulas**, and IR-eval metrics are already
+  densely grounded by d2fbbb962 + d8b594416 → no defensible new finding; **02** = the remaining 5 uncited
+  chunks are *other chunks of papers already grounded* (confidence sequences, Card-Krueger, Imbens-Angrist,
+  Lunceford-Davidian, Yang online-FDR) whose key themes the existing findings already cover → a second slice
+  would be redundancy-rejected. RDD was the one separable survey-half worth a complement; it's now taken.
 - **17 of 17 domains grounded** — breadth bar fully met. Prior sessions closed breadth + the seven
   item-2 blog→primary corners + six deep formula/spec arcs (PMI/PPMI, always-valid inference, Nygard
   ADR, RAGAS/ARES, FActScore/RARR, MCP spec internals) + ten reachable-frontier arcs (citation
@@ -60,7 +78,7 @@ The convergence orchestrator (`scripts/orchestrator.py`) decides phase
   - **02** **Online FDR for A/B-test streams** (Yang, Ramdas, Jamieson, Wainwright, arXiv:1706.05378):
     always-valid sequential p-values + LORD (alpha-investing, α-wealth) → any-time mFDR control over a
     stream — d42ec736c, `6e7e1e6`. Closed g32860b29 (the multiple-testing residual dc588b7cc flagged).
-  Root `SYNTHESIS.md` re-grounded after each (now 53 findings, graph 2473/2786).
+  Root `SYNTHESIS.md` re-grounded after each (now 54 findings, graph 2473/2786).
 - **Gather technique that worked every time:** for clean math/spec content, prefer **HTML** primaries
   (IR-book, schema.org, MCP spec) — markitdown preserves LaTeX-in-img-alt-text and avoids PDF garble that
   bit the prior PMI/SGNS arc. arXiv PDFs still fine for prose+tables (grep the number whitespace-insensitively
@@ -206,11 +224,16 @@ finding whose `status` was never flipped). Do **not** burn an arc on these witho
   (`gb02c7fd4`/`gcccbc027`); 12 neutral reproducible cross-framework benchmark (`g2d6b3b0c`); 02 sample-size
   under SUTVA/interference (`gd78c76ea`) + SUTVA-failure base rates (`g449073fd`); 11 vendor-neutral CDC/
   index-freshness *standard* (`g172a5217`/`g860ec004`). No clean primary — each probed repeatedly.
-- **If a future session wants more grounding,** the productive next move is the **process/candidates cycle**
+- **The process/candidates cycle has now been worked to exhaustion too** (this session — see Current state):
+  the one defensible non-redundant complement (02 RDD estimation/validity, d8d9c5187) is taken; 15-textbooks'
+  uncited corpus is blog-tier + content-free landing pages, and 02's residual uncited chunks are extra slices
+  of already-grounded papers. Below is the prior assessment, still accurate for what it labels —
+- **(prior-session note) If a future session wants more grounding,** the next move *was* the **process/candidates cycle**
   (not gap-chasing): `state.py candidates` shows topics with ≥3 *uncited* corpus sources (currently 06, 15,
   02) — turn that already-gathered material into findings. CAUTION: 06's uncited corpus is the dead-source
   RAG-head-to-head material that was rejected on provenance; 15-textbooks is the more promising untapped vein.
-  Otherwise the corpus is at a natural plateau: 53 findings, 17/17 domains, every reachable clean primary grounded.
+  Otherwise the corpus is at a natural plateau: 54 findings, 17/17 domains, every reachable clean primary grounded,
+  and both the gap frontier AND the process/candidates cycle are now exhausted of defensible non-redundant material.
 
 **Verify live before trusting any of the above** — `state.py candidates`, `list-gaps`,
 `check_integrity.py`. Gap ids drift as work proceeds.
@@ -228,7 +251,7 @@ to re-point the overlay line to the current id. **Prefer stable concept/synthesi
 nodes over `sources_…` nodes when asserting** — they survive rebuilds; source nodes don't.
 
 **Definitive bar:** 17 of 17 domains grounded — breadth complete. Across sessions the corpus now holds
-**53 promoted findings** on peer-reviewed papers + official specs: prior sessions closed breadth, the
+**54 promoted findings** on peer-reviewed papers + official specs: prior sessions closed breadth, the
 seven item-2 blog→primary corners, six deep formula/spec arcs, and ten reachable-frontier arcs; **this
 session added nine more** (confidence sequences, IV/DiD/RDD identification, Chain-of-Draft, LangGraph/
 AutoGen orchestration primitives, Saaty AHP, propensity-score IPW/doubly-robust ATE estimation, biblatex
@@ -240,5 +263,7 @@ crosswalk — synthesis-only; FWER-under-optional-stopping — stricter than the
 (b) **confirmed dead-source** corners the direct-fetch path can't get (controlled ColBERT-vs-cross-encoder
 head-to-head; true-GraphRAG-vs-tuned-hybrid shared benchmark; independent third-party GPT-Researcher/closed-
 agent measurement; neutral cross-framework benchmark; SUTVA-interference sizing; vendor-neutral CDC/freshness
-standard) — left queued, honestly labeled, not faked as done. The productive next move is the process/
-candidates cycle (mine the ≥3-uncited-corpus topics, esp. 15-textbooks), not further gap-chasing.
+standard) — left queued, honestly labeled, not faked as done. The process/candidates cycle has now also been
+worked to exhaustion: the single separable survey-half worth a complement (02 RDD estimation/validity) is grounded,
+and the remaining ≥3-uncited topics are blog-tier (15), dead-source (06), or redundant same-paper chunks (02).
+Both frontiers — gap-driven and process-driven — are now at their defensible limit.
