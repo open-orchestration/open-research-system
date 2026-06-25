@@ -6,7 +6,7 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **53 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **54 promoted findings across all 17 of 17 domains** (01–17). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -364,7 +364,17 @@ discontinuous function of a running variable at a cutoff (sharp), or its probabi
 (fuzzy); under *continuity* of the conditional expectations at the cutoff the variation is
 "as good as randomized" — but the effect is identified *only at the cutoff*. The throughline:
 credible local identification under a design-specific assumption beats an incredible
-population estimate.
+population estimate. Identifying an RD design is only half the job; whether an applied
+estimate is *credible* turns on **estimation and falsification**
+([RDD in practice](docs/findings/d8d9c5187-rdd-estimation-bandwidth-validity-lee-lemieux.md),
+Lee & Lemieux): estimate the cutoff jump with **local linear regression** on each side of `X−c`
+(the cutoff is a *boundary point* where global polynomials and raw kernel averages are biased;
+local linear "reduces the bias by an order of magnitude"); pick the bandwidth by
+boundary-specific **leave-one-out cross-validation** or an RD-tuned plug-in against a
+bias–variance tradeoff, and show robustness over windows and polynomial orders; then **falsify**
+the design with the **McCrary density test** for manipulation/sorting and a
+**continuity-of-covariates** check — treating RD like a randomized experiment whose
+randomization must be empirically defended, not assumed.
 
 Identification only says an effect is estimable; the **estimation half — under
 selection-on-observables (ignorability)** — is now grounded too (Lunceford & Davidian 2004,

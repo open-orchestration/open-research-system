@@ -1227,6 +1227,14 @@
       "origin": "process",
       "status": "done",
       "attempts": 0
+    },
+    {
+      "id": "ge53e646b",
+      "topic": "02-statistical-causal-inference",
+      "desc": "Named RD falsification primitives Lee-Lemieux lacks: a formal placebo/non-cutoff discontinuity test and a principled polynomial-order selection criterion (e.g. Cattaneo et al. rdrobust; Gelman-Imbens against high-order polynomials)",
+      "origin": "process",
+      "status": "queued",
+      "attempts": 0
     }
   ],
   "inbox": [],
@@ -4562,6 +4570,19 @@
       "created_at": "2026-06-24T20:54:37.767475+00:00",
       "promoted_path": "docs/findings/d42ec736c-online-fdr-continuous-ab-test-streams-lord.md",
       "promoted_at": "2026-06-24T20:57:00.724381+00:00"
+    },
+    {
+      "id": "d8d9c5187",
+      "topic": "02-statistical-causal-inference",
+      "title": "RDD in practice: local-linear estimation at a boundary, cross-validated bandwidth, and the McCrary/covariate falsification tests that make the design testable",
+      "path": "docs/findings/_drafts/d8d9c5187-rdd-estimation-bandwidth-validity-lee-lemieux.md",
+      "status": "promoted",
+      "cites": [
+        "c213028d1"
+      ],
+      "created_at": "2026-06-25T17:38:18.249900+00:00",
+      "promoted_path": "docs/findings/d8d9c5187-rdd-estimation-bandwidth-validity-lee-lemieux.md",
+      "promoted_at": "2026-06-25T17:40:14.894480+00:00"
     }
   ]
 }
