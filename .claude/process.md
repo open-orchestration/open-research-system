@@ -33,11 +33,26 @@ Run one process cycle for the research engine. Do exactly this, then stop:
        passes.
      Log the citation gate: on exit 0 `python3 scripts/runlog.py log --flow process --step cite_check --status ok`;
      on exit 1 (after you have exhausted fixes) `--status fail`.
-   - **(b) Faithfulness self-check (agent judgment):** re-read each claim **against the
-     source it cites** and confirm the source actually supports the claim — not merely
-     that the cited id exists. Rewrite or drop any claim the source does not bear out.
-     This gate is intentionally agent-side: faithfulness is not deterministically
-     checkable, so `cite_check.py` does not attempt it.
+   - **(b) Faithfulness self-check (agent judgment) — FActScore-style atomic decomposition.**
+     This gate is grounded in the corpus's own grounding findings: **FActScore atomic factual
+     precision** (d1ad78766 — decompose a generation into atomic facts, score each as supported
+     / not-supported by its source, *abstain* rather than guess) and the **faithfulness
+     measurement machinery** (dfa42bc8a — per-claim entailment against the exact cited bytes).
+     Apply it as:
+     1. **Decompose, don't skim.** Break the draft into its individual load-bearing claims
+        (one verifiable assertion each — split compound sentences). A vague paragraph judged
+        as a whole hides an unsupported clause; an atomic claim cannot.
+     2. **Score each claim against the bytes it cites** — does the cited source *entail* this
+        specific clause, not merely sit in the same topic? For any **number, formula, or quoted
+        phrase**, re-grep it in the source **whitespace-insensitively** before trusting it
+        (Python `re.sub(r'\s+','',open(p).read().lower())`; never a shell `$(…)` var — a
+        >700KB source overflows it and `grep` silently returns 0).
+     3. **Abstain beats guess.** A number not in the source bytes does **not** get reported;
+        a garbled formula gets its canonical form + a one-line lossiness note, never a
+        transcribed garble. Rewrite or drop any claim the source does not bear out.
+     Faithfulness is not deterministically checkable, so `cite_check.py` does not attempt it —
+     this atomic pass is the agent-side complement. (It is the same machinery Workstream-1
+     definitive findings run as their self-verify step.)
 
    Do **not** record a draft until **both** gates pass.
 
