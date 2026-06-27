@@ -6,10 +6,11 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **56 promoted findings across all 17 of 17 domains** (01–17), the latest
-being the first **definitive / cross-domain synthesis** finding — a class that distills several
-single-source findings into one durable decision procedure, re-anchoring every load-bearing
-claim on its underlying primary `[c…]` id (see the causal-inference decision tree below). Every
+Grounding status: **57 promoted findings across all 17 of 17 domains** (01–17), including the
+first two **definitive / cross-domain synthesis** findings — a class that distills several
+single-source findings into one durable decision procedure or stack, re-anchoring every
+load-bearing claim on its underlying primary `[c…]` id (the causal-inference decision tree and
+the evaluation stack, below). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -214,6 +215,22 @@ over RAGAS in their study)
 agent-benchmark and RAG-harness regimes separate; and inside the RAG-harness regime, a
 calibrated judge-with-error-bars (ARES/PPI) beats a bare LLM-prompted point score — which is
 exactly the discipline the engine's own faithfulness gate must adopt.
+
+These six evaluation findings now compose into one **definitive evaluation stack** — the corpus's
+second cross-domain *synthesis* finding — answering what to measure, with which metric, under
+which regime, and which judge biases to correct. The spine: **two regimes** (the web-research
+**agent** regime scored by frozen-corpus benchmarks — GAIA's 92%-human-vs-15%-GPT-4-plugins gap,
+BrowseComp's 29.2%-human-vs-51.5%-Deep-Research — and the **RAG-grounding** regime scored by
+decomposed harnesses) **→ which metric** (RAGAS reference-free point scores to *monitor*, ARES
+fine-tuned-judge + PPI confidence intervals to *decide*; plus FActScore atomic precision against a
+knowledge source and RARR editing-for-attribution as the grounding spectrum) **→ the LLM judge
+underneath both** (decompose per-axis via the TruLens RAG-Triad, control MT-Bench's named biases,
+calibrate on chance-corrected Scott's π not raw agreement). It reconciles the standing tensions
+(RAGAS-monitor vs ARES-decide; context-faithfulness vs world-factuality; attribution vs volume) and
+re-cites every load-bearing number to its primary; promoted at **GRADE moderate** (one imprecision
+downgrade — the RAGAS/FActScore single-line formulas are glyph-mangled in the source PDFs, so only
+their component terms byte-match, with the clean renderings carried by the sibling findings)
+([definitive evaluation stack](docs/findings/d9136c25c-definitive-evaluation-stack.md)).
 
 ### Interoperability: build adapters against the actual specs (MCP, CSL-JSON, MADR)
 Three independent seams, each with an official spec: expose capabilities to AI clients via

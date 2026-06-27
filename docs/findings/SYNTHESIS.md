@@ -56,3 +56,4 @@
 - [RDD in practice: local-linear estimation at a boundary, cross-validated bandwidth, and the McCrary/covariate falsification tests that make the design testable](d8d9c5187-rdd-estimation-bandwidth-validity-lee-lemieux.md) — 02-statistical-causal-inference
 - [Falsifying an RD design: the McCrary density test for manipulation, the case against high-order polynomials, and the placebo-cutoff/covariate battery](dd02167c3-rdd-falsification-mccrary-polynomials-placebo.md) — 02-statistical-causal-inference
 - [The definitive causal-inference decision tree: can you randomize, which design, which estimator, which falsification test](daccd735c-definitive-causal-inference-decision-tree.md) — 02-statistical-causal-inference
+- [The definitive evaluation stack: what to measure, with which metric, under which regime, and the judge biases to correct](d9136c25c-definitive-evaluation-stack.md) — 16-evaluation-benchmarks
