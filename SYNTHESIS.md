@@ -6,11 +6,11 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **57 promoted findings across all 17 of 17 domains** (01–17), including the
-first two **definitive / cross-domain synthesis** findings — a class that distills several
-single-source findings into one durable decision procedure or stack, re-anchoring every
-load-bearing claim on its underlying primary `[c…]` id (the causal-inference decision tree and
-the evaluation stack, below). Every
+Grounding status: **58 promoted findings across all 17 of 17 domains** (01–17), including the
+first three **definitive / cross-domain synthesis** findings — a class that distills several
+single-source findings into one durable decision procedure, stack, or kit, re-anchoring every
+load-bearing claim on its underlying primary `[c…]` id (the causal-inference decision tree, the
+evaluation stack, and the anytime-valid testing kit, below). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -370,6 +370,20 @@ get **any-time mFDR control** over the whole stream. Single test → always-vali
 stream of tests → online FDR on top.
 Identification (Pearl/Rubin) says *when* an effect is estimable;
 this says *how big an experiment* must be to see it, and *how to stop early without lying*.
+
+These three sequential-testing findings now compose into one **definitive anytime-valid testing
+kit** — the corpus's third cross-domain *synthesis* finding — a single decision rule keyed to
+*what* is being monitored: **one estimated quantity over time → a confidence sequence** (uniform
+coverage `P(∀t: θ_t∈CI_t)≥1−α`, the closed-form sub-Gaussian `±1.7√[(loglog2t+0.72log(10.4/α))/t]`,
+linear-but-never-shrinking vs curved/stitched-and-shrinking boundary); **one hypothesis under
+peeking → an always-valid p-value / mSPRT** (`P_{θ0}(p_T≤s)≤s` at any stopping time; stop when the
+mixture LR crosses `α⁻¹`, a martingale threshold); **a stream of tests → online-FDR/LORD on top**
+(alpha-investing α-wealth `W(0)<α` for any-time mFDR). The load-bearing composition: the first two
+layers are *duals* of the same martingale machinery (interval-side vs test-side), and Layer 2's
+*conditionally super-uniform* always-valid p-value is the exact premise Layer 3's mFDR guarantee
+requires. Promoted at **GRADE moderate** (one imprecision downgrade — several equations are
+PDF→markdown glyph-mangled, so cited in canonical form with component tokens byte-verified)
+([definitive anytime-valid testing kit](docs/findings/dd90b2c09-definitive-anytime-valid-testing-kit.md)).
 
 When randomization is impossible, three **quasi-experimental designs** each buy identification
 with a *different* assumption, and each identifies a *local* effect rather than the population

@@ -57,3 +57,4 @@
 - [Falsifying an RD design: the McCrary density test for manipulation, the case against high-order polynomials, and the placebo-cutoff/covariate battery](dd02167c3-rdd-falsification-mccrary-polynomials-placebo.md) — 02-statistical-causal-inference
 - [The definitive causal-inference decision tree: can you randomize, which design, which estimator, which falsification test](daccd735c-definitive-causal-inference-decision-tree.md) — 02-statistical-causal-inference
 - [The definitive evaluation stack: what to measure, with which metric, under which regime, and the judge biases to correct](d9136c25c-definitive-evaluation-stack.md) — 16-evaluation-benchmarks
+- [The definitive anytime-valid testing kit: test continuously without inflating error (confidence sequences, mSPRT, online FDR)](dd90b2c09-definitive-anytime-valid-testing-kit.md) — 02-statistical-causal-inference
