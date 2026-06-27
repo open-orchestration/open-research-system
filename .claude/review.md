@@ -110,3 +110,34 @@ Run this on one draft id `D`, or loop it over every queued draft
 The reviewer's authority is real — a `promote` moves the draft into `docs/findings/` and
 appends it to `SYNTHESIS.md`; a `reject` frees its sources. A human can still override after
 the fact (`promote.py promote/reject` by hand).
+
+## Promotion is a streaming multiple-comparison problem
+
+Each draft is independently "tested" for promotion, and the corpus has run this test 60+
+times (56 promoted / 5 rejected to date). That is a **streaming multiple-testing** setup, and
+the corpus's own findings name the discipline it implies — so the gate must reason about its
+**false-promotion rate across the whole corpus**, not just per-draft.
+
+- A single-draft promote decision is the analogue of an **always-valid** sequential test —
+  the engine peeks at each draft as it arrives and decides at a data-dependent stopping time,
+  which is exactly the regime where a naive fixed-threshold test loses its error guarantee
+  (always-valid inference / mSPRT, **dc588b7cc**).
+- Across the *stream* of drafts, single-test validity is not enough; the right target is
+  **mFDR control over the family** via an online-FDR scheme — LORD's *alpha-investing*: start
+  with an α-wealth budget below α and spend a fraction per test, earning wealth back on each
+  rejection (online FDR for streams, **d42ec736c**). In this engine a **promote** is the
+  "rejection of the null that the draft is not canon-worthy," so each promote is a discovery
+  whose error contributes to the corpus-wide false-promotion rate.
+
+**What this gate does about it (today):** the conservative defaults already approximate an
+α-budget — *default-reject*, the *higher bar for definitive/synthesis findings*, and the
+*GRADE certainty downgrades* all spend promotion-credit grudgingly, so a marginal draft is
+rejected rather than promoted on a coin-flip. The `runlog.py` ledger (`decision` + `certainty`
+per review) is the **append-only record needed to actually measure** the false-promotion rate:
+the running promoted-vs-rejected counts and the certainty mix are the observable α-wealth.
+
+**What stays a known gap:** no *quantitative* α-budget is tracked or enforced — a promote does
+not debit a wealth counter, and there is no automated mFDR bound. The conservative bar is a
+qualitative stand-in. Tightening it into a real online-FDR budget over the runlog ledger is the
+grounded upgrade (d42ec736c) if the false-promotion rate ever needs a hard guarantee rather
+than a defensible default.
