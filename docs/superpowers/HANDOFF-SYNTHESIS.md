@@ -17,10 +17,44 @@ distillation — the raw material for definitive findings). Don't re-derive what
 ---
 
 ## State (verify live — drifts as you work)
-- **55 promoted / 5 rejected.** Corpus **223** active. Graph **2487 nodes / 2804 links**
-  (`dirty:false`). 66 assertions. ALL 17/17 domains grounded. Phase `deepen`. 50 queued gaps
-  (all dead-source / no-clean-primary / redundant — **do NOT chase them**, both the gather and
-  process/candidates frontiers are exhausted; see HANDOFF.md "plateau").
+- **58 promoted / 5 rejected** (was 55/5 — this phase added **3 definitive/synthesis findings**,
+  all promoted on first independent review, all GRADE **moderate**, zero rejects). Corpus **223**
+  active. Graph **2487 nodes / 2804 links** (`dirty:false`). 66 assertions. ALL 17/17 domains
+  grounded. Phase `deepen`. 50 queued gaps (all dead-source / no-clean-primary / redundant —
+  **do NOT chase them**, both the gather and process/candidates frontiers are exhausted).
+- HEAD `ddbbc4a` (this phase: `c0350c4`→`ddbbc4a`).
+
+## DONE this phase (cross off; pick up the unchecked items)
+**Workstream 1 — definitive findings promoted (3 of 5 candidates):**
+- ✅ **causal-inference decision tree** (`daccd735c`, 02, moderate) — commit `2743add`.
+- ✅ **evaluation stack** (`d9136c25c`, 16, moderate) — commit `8662e64`.
+- ✅ **anytime-valid testing kit** (`dd90b2c09`, 02, moderate) — commit `ddbbc4a`.
+- ⬜ **grounding/faithfulness pipeline** (d1ad78766 + dfa42bc8a + d636208ea) — NOT yet done.
+- ⬜ **deep-research architecture** (d603c3334 + da592d4f8 + dbc0e9395 + d369c3d06 + 06/07/12) — NOT yet done.
+
+**Workstream 2 — process upgrades shipped (each cites its grounding finding in the commit body):**
+- ✅ **#1 review gate → GRADE certainty + LLM-judge debiasing** (`.claude/review.md`; grounds
+  d628b3d0f + dc577f3e2 + d4c45dd7e) — commit `c0350c4`. The gate now records a `CERTAINTY:`
+  level per promote into the `runlog.py` ledger (free-form `--data`, no script change).
+- ✅ **#2 promotion = streaming multiple-testing** (`.claude/review.md` new section; grounds
+  d42ec736c + dc588b7cc) — commit `d159e01`. Framing + known-gap note; no α-budget tracking built.
+- ✅ **#4 faithfulness self-check → FActScore atomic decomposition** (`.claude/process.md` step 4b;
+  grounds d1ad78766 + dfa42bc8a) — commit `7350568`.
+- ⬜ **#3 drafting → grounded prompting** (prompting ladder d0b1fc5c6 + Chain-of-Draft d6432467b) — NOT done.
+- ⬜ **#5 citation discipline → CSL-JSON/biblatex** (d59d1279b, de47719c4) — NOT done.
+- ⬜ **#6 candidate-selection → BM25/PMI** (d0fefa5d5, d7289dbd9) — NOT done.
+- ⬜ **#7 ADR log for the process changes** (decf6989c / d657c1d86) — NOT done.
+
+**Pattern that worked (reuse it):** for each definitive finding — resolve the contributing
+findings' inline `[c…]` (regex `c[0-9a-f]{8}`, NOT 9 — ids are c+8hex) → corpus source map;
+`gen-id`; dispatch one `general-purpose` DRAFTER with the theme + finding paths + c→source map +
+the re-cite-primary rule; **self-verify independently** (re-run `cite_check.py` + Python
+whitespace-insensitive re-grep of every cited number — both MISS cases this phase were *my* wrong
+grep terms, not draft errors, so always confirm the term before trusting a MISS); `add-draft`;
+`check_integrity.py`; dispatch a **FRESH** reviewer with the upgraded `.claude/review.md` rubric
+verbatim (it now emits `CERTAINTY:` + `VERDICT:` as the last two lines); promote + log certainty +
+integrity + re-ground `SYNTHESIS.md` + commit. All 3 drafts handled glyph-mangled PDF formulas the
+same honest way (canonical form + lossiness note, component tokens byte-verified).
 - Verify: `python3 scripts/check_integrity.py`, `python3 scripts/state.py candidates`,
   `git rev-parse --short HEAD` (should be `070af6f` or later, tree clean modulo the user's
   IDE file `public/dashboard.html` — **NEVER touch/stage/commit it, or `.research/*.log` /
