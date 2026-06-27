@@ -6,7 +6,10 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **55 promoted findings across all 17 of 17 domains** (01–17). Every
+Grounding status: **56 promoted findings across all 17 of 17 domains** (01–17), the latest
+being the first **definitive / cross-domain synthesis** finding — a class that distills several
+single-source findings into one durable decision procedure, re-anchoring every load-bearing
+claim on its underlying primary `[c…]` id (see the causal-inference decision tree below). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -399,6 +402,22 @@ PS model **or** the outcome models are right (not both) — "two chances to be r
 protection against model misspecification. Crucial caveat: double-robustness guards against
 *model* misspecification, **not** unmeasured confounding — ignorability is the upstream
 assumption this machinery presupposes and cannot test.
+
+These six causal findings now compose into one **definitive causal-inference decision tree** —
+the corpus's first cross-domain *synthesis* finding — that an analyst walks top-down: **can you
+randomize?** (yes → designed A/B test, sized `16σ²/Δ²` and guarded by an A/A test; no →
+quasi-experimental) **→ which design?** (IV/LATE under exclusion+monotonicity · DiD under
+parallel trends · RDD under continuity · or selection-on-observables) **→ which estimator?**
+(propensity-score IPW/doubly-robust · RDD local-linear-at-the-boundary) **→ which falsification
+test?** (RDD's McCrary density + covariate-continuity + placebo-cutoff battery; the
+unfalsifiable-ignorability caveat). It reconciles the two standing tensions — Pearl's do-calculus
+and Rubin's potential outcomes are *complementary* (DAG picks the adjustment set, potential
+outcomes pick the estimator), and on global-vs-local RDD it sides with **local low-order** — and
+states each estimand honestly (designed→ATE, IV→complier-LATE, RDD→local-at-cutoff, ignorability→
+untestable). Every load-bearing claim re-cites its primary, with the secondary do-calculus/PO
+framing confined to the reconciliation; promoted at **GRADE moderate** certainty (one indirectness
+downgrade — the calculi-reconciliation rests on a secondary source)
+([definitive causal-inference decision tree](docs/findings/daccd735c-definitive-causal-inference-decision-tree.md)).
 
 ### Decision-making: ACH for contested findings, weighted criteria for auditable records
 **Analysis of Competing Hypotheses** enumerates hypotheses, builds an evidence×hypothesis
