@@ -4,9 +4,24 @@
 
 Automated promotion gate. An **independent** reviewer (a fresh subagent, never the
 agent that wrote the draft) judges a finished draft and the engine promotes or rejects it
-without a human. The gate is **conservative and binary**: promote only a draft that is
-clearly canon-worthy; otherwise reject (rejecting frees its cited sources for a stronger
-redraft).
+without a human. The gate is **conservative**: promote only a draft that is clearly
+canon-worthy; otherwise reject (rejecting frees its cited sources for a stronger redraft).
+A promote also records **how certain** the evidence is (a GRADE level), so the corpus
+carries graded confidence, not a bare promoted/rejected bit.
+
+**This gate is grounded in the corpus's own peer-reviewed methods** (each method names the
+finding that grounds it; a process change citing a finding is how the engine dogfoods its
+own conclusions):
+- **GRADE certainty** — the four-level certainty scale and its downgrade/upgrade domains
+  come from the GRADE handbook finding **d628b3d0f**; the "auditable per-domain rationale,
+  ≥2 reviewers, certainty ≠ recommendation" framing from **dc577f3e2** (which flagged that
+  this engine had *no explicit certainty rating* — this gate is that rating).
+- **Judge debiasing** — the reviewer's own reliability is bounded by the LLM-as-judge
+  finding **d4c45dd7e**: judge faithfulness against the source bytes *before* the draft's
+  own confidence framing can anchor the verdict (self-enhancement / anchoring control),
+  decompose into per-axis judgments rather than one holistic score (RAG-Triad spirit), and
+  never reward length over substance (verbosity bias). The reviewer is still one judge, so
+  its verdict is treated as evidence under these controls, not as ground truth.
 
 Run this on one draft id `D`, or loop it over every queued draft
 (`python3 scripts/promote.py queue` lists them). For each `D`, do exactly this:
@@ -33,28 +48,60 @@ Run this on one draft id `D`, or loop it over every queued draft
    this rubric verbatim. Do not tell it which way to lean.
 
    > You are an independent reviewer deciding whether a machine-written research draft is
-   > trustworthy enough to enter a permanent source-of-truth. You did not write it. Read the
-   > draft at DRAFT_PATH, then read each cited source file. Judge three things:
-   > 1. **Faithfulness** — for each `[c<id>]` claim, does the cited source file actually
-   >    support it (not merely exist)? Flag any claim the source does not bear out.
-   > 2. **Source provenance** — are the cited sources trustworthy (primary papers, official
-   >    docs, reputable engineering writing) or promotional/secondary (vendor marketing,
-   >    listicles, SEO blogs)? Load-bearing claims resting on promotional sources are a
-   >    reject reason.
-   > 3. **Canon-worthiness** — is the finding coherent, non-trivial, and useful as a
-   >    durable reference, or thin/redundant?
-   > Default to **reject**. Promote only if all three are clearly satisfied. Return your
-   > verdict as the LAST line, exactly `VERDICT: promote` or `VERDICT: reject`, preceded by
-   > 2–4 lines of specific reasons (name the failing claim or source).
+   > trustworthy enough to enter a permanent source-of-truth, and how certain its evidence
+   > is. You did not write it. Work in this order — the order is a debiasing control, do not
+   > reorder it:
+   >
+   > **A. Faithfulness FIRST, from the sources — before reading the draft's own confidence
+   > framing.** Open each cited source file. For each `[c<id>]` claim, decide whether that
+   > source actually bears out the *specific clause the citation sits on* (not merely that
+   > the source exists or is topical). Judge this against the source bytes alone; do NOT let
+   > the draft's own "definitive" / "clearly" / high-confidence language raise your trust —
+   > that wording is the thing being tested, not evidence for it. Flag every claim the
+   > source does not support, by `[c<id>]` and the clause.
+   > **B. Source provenance.** Are the cited sources trustworthy (primary papers, official
+   > docs, reputable engineering writing) or promotional/secondary (vendor marketing,
+   > listicles, SEO blogs)? A **load-bearing** claim resting on a promotional source is a
+   > reject reason; a blog claim that is explicitly attributed and non-load-bearing is fine.
+   > **C. Canon-worthiness.** Is the finding coherent, non-trivial, and useful as a durable
+   > reference, or thin/redundant? Judge substance, NOT length — a longer draft is not a
+   > better one; padding, restatement, and verbose hedging count against it, not for it. For
+   > a *definitive/synthesis* finding the bar is higher: it must genuinely compose across
+   > findings and must not contradict a sibling finding without reconciling it.
+   >
+   > Treat A, B, C as three independent axes — a draft must clearly pass all three. Default
+   > to **reject**; promote only if all three are clearly satisfied.
+   >
+   > **Then assign a GRADE certainty level** to what you are about to promote (skip if you
+   > reject). Start the load-bearing core at **High** if it rests on primary papers / official
+   > specs, **Low** if it rests on a single source or attributed secondary material. Then move
+   > the level DOWN one per domain that applies, and record which:
+   >   - *risk of bias / provenance* — any load-bearing claim leans on a weaker-tier source;
+   >   - *inconsistency* — sources or sibling findings disagree and the draft doesn't resolve it;
+   >   - *indirectness* — a source answers an adjacent question, not the exact claim;
+   >   - *imprecision* — a load-bearing number/formula is single-sourced, hedged, or only
+   >     approximately matched in the bytes;
+   >   - *selective sourcing* — obvious primary evidence is missing or one-sided.
+   > (Certainty is your confidence in the *evidence*, separate from whether it's worth
+   > promoting — a thin-but-true finding can be High-certainty and still fail canon-worthiness.)
+   >
+   > Return, as the LAST TWO lines exactly:
+   > `CERTAINTY: <high|moderate|low|very-low>` then `VERDICT: <promote|reject>`,
+   > preceded by 2–5 lines of specific reasons per axis (name the failing claim or source,
+   > and which downgrade domains you applied).
 
-3. **Act on the verdict** (parse the subagent's last `VERDICT:` line):
+3. **Act on the verdict** (parse the subagent's last `VERDICT:` line; read `CERTAINTY:` from
+   the line above it):
    - `promote` → `python3 scripts/promote.py promote "$D"`
    - `reject`  → `python3 scripts/promote.py reject "$D" --reason "ai-independent: <the reviewer's reasons, one line>"`
    - If no clear `VERDICT:` line is returned, treat it as **reject** (conservative default).
-   Then log it:
+   - If a promote returns no clear `CERTAINTY:` line, record `very-low` (conservative default)
+     and prefer to re-review rather than promote on an uncertain grade.
+   Then log it (the certainty rides in the free-form `--data`, so no script change is needed
+   to record graded confidence):
    ```
    python3 scripts/runlog.py log --flow process --step review --status ok \
-     --data "{\"draft_id\":\"$D\",\"decision\":\"<promote|reject>\",\"reviewer\":\"ai-independent\"}"
+     --data "{\"draft_id\":\"$D\",\"decision\":\"<promote|reject>\",\"certainty\":\"<high|moderate|low|very-low>\",\"reviewer\":\"ai-independent\"}"
    ```
 
 4. **Integrity:** after acting, run `python3 scripts/check_integrity.py`; if it reports
