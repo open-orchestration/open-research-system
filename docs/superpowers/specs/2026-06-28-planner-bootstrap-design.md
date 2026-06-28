@@ -133,9 +133,15 @@ each cycle:
 - **Run-budget headroom:** a candidate whose gaps cannot be funded within the remaining
   token ceiling is rejected — no half-researched columns.
 - **Rejected set:** rejected dimensions are recorded and never re-proposed (idempotent).
-- **Extended `goal_met`:** plateau now additionally requires *no accept-eligible candidates*
-  and *no acceptance for K cycles* (dimension-stability), on top of the existing
-  "no queued gaps / no processable / drafts done."
+- **Extended `goal_met`:** plateau additionally requires *no accept-eligible candidates*
+  (`not accept_eligible(state)`), on top of the existing "no queued gaps / no processable /
+  drafts done." **Dimension-stability** — never declaring convergence with a just-accepted,
+  unresearched dimension — is delivered *without* a separate cycle counter: accepting a
+  dimension seeds its entity×dimension gaps (goal.md step 4b), and `recommend_phase` returns
+  `synthesize` only when `queued == 0`, so the loop stays in `deepen` until those gaps are
+  researched; the α-wealth cap bounds the total number of accepts so the candidate stream is
+  finite. This keeps `orchestrator.py` a pure function of the current state snapshot (no
+  cycle threading).
 
 **Candidate record:**
 ```
@@ -200,7 +206,7 @@ Budget is the only guardrail, so this is load-bearing.
   no new control flow:
   ```
   stop when ANY:
-    goal_met                              (plateau, incl. dimension-stability) ← primary
+    goal_met                              (plateau, incl. no accept-eligible) ← primary
     run.tokens_spent ≥ run.token_ceiling                                       ← budget
     cycle K ≥ cap                                                              ← backstop
   ```
@@ -233,8 +239,8 @@ Stdlib asserts, the repo's existing `tests/` pattern — no frameworks, no fixtu
 - dimension gate: accept / reject / pending transitions; corroboration accumulation across
   cycles; α-wealth tightening; pool-dries-up convergence.
 - `meter.py`: transcript parse + fallback estimate.
-- `orchestrator`: extend existing tests for the run-budget stop and dimension-stability in
-  `goal_met`.
+- `orchestrator`: extend existing tests for the run-budget stop and no-accept-eligible
+  guard in `goal_met`.
 - end-to-end smoke: canned prompt + stubbed flows → reaches plateau.
 
 ## §7 — Portability constraints (for Sub-project B; honored now)

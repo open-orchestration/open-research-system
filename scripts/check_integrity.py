@@ -40,6 +40,12 @@ def check(root="."):
         for cid in dft.get("cites", []):
             if cid not in corpus_ids:
                 problems.append(f"draft {did} dangling cite: {cid}")
+    plan = st.get("plan") or {}
+    for c in plan.get("candidate_dimensions", []):
+        for cid in c.get("evidence_cites", []):
+            if cid not in corpus_ids:
+                problems.append(
+                    f"plan candidate {c.get('name')!r} dangling cite: {cid}")
     active = assertions_mod.load_overlay(root)
     if active:
         gp = Path(root) / assertions_mod.GRAPH_REL
