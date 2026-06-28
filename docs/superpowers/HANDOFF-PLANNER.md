@@ -42,7 +42,22 @@ Key files: NEW `scripts/plan.py`, `scripts/meter.py`, `scripts/dimension_gate.py
 
 **The headline goal — "use ORS from another project to research that project" — is NOT yet possible.**
 
-### Gap 1 — A has never had a real live run (validate before trusting it)
+### Gap 1 — VALIDATED LIVE (2026-06-28, commit `0270ca1`)
+Ran a real bootstrap → search → ingest → decide → meter chain against a throwaway `--root`
+(`/tmp/ors-live`, comparison "SQLite vs DuckDB / columnar storage", real crawl4ai search +
+real `CLAUDE_TRANSCRIPT_PATH` metering). Confirmed live: `plan.py apply` writes goal/plan +
+seeds gaps; `search_flow.sh` fetches+junk-filters real sources; `ingest_flow.sh` routes them
+to corpus + flags graph dirty; `orchestrator decide` flips `gather→deepen` correctly;
+`meter.py` reads real `output_tokens` (52451, not the estimate fallback). **One real bug
+found + fixed (TDD):** `resolve_topic_dir` (lib.sh) only looked up pre-existing human-made
+`docs/NN-topic/` dirs and failed for any autonomous free-text topic — broke search→ingest for
+every new `/research` question. Now slugifies the arg and creates `docs/NN-<slug>` on miss
+(test `tests/test_resolve_topic_dir.sh`). The remaining `process`/`report` steps are
+agent-driven content generation; their decide branches are unit-covered (164 OK). The
+graphify `--update` step + `.graphify`/state paths are cwd-bound — that is Gap-2 work below.
+
+<details><summary>Original Gap-1 brief (kept for context)</summary>
+
 All of A is unit/smoke-tested; the tests **stub the flows**. No actual `/research "..."` → autonomous
 loop → real cited findings run has executed. Before building anything else, do ONE cheap live run
 **inside the ORS repo** to validate the whole chain end-to-end and fix whatever the real flow breaks:
@@ -53,6 +68,8 @@ loop → real cited findings run has executed. Before building anything else, do
   so metering is real, not the estimate fallback (else token budget is approximate).
 - Expect rough edges — the flows were never executed, only grep-checked. Treat failures as real
   bugs to fix in A.
+
+</details>
 
 ### Gap 2 — Sub-project B "The Package" (portability/distribution) — UNBUILT
 This is what makes ORS usable from another project. Was deliberately deferred; A was built
