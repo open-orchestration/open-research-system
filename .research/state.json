@@ -4690,6 +4690,50 @@
       "created_at": "2026-06-27T22:50:45.970430+00:00",
       "promoted_path": "docs/findings/dd90b2c09-definitive-anytime-valid-testing-kit.md",
       "promoted_at": "2026-06-27T22:53:41.552986+00:00"
+    },
+    {
+      "id": "d320bccee",
+      "topic": "08-grounding-truth",
+      "title": "The definitive grounding and faithfulness pipeline: claim extraction → atomic-fact scoring → attribution editing → NLI entailment, end to end",
+      "path": "docs/findings/_drafts/d320bccee-definitive-grounding-faithfulness-pipeline.md",
+      "status": "promoted",
+      "cites": [
+        "ce1c38128",
+        "c6fc7d334",
+        "c1ee9053c",
+        "ccb6561db"
+      ],
+      "created_at": "2026-06-28T00:19:22.499507+00:00",
+      "promoted_path": "docs/findings/d320bccee-definitive-grounding-faithfulness-pipeline.md",
+      "promoted_at": "2026-06-28T00:25:22.695699+00:00"
+    },
+    {
+      "id": "d0651b724",
+      "topic": "04-applied-research-playbooks",
+      "title": "The definitive deep-research agent architecture: planner-executor-publisher spine, the retrieval choice underneath it, the orchestration primitive that runs it, and the one axis on which it can be benchmarked",
+      "path": "docs/findings/_drafts/d0651b724-definitive-deep-research-architecture.md",
+      "status": "promoted",
+      "cites": [
+        "c1bb33cc6",
+        "cb547d339",
+        "cfc0c8e73",
+        "c3bf6d346",
+        "c9c58e239",
+        "c2713ec8f",
+        "cc06c6ce1",
+        "cbb096e41",
+        "c7b11e5a5",
+        "cc413ffed",
+        "cce59d029",
+        "c2713d958",
+        "cc9ebf39f",
+        "ceb7cfb9f",
+        "c3d36ff44",
+        "cbda2cb4e"
+      ],
+      "created_at": "2026-06-28T00:19:22.536869+00:00",
+      "promoted_path": "docs/findings/d0651b724-definitive-deep-research-architecture.md",
+      "promoted_at": "2026-06-28T00:25:22.728059+00:00"
     }
   ]
 }

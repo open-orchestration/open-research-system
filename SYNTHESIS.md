@@ -6,11 +6,12 @@ faithfulness, and independent-reviewer gates on primary/official sources. Claims
 the earlier spike asserted but that no promoted finding yet backs are quarantined under
 [Not yet grounded](#not-yet-grounded) rather than stated as fact.
 
-Grounding status: **58 promoted findings across all 17 of 17 domains** (01–17), including the
-first three **definitive / cross-domain synthesis** findings — a class that distills several
-single-source findings into one durable decision procedure, stack, or kit, re-anchoring every
-load-bearing claim on its underlying primary `[c…]` id (the causal-inference decision tree, the
-evaluation stack, and the anytime-valid testing kit, below). Every
+Grounding status: **60 promoted findings across all 17 of 17 domains** (01–17), including the
+first five **definitive / cross-domain synthesis** findings — a class that distills several
+single-source findings into one durable decision procedure, stack, kit, pipeline, or
+architecture, re-anchoring every load-bearing claim on its underlying primary `[c…]` id (the
+causal-inference decision tree, the evaluation stack, the anytime-valid testing kit, the
+grounding/faithfulness pipeline, and the deep-research architecture, below). Every
 domain now has at least one finding that passed the citation + faithfulness +
 independent-reviewer gates on primary/official sources. The methodology half (01 epistemics,
 02 statistical/causal, 03 decision frameworks) is grounded — the engine can defend its
@@ -169,6 +170,16 @@ has the most *under-constrained* failures). The reassuring result: constraining 
 up to 4%. **Implication for framework choice:** pick by *measured real-world schema coverage*, not
 by the existence of a constrained-decoding feature; constraints are a net win on both speed and
 quality.
+
+These grounding findings now compose into one **definitive grounding/faithfulness pipeline** — the
+corpus's fourth definitive synthesis finding — distilling FActScore, RARR, RAGAS, and ARES into a
+single four-stage machinery (claim/atomic-fact extraction → supported-fraction scoring → attribution
+editing → NLI entailment) re-anchored on the four primary papers. It pins what is *settled* (decompose
+before scoring; score = fraction-of-units-supported; the support check is entailment) against where the
+methods genuinely diverge (the *reference* — context vs. knowledge-source vs. repair-into-attributable;
+verdict vs. repair; prompt-only point score vs. ARES's PPI confidence intervals), and gives a
+use-when table
+([definitive grounding/faithfulness pipeline](docs/findings/d320bccee-definitive-grounding-faithfulness-pipeline.md)).
 
 ### Knowledge graph: extraction method and community structure are the cost-fidelity levers
 When compiling a source-of-truth KG corpus, the two measured levers are *how triples are
@@ -638,6 +649,17 @@ Anthropic's "Building Effective Agents") independently converge on the
 than bind to the context window. The production-RAG craft (structure-aware chunking, hybrid +
 rerank, filter-before-search) is dev-agency blog-consensus — sensible defaults, not evidence
 ([applied playbooks](docs/findings/d603c3334-convergent-playbook-anchored-architecture-blog-consensus-rag-craft.md)).
+
+These architecture, retrieval, orchestration, and benchmark findings now compose into one
+**definitive deep-research architecture** — the corpus's fifth definitive synthesis finding —
+stacking the **planner-executor-publisher spine** (GPT-Researcher README + STORM paper converge on
+a gather-references → write-only-from-references split), the **retrieval choice** underneath it
+(late-interaction ColBERT's offline-cost-for-query-cost reallocation vs. hybrid lexical+dense as the
+broad default, grounded in the ColBERT/v2 papers), the **orchestration primitive** that dispatches it
+(LangGraph `Send`/`Command` graph control vs. AutoGen topic/subscription pub-sub, from official docs),
+and the **one cross-vendor-comparable axis** — shared-benchmark accuracy, with cost/latency/internals
+treated as attributed-only
+([definitive deep-research architecture](docs/findings/d0651b724-definitive-deep-research-architecture.md)).
 
 ## Tensions & open questions (from the promoted findings)
 - **Citation accuracy vs volume** — measured but mechanistically unexplained; no source in

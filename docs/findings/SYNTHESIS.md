@@ -58,3 +58,5 @@
 - [The definitive causal-inference decision tree: can you randomize, which design, which estimator, which falsification test](daccd735c-definitive-causal-inference-decision-tree.md) — 02-statistical-causal-inference
 - [The definitive evaluation stack: what to measure, with which metric, under which regime, and the judge biases to correct](d9136c25c-definitive-evaluation-stack.md) — 16-evaluation-benchmarks
 - [The definitive anytime-valid testing kit: test continuously without inflating error (confidence sequences, mSPRT, online FDR)](dd90b2c09-definitive-anytime-valid-testing-kit.md) — 02-statistical-causal-inference
+- [The definitive grounding and faithfulness pipeline: claim extraction → atomic-fact scoring → attribution editing → NLI entailment, end to end](d320bccee-definitive-grounding-faithfulness-pipeline.md) — 08-grounding-truth
+- [The definitive deep-research agent architecture: planner-executor-publisher spine, the retrieval choice underneath it, the orchestration primitive that runs it, and the one axis on which it can be benchmarked](d0651b724-definitive-deep-research-architecture.md) — 04-applied-research-playbooks
