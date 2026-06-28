@@ -35,6 +35,16 @@ class Validate(unittest.TestCase):
                                          {"name": "fuel", "why": "b"}])
         self.assertTrue(any("duplicate" in x for x in plan.validate_plan(p)))
 
+    def test_duplicate_topic_names_rejected(self):
+        p = {"shape": "survey", "entities": [], "dimensions": [],
+             "topics": [{"name": "history", "why": "a"}, {"name": "history", "why": "b"}],
+             "seed_gaps": [{"topic": "history", "desc": "d"}], "rationale": "r"}
+        self.assertTrue(any("duplicate" in x for x in plan.validate_plan(p)))
+
+    def test_seed_gap_missing_desc_rejected(self):
+        p = dict(VALID_CMP, seed_gaps=[{"topic": "fuel"}])   # no desc
+        self.assertTrue(any("topic/desc" in x or "desc" in x for x in plan.validate_plan(p)))
+
     def test_cap_for_budget(self):
         self.assertEqual(plan.cap_for_budget(120000), 4)   # floor is 4
         self.assertEqual(plan.cap_for_budget(2000000), 33)
