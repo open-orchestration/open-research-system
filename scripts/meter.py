@@ -57,12 +57,10 @@ def update_run_spend(root, *, transcript_path=None, started_at=None, subagents_f
         spent = estimate_tokens(subagents_fallback)
     with state_mod.locked_state(root) as st_:
         cur = st_["budget"].get("run", {}).get("tokens_spent", 0)
-        # estimation is additive (per cycle); transcript sum is absolute
-        st_["budget"].setdefault("run", {"token_ceiling": 0, "tokens_spent": 0})
         if path and Path(path).exists():
-            st_["budget"]["run"]["tokens_spent"] = spent
+            state_mod.set_run_tokens_spent(st_, spent)
         else:
-            st_["budget"]["run"]["tokens_spent"] = cur + spent
+            state_mod.set_run_tokens_spent(st_, cur + spent)
         spent = st_["budget"]["run"]["tokens_spent"]
     return spent
 
