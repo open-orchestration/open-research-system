@@ -3,11 +3,24 @@
 
 slugify() { echo "$1" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g'; }
 
-# Resolve a topic arg (slug or NN prefix) to its docs dir; echo path or exit 1.
+# Resolve a topic arg to its docs dir, creating docs/NN-<slug> on miss.
+# The arg is slugified first, so free-text topic names ("columnar storage")
+# match slug dirs ("01-columnar-storage"). Autonomous flow: topics are
+# discovered at runtime, so a missing dir is created, not an error.
+# ponytail: next-NN under concurrent ingest can dup a prefix (distinct slugs
+# stay distinct dirs); per-topic locking only if numbering must be gapless.
 resolve_topic_dir() {
-  local root="$1" arg="$2" match
-  match=$(find "$root/docs" -maxdepth 1 -type d -name "*${arg}*" | grep -E '/[0-9]{2}-[^/]+$' | head -1)
-  [ -n "$match" ] || { echo "no topic dir matches '$arg'" >&2; return 1; }
+  local root="$1" slug match next
+  slug="$(slugify "$2")"
+  match=$(find "$root/docs" -maxdepth 1 -type d -name "*${slug}*" 2>/dev/null \
+            | grep -E '/[0-9]{2}-[^/]+$' | head -1)
+  if [ -z "$match" ]; then
+    next=$(find "$root/docs" -maxdepth 1 -type d 2>/dev/null \
+             | grep -oE '/[0-9]{2}-' | tr -dc '0-9\n' | sort -n | tail -1)
+    next=$(printf '%02d' $(( 10#${next:-0} + 1 )))
+    match="$root/docs/${next}-${slug}"
+    mkdir -p "$match" || { echo "could not create topic dir '$match'" >&2; return 1; }
+  fi
   echo "$match"
 }
 
