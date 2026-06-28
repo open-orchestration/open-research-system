@@ -273,6 +273,69 @@ def set_phase(state, phase):
     return phase
 
 
+def set_goal(state, *, question, shape, now=None):
+    state["goal"] = {"question": question, "shape": shape, "created_at": now or _now()}
+    return state["goal"]
+
+
+def set_plan(state, *, entities, dimensions, topics):
+    state["plan"] = {
+        "entities": list(entities), "dimensions": list(dimensions),
+        "topics": list(topics), "candidate_dimensions": [], "rejected_dimensions": [],
+    }
+    return state["plan"]
+
+
+def _plan(state):
+    return state.setdefault("plan", {
+        "entities": [], "dimensions": [], "topics": [],
+        "candidate_dimensions": [], "rejected_dimensions": [],
+    })
+
+
+def add_dimension_candidate(state, *, name, cite, cycle):
+    p = _plan(state)
+    for c in p["candidate_dimensions"]:
+        if c["name"] == name:
+            if cite not in c["evidence_cites"]:
+                c["evidence_cites"].append(cite)
+            c["corroboration"] = len(c["evidence_cites"])
+            c["last_seen_cycle"] = cycle
+            return c
+    c = {"name": name, "evidence_cites": [cite], "corroboration": 1,
+         "first_seen_cycle": cycle, "last_seen_cycle": cycle, "status": "pending"}
+    p["candidate_dimensions"].append(c)
+    return c
+
+
+def list_candidate_dimensions(state, status="pending"):
+    return [c for c in _plan(state)["candidate_dimensions"]
+            if status is None or c.get("status") == status]
+
+
+def accept_dimension(state, name, *, now=None):
+    p = _plan(state)
+    for i, c in enumerate(p["candidate_dimensions"]):
+        if c["name"] == name:
+            p["candidate_dimensions"].pop(i)
+            dim = {"name": name, "why": "discovered", "findings": []}
+            p["dimensions"].append(dim)
+            p["last_accept_cycle"] = c.get("last_seen_cycle")
+            return dim
+    return None
+
+
+def reject_dimension(state, name, *, reason, cycle):
+    p = _plan(state)
+    for i, c in enumerate(p["candidate_dimensions"]):
+        if c["name"] == name:
+            p["candidate_dimensions"].pop(i)
+            rec = {"name": name, "reason": reason, "cycle": cycle}
+            p["rejected_dimensions"].append(rec)
+            return rec
+    return None
+
+
 def _main(argv):
     import argparse
     ap = argparse.ArgumentParser()
