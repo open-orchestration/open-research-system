@@ -337,6 +337,47 @@ def reject_dimension(state, name, *, reason, cycle):
     return None
 
 
+def init_run_budget(state, *, token_ceiling, now=None):
+    state["budget"]["run"] = {
+        "token_ceiling": token_ceiling, "tokens_spent": 0, "started_at": now or _now(),
+    }
+    return state["budget"]["run"]
+
+
+def set_run_tokens_spent(state, n):
+    state["budget"].setdefault("run", {"token_ceiling": 0, "tokens_spent": 0})
+    state["budget"]["run"]["tokens_spent"] = n
+    return n
+
+
+def run_budget_exceeded(state):
+    r = state["budget"].get("run")
+    return bool(r) and r["tokens_spent"] >= r["token_ceiling"]
+
+
+def init_dimension_alpha(state, *, wealth):
+    state["budget"]["dimension_alpha"] = {"wealth": wealth, "spent": 0}
+    return state["budget"]["dimension_alpha"]
+
+
+def _alpha(state):
+    return state["budget"].setdefault("dimension_alpha", {"wealth": 0, "spent": 0})
+
+
+def dimension_threshold(state, base_k):
+    return base_k + _alpha(state)["spent"]
+
+
+def dimension_wealth_left(state):
+    a = _alpha(state)
+    return max(0, a["wealth"] - a["spent"])
+
+
+def spend_dimension_alpha(state, n=1):
+    _alpha(state)["spent"] += n
+    return dimension_wealth_left(state)
+
+
 def _main(argv):
     import argparse
     ap = argparse.ArgumentParser()
@@ -382,6 +423,13 @@ def _main(argv):
     cd.add_argument("--min-sources", type=int, default=3)
     sph = sub.add_parser("set-phase"); sph.add_argument("--root", default=".")
     sph.add_argument("--phase", required=True)
+    irb = sub.add_parser("init-run-budget"); irb.add_argument("--root", default=".")
+    irb.add_argument("--ceiling", type=int, required=True)
+    srs = sub.add_parser("set-run-spent"); srs.add_argument("--root", default=".")
+    srs.add_argument("--tokens", type=int, required=True)
+    adc = sub.add_parser("add-dim-candidate"); adc.add_argument("--root", default=".")
+    adc.add_argument("--name", required=True); adc.add_argument("--cite", required=True)
+    adc.add_argument("--cycle", type=int, required=True)
     args = ap.parse_args(argv)
     if args.cmd == "gen-id":
         print(gen_id(args.prefix, args.seed)); return 0
@@ -470,6 +518,18 @@ def _main(argv):
         except ValueError as e:
             print(str(e), file=sys.stderr); return 1
         print(args.phase); return 0
+    if args.cmd == "init-run-budget":
+        with locked_state(args.root) as st_:
+            init_run_budget(st_, token_ceiling=args.ceiling)
+        print("run budget set"); return 0
+    if args.cmd == "set-run-spent":
+        with locked_state(args.root) as st_:
+            set_run_tokens_spent(st_, args.tokens)
+        print(args.tokens); return 0
+    if args.cmd == "add-dim-candidate":
+        with locked_state(args.root) as st_:
+            c = add_dimension_candidate(st_, name=args.name, cite=args.cite, cycle=args.cycle)
+        print(c["corroboration"]); return 0
     return 1
 
 

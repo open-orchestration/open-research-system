@@ -58,5 +58,28 @@ class Candidates(unittest.TestCase):
         self.assertIsNone(st.reject_dimension(s, "nope", reason="x", cycle=1))
 
 
+class RunBudget(unittest.TestCase):
+    def test_run_budget_ceiling(self):
+        s = st.load_default()
+        st.init_run_budget(s, token_ceiling=1000, now="T")
+        self.assertFalse(st.run_budget_exceeded(s))
+        st.set_run_tokens_spent(s, 999)
+        self.assertFalse(st.run_budget_exceeded(s))
+        st.set_run_tokens_spent(s, 1000)
+        self.assertTrue(st.run_budget_exceeded(s))
+
+    def test_run_budget_absent_is_not_exceeded(self):
+        self.assertFalse(st.run_budget_exceeded(st.load_default()))
+
+    def test_dimension_alpha_threshold_rises_with_spend(self):
+        s = st.load_default()
+        st.init_dimension_alpha(s, wealth=5)
+        self.assertEqual(st.dimension_threshold(s, 3), 3)   # base K, nothing spent
+        self.assertEqual(st.dimension_wealth_left(s), 5)
+        st.spend_dimension_alpha(s)
+        self.assertEqual(st.dimension_threshold(s, 3), 4)   # bar rose
+        self.assertEqual(st.dimension_wealth_left(s), 4)
+
+
 if __name__ == "__main__":
     unittest.main()
