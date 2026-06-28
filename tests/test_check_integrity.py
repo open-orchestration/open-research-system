@@ -68,6 +68,33 @@ class TestIntegrity(unittest.TestCase):
                 "path": "docs/findings/_drafts/moved.md", "cites": []}])
             self.assertEqual(ci.check(t), [])
 
+    def test_flags_dangling_candidate_dimension_cite(self):
+        with tempfile.TemporaryDirectory() as t:
+            p = Path(t) / ".research"; p.mkdir(parents=True, exist_ok=True)
+            base = {"budget": {}, "gaps": [], "inbox": [], "corpus": [],
+                    "graph": {}, "assertions": {}, "drafts": [],
+                    "plan": {"entities": [], "dimensions": [], "topics": [],
+                             "candidate_dimensions": [
+                                 {"name": "x", "evidence_cites": ["cNOPE"], "corroboration": 1}],
+                             "rejected_dimensions": []}}
+            (p / "state.json").write_text(json.dumps(base), encoding="utf-8")
+            self.assertTrue(any("cNOPE" in x for x in ci.check(t)))
+
+    def test_clean_when_candidate_cite_resolves(self):
+        with tempfile.TemporaryDirectory() as t:
+            (Path(t) / "docs").mkdir()
+            (Path(t) / "docs/x.md").write_text("hi", encoding="utf-8")
+            p = Path(t) / ".research"; p.mkdir(parents=True, exist_ok=True)
+            base = {"budget": {}, "gaps": [], "inbox": [],
+                    "corpus": [{"id": "cREAL", "extracted_path": "docs/x.md"}],
+                    "graph": {}, "assertions": {}, "drafts": [],
+                    "plan": {"entities": [], "dimensions": [], "topics": [],
+                             "candidate_dimensions": [
+                                 {"name": "x", "evidence_cites": ["cREAL"], "corroboration": 1}],
+                             "rejected_dimensions": []}}
+            (p / "state.json").write_text(json.dumps(base), encoding="utf-8")
+            self.assertEqual(ci.check(t), [])
+
 
 class AssertionIntegrity(unittest.TestCase):
     def setUp(self):
