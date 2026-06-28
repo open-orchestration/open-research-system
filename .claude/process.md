@@ -78,6 +78,13 @@ Run one process cycle for the research engine. Do exactly this, then stop:
    answer, run
    `python3 scripts/state.py add-gap --topic "T" --desc "<the missing question>" --origin process`.
 
+   Also emit DIMENSION CANDIDATES: if a source raised a substantive comparable aspect
+   that is NOT already a `plan.dimension` and is on-goal, record it (corroboration
+   accumulates across cycles — record it every time a source raises it, with that
+   source's corpus id):
+   `python3 scripts/state.py add-dim-candidate --root <root> --name "<aspect>" --cite "<c-id>" --cycle K`
+   Do not accept it here — the goal loop's dimension gate (step 4b) decides acceptance.
+
 7. Author graph assertions (optional, autonomous — no human gate). While
    reading the knowledge graph in step 2, if you perceive a **missing
    cross-community link** — two nodes in different communities that your

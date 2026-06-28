@@ -28,14 +28,12 @@ Each cycle, do exactly this:
    The record's `data` must be `{"decide": <the decide JSON>, "state": <snapshot>}`, so pass the
    decide JSON nested under `decide` and let `--snapshot` add `state`:
    `python3 scripts/runlog.py log --flow orchestrator --step decide --status ok --snapshot --data "{\"decide\": $D}"`
-   - If `D.goal_met` is `true`: **stop**. Report convergence, then surface the human
-     review queue and any stuck gaps:
-     ```
-     python3 scripts/promote.py queue
-     python3 scripts/state.py list-gaps --status failed
-     ```
-     Before stopping, close the run log: `python3 scripts/runlog.py end --status ok`
-     Do not run any more cycles.
+   - If `D.stop` is `true`: **stop**. If `D.goal_met` is true, report convergence
+     (plateau). If instead `D.budget_exhausted` is true, report the run was cut short on
+     budget: print the finding/dimension counts and the pending-candidate count so the
+     user knows it did not fully converge. Then surface the review queue + stuck gaps
+     (`python3 scripts/promote.py queue`; `python3 scripts/state.py list-gaps --status failed`),
+     close the run log (`python3 scripts/runlog.py end --status ok`), and run no more cycles.
 
 3. **Search.** If `D.search` is `true`: run search+ingest concurrently, one worker per topic
    with queued gaps, each isolated in its own `ingest/.work/<topic>/` inbox so parallel
@@ -64,6 +62,25 @@ Each cycle, do exactly this:
 4. **Process.** If `D.process` is `true`: run the Process cycle exactly as defined in
    `.claude/process.md` (pick a candidate topic, draft with inline citations, pass both
    success gates, record the draft, emit gaps, optional assertions, integrity check).
+
+4b. **Dimension gate** (plan growth — runs every cycle, see `.claude/research.md` and
+    the spec's §1.5). Do exactly this:
+    - List deterministically-eligible candidates:
+      `python3 scripts/dimension_gate.py eligible --root <root>` (these already pass the
+      corroboration threshold, have α-wealth left, and fit the remaining budget).
+    - For EACH eligible candidate, judge the three LLM axes against `goal.question` in
+      `.research/state.json`: (1) goal-relevance, (2) distinctness from existing
+      `plan.dimensions`, (3) comparability — both entities are scoreable on it
+      (comparison shape only). Accept only if all three pass.
+      - Accept: `python3 scripts/dimension_gate.py accept --root <root> --name "<name>"`,
+        then seed one gap per `entity × new dimension`
+        (`python3 scripts/state.py add-gap --topic "<name>" --desc "<entity> <name>" --origin dimension`).
+      - Reject: `python3 scripts/dimension_gate.py reject --root <root> --name "<name>" --reason "<axis that failed>" --cycle K`.
+    - Expire stale candidates: `python3 scripts/dimension_gate.py expire --root <root> --cycle K`.
+    - Log: `python3 scripts/runlog.py log --flow dimension --step gate --status ok --data "{\"accepted\":A,\"rejected\":R}"`.
+
+4c. **Meter.** Update cumulative run-token spend so the next `decide` sees it:
+    `python3 scripts/meter.py update --root <root> --fallback-subagents <subagents dispatched this cycle>`.
 
 5. **Safety.** Increment `K`. If `K >= 25` and `goal_met` was never `true`, **stop**: the
    loop did not converge. Surface the failed/stuck gaps
