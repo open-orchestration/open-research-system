@@ -38,6 +38,16 @@ class Eligible(unittest.TestCase):
         self.assertEqual(n, 1)
         self.assertEqual(s["plan"]["rejected_dimensions"][0]["name"], "weak")
 
+    def test_accept_unknown_name_is_noop(self):
+        s = _ready()
+        self.assertIsNone(gate.accept(s, "ghost"))           # not a candidate
+        self.assertEqual(st.dimension_wealth_left(s), 5)     # wealth NOT spent on no-op
+
+    def test_stale_but_corroborated_survives_expire(self):
+        s = _ready()                                         # "pref" corrob 3, last_seen 1; threshold = 3
+        self.assertEqual(gate.expire(s, current_cycle=100), 0)   # stale (100-1>=3) but corrob 3 >= thr 3
+        self.assertEqual(len(st.list_candidate_dimensions(s)), 1)  # still pending
+
 
 if __name__ == "__main__":
     unittest.main()

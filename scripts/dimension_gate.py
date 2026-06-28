@@ -49,7 +49,7 @@ def _main(argv):
     import argparse
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
-    e = sub.add_parser("eligible"); e.add_argument("--root", default=".")
+    e = sub.add_parser("eligible"); e.add_argument("--root", default="."); e.add_argument("--cycle", type=int, default=None)
     ac = sub.add_parser("accept"); ac.add_argument("--root", default="."); ac.add_argument("--name", required=True)
     rj = sub.add_parser("reject"); rj.add_argument("--root", default="."); rj.add_argument("--name", required=True)
     rj.add_argument("--reason", required=True); rj.add_argument("--cycle", type=int, required=True)
