@@ -32,6 +32,7 @@
   .meter { height:6px; background:#21262d; border-radius:3px; overflow:hidden; margin:4px 0 10px; }
   .meter > span { display:block; height:100%; background:var(--blue); }
   .log { white-space:pre; line-height:1.5; }
+  .logRow { display:flex; justify-content:space-between; gap:8px; }
   .ok{color:var(--green)} .fail{color:var(--red)} .capped{color:var(--yellow)}
   #status { position:absolute; top:8px; left:12px; color:var(--dim); font-size:11px; z-index:1; }
   #status::before { content:"\25CF"; margin-right:5px; color:var(--dot,#8b949e); }
@@ -74,11 +75,50 @@ function addDelta(d){ (d.new_nodes||[]).forEach(addNode); const o=d.edge_origins
 let relayoutPending=false;
 function relayout(){ if (relayoutPending) return; relayoutPending=true;
   setTimeout(()=>{ relayoutPending=false; cy.layout({ name:"cose", animate:false }).run(); }, 150); }
-const ws = new WebSocket("ws://" + location.host + "/ws");
-ws.onmessage = (ev)=>{ const d=JSON.parse(ev.data); if (seeded) addDelta(d); else buffer.push(d); };
-let wsOpen = false;
-ws.onopen = ()=>{ wsOpen = true; };
-ws.onclose = ()=>{ wsOpen = false; status.textContent="graph stream disconnected"; status.style.setProperty("--dot","#f85149"); };
+// cose is O(n²) — on ~1800 nodes it dominates boot. Cache solved positions so a
+// reload restores them via `preset` instead of re-solving the layout from scratch.
+const POS_KEY = "cy-pos-v1";
+function savePositions(){
+  try { const m={}; cy.nodes().forEach(n=>{ const p=n.position();
+    m[n.id()]=[Math.round(p.x),Math.round(p.y)]; });
+    localStorage.setItem(POS_KEY, JSON.stringify(m)); } catch(e){}
+}
+function loadPositions(){
+  try { return JSON.parse(localStorage.getItem(POS_KEY)||"null"); } catch(e){ return null; }
+}
+cy.on("layoutstop", savePositions);  // any cose run (boot or delta) refreshes the cache
+
+// addNode/addEdge dedupe by id, so re-seeding on reconnect is idempotent.
+function seedGraph(){
+  return fetch("/graph").then(r=>r.json()).then(g=>{
+    (g.nodes||[]).forEach(n=>addNode(n.id));
+    (g.links||g.edges||[]).forEach(e=>addEdge(e.source, e.target, e._origin));
+    seeded=true; buffer.splice(0).forEach(addDelta);
+    const pos = loadPositions();
+    const hit = pos ? cy.nodes().filter(n=>pos[n.id()]).length : 0;
+    if (pos && hit >= cy.nodes().length*0.9){
+      cy.nodes().forEach(n=>{ const p=pos[n.id()]; if (p) n.position({x:p[0],y:p[1]}); });
+      cy.layout({ name:"preset" }).run();
+    } else {
+      cy.layout({ name:"cose", animate:false }).run();
+    }
+  }).catch(()=>{ seeded=true; });
+}
+
+let wsOpen = false, ws, wsBackoff = 1000, wsEverOpened = false;
+function connectWS(){
+  ws = new WebSocket("ws://" + location.host + "/ws");
+  ws.onmessage = (ev)=>{ const d=JSON.parse(ev.data); if (seeded) addDelta(d); else buffer.push(d); };
+  ws.onopen = ()=>{ wsOpen = true; wsBackoff = 1000;
+    if (wsEverOpened) seedGraph();  // resync on reconnect — catches deltas missed while down
+    wsEverOpened = true; };
+  ws.onclose = ()=>{
+    wsOpen = false; status.textContent="reconnecting…"; status.style.setProperty("--dot","#f85149");
+    setTimeout(connectWS, wsBackoff);
+    wsBackoff = Math.min(wsBackoff*2, 15000);  // ponytail: capped exponential backoff, jitter if thundering-herd ever matters
+  };
+  ws.onerror = ()=>{ try{ ws.close(); }catch(e){} };
+}
 
 const LIVE_WINDOW_MS = 30000;
 function setLive(lastTs){
@@ -88,12 +128,8 @@ function setLive(lastTs){
   status.textContent = live ? "live" : "idle";
   status.style.setProperty("--dot", live ? "#3fb950" : "#f85149");
 }
-fetch("/graph").then(r=>r.json()).then(g=>{
-  (g.nodes||[]).forEach(n=>addNode(n.id));
-  (g.links||g.edges||[]).forEach(e=>addEdge(e.source, e.target, e._origin));
-  seeded=true; buffer.splice(0).forEach(addDelta);
-  cy.layout({ name:"cose", animate:false }).run();
-}).catch(()=>{ seeded=true; });
+seedGraph();
+connectWS();
 
 /* ---------- queue + loop (poll) ---------- */
 const esc = (s)=>String(s).replace(/[&<>]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
@@ -129,9 +165,10 @@ function renderLoop(rows){
   body.innerHTML = rows.slice(-40).reverse().map(r=>{
     const k = (r.cycle!=null)?`K${r.cycle}`:"--";
     const st = r.status||""; const cls = st==="ok"?"ok":st==="fail"?"fail":st?"capped":"";
-    return `${k}  ${esc((r.flow||"").padEnd(12))} ${esc((r.step||"").padEnd(11))} `+
-           `<span class="${cls}">${esc(st)}</span>`;
-  }).join("\n");
+    return `<div class="logRow">`+
+           `<span>${k}  ${esc((r.flow||"").padEnd(12))} ${esc((r.step||"").padEnd(11))}</span>`+
+           `<span class="${cls}">${esc(st)}</span></div>`;
+  }).join("");
 }
 
 async function poll(){
