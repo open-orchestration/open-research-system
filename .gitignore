@@ -9,6 +9,7 @@ ingest/*
 
 # research engine state spine is committed; only atomic-write temp files are ignored
 .research/*.tmp
+.research/*.log
 .research/state.lock
 .research/run.jsonl
 .research/run-context.json
