@@ -81,6 +81,7 @@ Each cycle, do exactly this:
 
 4c. **Meter.** Update cumulative run-token spend so the next `decide` sees it:
     `python3 scripts/meter.py update --root <root> --fallback-subagents <subagents dispatched this cycle>`.
+    (primary token metering requires the CLAUDE_TRANSCRIPT_PATH env var; without it the per-cycle subagent estimate is used, and the cycle cap remains the backstop)
 
 5. **Safety.** Increment `K`. If `K >= 25` and `goal_met` was never `true`, **stop**: the
    loop did not converge. Surface the failed/stuck gaps

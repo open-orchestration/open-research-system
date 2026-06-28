@@ -38,12 +38,7 @@ def estimate_tokens(subagents_dispatched, avg_output=8000):
 
 
 def _discover_transcript():
-    """Best-effort: the active session transcript path, or None.
-
-    Honors CLAUDE_TRANSCRIPT_PATH if set; otherwise returns None and the caller
-    falls back to estimation. (Auto-walking the projects dir is left to the caller's
-    environment to avoid guessing a fragile path here.)
-    """
+    """Returns the transcript path if CLAUDE_TRANSCRIPT_PATH is set and the file exists; otherwise None and the caller falls back to estimation."""
     p = os.environ.get("CLAUDE_TRANSCRIPT_PATH")
     return p if p and Path(p).exists() else None
 

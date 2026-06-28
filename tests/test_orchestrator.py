@@ -138,6 +138,18 @@ class BudgetAndDimensions(unittest.TestCase):
         self.assertFalse(orch.accept_eligible(s))
         self.assertTrue(orch.goal_met(s))
 
+    def test_accept_eligible_empty_on_default_state(self):
+        self.assertEqual(orch.accept_eligible(st.load_default()), [])  # legacy state: no plan/alpha
+
+    def test_stop_true_when_both_goal_met_and_budget_exhausted(self):
+        s = self._drained_with_draft()
+        st.init_run_budget(s, token_ceiling=100, now="T")
+        st.set_run_tokens_spent(s, 100)
+        res = orch.decide(s, apply=False)
+        self.assertTrue(res["goal_met"])
+        self.assertTrue(res["budget_exhausted"])
+        self.assertTrue(res["stop"])
+
 
 if __name__ == "__main__":
     unittest.main()
