@@ -17,20 +17,34 @@ distillation — the raw material for definitive findings). Don't re-derive what
 ---
 
 ## State (verify live — drifts as you work)
-- **58 promoted / 5 rejected** (was 55/5 — this phase added **3 definitive/synthesis findings**,
-  all promoted on first independent review, all GRADE **moderate**, zero rejects). Corpus **223**
-  active. Graph **2487 nodes / 2804 links** (`dirty:false`). 66 assertions. ALL 17/17 domains
-  grounded. Phase `deepen`. 50 queued gaps (all dead-source / no-clean-primary / redundant —
-  **do NOT chase them**, both the gather and process/candidates frontiers are exhausted).
-- HEAD `ddbbc4a` (this phase: `c0350c4`→`ddbbc4a`).
+- **60 promoted / 5 rejected** — this phase added **5 definitive/synthesis findings** total, all
+  promoted on first independent review, all GRADE **moderate**, zero rejects. Corpus **223**
+  active. ALL 17/17 domains grounded. Phase `deepen`. 50 queued gaps (all dead-source /
+  no-clean-primary / redundant — **do NOT chase them**, both the gather and process/candidates
+  frontiers are exhausted).
+- **Both workstreams are now COMPLETE** (see "DONE this phase" below): 5/5 definitive findings
+  promoted; all 7 process upgrades resolved (6 shipped, #6 declined-with-ADR). The engine's
+  self-improvement is itself recorded as a decision log under `docs/adr/`.
+- HEAD `3e2500f` (this phase ran `c0350c4`→`3e2500f`).
 
-## DONE this phase (cross off; pick up the unchecked items)
-**Workstream 1 — definitive findings promoted (3 of 5 candidates):**
+**If you are starting a fresh session: there is no queued work here.** The corpus is grounded
+and plateaued, both definitive-finding candidates and all process upgrades are done, and the
+gather/process frontiers are exhausted. A genuinely new direction (a new domain, a new
+definitive theme spanning findings not yet composed, or a real source-relevance feature that
+would revive ADR 0007's BM25 option) would need fresh scoping — do not manufacture work against
+the dead gaps.
+
+## DONE this phase (all 5 definitive findings + all 7 process upgrades resolved)
+**Workstream 1 — definitive findings promoted (5 of 5 candidates):**
 - ✅ **causal-inference decision tree** (`daccd735c`, 02, moderate) — commit `2743add`.
 - ✅ **evaluation stack** (`d9136c25c`, 16, moderate) — commit `8662e64`.
 - ✅ **anytime-valid testing kit** (`dd90b2c09`, 02, moderate) — commit `ddbbc4a`.
-- ⬜ **grounding/faithfulness pipeline** (d1ad78766 + dfa42bc8a + d636208ea) — NOT yet done.
-- ⬜ **deep-research architecture** (d603c3334 + da592d4f8 + dbc0e9395 + d369c3d06 + 06/07/12) — NOT yet done.
+- ✅ **grounding/faithfulness pipeline** (`d320bccee`, 08, moderate; grounds d1ad78766 + dfa42bc8a +
+  d636208ea) — commit `1b4dfd4`. Reviewer-flagged FActScore r=0.99 misattribution fixed pre-merge.
+- ✅ **deep-research architecture** (`d0651b724`, 04, moderate; grounds d603c3334 + da592d4f8 +
+  dbc0e9395 + d369c3d06 + d6ccd6b1c + dc97efcf9 + d1fb5a112 + d28841446) — commit `1b4dfd4`.
+  Reviewer-flagged BrowseComp source (ceb7cfb9f) mislabel fixed pre-merge — relabeled secondary,
+  load-bearing accuracy axis routed to the aggregator leaderboards.
 
 **Workstream 2 — process upgrades shipped (each cites its grounding finding in the commit body):**
 - ✅ **#1 review gate → GRADE certainty + LLM-judge debiasing** (`.claude/review.md`; grounds
@@ -38,12 +52,16 @@ distillation — the raw material for definitive findings). Don't re-derive what
   level per promote into the `runlog.py` ledger (free-form `--data`, no script change).
 - ✅ **#2 promotion = streaming multiple-testing** (`.claude/review.md` new section; grounds
   d42ec736c + dc588b7cc) — commit `d159e01`. Framing + known-gap note; no α-budget tracking built.
+- ✅ **#3 drafting → grounded prompting** (`.claude/process.md` step 3; grounds d6432467b +
+  d0b1fc5c6) — commit `acdfdde`. Chain-of-Draft citation-dense style + escalate-only-when-it-pays.
 - ✅ **#4 faithfulness self-check → FActScore atomic decomposition** (`.claude/process.md` step 4b;
   grounds d1ad78766 + dfa42bc8a) — commit `7350568`.
-- ⬜ **#3 drafting → grounded prompting** (prompting ladder d0b1fc5c6 + Chain-of-Draft d6432467b) — NOT done.
-- ⬜ **#5 citation discipline → CSL-JSON/biblatex** (d59d1279b, de47719c4) — NOT done.
-- ⬜ **#6 candidate-selection → BM25/PMI** (d0fefa5d5, d7289dbd9) — NOT done.
-- ⬜ **#7 ADR log for the process changes** (decf6989c / d657c1d86) — NOT done.
+- ✅ **#5 citation discipline → CSL-JSON** (`scripts/export_csl.py`; grounds d59d1279b + de47719c4)
+  — commit `2e6760c`. Corpus → CSL-JSON (closed 45-type enum, required type/id), `--selfcheck`.
+- ✅ **#6 candidate-selection → BM25/PMI: DECLINED** (ADR 0007). `process_candidates` ranks topics
+  by queue depth, not source relevance; no naive ranking exists to replace. Documented, not built.
+- ✅ **#7 ADR log for the process changes** (`docs/adr/`; grounds decf6989c + d657c1d86) — commit
+  `3e2500f`. 0001 establishes the log; 0002–0006 record the shipped changes; 0007 the declined one.
 
 **Pattern that worked (reuse it):** for each definitive finding — resolve the contributing
 findings' inline `[c…]` (regex `c[0-9a-f]{8}`, NOT 9 — ids are c+8hex) → corpus source map;

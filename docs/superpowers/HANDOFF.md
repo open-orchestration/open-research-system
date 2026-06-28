@@ -20,17 +20,19 @@ ledger — **`.research/state.json`** ("the agent forgets, the repo remembers"):
 The convergence orchestrator (`scripts/orchestrator.py`) decides phase
 (`gather`/`deepen`/`synthesize`) as a stateless function of state signals.
 
-## Current state (HEAD `ddbbc4a`; working tree clean modulo `public/dashboard.html`)
-- **SYNTHESIS + SELF-IMPROVEMENT phase is now active** (see `docs/superpowers/HANDOFF-SYNTHESIS.md`
-  — the authoritative runbook for it). That phase added **3 definitive/synthesis findings**
+## Current state (HEAD `3e2500f`; working tree clean modulo `public/dashboard.html`)
+- **SYNTHESIS + SELF-IMPROVEMENT phase is now COMPLETE** (see `docs/superpowers/HANDOFF-SYNTHESIS.md`
+  — the authoritative runbook for it). That phase added **5 definitive/synthesis findings**
   (causal-inference decision tree `daccd735c`, evaluation stack `d9136c25c`, anytime-valid testing
-  kit `dd90b2c09` — all GRADE moderate, zero rejects) and **3 process upgrades** (review gate ←
-  GRADE+LLM-judge, promotion-as-multiple-testing framing, drafting self-check ← FActScore). The
-  gather/process **plateau below still holds** — no new primaries were gathered; the definitive
-  findings re-distil existing grounded findings, and the process upgrades are doc edits grounding
-  the engine in its own corpus. Counts below are the gather-phase snapshot (now **58 promoted / 5
-  rejected**).
-- **55 promoted findings / 5 rejected** (gather-phase count; now 58/5 after the synthesis phase
+  kit `dd90b2c09`, grounding/faithfulness pipeline `d320bccee`, deep-research architecture
+  `d0651b724` — all GRADE moderate, zero rejects) and **all 7 process upgrades** (review gate ←
+  GRADE+LLM-judge; promotion-as-multiple-testing framing; drafting ← Chain-of-Draft/prompting
+  ladder; faithfulness self-check ← FActScore; citation export → CSL-JSON; candidate-selection ←
+  BM25 *declined* with ADR; ADR decision log under `docs/adr/`). The gather/process **plateau
+  below still holds** — no new primaries were gathered; the definitive findings re-distil existing
+  grounded findings, and the process upgrades are doc/script edits grounding the engine in its own
+  corpus. Counts below are the gather-phase snapshot (now **60 promoted / 5 rejected**).
+- **55 promoted findings / 5 rejected** (gather-phase count; now 60/5 after the synthesis phase
   above). Corpus **223** active. Graph **2487 nodes / 2804 links**
   (`dirty:false`). **66 graph assertions** (overlay `.research/graph-assertions.jsonl`).
   Phase `deepen`. **50 queued gaps** (all dead-source/no-clean-primary/redundant — see Next steps).
