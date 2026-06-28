@@ -345,7 +345,7 @@ def init_run_budget(state, *, token_ceiling, now=None):
 
 
 def set_run_tokens_spent(state, n):
-    state["budget"].setdefault("run", {"token_ceiling": 0, "tokens_spent": 0})
+    state["budget"].setdefault("run", {"token_ceiling": 0, "tokens_spent": 0, "started_at": None})
     state["budget"]["run"]["tokens_spent"] = n
     return n
 
@@ -361,7 +361,7 @@ def init_dimension_alpha(state, *, wealth):
 
 
 def _alpha(state):
-    return state["budget"].setdefault("dimension_alpha", {"wealth": 0, "spent": 0})
+    return state["budget"].get("dimension_alpha") or {"wealth": 0, "spent": 0}
 
 
 def dimension_threshold(state, base_k):
@@ -374,7 +374,8 @@ def dimension_wealth_left(state):
 
 
 def spend_dimension_alpha(state, n=1):
-    _alpha(state)["spent"] += n
+    a = state["budget"].setdefault("dimension_alpha", {"wealth": 0, "spent": 0})
+    a["spent"] += n
     return dimension_wealth_left(state)
 
 

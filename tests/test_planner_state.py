@@ -74,11 +74,17 @@ class RunBudget(unittest.TestCase):
     def test_dimension_alpha_threshold_rises_with_spend(self):
         s = st.load_default()
         st.init_dimension_alpha(s, wealth=5)
-        self.assertEqual(st.dimension_threshold(s, 3), 3)   # base K, nothing spent
+        self.assertEqual(st.dimension_threshold(s, 3), 3)
         self.assertEqual(st.dimension_wealth_left(s), 5)
         st.spend_dimension_alpha(s)
-        self.assertEqual(st.dimension_threshold(s, 3), 4)   # bar rose
+        self.assertEqual(st.dimension_threshold(s, 3), 4)
         self.assertEqual(st.dimension_wealth_left(s), 4)
+
+    def test_read_helpers_do_not_initialize_alpha(self):
+        s = st.load_default()
+        self.assertEqual(st.dimension_wealth_left(s), 0)
+        self.assertEqual(st.dimension_threshold(s, 3), 3)
+        self.assertNotIn("dimension_alpha", s["budget"])
 
 
 if __name__ == "__main__":
