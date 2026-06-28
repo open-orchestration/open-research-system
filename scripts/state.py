@@ -318,7 +318,8 @@ def accept_dimension(state, name, *, now=None):
     for i, c in enumerate(p["candidate_dimensions"]):
         if c["name"] == name:
             p["candidate_dimensions"].pop(i)
-            dim = {"name": name, "why": "discovered", "findings": []}
+            dim = {"name": name, "why": "discovered", "findings": [],
+                   "accepted_at": now or _now()}
             p["dimensions"].append(dim)
             p["last_accept_cycle"] = c.get("last_seen_cycle")
             return dim

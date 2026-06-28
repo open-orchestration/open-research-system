@@ -37,6 +37,7 @@ class Candidates(unittest.TestCase):
         self.assertEqual([x["name"] for x in s["plan"]["dimensions"]], ["noise"])
         self.assertEqual(st.list_candidate_dimensions(s), [])
         self.assertEqual(s["plan"]["last_accept_cycle"], 1)
+        self.assertEqual(d["accepted_at"], "T")
 
     def test_reject_moves_candidate_to_rejected(self):
         s = st.load_default()
@@ -45,6 +46,16 @@ class Candidates(unittest.TestCase):
         st.reject_dimension(s, "weather", reason="off-goal", cycle=2)
         self.assertEqual(s["plan"]["rejected_dimensions"][0]["reason"], "off-goal")
         self.assertEqual(st.list_candidate_dimensions(s), [])
+
+    def test_accept_absent_returns_none(self):
+        s = st.load_default()
+        st.set_plan(s, entities=["a", "b"], dimensions=[], topics=[])
+        self.assertIsNone(st.accept_dimension(s, "nope"))
+
+    def test_reject_absent_returns_none(self):
+        s = st.load_default()
+        st.set_plan(s, entities=["a", "b"], dimensions=[], topics=[])
+        self.assertIsNone(st.reject_dimension(s, "nope", reason="x", cycle=1))
 
 
 if __name__ == "__main__":
