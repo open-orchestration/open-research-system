@@ -17,7 +17,17 @@ Run one process cycle for the research engine. Do exactly this, then stop:
 
 3. Draft: write a finding answering those sub-questions. **Every claim must carry an
    inline `[corpus_id]` citation** to the `corpus` entry it came from (the `c…` ids
-   from `state.json`), e.g. `… pre-registration reduces bias [c1a2b3c4d].` Compute the
+   from `state.json`), e.g. `… pre-registration reduces bias [c1a2b3c4d].`
+   **Reason concisely, citation-dense — grounded in the corpus's own prompting findings.**
+   Draft in the **Chain-of-Draft** style (d6432467b): minimal, informative reasoning steps
+   that carry the essential intermediate result, not verbose step-by-step narration — CoD
+   matches chain-of-thought accuracy at a fraction of the tokens [c810db9f5]. The finding
+   body is the *evidence and its citations*, not a transcript of deliberation; every
+   sentence should either state a cited fact or connect two of them. **Escalate reasoning
+   depth only when it pays** (prompting ladder d0b1fc5c6): plain citation-anchored prose is
+   the default; reach for heavier multi-step reasoning only on a genuinely contested or
+   multi-source claim, since the originating papers show added reasoning is an
+   emergent-at-scale, cost-incurring move, not a free win [cf83dbc59]. Compute the
    draft id and filename:
    ```
    ID=$(python3 scripts/state.py gen-id d "T|<your title>")
