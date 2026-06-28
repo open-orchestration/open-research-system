@@ -2,6 +2,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ROOT="$(mktemp -d)"
+trap 'rm -rf "$ROOT"' EXIT
 cat > "$ROOT/plan.json" <<'JSON'
 {"shape":"comparison","entities":["777","A380"],
  "dimensions":[{"name":"fuel","why":"x"},{"name":"range","why":"y"}],
@@ -21,7 +22,6 @@ assert s["budget"]["dimension_alpha"]["wealth"] == 5
 print("e2e state OK")
 PY
 # budget stop fires when spent >= ceiling
-python3 scripts/state.py set-run-spent --root "$ROOT" --tokens 1000000 >/dev/null
+python3 scripts/state.py set-run-spent --root "$ROOT" --tokens 1000000
 python3 scripts/orchestrator.py decide --root "$ROOT" | python3 -c 'import json,sys; d=json.load(sys.stdin); assert d["stop"] and d["budget_exhausted"], d; print("e2e stop OK")'
-rm -rf "$ROOT"
 echo "PASS planner e2e"
