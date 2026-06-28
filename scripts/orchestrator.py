@@ -36,11 +36,20 @@ def recommend_phase(state, min_sources=3):
     return "deepen"
 
 
+def accept_eligible(state, base_k=3):
+    if state_mod.dimension_wealth_left(state) <= 0:
+        return []
+    thr = state_mod.dimension_threshold(state, base_k)
+    return [c for c in state_mod.list_candidate_dimensions(state)
+            if c.get("corroboration", 0) >= thr]
+
+
 def goal_met(state, min_sources=3):
     return (
         recommend_phase(state, min_sources) == "synthesize"
         and not _processable(state, min_sources)
         and len(state_mod.list_drafts(state, status="draft")) >= 1
+        and not accept_eligible(state)
     )
 
 
@@ -59,11 +68,15 @@ def decide(state, min_sources=3, apply=False):
     before = state["budget"]["phase"]
     rec = recommend_phase(state, min_sources)
     state_mod.set_phase(state, rec)                 # in-memory flip (validated)
+    budget_exhausted = state_mod.run_budget_exceeded(state)
+    met = goal_met(state, min_sources)
     result = {
         "phase": rec,
         "phase_changed": rec != before,
         **next_actions(state, min_sources),
-        "goal_met": goal_met(state, min_sources),
+        "goal_met": met,
+        "budget_exhausted": budget_exhausted,
+        "stop": met or budget_exhausted,
     }
     if not apply:
         state_mod.set_phase(state, before)          # restore for dry-run

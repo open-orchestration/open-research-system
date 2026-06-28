@@ -105,5 +105,39 @@ class Decide(unittest.TestCase):
         self.assertEqual(s["budget"]["phase"], "gather")   # not persisted
 
 
+class BudgetAndDimensions(unittest.TestCase):
+    def _drained_with_draft(self):
+        s = st.load_default()
+        ids = _corpus(s, "t", 3)
+        s["graph"]["dirty"] = False
+        st.add_draft(s, topic="t", title="f", path="p", cites=ids, status="draft")
+        return s
+
+    def test_budget_exhausted_sets_stop(self):
+        s = self._drained_with_draft()
+        st.init_run_budget(s, token_ceiling=100, now="T")
+        st.set_run_tokens_spent(s, 100)
+        res = orch.decide(s, apply=False)
+        self.assertTrue(res["budget_exhausted"])
+        self.assertTrue(res["stop"])
+
+    def test_accept_eligible_blocks_goal_met(self):
+        s = self._drained_with_draft()
+        st.init_dimension_alpha(s, wealth=5)
+        st.set_plan(s, entities=["a", "b"], dimensions=[], topics=[])
+        for cy in (1, 2, 3):                              # 3 independent sources => corrob 3 >= K 3
+            st.add_dimension_candidate(s, name="pref", cite=f"c{cy}", cycle=cy)
+        self.assertTrue(orch.accept_eligible(s))
+        self.assertFalse(orch.goal_met(s))               # eligible candidate blocks plateau
+
+    def test_goal_met_when_no_eligible_candidates(self):
+        s = self._drained_with_draft()
+        st.init_dimension_alpha(s, wealth=5)
+        st.set_plan(s, entities=["a", "b"], dimensions=[], topics=[])
+        st.add_dimension_candidate(s, name="pref", cite="c1", cycle=1)  # corrob 1 < K 3
+        self.assertFalse(orch.accept_eligible(s))
+        self.assertTrue(orch.goal_met(s))
+
+
 if __name__ == "__main__":
     unittest.main()
