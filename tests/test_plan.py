@@ -1,4 +1,4 @@
-import json, os, sys, tempfile, unittest
+import json, os, sys, unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
 import plan
 import state as st
@@ -68,6 +68,9 @@ class Apply(unittest.TestCase):
         with self.assertRaises(ValueError):
             plan.apply_plan(s, question="q", plan=dict(VALID_CMP, shape="bad"),
                             budget_tokens=1000, now="T")
+        self.assertNotIn("goal", s)          # validate-first => no partial write
+        self.assertEqual(s["gaps"], [])
+        self.assertNotIn("run", s["budget"])
 
     def test_seed_cap_limits_gaps(self):
         s = st.load_default()
