@@ -11,7 +11,7 @@ files=("$ROOT"/ingest/*)
 real=(); for f in "${files[@]+"${files[@]}"}"; do [ "$(basename "$f")" = ".gitkeep" ] || real+=("$f"); done
 [ "${#real[@]}" -gt 0 ] || { echo "no files in ingest/" >&2; exit 1; }
 
-if [ "${1:-}" ]; then dest="$(resolve_topic_dir "$ROOT" "$1")/sources"; else dest="$ROOT/docs/findings"; fi
+if [ "${1:-}" ]; then dest="$(resolve_topic_dir "$ROOT" "$1")/sources"; else dest="$ROOT/${DOCS_BASE:-.research/docs}/findings"; fi
 mkdir -p "$dest"
 
 for f in "${real[@]+"${real[@]}"}"; do
