@@ -21,3 +21,4 @@ plugin, runnable against any target project.
 - `DOCS_BASE=.research/docs` namespacing so all research output lands under the
   target project's `.research/` (and `.graphify/`), never the plugin repo.
 - Distribution via the `open-orchestration` marketplace.
+- MIT license.
