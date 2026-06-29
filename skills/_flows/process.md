@@ -116,7 +116,7 @@ Run one process cycle for the research engine. Do exactly this, then stop:
    `skills/_flows/review.md` (dispatch a **fresh** reviewer subagent — never your own drafting
    context — over the draft `$ID` and its cited sources; it returns a binary verdict and the
    engine promotes or rejects accordingly). The gate is conservative: a clear `promote`
-   moves the finding into `$DOCS_BASE/findings/` + `SYNTHESIS.md`; anything else rejects and frees
+   moves the finding into `$DOCS_BASE/findings/` + appends `$DOCS_BASE/findings/SYNTHESIS.md`; anything else rejects and frees
    the sources for a stronger redraft.
 
 A human can still override the gate after the fact (`ors promote promote/reject <id>` by hand).

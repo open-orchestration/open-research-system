@@ -108,7 +108,7 @@ Run this on one draft id `D`, or loop it over every queued draft
    problems, surface them and stop.
 
 The reviewer's authority is real — a `promote` moves the draft into `$DOCS_BASE/findings/` and
-appends it to `SYNTHESIS.md`; a `reject` frees its sources. A human can still override after
+appends it to `$DOCS_BASE/findings/SYNTHESIS.md`; a `reject` frees its sources. A human can still override after
 the fact (`ors promote promote/reject` by hand).
 
 ## Promotion is a streaming multiple-comparison problem
