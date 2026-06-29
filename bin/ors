@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Single engine entrypoint. On the Bash-tool PATH while the plugin is enabled,
+# so flow docs call `ors <verb>` from any (non-persistent) shell. Resolves the
+# verb to a bundled script and bakes in the env contract.
+set -euo pipefail
+HERE="$(cd "$(dirname "$0")/.." && pwd)"          # plugin/repo root
+export REPO_ROOT="${REPO_ROOT:-$PWD}"             # target project
+export DOCS_BASE="${DOCS_BASE:-.research/docs}"    # uniform output namespace
+# Discover this session's transcript so `ors meter update` reads real tokens in
+# EVERY cycle (each loop step is a fresh shell; exporting it here, not in a skill
+# step, is the only thing that survives). Best-effort; meter.py falls back to the
+# subagent estimate when unset/missing.
+if [ -z "${CLAUDE_TRANSCRIPT_PATH:-}" ]; then
+  _slug="$(printf '%s' "$REPO_ROOT" | sed 's#[/.]#-#g')"
+  CLAUDE_TRANSCRIPT_PATH="$(ls -t "$HOME/.claude/projects/$_slug"/*.jsonl 2>/dev/null | head -1 || true)"
+  [ -n "$CLAUDE_TRANSCRIPT_PATH" ] && export CLAUDE_TRANSCRIPT_PATH
+fi
+verb="${1:?usage: ors <verb> [args]}"; shift || true
+case "$verb" in
+  __envprobe) echo "REPO_ROOT=$REPO_ROOT"; echo "DOCS_BASE=$DOCS_BASE"; exit 0 ;;
+  decide) exec python3 "$HERE/scripts/orchestrator.py" "$@" ;;
+  dim)    exec python3 "$HERE/scripts/dimension_gate.py" "$@" ;;
+  search) exec bash    "$HERE/scripts/search_flow.sh" "$@" ;;
+  ingest) exec bash    "$HERE/scripts/ingest_flow.sh" "$@" ;;
+  gather) exec bash    "$HERE/scripts/gather.sh" "$@" ;;
+  *)
+    if   [ -f "$HERE/scripts/$verb.py" ]; then exec python3 "$HERE/scripts/$verb.py" "$@"
+    elif [ -f "$HERE/scripts/$verb.sh" ]; then exec bash    "$HERE/scripts/$verb.sh" "$@"
+    else echo "ors: unknown verb '$verb'" >&2; exit 2; fi ;;
+esac
