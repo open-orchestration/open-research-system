@@ -6,17 +6,24 @@ disable-model-invocation: true
 
 # /open-research-system:dashboard — live graph UI
 
-Serve the realtime graph + run dashboard against THIS project's artifacts. Run:
+Copy the UI into THIS project so it owns a standalone copy, then serve every panel
+against this project's artifacts. Run:
 
 ```
+DASH="$PWD/.research/dashboard"; mkdir -p "$DASH"
+cp "${CLAUDE_PLUGIN_ROOT}/public/index.html" "${CLAUDE_PLUGIN_ROOT}/public/dashboard.html" "$DASH/"
 GV_GRAPH="$PWD/.graphify/graph.json" \
 GV_STATE="$PWD/.research/state.json" \
-GV_HTML="${CLAUDE_PLUGIN_ROOT}/public/index.html" \
-GV_DASHBOARD="${CLAUDE_PLUGIN_ROOT}/public/dashboard.html" \
+GV_RUNLOG="$PWD/.research/run.jsonl" \
+GV_EVENTS="$PWD/.research/graph-events.jsonl" \
+GV_HTML="$DASH/index.html" \
+GV_DASHBOARD="$DASH/dashboard.html" \
   python3 "${CLAUDE_PLUGIN_ROOT}/scripts/graph_view_server.py" --port 8765
 ```
 
-Then open the printed URL. The server reads the target's `.graphify/graph.json`
-and `.research/state.json`; the HTML is served from the plugin bundle. Stop it
-with Ctrl-C when done. (graphify must have produced `.graphify/graph.json` for the
-graph panel to populate.)
+Then open the printed URL (`…/dashboard`). The UI files live in
+`<project>/.research/dashboard/` (refreshed from the plugin on each launch, so the
+project keeps a working copy even if the plugin is later removed). All four panels —
+graph, queue, loop, and the live graph-events feed — read this project's `.graphify/`
+and `.research/`. Stop with Ctrl-C. (graphify must have produced
+`.graphify/graph.json` for the graph panel to populate.)
