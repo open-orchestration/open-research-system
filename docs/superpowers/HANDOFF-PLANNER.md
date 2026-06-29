@@ -71,7 +71,32 @@ loop → real cited findings run has executed. Before building anything else, do
 
 </details>
 
-### Gap 2 — Sub-project B "The Package" (portability/distribution) — UNBUILT
+### Gap 2 — Sub-project B "The Package" — DONE (2026-06-29, merged `a26b915`)
+ORS is now a self-contained personal Claude Code plugin. The repo **root is the plugin**
+(`.claude-plugin/plugin.json`, `bin/ors`, `skills/`). From any target project with the
+plugin enabled (`claude --plugin-dir <ors-repo>`), `/ors:research "<q>"`, `/ors:report`,
+and `/ors:dashboard` run against that project, writing artifacts under `<target>/.research/`
+(state, runlog, `docs/NN-topic/`, `findings/`) + `<target>/.graphify/`. How it works:
+- **`bin/ors` dispatcher** (on the plugin PATH; survives the harness's non-persistent shells)
+  is the single engine entrypoint: `ors <verb>` → bundled `scripts/<verb>.py|sh`. It exports
+  `REPO_ROOT=$PWD`, `DOCS_BASE=.research/docs`, and auto-discovers `CLAUDE_TRANSCRIPT_PATH`
+  (so metering is real every cycle). Aliases: `decide`→orchestrator, `dim`→dimension_gate,
+  `search`/`ingest`/`gather`→`*_flow.sh`.
+- **`DOCS_BASE=.research/docs`** is the uniform namespace knob (threaded through `lib.sh`,
+  `promote.py`, `ingest.sh`); `.graphify` stays at root.
+- The four internal flows moved to `skills/_flows/{goal,loop,process,review}.md`; `/research`
+  + `/report` became `skills/{research,report}/SKILL.md` (+ `skills/dashboard/`), all engine
+  calls via `ors`, `disable-model-invocation: true`. Old `.claude/*.md` deleted.
+- Built TDD over 8 tasks (spec `docs/superpowers/specs/2026-06-29-ors-package-design.md`,
+  plan `docs/superpowers/plans/2026-06-29-ors-package.md`, ledger `.superpowers/sdd/progress.md`).
+  Live-validated end-to-end against a throwaway target via `ors`. Bugs caught + fixed: the
+  `decide` alias dropping orchestrator's subcommand; 3 flow smokes still pointing at old
+  `.claude/` paths. Suite 170 OK, 13/13 smokes, integrity OK, `public/dashboard.html` untouched.
+  **Remaining user step:** verify `claude --plugin-dir <ors-repo>` + `/ors:research` from a real
+  separate project (the controller did not self-launch a billed research run).
+
+<details><summary>Original Gap-2 brief (kept for context)</summary>
+
 This is what makes ORS usable from another project. Was deliberately deferred; A was built
 **root-aware on purpose** so B is mostly *extraction, not rework*. B must:
 1. **Full root-awareness.** `state.py`/`orchestrator.py`/`plan.py`/`meter.py`/`dimension_gate.py`
@@ -88,6 +113,8 @@ This is what makes ORS usable from another project. Was deliberately deferred; A
    make the realtime graph UI run against the target project's `.graphify`/state.
 4. **Metering wiring.** Ensure whatever launches a run sets `CLAUDE_TRANSCRIPT_PATH` (or an
    equivalent), so the run budget is metered, not estimated.
+
+</details>
 
 ## How to proceed (use the superpowers workflow — the user runs subagent-driven)
 
