@@ -1,5 +1,6 @@
 {
   "name": "open-orchestration",
+  "description": "Open Orchestration — Joshua Tyler's catalog of autonomous research and workflow plugins for Claude Code.",
   "owner": { "name": "Joshua Tyler" },
   "plugins": [
     {

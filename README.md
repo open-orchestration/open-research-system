@@ -4,17 +4,27 @@ One prompt → an autonomous, cited research run against **any project's directo
 This repo *is* a self-contained Claude Code **plugin** (named `open-research-system`) and
 the engine it bundles.
 
+## Install
+
+From the `open-orchestration` marketplace (hosted in this repo):
+
+```
+claude plugin marketplace add open-orchestration/open-research-system
+claude plugin install open-research-system@open-orchestration
+```
+
+`/plugin update open-research-system` pulls new releases (the `version` in
+`plugin.json` is the update key — see `CHANGELOG.md`). For local development,
+skip the marketplace and load the working tree directly:
+`claude --plugin-dir /path/to/open-research-system`.
+
 ## Run it against another project
 
 ORS runs from inside a target project; all research output lands in **that** project,
 never here.
 
-1. Launch Claude Code in the target with the plugin loaded:
-   ```
-   cd <target-project>
-   claude --plugin-dir /path/to/open-research-system
-   ```
-   (or enable it via `/plugin` + `/reload-plugins`).
+1. In the target project, with the plugin installed (or `--plugin-dir`-loaded), confirm
+   `/open-research-system:research` is available (`/plugin` lists it).
 2. Add `.research/` and `.graphify/` to the target's `.gitignore` (ORS output is generated).
 3. Kick off a run:
    ```
