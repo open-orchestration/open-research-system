@@ -8,13 +8,13 @@ import state
 
 def _seed_draft(root):
     st = state.load(root)
-    drafts_dir = Path(root) / "docs/findings/_drafts"
+    drafts_dir = Path(root) / ".research/docs/findings/_drafts"
     drafts_dir.mkdir(parents=True, exist_ok=True)
     did = state.gen_id("d", "05-ai|Deep research")
     fname = f"{did}-deep-research.md"
     (drafts_dir / fname).write_text("# Deep research\n\nclaim [c1a2b3c4d]\n", encoding="utf-8")
     state.add_draft(st, topic="05-ai", title="Deep research",
-                    path=f"docs/findings/_drafts/{fname}", cites=["c1a2b3c4d"], id=did)
+                    path=f".research/docs/findings/_drafts/{fname}", cites=["c1a2b3c4d"], id=did)
     state.save(st, root)
     return did, fname
 
@@ -23,10 +23,10 @@ class TestPromoteOps(unittest.TestCase):
     def test_promote_draft_sets_fields(self):
         st = state.load_default()
         d = state.add_draft(st, topic="t", title="x", path="p.md", cites=["c1"])
-        out = state.promote_draft(st, d["id"], "docs/findings/p.md",
+        out = state.promote_draft(st, d["id"], ".research/docs/findings/p.md",
                                   now="2026-06-20T00:00:00+00:00")
         self.assertEqual(out["status"], "promoted")
-        self.assertEqual(out["promoted_path"], "docs/findings/p.md")
+        self.assertEqual(out["promoted_path"], ".research/docs/findings/p.md")
         self.assertEqual(out["promoted_at"], "2026-06-20T00:00:00+00:00")
         self.assertIsNone(state.promote_draft(st, "dffffffff", "x"))
 
@@ -55,9 +55,9 @@ class TestPromoteCLI(unittest.TestCase):
             did, fname = _seed_draft(d)
             r = self._run(d, "promote", did)
             self.assertEqual(r.returncode, 0, r.stderr)
-            self.assertFalse((Path(d) / "docs/findings/_drafts" / fname).exists())
-            self.assertTrue((Path(d) / "docs/findings" / fname).exists())
-            syn = (Path(d) / "docs/findings/SYNTHESIS.md").read_text(encoding="utf-8")
+            self.assertFalse((Path(d) / ".research/docs/findings/_drafts" / fname).exists())
+            self.assertTrue((Path(d) / ".research/docs/findings" / fname).exists())
+            syn = (Path(d) / ".research/docs/findings/SYNTHESIS.md").read_text(encoding="utf-8")
             self.assertIn(fname, syn)
             self.assertIn("Deep research", syn)
             st = state.load(d)
@@ -73,7 +73,7 @@ class TestPromoteCLI(unittest.TestCase):
             did, fname = _seed_draft(d)
             r = self._run(d, "reject", did, "--reason", "thin")
             self.assertEqual(r.returncode, 0)
-            self.assertTrue((Path(d) / "docs/findings/_drafts" / fname).exists())
+            self.assertTrue((Path(d) / ".research/docs/findings/_drafts" / fname).exists())
             st = state.load(d)
             self.assertEqual(state.get_draft(st, did)["status"], "rejected")
 
@@ -85,26 +85,26 @@ class TestPromoteCLI(unittest.TestCase):
     def test_promote_missing_file_fails(self):
         with tempfile.TemporaryDirectory() as d:
             did, fname = _seed_draft(d)
-            (Path(d) / "docs/findings/_drafts" / fname).unlink()
+            (Path(d) / ".research/docs/findings/_drafts" / fname).unlink()
             r = self._run(d, "promote", did)
             self.assertEqual(r.returncode, 1)
-            self.assertFalse((Path(d) / "docs/findings" / fname).exists())
+            self.assertFalse((Path(d) / ".research/docs/findings" / fname).exists())
 
     def test_promote_dest_exists_fails(self):
         with tempfile.TemporaryDirectory() as d:
             did, fname = _seed_draft(d)
-            dest_path = Path(d) / "docs/findings" / fname
+            dest_path = Path(d) / ".research/docs/findings" / fname
             dest_path.parent.mkdir(parents=True, exist_ok=True)
             sentinel = "original content\n"
             dest_path.write_text(sentinel, encoding="utf-8")
             r = self._run(d, "promote", did)
             self.assertEqual(r.returncode, 1)
             self.assertEqual(dest_path.read_text(encoding="utf-8"), sentinel)
-            self.assertTrue((Path(d) / "docs/findings/_drafts" / fname).exists())
+            self.assertTrue((Path(d) / ".research/docs/findings/_drafts" / fname).exists())
 
     def test_promote_appends_to_existing_synthesis(self):
         with tempfile.TemporaryDirectory() as d:
-            syn_path = Path(d) / "docs/findings" / "SYNTHESIS.md"
+            syn_path = Path(d) / ".research/docs/findings" / "SYNTHESIS.md"
             syn_path.parent.mkdir(parents=True, exist_ok=True)
             existing_line = "- existing entry\n"
             syn_path.write_text(existing_line, encoding="utf-8")

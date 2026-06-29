@@ -5,8 +5,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import state as state_mod
 
-FINDINGS_DIR = "docs/findings"
-SYNTHESIS = "docs/findings/SYNTHESIS.md"
+FINDINGS_DIR = state_mod.docs_base() + "/findings"
+SYNTHESIS = FINDINGS_DIR + "/SYNTHESIS.md"
 
 
 def promote(root, draft_id):

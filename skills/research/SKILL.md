@@ -1,9 +1,14 @@
-<!-- .claude/research.md -->
-# Research flow — one-prompt autonomous bootstrap
+---
+name: research
+description: One-prompt autonomous research run against the current project. Use when the user runs /ors:research "<question>" or asks ORS to research a topic and produce cited findings. Invoke to bootstrap a plan, then drive the autonomous goal loop to convergence.
+disable-model-invocation: true
+---
+
+# /ors:research — one-prompt autonomous research bootstrap
 
 Turn ONE natural-language prompt into a fully autonomous research run. Invoked as
-`/research "<prompt>" [--budget <tokens>] [--root <dir>]` (default budget 2000000,
-default root `.`). Do exactly this, then hand off to the `/goal` loop:
+`/ors:research "<prompt>" [--budget <tokens>] [--root <dir>]` (default budget 2000000,
+default root `.` = the current project root). Do exactly this, then hand off to the goal loop:
 
 1. **Classify the research shape** of the prompt: one of `comparison`, `survey`,
    `causal`, `how-to`, `chronology`. If unsure, use `survey`.
@@ -27,19 +32,22 @@ default root `.`). Do exactly this, then hand off to the `/goal` loop:
 3. **Apply the plan** (pure code validates it; an invalid plan halts BEFORE any tokens
    are spent — this is the only pre-launch stop):
    ```
-   python3 scripts/plan.py apply --root <root> --question "<prompt>" \
+   ors plan apply --root <root> --question "<prompt>" \
      --budget <tokens> --plan-file <root>/.research/plan-input.json
    ```
    If it exits non-zero, surface the `invalid plan: …` message and STOP — fix the plan
    JSON and retry; do not launch the loop on an invalid plan.
 4. **Start the run log and meter baseline:**
    ```
-   python3 scripts/runlog.py start
-   python3 scripts/meter.py update --root <root>   # records run-start token baseline
+   ors runlog start
+   ors meter update --root <root>
    ```
-5. **Hand off to the autonomous loop:** run the `/goal` loop exactly as defined in
-   `.claude/goal.md` (it now meters tokens and runs the dimension gate each cycle, and
-   stops on plateau OR run-budget OR cycle cap). Do not re-implement the loop here.
+   `ors` auto-discovers the session transcript (`CLAUDE_TRANSCRIPT_PATH`) and exports
+   it for metering. If no transcript is found, the run proceeds with the per-cycle
+   subagent estimate and the cycle cap as backstop.
+5. **Hand off to the autonomous loop:** run the goal loop exactly as defined in
+   `skills/_flows/goal.md` (it meters tokens, runs the dimension gate each cycle, and
+   stops on plateau OR run-budget OR cycle cap). Do not re-implement it here.
 
-The run is fully autonomous after step 3; the only human-visible stop before completion
-is an invalid-plan halt.
+The run is fully autonomous after step 3; the only human-visible pre-completion
+stop is an invalid-plan halt.

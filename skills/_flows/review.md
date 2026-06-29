@@ -1,4 +1,4 @@
-<!-- .claude/review.md -->
+<!-- skills/_flows/review.md -->
 
 # Review gate — independent reviewer
 
@@ -24,7 +24,7 @@ own conclusions):
   its verdict is treated as evidence under these controls, not as ground truth.
 
 Run this on one draft id `D`, or loop it over every queued draft
-(`python3 scripts/promote.py queue` lists them). For each `D`, do exactly this:
+(`ors promote queue` lists them). For each `D`, do exactly this:
 
 1. **Resolve the draft and its cited sources** (the reviewer must read the sources, not the
    draft's word for it):
@@ -92,24 +92,24 @@ Run this on one draft id `D`, or loop it over every queued draft
 
 3. **Act on the verdict** (parse the subagent's last `VERDICT:` line; read `CERTAINTY:` from
    the line above it):
-   - `promote` → `python3 scripts/promote.py promote "$D"`
-   - `reject`  → `python3 scripts/promote.py reject "$D" --reason "ai-independent: <the reviewer's reasons, one line>"`
+   - `promote` → `ors promote promote "$D"`
+   - `reject`  → `ors promote reject "$D" --reason "ai-independent: <the reviewer's reasons, one line>"`
    - If no clear `VERDICT:` line is returned, treat it as **reject** (conservative default).
    - If a promote returns no clear `CERTAINTY:` line, record `very-low` (conservative default)
      and prefer to re-review rather than promote on an uncertain grade.
    Then log it (the certainty rides in the free-form `--data`, so no script change is needed
    to record graded confidence):
    ```
-   python3 scripts/runlog.py log --flow process --step review --status ok \
+   ors runlog log --flow process --step review --status ok \
      --data "{\"draft_id\":\"$D\",\"decision\":\"<promote|reject>\",\"certainty\":\"<high|moderate|low|very-low>\",\"reviewer\":\"ai-independent\"}"
    ```
 
-4. **Integrity:** after acting, run `python3 scripts/check_integrity.py`; if it reports
+4. **Integrity:** after acting, run `ors check_integrity`; if it reports
    problems, surface them and stop.
 
-The reviewer's authority is real — a `promote` moves the draft into `docs/findings/` and
+The reviewer's authority is real — a `promote` moves the draft into `$DOCS_BASE/findings/` and
 appends it to `SYNTHESIS.md`; a `reject` frees its sources. A human can still override after
-the fact (`promote.py promote/reject` by hand).
+the fact (`ors promote promote/reject` by hand).
 
 ## Promotion is a streaming multiple-comparison problem
 
@@ -132,7 +132,7 @@ the corpus's own findings name the discipline it implies — so the gate must re
 **What this gate does about it (today):** the conservative defaults already approximate an
 α-budget — *default-reject*, the *higher bar for definitive/synthesis findings*, and the
 *GRADE certainty downgrades* all spend promotion-credit grudgingly, so a marginal draft is
-rejected rather than promoted on a coin-flip. The `runlog.py` ledger (`decision` + `certainty`
+rejected rather than promoted on a coin-flip. The `runlog` ledger (`decision` + `certainty`
 per review) is the **append-only record needed to actually measure** the false-promotion rate:
 the running promoted-vs-rejected counts and the certainty mix are the observable α-wealth.
 

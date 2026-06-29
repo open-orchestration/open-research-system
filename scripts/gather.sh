@@ -31,4 +31,4 @@ results_file="$out/_search_$(slugify "$query").json"
 # Fetch each URL to markdown via the helper file (no stdin/heredoc collision).
 # Large output stays on disk — index with context-mode, do not raw-read.
 "$PY" "$HERE/_fetch_results.py" "$results_file" "$out" "$FETCH"
-echo "Gathered into $out. Index with context-mode; synthesize into docs/findings/."
+echo "Gathered into $out. Index with context-mode; synthesize into ${DOCS_BASE:-.research/docs}/findings/."

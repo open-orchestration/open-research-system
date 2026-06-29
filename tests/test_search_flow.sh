@@ -4,7 +4,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
-mkdir -p "$TMP/scripts" "$TMP/ingest" "$TMP/docs/06-x/sources"
+mkdir -p "$TMP/scripts" "$TMP/ingest" "$TMP/.research/docs/06-x/sources"
 cp "$ROOT/scripts/lib.sh" "$ROOT/scripts/state.py" "$ROOT/scripts/junk.py" \
    "$ROOT/scripts/search_flow.sh" "$TMP/scripts/"
 

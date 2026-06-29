@@ -1,17 +1,17 @@
-<!-- .claude/process.md -->
+<!-- skills/_flows/process.md -->
 
 # Process cycle
 
 Run one process cycle for the research engine. Do exactly this, then stop:
 
-1. Pick a topic: run `python3 scripts/state.py candidates`. If it prints nothing,
+1. Pick a topic: run `ors state candidates`. If it prints nothing,
    stop early — either the phase is `gather` (process is gated off) or no topic has
    enough un-processed sources. Otherwise take the top line's topic `T`.
 
 2. Plan: read the un-processed sources for `T`
-   (`python3 scripts/state.py list-drafts` shows what is already drafted; the source
-   files live under `docs/<T>/sources/`). Read the existing finding for `T` under
-   `docs/findings/` and the knowledge graph (`.graphify/graph.json`) for context.
+   (`ors state list-drafts` shows what is already drafted; the source
+   files live under `$DOCS_BASE/<T>/sources/`). Read the existing finding for `T` under
+   `$DOCS_BASE/findings/` and the knowledge graph (`.graphify/graph.json`) for context.
    Frame **3–5 sub-questions across different perspectives** (method, evidence,
    contradiction, application).
 
@@ -30,18 +30,18 @@ Run one process cycle for the research engine. Do exactly this, then stop:
    emergent-at-scale, cost-incurring move, not a free win [cf83dbc59]. Compute the
    draft id and filename:
    ```
-   ID=$(python3 scripts/state.py gen-id d "T|<your title>")
+   ID=$(ors state gen-id d "T|<your title>")
    ```
-   Write the draft to `docs/findings/_drafts/$ID-<slug>.md` with a `status: draft`
+   Write the draft to `$DOCS_BASE/findings/_drafts/$ID-<slug>.md` with a `status: draft`
    line in its header.
 
 4. Success check — **two gates**, do not skip either:
    - **(a) Citation resolution (deterministic):** run
-     `python3 scripts/cite_check.py docs/findings/_drafts/$ID-<slug>.md`.
+     `ors cite_check $DOCS_BASE/findings/_drafts/$ID-<slug>.md`.
      - Exit 0 → continue. Exit 1 → the draft has missing or dangling citations. Fix the
        draft (cite real corpus ids, or remove the unsupported claim) and re-run until it
        passes.
-     Log the citation gate: on exit 0 `python3 scripts/runlog.py log --flow process --step cite_check --status ok`;
+     Log the citation gate: on exit 0 `ors runlog log --flow process --step cite_check --status ok`;
      on exit 1 (after you have exhausted fixes) `--status fail`.
    - **(b) Faithfulness self-check (agent judgment) — FActScore-style atomic decomposition.**
      This gate is grounded in the corpus's own grounding findings: **FActScore atomic factual
@@ -60,7 +60,7 @@ Run one process cycle for the research engine. Do exactly this, then stop:
      3. **Abstain beats guess.** A number not in the source bytes does **not** get reported;
         a garbled formula gets its canonical form + a one-line lossiness note, never a
         transcribed garble. Rewrite or drop any claim the source does not bear out.
-     Faithfulness is not deterministically checkable, so `cite_check.py` does not attempt it —
+     Faithfulness is not deterministically checkable, so `cite_check` does not attempt it —
      this atomic pass is the agent-side complement. (It is the same machinery Workstream-1
      definitive findings run as their self-verify step.)
 
@@ -68,21 +68,21 @@ Run one process cycle for the research engine. Do exactly this, then stop:
 
 5. Record the draft:
    ```
-   python3 scripts/state.py add-draft --id "$ID" --topic "T" --title "<your title>" \
-     --path "docs/findings/_drafts/$ID-<slug>.md" --cites "c…,c…"
+   ors state add-draft --id "$ID" --topic "T" --title "<your title>" \
+     --path "$DOCS_BASE/findings/_drafts/$ID-<slug>.md" --cites "c…,c…"
    ```
    (`--cites` is the comma-separated list of every corpus id you cited.)
-   Log the draft: `python3 scripts/runlog.py log --flow process --step draft --status ok --data "{\"draft_id\":\"$ID\"}"`.
+   Log the draft: `ors runlog log --flow process --step draft --status ok --data "{\"draft_id\":\"$ID\"}"`.
 
 6. Emit gaps (closes the loop to search): for each open question the corpus could not
    answer, run
-   `python3 scripts/state.py add-gap --topic "T" --desc "<the missing question>" --origin process`.
+   `ors state add-gap --topic "T" --desc "<the missing question>" --origin process`.
 
    Also emit DIMENSION CANDIDATES: if a source raised a substantive comparable aspect
    that is NOT already a `plan.dimension` and is on-goal, record it (corroboration
    accumulates across cycles — record it every time a source raises it, with that
    source's corpus id):
-   `python3 scripts/state.py add-dim-candidate --root <root> --name "<aspect>" --cite "<c-id>" --cycle K`
+   `ors state add-dim-candidate --root <root> --name "<aspect>" --cite "<c-id>" --cycle K`
    Do not accept it here — the goal loop's dimension gate (step 4b) decides acceptance.
 
 7. Author graph assertions (optional, autonomous — no human gate). While
@@ -91,7 +91,7 @@ Run one process cycle for the research engine. Do exactly this, then stop:
    sources show are genuinely related (a bridge), or one source that
    `supports`/`contradicts`/`refines` another — append one assertion per link:
    ```
-   python3 scripts/assertions.py add \
+   ors assertions add \
      --from "<node_id>" --to "<node_id>" \
      --relation bridges|supports|contradicts|refines \
      --rationale "<why these two connect>" \
@@ -108,15 +108,15 @@ Run one process cycle for the research engine. Do exactly this, then stop:
    recorded — only assert links you can defend from cited sources. Skip this
    step if no missing link is evident; do not invent edges to fill a quota.
 
-8. Run `python3 scripts/check_integrity.py` — if it reports problems, stop and surface
+8. Run `ors check_integrity` — if it reports problems, stop and surface
    them; do not claim the cycle succeeded.
-   Log it: `python3 scripts/runlog.py log --flow process --step integrity --status ok` (or `--status fail` if it reported problems).
+   Log it: `ors runlog log --flow process --step integrity --status ok` (or `--status fail` if it reported problems).
 
 9. Review gate: run the independent reviewer on this draft exactly as defined in
-   `.claude/review.md` (dispatch a **fresh** reviewer subagent — never your own drafting
+   `skills/_flows/review.md` (dispatch a **fresh** reviewer subagent — never your own drafting
    context — over the draft `$ID` and its cited sources; it returns a binary verdict and the
    engine promotes or rejects accordingly). The gate is conservative: a clear `promote`
-   moves the finding into `docs/findings/` + `SYNTHESIS.md`; anything else rejects and frees
+   moves the finding into `$DOCS_BASE/findings/` + `SYNTHESIS.md`; anything else rejects and frees
    the sources for a stronger redraft.
 
-A human can still override the gate after the fact (`promote.py promote/reject <id>` by hand).
+A human can still override the gate after the fact (`ors promote promote/reject <id>` by hand).
