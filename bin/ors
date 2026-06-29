@@ -16,7 +16,7 @@ fi
 verb="${1:?usage: ors <verb> [args]}"; shift || true
 case "$verb" in
   __envprobe) echo "REPO_ROOT=$REPO_ROOT"; echo "DOCS_BASE=$DOCS_BASE"; exit 0 ;;
-  decide) exec python3 "$HERE/scripts/orchestrator.py" "$@" ;;
+  decide) exec python3 "$HERE/scripts/orchestrator.py" decide "$@" ;;
   dim)    exec python3 "$HERE/scripts/dimension_gate.py" "$@" ;;
   search) exec bash    "$HERE/scripts/search_flow.sh" "$@" ;;
   ingest) exec bash    "$HERE/scripts/ingest_flow.sh" "$@" ;;
