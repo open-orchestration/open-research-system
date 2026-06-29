@@ -3,13 +3,11 @@
 # so flow docs call `ors <verb>` from any (non-persistent) shell. Resolves the
 # verb to a bundled script and bakes in the env contract.
 set -euo pipefail
-HERE="$(cd "$(dirname "$0")/.." && pwd)"          # plugin/repo root
+HERE="$(cd "$(dirname "$0")/.." && pwd)"
 export REPO_ROOT="${REPO_ROOT:-$PWD}"             # target project
 export DOCS_BASE="${DOCS_BASE:-.research/docs}"    # uniform output namespace
-# Discover this session's transcript so `ors meter update` reads real tokens in
-# EVERY cycle (each loop step is a fresh shell; exporting it here, not in a skill
-# step, is the only thing that survives). Best-effort; meter.py falls back to the
-# subagent estimate when unset/missing.
+# Best-effort: each loop step is a fresh shell, so only env vars survive.
+# meter.py falls back to the subagent estimate when this is unset.
 if [ -z "${CLAUDE_TRANSCRIPT_PATH:-}" ]; then
   _slug="$(printf '%s' "$REPO_ROOT" | sed 's#[/.]#-#g')"
   CLAUDE_TRANSCRIPT_PATH="$(ls -t "$HOME/.claude/projects/$_slug"/*.jsonl 2>/dev/null | head -1 || true)"

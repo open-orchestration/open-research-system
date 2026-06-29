@@ -16,6 +16,11 @@ fail=0
 "$ORS" search >/dev/null 2>&1; [ $? -eq 2 ] && echo "ok: search alias" \
   || { echo "MISS: search alias"; fail=1; }
 
+# 3b. Remaining shell-flow aliases: exit 2 with no args.
+"$ORS" dim    >/dev/null 2>&1; [ $? -eq 2 ] && echo "ok: dim alias"    || { echo "MISS: dim alias";    fail=1; }
+"$ORS" ingest >/dev/null 2>&1; [ $? -eq 2 ] && echo "ok: ingest alias" || { echo "MISS: ingest alias"; fail=1; }
+"$ORS" gather >/dev/null 2>&1; [ $? -eq 2 ] && echo "ok: gather alias" || { echo "MISS: gather alias"; fail=1; }
+
 # 4. Unknown verb exits 2.
 "$ORS" nonsense >/dev/null 2>&1; [ $? -eq 2 ] && echo "ok: unknown verb exit 2" \
   || { echo "MISS: unknown verb"; fail=1; }
