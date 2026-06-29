@@ -1,12 +1,12 @@
 ---
 name: report
-description: Generate the narrative research report from the current run's goal, plan, and findings. Use when the user runs /ors:report or asks ORS for a written summary of a completed/partial research run.
+description: Generate the narrative research report from the current run's goal, plan, and findings. Use when the user runs /open-research-system:report or asks ORS for a written summary of a completed/partial research run.
 disable-model-invocation: true
 ---
 
-# /ors:report — on-demand narrative report
+# /open-research-system:report — on-demand narrative report
 
-Invoked as `/ors:report [--root <dir>]` after a `/ors:research` run reaches plateau. Deterministic
+Invoked as `/open-research-system:report [--root <dir>]` after a `/open-research-system:research` run reaches plateau. Deterministic
 view over the promoted findings; never part of the autonomous loop. Do exactly this:
 
 1. Read `.research/state.json`: `goal` (question, shape) and `plan` (entities, dimensions

@@ -1,13 +1,13 @@
 ---
 name: research
-description: One-prompt autonomous research run against the current project. Use when the user runs /ors:research "<question>" or asks ORS to research a topic and produce cited findings. Invoke to bootstrap a plan, then drive the autonomous goal loop to convergence.
+description: One-prompt autonomous research run against the current project. Use when the user runs /open-research-system:research "<question>" or asks ORS to research a topic and produce cited findings. Invoke to bootstrap a plan, then drive the autonomous goal loop to convergence.
 disable-model-invocation: true
 ---
 
-# /ors:research — one-prompt autonomous research bootstrap
+# /open-research-system:research — one-prompt autonomous research bootstrap
 
 Turn ONE natural-language prompt into a fully autonomous research run. Invoked as
-`/ors:research "<prompt>" [--budget <tokens>] [--root <dir>]` (default budget 2000000,
+`/open-research-system:research "<prompt>" [--budget <tokens>] [--root <dir>]` (default budget 2000000,
 default root `.` = the current project root). Do exactly this, then hand off to the goal loop:
 
 1. **Classify the research shape** of the prompt: one of `comparison`, `survey`,

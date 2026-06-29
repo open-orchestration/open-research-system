@@ -1,10 +1,10 @@
 ---
 name: dashboard
-description: Launch the live knowledge-graph dashboard for the current research run. Use when the user runs /ors:dashboard or asks to see the realtime graph/state UI for an ORS run in this project.
+description: Launch the live knowledge-graph dashboard for the current research run. Use when the user runs /open-research-system:dashboard or asks to see the realtime graph/state UI for an ORS run in this project.
 disable-model-invocation: true
 ---
 
-# /ors:dashboard — live graph UI
+# /open-research-system:dashboard — live graph UI
 
 Serve the realtime graph + run dashboard against THIS project's artifacts. Run:
 
