@@ -6,7 +6,7 @@ class Manifest(unittest.TestCase):
     def test_manifest_valid(self):
         with open(os.path.join(ROOT, ".claude-plugin/plugin.json")) as f:
             m = json.load(f)
-        self.assertEqual(m["name"], "ors")
+        self.assertEqual(m["name"], "open-research-system")
         self.assertTrue(m.get("description"))
 
     def test_flows_have_no_raw_script_calls(self):

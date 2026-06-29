@@ -1,83 +1,70 @@
-# open-research-system
+# open-research-system (ORS)
 
-Definitive source-of-truth for **AI-assisted research → decisions → actionable knowledge**.
+One prompt → an autonomous, cited research run against **any project's directory**.
+This repo *is* a self-contained Claude Code **plugin** (named `open-research-system`) and
+the engine it bundles.
 
-> **Status:** Phase 1 — research spike. Cataloging the field, gathering sources,
-> synthesizing. The system itself (template, scaffolder, agents) is Phase 2, built
-> from what this spike learns. Sibling repo: `open-job-system`.
+## Run it against another project
 
-## Layout
-- `RESEARCH-CATALOG.md` — the 17-category taxonomy, sources to mine, research phases.
-- `docs/NN-topic/` — gathered source material per category.
-- `docs/findings/` — synthesized, cited findings.
-- `SYNTHESIS.md` — cross-topic distillation.
-- `ingest/` — drop local files (PDF/docx/…); `scripts/ingest.sh` converts them.
-- `scripts/gather.sh` — drives the crawl4ai deep-research workflow per topic.
-- `.graphify/` — relational model of the corpus (god nodes/nodes/edges); generated, gitignored.
+ORS runs from inside a target project; all research output lands in **that** project,
+never here.
 
-## Quickstart
-1. Drop files into `ingest/`, run `scripts/ingest.sh`.
-2. Gather a topic: `scripts/gather.sh 06-rag-retrieval "advanced RAG architectures 2025"`.
-3. Synthesize into `docs/findings/` and `SYNTHESIS.md`.
-4. Run graphify; review `.graphify/GRAPH_REPORT.md`.
+1. Launch Claude Code in the target with the plugin loaded:
+   ```
+   cd <target-project>
+   claude --plugin-dir /path/to/open-research-system
+   ```
+   (or enable it via `/plugin` + `/reload-plugins`).
+2. Add `.research/` and `.graphify/` to the target's `.gitignore` (ORS output is generated).
+3. Kick off a run:
+   ```
+   /open-research-system:research "<your question>" [--budget <tokens>] [--root <dir>]
+   ```
+   ORS classifies the question, writes a plan, then drives the autonomous loop
+   (search → ingest → graph → decide) to convergence — stopping on plateau, budget, or
+   the cycle cap.
+4. `/open-research-system:report` — narrative, cited summary of the run.
+5. `/open-research-system:dashboard` — live knowledge-graph + queue + loop UI (localhost).
 
-### Continuous ingest loop
-- Drop sources (files/links/videos/raw text) into `ingest/`.
-- `scripts/ingest_flow.sh <topic>` normalizes them into `docs/<topic>/sources/`, records each in `.research/state.json` with a durable id + lifecycle, and flags the graph dirty.
-- The graph is updated incrementally (graphify `--update`); deltas append to `.research/graph-events.jsonl` (the realtime-view feed + audit log).
-- Run the loop hands-off with `/loop` (uses `.claude/loop.md`).
+Prerequisites on the host: the **graphify** skill, the **crawl4ai** venv (search/fetch),
+`jq`, `markitdown`, and `python3`.
 
-### Autonomous search loop
-- Queue a research gap: `python3 scripts/state.py add-gap --topic 06-rag-retrieval --desc "hybrid retrieval rerank 2025"`.
-- `scripts/search_flow.sh --topic <T>` drains that topic's queued gaps within the source budget (`budget.sources_per_cycle`): it searches + fetches via crawl4ai, drops non-junk results into `ingest/`, and marks each gap done (or re-queues it; failed after 3 attempts).
-- Search is run **per topic** so the ingest flow routes each batch correctly: for every topic with queued gaps, run `scripts/search_flow.sh --topic <T>` then `scripts/ingest_flow.sh <T>`.
-- Reset the per-cycle budget with `python3 scripts/state.py budget-reset`; inspect it with `python3 scripts/state.py budget-status`.
-- Run hands-off on a slow interval, e.g. `/loop 10m for each topic with queued gaps, run scripts/search_flow.sh --topic <T> then scripts/ingest_flow.sh <T>`.
+## Where output goes (in the target project)
 
-## Realtime dashboard
+- `<target>/.research/state.json` — the run spine: goal, plan, gaps, corpus, budget.
+- `<target>/.research/docs/NN-<topic>/sources/` — fetched, normalized source material.
+- `<target>/.research/docs/findings/` — synthesized, cited findings + `SYNTHESIS.md`.
+- `<target>/.graphify/` — the relational knowledge graph (graphify owns this dir).
+- `<target>/.research/run.jsonl`, `graph-events.jsonl` — run trace + the dashboard feed.
 
-Watch the whole engine live in a browser. Read-only, runs beside the engine —
-start it whenever you want to watch:
+All paths are root-relative to the target and namespaced under `.research/` (the
+`DOCS_BASE` convention), so ORS never collides with the target's own `docs/`.
 
-    python3 scripts/graph_view_server.py
-    # then open http://127.0.0.1:8000/dashboard
+## How it's built
 
-The dashboard (`/dashboard`) shows three live panels:
+- **`bin/ors`** — the engine dispatcher, on the Bash-tool PATH while the plugin is
+  enabled. Flows call `ors <verb>` (e.g. `ors plan apply`, `ors search`, `ors decide`),
+  which resolves to the bundled `scripts/`. It also exports `REPO_ROOT`/`DOCS_BASE` and
+  discovers the session transcript for real token metering.
+- **`skills/`** — `research`, `report`, `dashboard` (user-invocable, side-effecting), plus
+  internal procedures in `skills/_flows/` (`goal`, `loop`, `process`, `review`).
+- **`scripts/`** — the stdlib-only python engine (`state.py`, `orchestrator.py`, `plan.py`,
+  `meter.py`, `dimension_gate.py`, `promote.py`, …) and the bash flows
+  (`search_flow.sh`, `ingest_flow.sh`).
+- **`.claude-plugin/plugin.json`** — the plugin manifest.
 
-- **Knowledge graph** — seeds from `.graphify/graph.json`, then animates each new
-  `.research/graph-events.jsonl` delta over a WebSocket as ingest cycles land.
-  AI-asserted edges (sub-project #4) render dashed and tinted, distinct from
-  corpus-extracted edges.
-- **Queue** — polls `/queue` (from `.research/state.json`): current budget phase,
-  the per-cycle source budget, corpus/draft counts, and gaps grouped by status.
-- **Loop** — polls `/runlog` (from `.research/run.jsonl`): the per-step trace of the
-  running `/goal` loop, or "idle" until one starts.
+## Convergence loop
 
-The graph alone is still at `/`. Binds localhost only (unauthenticated). Flags:
-`--host --port --events --graph --html --state --runlog --dashboard` (or `GV_*`
-env vars).
+`scripts/orchestrator.py decide` auto-selects the budget **phase** each cycle from
+deterministic signals (`gather` → `deepen` → `synthesize`, and back to `deepen` if a gap
+reopens) and reports which flows are eligible. The loop stops when `decide` reports
+`goal_met` (autonomous work drained, drafts waiting in the human review gate),
+`budget_exhausted`, or the cycle cap. Promotion stays a human gate (`ors promote queue`).
 
-## Convergence loop (`/goal`)
+## Legacy corpus (this repo only — not produced by a plugin run)
 
-`scripts/orchestrator.py` turns the three manually-kicked flows into one autonomously
-convergent loop. Launch it with the `/goal` prompt in `.claude/goal.md`.
-
-Each cycle the orchestrator reads `.research/state.json`, **auto-selects the budget
-`phase`** from deterministic signals, and reports which flows are eligible:
-
-- `gather` — nothing processable yet; search + ingest dominate.
-- `deepen` — corpus is processable but gathering / graph work is still in flight.
-- `synthesize` — gaps drained and graph merged; process dominates.
-
-The phase function is stateless, so a gap reopened during synthesis flips the engine back
-to `deepen` automatically. The loop stops when `orchestrator.py decide` reports
-`goal_met` — the autonomous work is drained and drafts wait in the review queue. Promotion
-stays a human gate (`python3 scripts/promote.py queue`).
-
-Inspect a decision without changing anything:
-
-```
-python3 scripts/orchestrator.py decide
-```
-
-Add `--apply` to persist the phase flip (the `/goal` loop does this).
+This repo also contains the original 2026 research-spike output: `RESEARCH-CATALOG.md`
+and `SYNTHESIS.md` at the root, and `docs/01-…`/`docs/findings/`. Those are the spike's
+**frozen** artifacts and are *not* the layout a `/open-research-system:research` run produces in a target
+project (that output lives under `<target>/.research/` as above). Design history lives in
+`docs/superpowers/specs/` and `docs/superpowers/plans/`.

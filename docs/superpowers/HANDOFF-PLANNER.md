@@ -74,8 +74,8 @@ loop → real cited findings run has executed. Before building anything else, do
 ### Gap 2 — Sub-project B "The Package" — DONE (2026-06-29, merged `a26b915`)
 ORS is now a self-contained personal Claude Code plugin. The repo **root is the plugin**
 (`.claude-plugin/plugin.json`, `bin/ors`, `skills/`). From any target project with the
-plugin enabled (`claude --plugin-dir <ors-repo>`), `/ors:research "<q>"`, `/ors:report`,
-and `/ors:dashboard` run against that project, writing artifacts under `<target>/.research/`
+plugin enabled (`claude --plugin-dir <ors-repo>`), `/open-research-system:research "<q>"`, `/open-research-system:report`,
+and `/open-research-system:dashboard` run against that project, writing artifacts under `<target>/.research/`
 (state, runlog, `docs/NN-topic/`, `findings/`) + `<target>/.graphify/`. How it works:
 - **`bin/ors` dispatcher** (on the plugin PATH; survives the harness's non-persistent shells)
   is the single engine entrypoint: `ors <verb>` → bundled `scripts/<verb>.py|sh`. It exports
@@ -92,7 +92,7 @@ and `/ors:dashboard` run against that project, writing artifacts under `<target>
   Live-validated end-to-end against a throwaway target via `ors`. Bugs caught + fixed: the
   `decide` alias dropping orchestrator's subcommand; 3 flow smokes still pointing at old
   `.claude/` paths. Suite 170 OK, 13/13 smokes, integrity OK, `public/dashboard.html` untouched.
-  **Remaining user step:** verify `claude --plugin-dir <ors-repo>` + `/ors:research` from a real
+  **Remaining user step:** verify `claude --plugin-dir <ors-repo>` + `/open-research-system:research` from a real
   separate project (the controller did not self-launch a billed research run).
 
 <details><summary>Original Gap-2 brief (kept for context)</summary>

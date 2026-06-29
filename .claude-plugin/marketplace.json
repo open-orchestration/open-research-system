@@ -1,0 +1,11 @@
+{
+  "name": "open-orchestration",
+  "owner": { "name": "Joshua Tyler" },
+  "plugins": [
+    {
+      "name": "open-research-system",
+      "source": "./",
+      "description": "Open Research System — one-prompt autonomous research against any project's directory."
+    }
+  ]
+}

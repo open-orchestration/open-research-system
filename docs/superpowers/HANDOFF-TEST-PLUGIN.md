@@ -1,7 +1,7 @@
 # Handoff — test the ORS plugin from a fresh project
 
 Paste the block below into a **new Claude Code session running inside a different
-project** (not the open-research-system repo). It does one cheap real `/ors:research`
+project** (not the open-research-system repo). It does one cheap real `/open-research-system:research`
 run and verifies the plugin works end-to-end against that project.
 
 ## Prerequisites (already true on this machine)
@@ -11,21 +11,21 @@ run and verifies the plugin works end-to-end against that project.
   cd <some-throwaway-or-small-project>
   claude --plugin-dir /Users/joshua/Documents/GitHub/open-research-system
   ```
-  (Or enable it via `/plugin` and `/reload-plugins`. Confirm `/ors:research` shows up.)
+  (Or enable it via `/plugin` and `/reload-plugins`. Confirm `/open-research-system:research` shows up.)
 - Deps the run uses, all present: the **graphify** skill (`~/.claude/skills/graphify`),
   the **crawl4ai** venv (`~/.venvs/crawl4ai`), `jq`, `markitdown`. `python3` (not `python`).
-- The skills are `disable-model-invocation: true` — invoke `/ors:research` explicitly.
+- The skills are `disable-model-invocation: true` — invoke `/open-research-system:research` explicitly.
 
 ---
 
 ## Paste this prompt
 
 ```
-Test the ORS plugin (/ors:research) end-to-end in THIS project and report what works
+Test the ORS plugin (/open-research-system:research) end-to-end in THIS project and report what works
 and what breaks. This is a cheap real run, not a simulation.
 
-Context: ORS is installed as a local Claude Code plugin named `ors` (loaded via
---plugin-dir from /Users/joshua/Documents/GitHub/open-research-system). It turns one
+Context: ORS is installed as a local Claude Code plugin named `open-research-system`
+(loaded via --plugin-dir from /Users/joshua/Documents/GitHub/open-research-system). It turns one
 prompt into an autonomous, cited research run whose artifacts land in THIS project's
 directory: <cwd>/.research/ (state, runlog, docs/NN-topic/sources, findings) and
 <cwd>/.graphify/ (knowledge graph). The engine runs through a `bin/ors` dispatcher on
@@ -36,8 +36,8 @@ output is generated, not committed). Confirm `ors plan --help` runs (proves the 
 PATH is active); if `ors` is not found, the plugin isn't loaded — stop and say so.
 
 Do this:
-1. Invoke the /ors:research skill with a SMALL throwaway question and a SMALL budget:
-   /ors:research "<a small, concrete comparison or how-to question>" --budget 300000
+1. Invoke the /open-research-system:research skill with a SMALL throwaway question and a SMALL budget:
+   /open-research-system:research "<a small, concrete comparison or how-to question>" --budget 300000
    Follow the skill's steps exactly (it bootstraps a plan via `ors plan apply`, starts
    the runlog + meter, then runs the goal loop in skills/_flows/goal.md).
 2. Watch the whole chain and narrate each stage as it happens:
@@ -47,9 +47,9 @@ Do this:
    - the ingest cycle's graphify `--update` step builds/updates <cwd>/.graphify/graph.json
    - `ors dim` gates dimension candidates; `ors meter update` accrues run tokens
    - the loop stops on plateau OR budget OR cycle cap (decide.stop)
-3. When it converges (or stops on budget), run /ors:report and confirm it produces a
+3. When it converges (or stops on budget), run /open-research-system:report and confirm it produces a
    cited narrative from the goal + plan + findings.
-4. Optionally run /ors:dashboard and confirm the server starts and serves the graph for
+4. Optionally run /open-research-system:dashboard and confirm the server starts and serves the graph for
    THIS project (Ctrl-C to stop).
 
 Verify and report:
