@@ -153,13 +153,15 @@ open-research-system/            (= the plugin; ${CLAUDE_PLUGIN_ROOT})
 
 ### Metering wiring
 
-`research/SKILL.md`, at launch, resolves the active session transcript path and
-exports `CLAUDE_TRANSCRIPT_PATH` so `ors meter update` reads real
-`output_tokens` (not the subagent estimate). The transcript lives under
-`~/.claude/projects/<project-slug>/<session>.jsonl`; the skill documents the
-discovery (newest `*.jsonl` for the project slug) as a step. If it cannot be
-resolved, metering falls back to the per-cycle subagent estimate (existing
-behavior) and the cycle cap remains the backstop.
+`ors meter update` must read real `output_tokens` from this session's transcript
+(`~/.claude/projects/<project-slug>/<session>.jsonl`) rather than the subagent
+estimate. Because each goal-loop cycle's `ors meter update` runs in a *separate*
+Bash call (shells don't persist), the transcript path is discovered and exported
+**inside `bin/ors`** (newest `*.jsonl` for the cwd's project slug), not in a
+one-off skill step — so every cycle is metered, not just the first. (Plan
+refinement over the original "export in research/SKILL.md".) If no transcript is
+found, metering falls back to the per-cycle subagent estimate and the cycle cap
+remains the backstop.
 
 ### Dashboard skill
 

@@ -204,15 +204,18 @@ FINDINGS_DIR = "docs/findings"
 SYNTHESIS = "docs/findings/SYNTHESIS.md"
 ```
 
-with module-level derivation from the helper (add `import state` if not already imported at top — it is via the existing `sys.path` block; confirm):
+with derivation from the helper, reusing the **existing** `state_mod` import
+(`scripts/promote.py:6` already has `import state as state_mod` — do NOT add a
+second alias):
 
 ```python
-import state as _state
-FINDINGS_DIR = _state.docs_base() + "/findings"
+FINDINGS_DIR = state_mod.docs_base() + "/findings"
 SYNTHESIS = FINDINGS_DIR + "/SYNTHESIS.md"
 ```
 
-If `promote.py` already imports `state` under another name, reuse that name instead of `_state` (check the top of the file; do not double-import).
+These are evaluated at import time; the `ors` dispatcher exports `DOCS_BASE`
+before invoking `promote.py`, and `docs_base()` defaults to `.research/docs`
+when unset, so both the dispatched and direct-invocation paths agree.
 
 - [ ] **Step 4: Run to verify it passes**
 
@@ -358,6 +361,15 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"          # plugin/repo root
 export REPO_ROOT="${REPO_ROOT:-$PWD}"             # target project
 export DOCS_BASE="${DOCS_BASE:-.research/docs}"    # uniform output namespace
+# Discover this session's transcript so `ors meter update` reads real tokens in
+# EVERY cycle (each loop step is a fresh shell; exporting it here, not in a skill
+# step, is the only thing that survives). Best-effort; meter.py falls back to the
+# subagent estimate when unset/missing.
+if [ -z "${CLAUDE_TRANSCRIPT_PATH:-}" ]; then
+  _slug="$(printf '%s' "$REPO_ROOT" | sed 's#[/.]#-#g')"
+  CLAUDE_TRANSCRIPT_PATH="$(ls -t "$HOME/.claude/projects/$_slug"/*.jsonl 2>/dev/null | head -1)"
+  [ -n "$CLAUDE_TRANSCRIPT_PATH" ] && export CLAUDE_TRANSCRIPT_PATH
+fi
 verb="${1:?usage: ors <verb> [args]}"; shift || true
 case "$verb" in
   __envprobe) echo "REPO_ROOT=$REPO_ROOT"; echo "DOCS_BASE=$DOCS_BASE"; exit 0 ;;
@@ -503,7 +515,7 @@ Append to `tests/test_plugin_manifest.py` inside the `Manifest` class:
             txt = open(p).read()
             self.assertTrue(txt.startswith("---"), name)
             fm = txt.split("---", 2)[1]
-            self.assertRegexpMatches(fm, r"name:\s*\S", name) if hasattr(self, "assertRegexpMatches") else self.assertRegex(fm, r"name:\s*\S")
+            self.assertRegex(fm, r"name:\s*\S")
             self.assertRegex(fm, r"description:\s*\S")
             self.assertRegex(fm, r"disable-model-invocation:\s*true")
             self.assertNotRegex(txt, r"python3 scripts/")
@@ -551,15 +563,15 @@ bundled dispatcher). Do exactly this, then hand off to the goal loop:
      --plan-file <root>/.research/plan-input.json
    ```
    If it exits non-zero, surface the `invalid plan: …` message and STOP.
-4. **Wire metering, then baseline:** resolve this session's transcript so token
-   metering is real (not the estimate fallback) —
+4. **Start the run log + meter baseline:**
    ```
-   export CLAUDE_TRANSCRIPT_PATH="$(ls -t "$HOME/.claude/projects/$(pwd | sed 's#[/.]#-#g')"/*.jsonl 2>/dev/null | head -1)"
    ors runlog start
-   ors meter update --root <root>
+   ors meter update --root <root>   # records run-start token baseline
    ```
-   If no transcript is found, proceed anyway (metering uses the per-cycle subagent
-   estimate; the cycle cap is the backstop).
+   `ors` auto-discovers and exports `CLAUDE_TRANSCRIPT_PATH` (this session's
+   transcript for the current project), so metering is real in every cycle. If no
+   transcript is found, the run proceeds with the per-cycle subagent estimate and
+   the cycle cap as backstop.
 5. **Hand off to the autonomous loop:** run the goal loop exactly as defined in
    `skills/_flows/goal.md` (it meters tokens, runs the dimension gate each cycle,
    and stops on plateau OR run-budget OR cycle cap). Do not re-implement it here.
