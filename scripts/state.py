@@ -12,7 +12,6 @@ from pathlib import Path
 
 def docs_base():
     """Root-relative base dir for research output (topic dirs + findings)."""
-    import os
     return os.environ.get("DOCS_BASE", ".research/docs")
 
 
