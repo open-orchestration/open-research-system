@@ -19,3 +19,6 @@ __pycache__/
 *.pyc
 
 .superpowers/
+
+# research output (corpus topic dirs + findings) is generated, not committed
+.research/docs/

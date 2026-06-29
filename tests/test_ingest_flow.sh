@@ -5,7 +5,7 @@ TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
 # Minimal fake repo: one topic dir + ingest + scripts + lib
-mkdir -p "$TMP/docs/11-x/sources" "$TMP/ingest" "$TMP/scripts"
+mkdir -p "$TMP/.research/docs/11-x/sources" "$TMP/ingest" "$TMP/scripts"
 cp "$ROOT/scripts/lib.sh" "$ROOT/scripts/state.py" "$ROOT/scripts/ingest_lib.py" \
    "$ROOT/scripts/ingest_flow.sh" "$TMP/scripts/"
 printf '# Hello\n\nsome content\n' > "$TMP/ingest/notes.md"
@@ -15,7 +15,7 @@ REPO_ROOT="$TMP" bash "$TMP/scripts/ingest_flow.sh" 11-x \
   || { echo "MISS: ingest_flow.sh exited nonzero"; fail=1; }
 
 # corpus file written under sources/
-n=$(find "$TMP/docs/11-x/sources" -name '*.md' | wc -l | tr -d ' ')
+n=$(find "$TMP/.research/docs/11-x/sources" -name '*.md' | wc -l | tr -d ' ')
 [ "$n" = "1" ] && echo "ok: one source file" || { echo "MISS: source file count=$n"; fail=1; }
 # state records exactly one corpus entry and graph dirty
 python3 - "$TMP" <<'PY' || fail=1

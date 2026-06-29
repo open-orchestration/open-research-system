@@ -56,7 +56,7 @@ class TestCandidates(unittest.TestCase):
             state.add_corpus_entry(
                 st, title=f"{topic}-{i}", source=f"src://{topic}/{i}", topic=topic,
                 native_path=f"ingest/{topic}-{i}.md",
-                extracted_path=f"docs/{topic}/sources/{topic}-{i}.md",
+                extracted_path=f".research/docs/{topic}/sources/{topic}-{i}.md",
                 now="2026-06-20T00:00:00+00:00",
             )
 
@@ -123,7 +123,7 @@ class TestDraftCLI(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             self._run(d, "set-phase", "--phase", "synthesize")
             r = self._run(d, "add-draft", "--topic", "05-ai", "--title", "X",
-                          "--path", "docs/findings/_drafts/dX.md", "--cites", "c1,c2")
+                          "--path", ".research/docs/findings/_drafts/dX.md", "--cites", "c1,c2")
             self.assertEqual(r.returncode, 0)
             did = r.stdout.strip()
             self.assertTrue(did.startswith("d"))
