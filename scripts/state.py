@@ -9,6 +9,13 @@ from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
+
+def docs_base():
+    """Root-relative base dir for research output (topic dirs + findings)."""
+    import os
+    return os.environ.get("DOCS_BASE", ".research/docs")
+
+
 DEFAULT_STATE = {
     "budget": {
         "tokens_per_cycle": 200000,
