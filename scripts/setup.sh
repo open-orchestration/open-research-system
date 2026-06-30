@@ -23,15 +23,24 @@ if command -v graphify >/dev/null 2>&1; then
   echo "✓ graphify present"
 else
   echo "→ installing graphify (graphifyy, MIT — github.com/safishamsi/graphify)"
-  if command -v uv >/dev/null 2>&1; then uv tool install graphifyy
-  else python3 -m pip install --user graphifyy; fi
-  command -v graphify >/dev/null 2>&1 && graphify install \
-    || echo "✗ graphify not installed — the knowledge-graph step will be skipped"
+  if command -v uv >/dev/null 2>&1; then
+    uv tool install graphifyy || echo "✗ uv tool install graphifyy failed"
+  else
+    python3 -m pip install --user graphifyy
+  fi
+  if command -v graphify >/dev/null 2>&1; then
+    graphify install
+  elif [ -x "$HOME/.local/bin/graphify" ]; then
+    echo "note: graphify installed to ~/.local/bin — add it to PATH"
+  else
+    echo "✗ graphify not installed — the knowledge-graph step will be skipped"
+  fi
 fi
 
 # 3. verify checklist
 echo "── verify ──"
-"$venv/bin/python" -c "import crawl4ai" 2>/dev/null && echo "✓ crawl4ai" || echo "✗ crawl4ai"
+vpy="$venv/bin/python"; [ -x "$vpy" ] || vpy="$venv/bin/python3"
+"$vpy" -c "import crawl4ai" 2>/dev/null && echo "✓ crawl4ai" || echo "✗ crawl4ai"
 [ -x "$venv/bin/markitdown" ] && echo "✓ markitdown" || echo "✗ markitdown"
 command -v graphify >/dev/null 2>&1 && echo "✓ graphify" || echo "✗ graphify (optional)"
 echo "venv: $venv"
