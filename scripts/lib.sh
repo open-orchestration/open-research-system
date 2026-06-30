@@ -1,6 +1,21 @@
 #!/usr/bin/env bash
 # Shared helpers for spike scripts.
 
+LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Echo the venv root to use (bin/ holds python + markitdown), or fail (1) with a
+# setup nudge. Precedence: explicit override, plugin-owned venv, reused personal venv.
+ors_venv() {
+  local v
+  for v in "${ORS_VENV:-}" \
+           "${CLAUDE_PLUGIN_DATA:+$CLAUDE_PLUGIN_DATA/venv}" \
+           "$HOME/.venvs/crawl4ai"; do
+    [ -n "$v" ] && [ -x "$v/bin/python" ] && { echo "$v"; return 0; }
+  done
+  echo "open-research-system: research deps not provisioned — run /open-research-system:setup" >&2
+  return 1
+}
+
 slugify() { echo "$1" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g'; }
 
 # Resolve a topic arg to its docs dir, creating docs/NN-<slug> on miss.
