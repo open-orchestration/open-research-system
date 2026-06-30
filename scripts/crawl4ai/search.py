@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Search via crawl4ai by scraping DuckDuckGo's HTML endpoint. Print JSON [{url,title,snippet}].
 
 No search-engine API and off the harness WebSearch path, so it dodges the harness rate limit.

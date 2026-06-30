@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Fetch a URL with crawl4ai, print clean markdown to stdout. Off the harness fetch path."""
 import asyncio
 import sys
