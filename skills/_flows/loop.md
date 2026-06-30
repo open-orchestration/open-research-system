@@ -40,3 +40,7 @@ Run one ingest cycle for the research engine. Do exactly this, then stop:
    (use `--status fail` and stop if it reported problems).
 
 If `ingest/` was empty (step 1 printed "no new sources"), stop early — nothing to do this cycle.
+
+There is **one** knowledge graph: `.graphify/graph.json` (with its `.graphify/.graphify_old.json`
+backup). Every step here, the dashboard, and the process flow read that same file — there is no
+second graph and no alternate output directory, so do not go looking for one.

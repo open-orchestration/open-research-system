@@ -22,5 +22,19 @@ while IFS= read -r line; do
 done < <(grep -rIn "SYNTHESIS\.md" "$ROOT/skills" 2>/dev/null)
 [ "$fail" = 0 ] && echo "ok: all SYNTHESIS.md refs qualified under findings/"
 
+# One graph only: .graphify/graph.json. No phantom dual graph (no graphify-out dir, no
+# repo-root graph.json). Guards against re-introducing the mismatch agents kept re-chasing.
+if grep -rIn "graphify-out" "$ROOT/skills" >/dev/null 2>&1; then
+  echo "MISS: skills/ reference a nonexistent graphify-out graph"; grep -rIn "graphify-out" "$ROOT/skills"; fail=1
+else echo "ok: no graphify-out refs in skills/"; fi
+
+# Every graph.json mention under skills/ must be the .graphify/ one (or its _old backup).
+while IFS= read -r line; do
+  [ -n "$line" ] || continue
+  printf '%s' "$line" | grep -q "\.graphify/graph\.json\|\.graphify/\.graphify_old" \
+    || { echo "MISS: graph.json not qualified to .graphify/ -> $line"; fail=1; }
+done < <(grep -rIn "graph\.json" "$ROOT/skills" 2>/dev/null)
+[ "$fail" = 0 ] && echo "ok: all graph.json refs qualified under .graphify/"
+
 [ "$fail" = 0 ] && echo "ALL OK" || echo "FAILED"
 exit "$fail"

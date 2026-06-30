@@ -22,3 +22,4 @@ core sections — Context and Problem Statement, Decision, Consequences. Files a
 | [0005](0005-drafting-chain-of-draft-prompting-ladder.md) | Ground drafting reasoning in Chain-of-Draft + the prompting ladder | accepted | d6432467b, d0b1fc5c6 |
 | [0006](0006-citation-export-csl-json.md) | Export the corpus as CSL-JSON for interchangeable provenance | accepted | d59d1279b, de47719c4 |
 | [0007](0007-candidate-selection-keep-queue-depth.md) | Keep queue-depth candidate selection; decline BM25/PMI | rejected | d0fefa5d5, d7289dbd9 |
+| [0008](0008-goal-met-is-ready-not-done.md) | `goal_met` is "ready for adjudication", not "done" | accepted | convergence-design §2 |

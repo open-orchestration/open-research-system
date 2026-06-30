@@ -68,6 +68,19 @@ class GoalMet(unittest.TestCase):
         st.add_draft(s, topic="t", title="f", path="p", cites=ids, status="promoted")
         self.assertFalse(orch.goal_met(s))           # draft promoted, none pending
 
+    def test_goes_false_when_pending_draft_adjudicated(self):
+        # ADR 0008: goal_met needs a pending draft; adjudicating it clears the flag.
+        for verb in ("promote", "reject"):
+            s = st.load_default()
+            ids = _corpus(s, "t", 3)
+            s["graph"]["dirty"] = False
+            st.add_draft(s, topic="t", title="f", path="p", cites=ids,
+                         status="draft", id="dX")
+            self.assertTrue(orch.goal_met(s), verb)
+            (st.promote_draft(s, "dX", "dest") if verb == "promote"
+             else st.reject_draft(s, "dX"))
+            self.assertFalse(orch.goal_met(s), verb)
+
 
 class NextActions(unittest.TestCase):
     def test_search_eligible_in_gather(self):

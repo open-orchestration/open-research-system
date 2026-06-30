@@ -25,6 +25,10 @@ def _processable(state, min_sources):
 
 
 def recommend_phase(state, min_sources=3):
+    """Budget phase from current signals. `synthesize` needs no queued gaps, a clean
+    graph, and either processable corpus or a pending draft — so it is reachable with
+    no draft yet; `goal_met` narrows that to the done case.
+    """
     queued = len(state_mod.list_gaps(state, status="queued"))
     dirty = state["graph"]["dirty"]
     processable = _processable(state, min_sources)
@@ -45,6 +49,11 @@ def accept_eligible(state, base_k=3):
 
 
 def goal_met(state, min_sources=3):
+    """True only while a finished draft still waits (status='draft') and nothing else
+    is processable — a 'ready for human adjudication' signal, NOT 'done'. Adjudicating
+    the last draft (promote/reject) clears it by design; convergence is work-drained +
+    drafts adjudicated, so do not poll this flag while reviewing inline (see ADR 0008).
+    """
     return (
         recommend_phase(state, min_sources) == "synthesize"
         and not _processable(state, min_sources)

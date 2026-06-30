@@ -93,3 +93,16 @@ Each cycle, do exactly this:
 The budget `phase` is chosen for you each cycle by `orchestrator.py` (gather → deepen →
 synthesize, and back to deepen if a gap reopens). Never set `phase` by hand inside this
 loop.
+
+## Convergence semantics & footguns
+
+- **`goal_met` is "ready for adjudication", not "done"** (ADR 0008). It is true only while a
+  finished draft still sits in `status="draft"` and nothing else is processable. This loop
+  stops on it and leaves the draft for a human — it does **not** promote/reject inline. If you
+  adjudicate drafts inline elsewhere, `goal_met` goes false by design; do not chase the flag.
+  Real convergence = no queued gaps + not processable + drafts adjudicated.
+- **Topics with only 1–2 un-cited sources are never offered to `process`** (ADR 0007, queue
+  depth ≥ `min_sources`, default 3). They are stranded by design; drain by hand if valued.
+- **Uncitable junk blocks convergence**: ≥3 un-cited junk sources in a topic keep it
+  processable forever. Purge with `ors state remove-corpus --id <cid> [--purge-files]` (it
+  refuses to drop a cited source; back up via git first).
