@@ -37,7 +37,12 @@ while IFS= read -r line; do
   [ "$granted" -gt 0 ] || break   # budget exhausted for this cycle
 
   results="$("$PY" "$SEARCH" "$desc" "$granted" 2>/dev/null)" || results="[]"
-  urls="$(printf '%s' "$results" | jq -r '.[].url' 2>/dev/null)"
+  urls="$(printf '%s' "$results" | python3 -c 'import json,sys
+try: data=json.load(sys.stdin)
+except Exception: data=[]
+for x in data:
+    u=x.get("url") if isinstance(x,dict) else None
+    if u: print(u)' 2>/dev/null)"
   kept=0; i=0
   while IFS= read -r url; do
     [ -n "$url" ] || continue
