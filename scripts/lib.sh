@@ -40,17 +40,20 @@ resolve_topic_dir() {
   echo "$match"
 }
 
-MARKITDOWN="${MARKITDOWN:-$HOME/.local/bin/markitdown}"
+MARKITDOWN="${MARKITDOWN:-$(ors_venv 2>/dev/null)/bin/markitdown}"
 
 # Fetch a URL to markdown via crawl4ai; prints markdown to stdout.
 fetch_link() {
-  local url="$1" py="$HOME/.venvs/crawl4ai/bin/python" f="$HOME/.venvs/crawl4ai/fetch_md.py"
+  local url="$1" py f
+  py="$(ors_venv)/bin/python" || return 1
+  f="$LIB_DIR/crawl4ai/fetch_md.py"
   "$py" "$f" "$url" 2>/dev/null
 }
 
 # Transcribe a YouTube/video URL to text via youtube-transcript-api; prints to stdout.
 transcribe_video() {
-  local url="$1" py="$HOME/.venvs/crawl4ai/bin/python"
+  local url="$1" py
+  py="$(ors_venv)/bin/python" || return 1
   "$py" - "$url" <<'PY' 2>/dev/null
 import sys, re
 url = sys.argv[1]

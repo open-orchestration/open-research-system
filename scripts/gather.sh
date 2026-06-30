@@ -13,9 +13,9 @@ dir="$(resolve_topic_dir "$ROOT" "$topic")" || exit 1
 [ -n "$query" ] || { echo "missing query" >&2; exit 2; }
 
 N="${N:-8}"
-PY="$HOME/.venvs/crawl4ai/bin/python"
-SEARCH="$HOME/.venvs/crawl4ai/search.py"
-FETCH="$HOME/.venvs/crawl4ai/fetch_md.py"
+PY="$(ors_venv)/bin/python"
+SEARCH="$HERE/crawl4ai/search.py"
+FETCH="$HERE/crawl4ai/fetch_md.py"
 out="$dir/sources"; mkdir -p "$out"
 search_cmd="$PY $SEARCH \"$query\" $N"
 
