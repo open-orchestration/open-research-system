@@ -26,7 +26,7 @@ else
   if command -v uv >/dev/null 2>&1; then
     uv tool install graphifyy || echo "✗ uv tool install graphifyy failed"
   else
-    python3 -m pip install --user graphifyy
+    python3 -m pip install --user graphifyy || echo "✗ pip install graphifyy failed"
   fi
   if command -v graphify >/dev/null 2>&1; then
     graphify install
@@ -41,6 +41,6 @@ fi
 echo "── verify ──"
 vpy="$venv/bin/python"; [ -x "$vpy" ] || vpy="$venv/bin/python3"
 "$vpy" -c "import crawl4ai" 2>/dev/null && echo "✓ crawl4ai" || echo "✗ crawl4ai"
-[ -x "$venv/bin/markitdown" ] && echo "✓ markitdown" || echo "✗ markitdown"
+{ [ -x "$venv/bin/markitdown" ] || command -v markitdown >/dev/null 2>&1; } && echo "✓ markitdown" || echo "✗ markitdown"
 command -v graphify >/dev/null 2>&1 && echo "✓ graphify" || echo "✗ graphify (optional)"
 echo "venv: $venv"
