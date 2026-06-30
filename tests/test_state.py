@@ -1,5 +1,6 @@
-import json, tempfile, unittest
+import json, os, tempfile, unittest
 from pathlib import Path
+from unittest import mock
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import state
@@ -145,6 +146,88 @@ class TestStateCore(unittest.TestCase):
         g = state.add_gap(st, topic="a", desc="x", id="gFIXED")
         self.assertEqual(g["id"], "gFIXED")
         self.assertEqual(st["gaps"][0]["id"], "gFIXED")
+
+    def _seed_corpus(self, st, cid="cA"):
+        return state.add_corpus_entry(
+            st, title="T", source="s://" + cid, topic="t",
+            native_path="n", extracted_path="e", id=cid, now="t")
+
+    def test_remove_corpus_uncited_drops_and_dirties(self):
+        st = state.load_default()
+        self._seed_corpus(st)
+        st["graph"]["dirty"] = False
+        removed = state.remove_corpus_entry(st, "cA")
+        self.assertEqual(removed["id"], "cA")
+        self.assertEqual(st["corpus"], [])
+        self.assertTrue(st["graph"]["dirty"])
+
+    def test_remove_corpus_absent_returns_none(self):
+        st = state.load_default()
+        self.assertIsNone(state.remove_corpus_entry(st, "cZ"))
+
+    def test_remove_corpus_refuses_cited_unless_forced(self):
+        st = state.load_default()
+        self._seed_corpus(st)
+        state.add_draft(st, topic="t", title="d", path="p", cites=["cA"], id="dA")
+        with self.assertRaises(ValueError):
+            state.remove_corpus_entry(st, "cA")
+        self.assertEqual(len(st["corpus"]), 1)  # untouched on refusal
+        self.assertEqual(state.remove_corpus_entry(st, "cA", force=True)["id"], "cA")
+        self.assertEqual(st["corpus"], [])
+
+    def test_remove_corpus_ignores_citations_from_rejected_drafts(self):
+        st = state.load_default()
+        self._seed_corpus(st)
+        state.add_draft(st, topic="t", title="d", path="p", cites=["cA"], id="dA")
+        state.reject_draft(st, "dA")  # _cited_ids excludes rejected -> cA is free
+        self.assertIsNotNone(state.remove_corpus_entry(st, "cA"))
+
+    def test_cli_remove_corpus_purge_files_unlinks(self):
+        with tempfile.TemporaryDirectory() as d:
+            droot = Path(d)
+            (droot / "ingest").mkdir(parents=True)
+            (droot / ".research/docs").mkdir(parents=True)
+            nat = droot / "ingest/a.md"; nat.write_text("x")
+            ext = droot / ".research/docs/a.md"; ext.write_text("y")
+            state._main(["add-corpus", "--root", str(droot), "--id", "cA",
+                         "--title", "T", "--source", "s://a", "--topic", "t",
+                         "--native", "ingest/a.md", "--extracted", ".research/docs/a.md"])
+            rc = state._main(["remove-corpus", "--root", str(droot),
+                              "--id", "cA", "--purge-files"])
+            self.assertEqual(rc, 0)
+            self.assertFalse(nat.exists())
+            self.assertFalse(ext.exists())
+            self.assertEqual(state.load(str(droot))["corpus"], [])
+
+    def test_cli_remove_corpus_cited_returns_2_and_keeps_entry(self):
+        with tempfile.TemporaryDirectory() as d:
+            state._main(["add-corpus", "--root", d, "--id", "cA", "--title", "T",
+                         "--source", "s://a", "--topic", "t", "--native", "n",
+                         "--extracted", "e"])
+            state._main(["add-draft", "--root", d, "--id", "dA", "--topic", "t",
+                         "--title", "x", "--path", "p", "--cites", "cA"])
+            self.assertEqual(state._main(["remove-corpus", "--root", d, "--id", "cA"]), 2)
+            self.assertEqual(len(state.load(d)["corpus"]), 1)
+
+    def test_cli_remove_corpus_unknown_id_returns_1(self):
+        with tempfile.TemporaryDirectory() as d:
+            self.assertEqual(state._main(["remove-corpus", "--root", d, "--id", "cZ"]), 1)
+
+    def test_resolve_root_absolute_wins_over_repo_root(self):
+        with mock.patch.dict(os.environ, {"REPO_ROOT": "/some/repo"}):
+            self.assertEqual(state._resolve_root("/abs/tmp"), Path("/abs/tmp"))
+
+    def test_resolve_root_relative_anchors_to_repo_root(self):
+        with mock.patch.dict(os.environ, {"REPO_ROOT": "/some/repo"}):
+            self.assertEqual(state._resolve_root("sub"), Path("/some/repo/sub"))
+            self.assertEqual(state._resolve_root("."), Path("/some/repo"))
+            self.assertEqual(
+                state.state_path("."), Path("/some/repo/.research/state.json"))
+
+    def test_resolve_root_relative_falls_back_to_cwd_without_repo_root(self):
+        env = {k: v for k, v in os.environ.items() if k != "REPO_ROOT"}
+        with mock.patch.dict(os.environ, env, clear=True):
+            self.assertEqual(state._resolve_root("."), Path("."))
 
 
 if __name__ == "__main__":

@@ -38,8 +38,26 @@ DEFAULT_STATE = {
 }
 
 
+def _resolve_root(root="."):
+    """Absolute root for the ledger. An explicit absolute --root wins (callers
+    override REPO_ROOT deliberately). A relative root anchors to $REPO_ROOT when set
+    — the ors entrypoint exports it — so a drifted cwd cannot silently seed a nested
+    .research/; with REPO_ROOT unset it falls back to cwd with a stderr note.
+    """
+    p = Path(root)
+    if p.is_absolute():
+        return p
+    repo = os.environ.get("REPO_ROOT")
+    if repo:
+        return Path(repo) / p
+    if str(p) not in (".", ""):
+        print(f"note: relative --root '{root}' resolved against cwd '{Path.cwd()}' "
+              f"(set REPO_ROOT to anchor it)", file=sys.stderr)
+    return p
+
+
 def state_path(root="."):
-    return Path(root) / ".research" / "state.json"
+    return _resolve_root(root) / ".research" / "state.json"
 
 
 def load(root="."):
@@ -61,7 +79,7 @@ def save(state, root="."):
 
 
 def lock_path(root="."):
-    return Path(root) / ".research" / "state.lock"
+    return _resolve_root(root) / ".research" / "state.lock"
 
 
 @contextmanager
@@ -108,6 +126,21 @@ def add_corpus_entry(state, *, title, source, topic, native_path, extracted_path
     state["corpus"].append(entry)
     state["graph"]["dirty"] = True
     return entry
+
+
+def remove_corpus_entry(state, cid, *, force=False):
+    """Drop a corpus entry by id; flag the graph dirty. Returns the removed entry, or
+    None if absent. Refuses (ValueError) when cid is cited by a non-rejected draft
+    unless force — the only safe junk purge is one that leaves real findings intact.
+    """
+    if not force and cid in _cited_ids(state):
+        raise ValueError(f"refusing to remove cited corpus entry: {cid}")
+    for i, e in enumerate(state["corpus"]):
+        if e["id"] == cid:
+            removed = state["corpus"].pop(i)
+            state["graph"]["dirty"] = True
+            return removed
+    return None
 
 
 def set_graph(state, *, dirty=None, node_count=None, edge_count=None, last_update=None):
@@ -260,6 +293,10 @@ def unprocessed_sources(state, topic):
 
 
 def process_candidates(state, min_sources=3):
+    """Topics with >= min_sources UN-cited corpus entries, queue-depth ranked. Topics
+    with 1-2 uncited are intentionally not surfaced (ADR 0007); drain them by hand if
+    wanted. Empty unless the process subagent count is > 0 (0 in `gather`).
+    """
     if subagent_count(state, "process") <= 0:
         return []
     cited = _cited_ids(state)
@@ -397,6 +434,11 @@ def _main(argv):
         a.add_argument(f"--{f}", required=True)
     a.add_argument("--lossy", action="store_true")
     a.add_argument("--id", default=None)
+    rc = sub.add_parser("remove-corpus")
+    rc.add_argument("--root", default=".")
+    rc.add_argument("--id", required=True)
+    rc.add_argument("--force", action="store_true")
+    rc.add_argument("--purge-files", action="store_true")
     sg = sub.add_parser("set-graph")
     sg.add_argument("--root", default=".")
     sg.add_argument("--dirty", choices=("true", "false"), default=None)
@@ -446,6 +488,25 @@ def _main(argv):
                                  native_path=args.native, extracted_path=args.extracted,
                                  lossy=args.lossy, id=args.id)
         print(e["id"]); return 0
+    if args.cmd == "remove-corpus":
+        try:
+            with locked_state(args.root) as st:
+                removed = remove_corpus_entry(st, args.id, force=args.force)
+                if removed is None:
+                    raise LookupError(args.id)
+        except LookupError as e:
+            print(f"unknown corpus id: {e.args[0]}", file=sys.stderr); return 1
+        except ValueError as e:
+            print(str(e), file=sys.stderr); return 2
+        if args.purge_files:
+            for key in ("native_path", "extracted_path"):
+                rel = removed.get(key)
+                if rel:
+                    try:
+                        (_resolve_root(args.root) / rel).unlink()
+                    except FileNotFoundError:
+                        pass
+        print(removed["id"]); return 0
     if args.cmd == "set-graph":
         with locked_state(args.root) as st:
             set_graph(st,
