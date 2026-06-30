@@ -4,7 +4,15 @@
 Run one ingest cycle for the research engine. Do exactly this, then stop:
 
 1. Run `ors ingest <default-topic>` (default topic: `13-reference-systems-case-studies` unless a dropped file names another). This drains `ingest/`, normalizes each item, records it in `.research/state.json`, and flags the graph dirty.
-2. If `.research/state.json` shows `graph.dirty == true`: back up the current graph (`cp .graphify/graph.json .graphify/.graphify_old.json` if it exists), then invoke the **graphify skill with `--update`** to incrementally extract only the new/changed source files (semantic update — this is an LLM step, not the code-only `graphify update` CLI).
+2. If `.research/state.json` shows `graph.dirty == true`: **if the graphify skill is available**
+   (installed — see `/open-research-system:setup`), back up the current graph
+   (`cp .graphify/graph.json .graphify/.graphify_old.json` if it exists), then invoke
+   the **graphify skill with `--update`** to incrementally extract only the new/changed
+   source files (semantic update — an LLM step, not the code-only `graphify update` CLI).
+   **If graphify is NOT available, skip the graph update for this cycle** — log it
+   (`ors runlog log --flow graph --step graphify --status skip
+   --data '{"reason":"graphify not installed"}'`) and continue; the run still
+   produces cited findings (the graph is enrichment).
 3. **Replay the assertion overlay** into the freshly-updated graph (asserted
    edges survive `graphify --update`, which only knows the corpus):
    `ors assertions replay`

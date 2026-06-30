@@ -6,6 +6,23 @@ This project follows [semantic versioning](https://semver.org). Because
 field is bumped — so every user-facing change lands with a version bump and an
 entry below.
 
+## [0.2.0] — 2026-06-30
+
+### Added
+- `/open-research-system:setup` — idempotent provisioning of the research deps
+  (crawl4ai + headless chromium + markitdown venv, and the graphify skill via its
+  own installer). Reuses an existing `~/.venvs/crawl4ai`, else builds a plugin-owned
+  venv under `${CLAUDE_PLUGIN_DATA}/venv`.
+- SessionStart hook that nudges to run setup when deps are unprovisioned.
+
+### Changed
+- All dep paths resolve through one `ors_venv` resolver; the crawl4ai search/fetch
+  helpers are now bundled in the plugin.
+- The knowledge-graph step degrades gracefully when graphify is absent.
+
+### Removed
+- The `jq` dependency (search URLs are parsed with python3).
+
 ## [0.1.0] — 2026-06-29
 
 Initial packaged release: open-research-system as a self-contained Claude Code

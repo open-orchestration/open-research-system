@@ -6,9 +6,9 @@ set -uo pipefail   # NOT -e: one bad gap/result must not abort the cycle.
 HERE="$(cd "$(dirname "$0")" && pwd)"
 source "$HERE/lib.sh"
 ROOT="${REPO_ROOT:-$(cd "$HERE/.." && pwd)}"
-PY="${PY:-$HOME/.venvs/crawl4ai/bin/python}"
-SEARCH="${SEARCH:-$HOME/.venvs/crawl4ai/search.py}"
-FETCH="${FETCH:-$HOME/.venvs/crawl4ai/fetch_md.py}"
+PY="${PY:-$(ors_venv)/bin/python}"
+SEARCH="${SEARCH:-$HERE/crawl4ai/search.py}"
+FETCH="${FETCH:-$HERE/crawl4ai/fetch_md.py}"
 PER_GAP="${PER_GAP:-5}"
 SP="python3 $HERE/state.py"
 RL="python3 $HERE/runlog.py"
@@ -37,7 +37,12 @@ while IFS= read -r line; do
   [ "$granted" -gt 0 ] || break   # budget exhausted for this cycle
 
   results="$("$PY" "$SEARCH" "$desc" "$granted" 2>/dev/null)" || results="[]"
-  urls="$(printf '%s' "$results" | jq -r '.[].url' 2>/dev/null)"
+  urls="$(printf '%s' "$results" | python3 -c 'import json,sys
+try: data=json.load(sys.stdin)
+except Exception: data=[]
+for x in data:
+    u=x.get("url") if isinstance(x,dict) else None
+    if u: print(u)' 2>/dev/null)"
   kept=0; i=0
   while IFS= read -r url; do
     [ -n "$url" ] || continue

@@ -13,6 +13,19 @@ claude plugin marketplace add open-orchestration/open-research-system
 claude plugin install open-research-system@open-orchestration
 ```
 
+### One-time setup
+
+After installing, provision the research dependencies (idempotent):
+
+```
+/open-research-system:setup
+```
+
+Requires **python3.12** on the host. This builds the crawl4ai + markitdown venv
+(+ headless chromium) and installs the graphify skill (`graphifyy`, MIT). A
+SessionStart nudge reminds you if you skip it. Research still runs without graphify
+— only the knowledge-graph enrichment is skipped.
+
 `/plugin update open-research-system` pulls new releases (the `version` in
 `plugin.json` is the update key — see `CHANGELOG.md`). For local development,
 skip the marketplace and load the working tree directly:
