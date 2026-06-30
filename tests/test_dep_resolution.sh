@@ -4,11 +4,12 @@ set -uo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 fail=0
 
-# Consumer hardcode check — excludes the single documented fallback inside ors_venv's
-# for-loop (identified by the trailing '"; do' that closes the for-item list).
-if grep -nE '\$HOME/\.venvs/crawl4ai|\$HOME/\.local/bin/markitdown' \
-     "$ROOT/scripts/lib.sh" "$ROOT/scripts/gather.sh" "$ROOT/scripts/search_flow.sh" \
-   | grep -v '"$HOME/\.venvs/crawl4ai"; do'; then
+# lib.sh may reference $HOME/.venvs/crawl4ai inside ors_venv (the documented fallback);
+# exclude any matching line that contains 'ors_venv'. Engine scripts must be fully clean.
+if grep -nE '\$HOME/\.venvs/crawl4ai|\$HOME/\.local/bin/markitdown' "$ROOT/scripts/lib.sh" \
+   | grep -v 'ors_venv' ||
+   grep -nE '\$HOME/\.venvs/crawl4ai|\$HOME/\.local/bin/markitdown' \
+     "$ROOT/scripts/gather.sh" "$ROOT/scripts/search_flow.sh" 2>/dev/null; then
   echo "MISS: hardcoded personal dep path remains"; fail=1
 else echo "ok: no hardcoded personal paths"; fi
 

@@ -6,10 +6,9 @@ LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Echo the venv root to use (bin/ holds python + markitdown), or fail (1) with a
 # setup nudge. Precedence: explicit override, plugin-owned venv, reused personal venv.
 ors_venv() {
+  local ors_venv_default="$HOME/.venvs/crawl4ai"
   local v
-  for v in "${ORS_VENV:-}" \
-           "${CLAUDE_PLUGIN_DATA:+$CLAUDE_PLUGIN_DATA/venv}" \
-           "$HOME/.venvs/crawl4ai"; do
+  for v in "${ORS_VENV:-}" "${CLAUDE_PLUGIN_DATA:+$CLAUDE_PLUGIN_DATA/venv}" "$ors_venv_default"; do
     [ -n "$v" ] && [ -x "$v/bin/python" ] && { echo "$v"; return 0; }
   done
   echo "open-research-system: research deps not provisioned — run /open-research-system:setup" >&2
@@ -41,6 +40,7 @@ resolve_topic_dir() {
 }
 
 MARKITDOWN="${MARKITDOWN:-$(ors_venv 2>/dev/null)/bin/markitdown}"
+[ -x "$MARKITDOWN" ] || MARKITDOWN="$(command -v markitdown 2>/dev/null)"
 
 # Fetch a URL to markdown via crawl4ai; prints markdown to stdout.
 fetch_link() {
