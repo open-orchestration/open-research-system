@@ -6,6 +6,21 @@ This project follows [semantic versioning](https://semver.org). Because
 field is bumped — so every user-facing change lands with a version bump and an
 entry below.
 
+## [0.3.0] — 2026-06-30
+
+### Added
+- `ors state remove-corpus --id <cid> [--force] [--purge-files]` — purge a corpus
+  entry (e.g. uncitable junk that otherwise keeps a topic processable forever and
+  blocks convergence). Refuses to drop a source cited by a non-rejected draft unless
+  `--force`; `--purge-files` also unlinks its native + extracted files.
+- ADR 0008 — `goal_met` is "ready for adjudication", not "done", with the invariant
+  pinned in `test_orchestrator.py`. Convergence semantics + the queue-depth (1–2-source
+  stranding) and single-graph facts are surfaced in `skills/_flows/goal.md` and `loop.md`.
+
+### Fixed
+- `state.py` no longer lets a drifted cwd seed a nested `.research/`: a relative
+  `--root` anchors to `$REPO_ROOT` when set (an explicit absolute `--root` still wins).
+
 ## [0.2.0] — 2026-06-30
 
 ### Added
